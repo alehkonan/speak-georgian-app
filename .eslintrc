@@ -1,0 +1,7 @@
+{
+  "extends": ["wesbos/typescript"],
+  "ignorePatterns": ["vite.config.ts", "dev-dist"],
+  "rules": {
+    "arrow-body-style": 0
+  }
+}
