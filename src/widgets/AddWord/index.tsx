@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { Button, Input } from 'src/components';
 
 export const AddWord = () => {
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -13,9 +14,9 @@ export const AddWord = () => {
 
   return (
     <form ref={formRef} onSubmit={onSubmit}>
-      <input name="name_en" type="text" />
-      <input name="name_ka" type="text" />
-      <button type="submit">Add word</button>
+      <Input name="name_en" type="text" />
+      <Input name="name_ka" type="text" />
+      <Button type="submit">Add word</Button>
     </form>
   );
 };

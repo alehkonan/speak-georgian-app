@@ -1,5 +1,10 @@
 {
-  "ignorePatterns": ["vite.config.ts", "/node_modules/**/*"],
+  "ignorePatterns": [
+    "vite.config.ts",
+    "/node_modules/**/*",
+    "postcss.config.cjs",
+    "tailwind.config.cjs"
+  ],
   "rules": {
     "constructor-super": "error",
     "array-callback-return": "warn",

@@ -1,6 +1,8 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabaseClient } from 'src/services/supabase';
+import { Card } from 'src/components';
+import { formatDate } from 'src/utils';
 
 export const AllWords = () => {
   const wordsQuery = useQuery({
@@ -27,9 +29,13 @@ export const AllWords = () => {
     );
 
   return (
-    <div>
+    <div className="grid grid-cols-2 gap-2 p-2">
       {words?.map((word) => (
-        <p>{word.id}</p>
+        <Card key={word.id}>
+          <h5>{word.name_en}</h5>
+          <h5>{word.name_ka}</h5>
+          <p>{formatDate(word.created_at)}</p>
+        </Card>
       ))}
     </div>
   );

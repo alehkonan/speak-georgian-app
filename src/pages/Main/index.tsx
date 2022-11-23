@@ -1,12 +1,12 @@
 import React from 'react';
-import { AddWord } from 'src/widgets/AddWord';
-import { AllWords } from 'src/widgets/AllWords';
+import { Container } from 'src/components';
+import { AddWord, AllWords } from 'src/widgets';
 
 export const MainPage = () => {
   return (
-    <div>
+    <Container>
       <AllWords />
       <AddWord />
-    </div>
+    </Container>
   );
 };
