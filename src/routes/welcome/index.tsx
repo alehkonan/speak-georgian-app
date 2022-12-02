@@ -9,13 +9,6 @@ import logo from './logo.png';
 export const WelcomeScreen = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const onTouchMove = (e: TouchEvent) => e.preventDefault();
-    document.addEventListener('touchmove', onTouchMove);
-
-    return () => document.removeEventListener('touchmove', onTouchMove);
-  }, []);
-
   return (
     <div className="grid grid-rows-1 h-screen">
       <div
