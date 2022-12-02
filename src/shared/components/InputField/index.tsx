@@ -6,10 +6,10 @@ import {
   UseControllerProps,
 } from 'react-hook-form';
 
-type Props<FormType extends FieldValues> = UseControllerProps<FormType> & {
+type Props<FormType extends FieldValues> = {
   label?: JSX.Element | string;
   type?: ComponentProps<'input'>['type'];
-};
+} & UseControllerProps<FormType>;
 
 export const InputField = <FormType extends FieldValues>({
   label,

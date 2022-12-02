@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'src/shared/components';
 import { ArrowRightIcon, ChevronDownIcon, PlusIcon } from 'src/shared/icons';
+import { routes } from '..';
 
 import logo from './logo.png';
 
@@ -37,11 +37,11 @@ export const WelcomeScreen = () => {
         </p>
         <ChevronDownIcon />
         <div className="flex gap-3">
-          <Button primary onClick={() => navigate('/login')}>
+          <Button primary onClick={() => navigate(routes.login)}>
             <span>LOG IN</span>
             <ArrowRightIcon />
           </Button>
-          <Button onClick={() => navigate('/signin')}>
+          <Button onClick={() => navigate(routes.signin)}>
             <span>SIGN IN</span>
             <PlusIcon />
           </Button>

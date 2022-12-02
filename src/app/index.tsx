@@ -1,21 +1,9 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from 'react-router-dom';
-import { router } from 'src/routes';
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: false,
-    },
-  },
-});
+import { useAuth } from 'src/api/auth';
+import { browserRouter } from 'src/routes';
 
 export const App = () => {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
-  );
+  const { isAuthenticated } = useAuth();
+
+  return <RouterProvider router={browserRouter(isAuthenticated)} />;
 };
