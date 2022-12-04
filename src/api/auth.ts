@@ -1,14 +1,31 @@
+import { supabaseClient } from './../services/supabase/index';
 import { useQuery } from '@tanstack/react-query';
 import { apiKeys } from '.';
 
-export const useAuth = () => {
-  const { data } = useQuery(apiKeys.auth, () =>
-    fetch('/').then((res) => res.json())
-  );
-
-  const token = data?.token;
+export const useUser = () => {
+  const userQuery = useQuery(apiKeys.user, () => supabaseClient.auth.getUser());
 
   return {
-    isAuthenticated: Boolean(token),
+    user: userQuery.data?.data.user,
+    isLoading: userQuery.isLoading,
+    error: userQuery.data?.error,
+  };
+};
+
+export const useSession = () => {
+  const sessionQuery = useQuery(
+    apiKeys.session,
+    () => supabaseClient.auth.getSession(),
+    {
+      staleTime: 60 * 60 * 1000,
+    }
+  );
+
+  const session = sessionQuery.data?.data.session;
+
+  return {
+    isAuthenticated: Boolean(session),
+    isAuthenticating: sessionQuery.isLoading,
+    error: sessionQuery.data?.error,
   };
 };

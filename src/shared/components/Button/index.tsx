@@ -13,6 +13,8 @@ export const Button = ({ className, children, primary, ...props }: Props) => {
         'px-5 py-2',
         'rounded-3xl',
         'min-w-[120px]',
+        'disabled:border disabled:border-gray-400',
+        'disabled:bg-gray-50 disabled:text-gray-400 disabled:bg-none',
         {
           'text-white': primary,
           'text-amber-500': !primary,

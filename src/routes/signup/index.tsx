@@ -1,3 +1,5 @@
+import { useUser } from 'src/api/auth';
+import { useSignUp } from 'src/features/auth';
 import { Button, Form, InputField, Link } from 'src/shared/components';
 import * as zod from 'zod';
 import { routes } from '..';
@@ -17,10 +19,21 @@ const schema = zod.object({
 
 type FormType = zod.infer<typeof schema>;
 
-export const SigninScreen = () => {
-  const onSubmit = (data: FormType) => {
-    // send request to create account
-    console.log(data);
+export const SignupScreen = () => {
+  const { onSignUp, error, isLoading } = useSignUp();
+  const { user } = useUser();
+
+  const onSubmit = ({ email, firstName, lastName, password }: FormType) => {
+    onSignUp({
+      email,
+      password,
+      options: {
+        data: {
+          firstName,
+          lastName,
+        },
+      },
+    });
   };
 
   return (
@@ -43,8 +56,14 @@ export const SigninScreen = () => {
           Already have an account? <Link to={routes.login}>Log in</Link>
         </p>
 
-        <Button primary>Create an account</Button>
+        <Button primary disabled={isLoading}>
+          Create an account
+        </Button>
       </Form>
+      {user && (
+        <span>To continue registration check your email {user.email}</span>
+      )}
+      {error && <span>{error.message}</span>}
     </div>
   );
 };

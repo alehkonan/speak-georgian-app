@@ -41,8 +41,8 @@ export const WelcomeScreen = () => {
             <span>LOG IN</span>
             <ArrowRightIcon />
           </Button>
-          <Button onClick={() => navigate(routes.signin)}>
-            <span>SIGN IN</span>
+          <Button onClick={() => navigate(routes.signup)}>
+            <span>SIGN UP</span>
             <PlusIcon />
           </Button>
         </div>

@@ -4,15 +4,17 @@ import { Categories } from './categories';
 import { Category } from './category';
 import { ForgotPasswordScreen } from './forgot-password';
 import { LoginScreen } from './login';
-import { SigninScreen } from './signin';
+import { SignupScreen } from './signup';
+import { UpdatePasswordScreen } from './update-password';
 import { WelcomeScreen } from './welcome';
 
 export const routes = {
   home: '/',
   welcome: '/welcome',
   login: '/login',
-  signin: '/signin',
+  signup: '/signup',
   forgotPassword: '/forgot-password',
+  updatePassword: '/update-password',
   categories: '/categories',
 } as const;
 
@@ -25,6 +27,10 @@ export const browserRouter = (isAuth: boolean) =>
             element: <MainLayout />,
             children: [
               {
+                path: routes.home,
+                element: <Navigate to={routes.categories} />,
+              },
+              {
                 path: routes.categories,
                 element: <Categories />,
               },
@@ -34,14 +40,18 @@ export const browserRouter = (isAuth: boolean) =>
               },
             ],
           },
+          {
+            path: routes.updatePassword,
+            element: <UpdatePasswordScreen />,
+          },
+          {
+            path: '*',
+            element: <Navigate to={routes.home} />,
+          },
         ]
       : [
           {
             path: routes.home,
-            element: <Navigate to={routes.welcome} />,
-          },
-          {
-            path: routes.welcome,
             element: <WelcomeScreen />,
           },
           {
@@ -49,12 +59,16 @@ export const browserRouter = (isAuth: boolean) =>
             element: <LoginScreen />,
           },
           {
-            path: routes.signin,
-            element: <SigninScreen />,
+            path: routes.signup,
+            element: <SignupScreen />,
           },
           {
             path: routes.forgotPassword,
             element: <ForgotPasswordScreen />,
+          },
+          {
+            path: '*',
+            element: <Navigate to={routes.login} />,
           },
         ]
   );

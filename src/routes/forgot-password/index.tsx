@@ -1,3 +1,4 @@
+import { useResetPassword } from 'src/features/auth';
 import { Button, Form, InputField } from 'src/shared/components';
 import * as zod from 'zod';
 
@@ -8,9 +9,10 @@ const schema = zod.object({
 type FormType = zod.infer<typeof schema>;
 
 export const ForgotPasswordScreen = () => {
+  const { onUpdatePassword, isLoading } = useResetPassword();
+
   const onSubmit = (data: FormType) => {
-    // send request to reset password
-    console.log(data);
+    onUpdatePassword(data.email);
   };
 
   return (
@@ -22,7 +24,9 @@ export const ForgotPasswordScreen = () => {
         onSubmit={onSubmit}
       >
         <InputField<FormType> name="email" type="email" label="Email" />
-        <Button primary>Reset password</Button>
+        <Button primary disabled={isLoading}>
+          Reset password
+        </Button>
       </Form>
     </div>
   );

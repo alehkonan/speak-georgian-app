@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useSignIn } from 'src/features/auth';
 import { Button, Form, InputField, Link } from 'src/shared/components';
 import * as zod from 'zod';
 import { routes } from '..';
@@ -12,10 +13,10 @@ type FormType = zod.infer<typeof schema>;
 
 export const LoginScreen = () => {
   const navigate = useNavigate();
+  const { error, onSignIn, isLoading } = useSignIn();
 
   const onSubmit = (data: FormType) => {
-    // send request to login
-    console.log(data);
+    onSignIn(data);
   };
 
   return (
@@ -35,11 +36,14 @@ export const LoginScreen = () => {
         <Link className="justify-self-end" to={routes.forgotPassword}>
           Forgot password
         </Link>
-        <Button primary>Log in</Button>
-        <Button type="button" onClick={() => navigate(routes.signin)}>
+        <Button primary disabled={isLoading}>
+          Log in
+        </Button>
+        <Button type="button" onClick={() => navigate(routes.signup)}>
           Sign up
         </Button>
       </Form>
+      {error && <span className="text-red-500">{error.message}</span>}
     </div>
   );
 };
