@@ -2,8 +2,11 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { MainLayout } from 'src/layout';
 import { Categories } from './categories';
 import { Category } from './category';
+import { FavoritesScreen } from './favorites';
 import { ForgotPasswordScreen } from './forgot-password';
+import { GameScreen } from './game';
 import { LoginScreen } from './login';
+import { ProfileScreen } from './profile';
 import { SignupScreen } from './signup';
 import { UpdatePasswordScreen } from './update-password';
 import { WelcomeScreen } from './welcome';
@@ -16,6 +19,9 @@ export const routes = {
   forgotPassword: '/forgot-password',
   updatePassword: '/update-password',
   categories: '/categories',
+  game: '/game',
+  favorites: '/favorites',
+  profile: '/profile',
 } as const;
 
 export const browserRouter = (isAuth: boolean) =>
@@ -37,6 +43,18 @@ export const browserRouter = (isAuth: boolean) =>
               {
                 path: 'categories/:id',
                 element: <Category />,
+              },
+              {
+                path: routes.game,
+                element: <GameScreen />,
+              },
+              {
+                path: routes.favorites,
+                element: <FavoritesScreen />,
+              },
+              {
+                path: routes.profile,
+                element: <ProfileScreen />,
               },
             ],
           },
