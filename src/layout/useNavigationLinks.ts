@@ -12,19 +12,19 @@ export const useNavigationLinks = () => {
         Icon: HomeIcon,
       },
       {
-        id: 1,
+        id: 2,
         to: routes.game,
         title: 'Game',
         Icon: GameIcon,
       },
       {
-        id: 1,
+        id: 3,
         to: routes.favorites,
         title: 'Favorites',
         Icon: HeartIcon,
       },
       {
-        id: 1,
+        id: 4,
         to: routes.profile,
         title: 'Profile',
         Icon: PersonIcon,
