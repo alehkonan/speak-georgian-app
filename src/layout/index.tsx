@@ -6,7 +6,7 @@ export const MainLayout = () => {
   return (
     <div
       className={classNames([
-        'grid h-screen grid-rows-[1fr_auto] pt-10',
+        'grid h-screen grid-rows-[1fr_auto]',
         'bg-khachapuri bg-scroll bg-no-repeat bg-cover bg-center',
       ])}
     >
