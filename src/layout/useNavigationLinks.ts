@@ -7,8 +7,8 @@ export const useNavigationLinks = () => {
     () => [
       {
         id: 1,
-        to: routes.categories,
-        title: 'Categories',
+        to: routes.home,
+        title: 'Home',
         Icon: HomeIcon,
       },
       {

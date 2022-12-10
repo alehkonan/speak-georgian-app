@@ -1,10 +1,9 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { MainLayout } from 'src/layout';
-import { Categories } from './categories';
-import { Category } from './category';
 import { FavoritesScreen } from './favorites';
 import { ForgotPasswordScreen } from './forgot-password';
 import { GameScreen } from './game';
+import { HomeScreen } from './home';
 import { LoginScreen } from './login';
 import { ProfileScreen } from './profile';
 import { SignupScreen } from './signup';
@@ -12,13 +11,12 @@ import { UpdatePasswordScreen } from './update-password';
 import { WelcomeScreen } from './welcome';
 
 export const routes = {
-  home: '/',
   welcome: '/welcome',
   login: '/login',
   signup: '/signup',
   forgotPassword: '/forgot-password',
   updatePassword: '/update-password',
-  categories: '/categories',
+  home: '/',
   game: '/game',
   favorites: '/favorites',
   profile: '/profile',
@@ -34,15 +32,7 @@ export const browserRouter = (isAuth: boolean) =>
             children: [
               {
                 path: routes.home,
-                element: <Navigate to={routes.categories} />,
-              },
-              {
-                path: routes.categories,
-                element: <Categories />,
-              },
-              {
-                path: 'categories/:id',
-                element: <Category />,
+                element: <HomeScreen />,
               },
               {
                 path: routes.game,
@@ -64,7 +54,7 @@ export const browserRouter = (isAuth: boolean) =>
           },
           {
             path: '*',
-            element: <Navigate to={routes.home} />,
+            element: <Navigate to={routes.home} replace />,
           },
         ]
       : [
@@ -86,7 +76,7 @@ export const browserRouter = (isAuth: boolean) =>
           },
           {
             path: '*',
-            element: <Navigate to={routes.login} />,
+            element: <Navigate to={routes.login} replace />,
           },
         ]
   );
