@@ -1,5 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { MainLayout } from 'src/layout';
+import { CategoryScreen } from './category';
+import { categoryParams } from './category/params';
 import { FavoritesScreen } from './favorites';
 import { ForgotPasswordScreen } from './forgot-password';
 import { GameScreen } from './game';
@@ -17,6 +19,7 @@ export const routes = {
   forgotPassword: '/forgot-password',
   updatePassword: '/update-password',
   home: '/',
+  category: '/category',
   game: '/game',
   favorites: '/favorites',
   profile: '/profile',
@@ -45,6 +48,10 @@ export const browserRouter = (isAuth: boolean) =>
               {
                 path: routes.profile,
                 element: <ProfileScreen />,
+              },
+              {
+                path: `${routes.category}/:${categoryParams.id}`,
+                element: <CategoryScreen />,
               },
             ],
           },

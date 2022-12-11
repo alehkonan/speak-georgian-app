@@ -32,11 +32,12 @@ export interface Database {
       words: {
         Row: {
           id: number;
-          name_en: string | null;
-          name_ka: string | null;
+          name_en: string;
+          name_ka: string;
+          transcription: string | null;
           category_id: number | null;
           picture_url: string | null;
-          created_at: string | null;
+          created_at: string;
         };
         Insert: {
           id?: number;

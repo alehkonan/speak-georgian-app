@@ -6,6 +6,7 @@ type Props = {
   wordsCount: number;
   learnedWordsCount: number;
   pictureUrl: string | null;
+  onSelectCard: () => void;
 };
 
 export const CategoryCard = ({
@@ -13,15 +14,18 @@ export const CategoryCard = ({
   pictureUrl,
   wordsCount,
   learnedWordsCount,
+  onSelectCard,
 }: Props) => {
   return (
     <div className="grid gap-1">
       <div
         className={classNames([
+          'cursor-pointer',
           'bg-white',
           'grid gap-2 p-3 rounded-xl shadow-lg',
         ])}
         tabIndex={0}
+        onClick={onSelectCard}
       >
         <img
           className="w-3/4 aspect-square mx-auto"
