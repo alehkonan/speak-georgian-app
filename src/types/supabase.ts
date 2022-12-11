@@ -4,80 +4,66 @@ export type Json =
   | boolean
   | null
   | { [key: string]: Json }
-  | Json[]
+  | Json[];
 
 export interface Database {
   public: {
     Tables: {
-      test: {
+      categories: {
         Row: {
-          id: number
-          created_at: string | null
-          name: string | null
-        }
+          id: number;
+          created_at: string;
+          name: string;
+          picture_url: string | null;
+        };
         Insert: {
-          id?: number
-          created_at?: string | null
-          name?: string | null
-        }
+          id?: number;
+          created_at?: string;
+          name: string;
+          picture_url?: string;
+        };
         Update: {
-          id?: number
-          created_at?: string | null
-          name?: string | null
-        }
-      }
-      word_categories: {
-        Row: {
-          id: number
-          created_at: string | null
-          name: string | null
-        }
-        Insert: {
-          id?: number
-          created_at?: string | null
-          name?: string | null
-        }
-        Update: {
-          id?: number
-          created_at?: string | null
-          name?: string | null
-        }
-      }
+          id?: number;
+          created_at?: string;
+          name: string;
+          picture_url?: string;
+        };
+      };
       words: {
         Row: {
-          id: number
-          name_en: string | null
-          name_ka: string | null
-          category_id: number | null
-          picture_url: string | null
-          created_at: string | null
-        }
+          id: number;
+          name_en: string | null;
+          name_ka: string | null;
+          category_id: number | null;
+          picture_url: string | null;
+          created_at: string | null;
+        };
         Insert: {
-          id?: number
-          name_en?: string | null
-          name_ka?: string | null
-          category_id?: number | null
-          picture_url?: string | null
-          created_at?: string | null
-        }
+          id?: number;
+          name_en?: string | null;
+          name_ka?: string | null;
+          category_id?: number | null;
+          picture_url?: string | null;
+          created_at?: string | null;
+        };
         Update: {
-          id?: number
-          name_en?: string | null
-          name_ka?: string | null
-          category_id?: number | null
-          picture_url?: string | null
-          created_at?: string | null
-        }
-      }
-    }
+          id?: number;
+          name_en?: string | null;
+          name_ka?: string | null;
+          category_id?: number | null;
+          picture_url?: string | null;
+          created_at?: string | null;
+        };
+      };
+    };
     Views: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Functions: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Enums: {
-      [_ in never]: never
-    }
-  }
+      [_ in never]: never;
+    };
+  };
 }
