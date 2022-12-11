@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useCategories } from 'src/api/categories';
 import { CategoryCard } from 'src/shared/components';
 
@@ -21,7 +22,13 @@ export const Categories = () => {
   }
 
   return (
-    <div className="h-full overflow-auto grid grid-cols-2 gap-4">
+    <div
+      className={classNames([
+        'h-full overflow-auto',
+        'grid grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4',
+        'p-3 -m-3',
+      ])}
+    >
       {categories?.map((category) => (
         <CategoryCard
           key={category.id}

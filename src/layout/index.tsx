@@ -10,7 +10,7 @@ export const MainLayout = () => {
         'bg-khachapuri bg-scroll bg-no-repeat bg-cover bg-center',
       ])}
     >
-      <main className="p-4 sm:min-w-[50%] sm:mx-auto overflow-hidden">
+      <main className="px-4 pt-4 sm:min-w-[50%] sm:mx-auto overflow-hidden">
         <Outlet />
       </main>
       <footer className="pb-5">
