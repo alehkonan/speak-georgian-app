@@ -13,7 +13,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: { enabled: true },
-      workbox: { globPatterns: ['**/*.{js,css,html,ico,png,svg,txt}'] },
+      workbox: { globPatterns: ['**/*.{js,css,html,ico,png,avif,svg,txt}'] },
       manifest: {
         name: 'Speak Georgian App',
         short_name: 'SpeakGeorgian',

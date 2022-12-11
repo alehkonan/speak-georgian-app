@@ -29,7 +29,7 @@ module.exports = {
         'primary-500': colors['primary-500'],
       },
       backgroundImage: {
-        khachapuri: "url('./public/background.avif')",
+        khachapuri: "url('/src/assets/images/background.avif')",
       },
     },
   },
