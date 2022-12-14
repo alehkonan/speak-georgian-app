@@ -18,7 +18,8 @@ export default defineConfig({
         name: 'Speak Georgian App',
         short_name: 'SpeakGeorgian',
         description: 'The app to learn and repeat georgian words',
-        theme_color: '#ffffff',
+        theme_color: '#ffb629',
+        background_color: '#ffb629',
         icons: [
           {
             src: '192x192.png',
