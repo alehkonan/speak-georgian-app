@@ -17,6 +17,9 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      height: {
+        dynamic: 'max(30%, calc(50% - 25vw))',
+      },
       textColor: {
         primary: colors.primary,
         secondary: colors.secondary,
