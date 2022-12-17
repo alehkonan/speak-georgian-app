@@ -18,7 +18,7 @@ module.exports = {
   theme: {
     extend: {
       height: {
-        dynamic: 'max(30%, calc(50% - 25vw))',
+        dynamic: 'max(30%, calc(45% - 25vw))',
       },
       textColor: {
         primary: colors.primary,
