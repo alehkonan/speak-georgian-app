@@ -38,9 +38,9 @@
 
 ## About The Project
 
-![app screenshot](https://github.com/alehkonan/speak-georgian-app/raw/main/documentation/images/welcome-screen.avif)
-
 This application is created for people who want to know common phrases and words in Georgian and use it in their everyday life.
+
+Designed with mobile first paradigm, can be installed as PWA.
 
 Features that realized in the app:
 
@@ -48,6 +48,8 @@ Features that realized in the app:
 - the word's game where users can practice there knowledge.
 - screen with favorites words and phrases.
 - profile page with statistics and account managing.
+
+![app screenshot](https://github.com/alehkonan/speak-georgian-app/raw/main/documentation/images/welcome-screen.avif)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -70,16 +72,15 @@ This is the instruction for setting up this project locally.
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/alehkonan/speak-georgian-app.git
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `env.local`
+3. Enter your API in `env.local`
    ```
    VITE_SUPABASE_URL = string;
    VITE_SUPABASE_KEY = string;
