@@ -20,7 +20,7 @@ export const WelcomeScreen = () => {
         </div>
         <div className="self-end grid justify-items-center gap-1 z-0">
           <p className="text-center uppercase text-sm">
-            Login or create a new account
+            Log in or create a new account
           </p>
           <ChevronDownIcon />
           <div className="flex justify-center flex-wrap gap-3">

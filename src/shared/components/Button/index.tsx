@@ -17,11 +17,12 @@ export const Button = ({ className, children, primary, ...props }: Props) => {
         'disabled:bg-gray-50 disabled:text-gray-400 disabled:bg-none',
         {
           'text-white': primary,
-          'text-amber-500': !primary,
+          'text-ripe-mango': !primary,
         },
         {
-          'bg-gradient-to-t from-amber-500 to-amber-200': primary,
-          'border border-amber-500': !primary,
+          'bg-gradient-to-t from-ripe-mango via-orange-yellow to-caramel':
+            primary,
+          'border border-ripe-mango': !primary,
         },
         className,
       ])}

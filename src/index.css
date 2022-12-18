@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --ripe-mango-color: #ffb629;
+  --calamansi-color: #fff1a5;
+}
+
 @supports (height: 100dvh) {
   .h-screen {
     height: 100dvh;
@@ -14,12 +19,12 @@ body {
 
 /* safari, chrome */
 progress::-webkit-progress-bar {
-  background-color: #fff1a5;
+  background-color: var(--calamansi-color);
   border-radius: 10px;
 }
 
 progress::-webkit-progress-value {
-  background-color: #ffb629;
+  background-color: var(--ripe-mango-color);
   border-radius: 10px;
 }
 
@@ -27,15 +32,17 @@ progress::-webkit-progress-value {
 progress {
   border: none;
   border-radius: 10px;
-  background-color: #fff1a5;
+  background-color: var(--calamansi-color);
 }
 
 progress::-moz-progress-bar {
   border-radius: 10px;
-  background-color: #ffb629;
+  background-color: var(--ripe-mango-color);
 }
 
-*:focus-within {
-  outline-color: hsl(0, 0%, 50%);
-  outline-offset: 3px;
+*:focus-visible {
+  outline-width: 2px;
+  outline-style: solid;
+  outline-color: var(--ripe-mango-color);
+  border-color: var(--ripe-mango-color);
 }
