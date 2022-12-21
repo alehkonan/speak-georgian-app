@@ -1,7 +1,6 @@
 export const apiKeys = {
-  auth: ['auth'],
-  user: ['auth', 'user'],
-  session: ['auth', 'session'],
+  user: ['user'],
+  session: ['session'],
   categories: ['categories'],
   words: ['words'],
   wordsByCategory: (categoryId: number) => ['words', { categoryId }],
