@@ -32,7 +32,9 @@ export const DailyCard = ({
         )}
       </div>
       <p className="px-5">
-        <span className="text-secondary text-2xl font-bold">{wordKa}</span>{' '}
+        <span className="text-secondary text-2xl font-bold font-georgian">
+          {wordKa}
+        </span>{' '}
         <span className="text-gray font-semibold">({transcription})</span>
       </p>
       <p className="text-dark text-lg px-5">{wordEn}</p>

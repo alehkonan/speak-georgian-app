@@ -10,7 +10,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
         ref={ref}
         className={classNames([
           'p-2',
-          'border border-gray-800 rounded-lg',
+          'border border-gray-400 rounded-lg',
           className,
         ])}
         {...props}

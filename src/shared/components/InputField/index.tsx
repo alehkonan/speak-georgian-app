@@ -24,9 +24,15 @@ export const InputField = <FormType extends FieldValues>({
 
   return (
     <div className="grid">
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id} className="text-sm font-semibold mb-1">
+        {label}
+      </label>
       <Input id={id} className="w-full" type={type} {...field} />
-      {error && <span className="text-xs text-red-700">{error.message}</span>}
+      {error && (
+        <span className="text-center text-xs text-red-500">
+          {error.message}
+        </span>
+      )}
     </div>
   );
 };
