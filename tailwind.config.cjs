@@ -50,6 +50,9 @@ module.exports = {
       borderColor: {
         'ripe-mango': colors.ripeMango,
       },
+      fontFamily: {
+        georgian: 'DejaVuSans',
+      },
     },
   },
   plugins: [],

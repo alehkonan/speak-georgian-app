@@ -2,6 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: SF-Pro-Rounded;
+  src: url(/src/assets/fonts/SF-Pro-Rounded-Regular.woff2);
+  font-weight: 400;
+}
+@font-face {
+  font-family: SF-Pro-Rounded;
+  src: url(/src/assets/fonts/SF-Pro-Rounded-Semibold.woff2);
+  font-weight: 600;
+}
+@font-face {
+  font-family: SF-Pro-Rounded;
+  src: url(/src/assets/fonts/SF-Pro-Rounded-Bold.woff2);
+  font-weight: 700;
+}
+@font-face {
+  font-family: DejaVuSans;
+  src: url(/src/assets/fonts/DejaVuSans.ttf);
+  font-weight: 400;
+}
+@font-face {
+  font-family: DejaVuSans;
+  src: url(/src/assets/fonts/DejaVuSans-Bold.ttf);
+  font-weight: 700;
+}
+
+html {
+  font-family: SF-Pro-Rounded, sans-serif;
+}
+
 :root {
   --ripe-mango-color: #ffb629;
   --calamansi-color: #fff1a5;
@@ -41,8 +71,9 @@ progress::-moz-progress-bar {
 }
 
 *:focus-visible {
-  outline-width: 2px;
-  outline-style: solid;
-  outline-color: var(--ripe-mango-color);
+  outline: none;
+  box-shadow: 1px 1px 1px var(--ripe-mango-color),
+    1px -1px 1px var(--ripe-mango-color), -1px 1px 1px var(--ripe-mango-color),
+    -1px -1px 1px var(--ripe-mango-color);
   border-color: var(--ripe-mango-color);
 }
