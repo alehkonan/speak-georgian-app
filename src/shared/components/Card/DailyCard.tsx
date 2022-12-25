@@ -1,54 +1,79 @@
 import { CloseIcon, CopyIcon, HeartIcon, SoundIcon } from 'src/shared/icons';
 import { IconButton } from 'src/shared/components';
+import { useRef, useState } from 'react';
 
 type Props = {
   wordKa: string;
   wordEn: string;
-  transcription: string;
-  soundUrl?: string;
+  transcription: string | null;
+  soundUrl: string | null;
+  pictureUrl: string | null;
   onClose?: () => void;
 };
 
 export const DailyCard = ({
   wordKa,
   wordEn,
-  transcription,
   soundUrl,
+  pictureUrl,
   onClose,
 }: Props) => {
-  const onCopyWord = async () => {
-    await navigator.clipboard.writeText(wordKa);
-    alert('Text copied');
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const onPlaySound = () => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play();
+    }
   };
 
   return (
-    <div className="bg-white flex flex-col p-3 border rounded-2xl">
-      <div className="flex justify-between items-center">
-        <span className="text-sm text-gray-600">Daily word</span>
-        {onClose && (
-          <button title="Close" onClick={onClose}>
-            <CloseIcon className="text-primary" />
+    <div className="flex bg-white rounded-2xl shadow-md w-card justify-self-center">
+      <div className="flex-1 grid p-2">
+        <span className="text-sm text-raisin-black opacity-50">Daily word</span>
+        <div className="grid grid-rows-2 p-2">
+          <div>
+            <button
+              className="inline-flex items-center gap-2 cursor-pointer"
+              onClick={onPlaySound}
+            >
+              <span className="text-raisin-black text-2xl font-bold font-georgian">
+                {wordKa}
+              </span>
+              {soundUrl && (
+                <div>
+                  <SoundIcon className="w-5 h-5 text-raisin-black opacity-50" />
+                  <audio ref={audioRef} src={soundUrl}></audio>
+                </div>
+              )}
+            </button>
+          </div>
+          <div>
+            <span className="text-raisin-black opacity-50">{wordEn}</span>
+          </div>
+        </div>
+        <div className="flex gap-3">
+          <button
+            className="text-raisin-black opacity-50 font-semibold text-sm"
+            onClick={onClose}
+          >
+            Already know
           </button>
-        )}
+          <button className="text-raisin-black opacity-50 font-semibold text-sm">
+            Add to favorites
+          </button>
+        </div>
       </div>
-      <p className="px-5">
-        <span className="text-secondary text-2xl font-bold font-georgian">
-          {wordKa}
-        </span>{' '}
-        <span className="text-gray font-semibold">({transcription})</span>
-      </p>
-      <p className="text-dark text-lg px-5">{wordEn}</p>
-      <div className="flex justify-end gap-4">
-        <IconButton title="Copy word" onClick={onCopyWord}>
-          <CopyIcon />
-        </IconButton>
-        <IconButton title="Add to favorites">
-          <HeartIcon />
-        </IconButton>
-        <IconButton title="Play sound">
-          <SoundIcon />
-        </IconButton>
-      </div>
+
+      {pictureUrl && (
+        <div className="flex-shrink-0 basis-1/3">
+          <img
+            className="aspect-square w-full object-cover h-full rounded-r-xl"
+            src={pictureUrl}
+            alt={wordKa}
+          />
+        </div>
+      )}
     </div>
   );
 };

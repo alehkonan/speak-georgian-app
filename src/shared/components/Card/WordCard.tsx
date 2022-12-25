@@ -43,20 +43,18 @@ export const WordCard = ({
           />
         </div>
       )}
-      <div className="flex-1 p-3 grid">
+      <div className="flex-1 p-2 grid">
         <div>
-          <span
-            tabIndex={0}
-            className="text-raisin-black text-xl font-bold cursor-pointer"
+          <button
+            className="text-raisin-black text-xl font-bold"
             onClick={onCopyWord}
           >
             {nameKa}
-          </span>
+          </button>
         </div>
         <div>
-          <div
-            tabIndex={0}
-            className="inline-flex items-center gap-2 cursor-pointer"
+          <button
+            className="inline-flex items-center gap-2"
             onClick={onPlaySound}
           >
             <span className="text-raisin-black opacity-50">
@@ -68,20 +66,24 @@ export const WordCard = ({
                 <audio ref={audioRef} src={soundUrl}></audio>
               </div>
             )}
-          </div>
+          </button>
         </div>
-        <div className="h-7">
+        <div>
           {isTranslationShown ? (
             <span className="text-raisin-black opacity-50">{nameEn}</span>
           ) : (
-            <span
-              tabIndex={0}
-              className="text-sm font-semibold opacity-30 cursor-pointer"
+            <button
+              className="text-raisin-black text-sm font-semibold opacity-30"
               onClick={() => setTranslationShown(true)}
             >
               Tap to see translation
-            </span>
+            </button>
           )}
+        </div>
+        <div className="justify-self-end">
+          <button className="text-raisin-black text-sm font-semibold opacity-50">
+            Add to favorites
+          </button>
         </div>
       </div>
     </div>

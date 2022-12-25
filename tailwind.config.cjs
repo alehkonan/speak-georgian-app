@@ -23,6 +23,9 @@ module.exports = {
       height: {
         dynamic: 'max(30%, calc(45% - 25vw))',
       },
+      width: {
+        card: 'min(100%, 30rem)',
+      },
       textColor: {
         'ripe-mango': colors.ripeMango,
         'orange-yellow': colors.orangeYellow,
