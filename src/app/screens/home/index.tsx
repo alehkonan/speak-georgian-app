@@ -1,18 +1,22 @@
+import { useRandomWord } from 'src/api/randomWord';
 import { DailyCard } from 'src/shared/components';
 import { Categories } from './Categories';
 import { useDailyWord } from './useDailyWord';
 
 export const HomeScreen = () => {
   const { isDailyWordClosedToday, onCloseDailyWord } = useDailyWord();
+  const randomWord = useRandomWord();
 
   return (
     <div className="grid gap-3 h-full grid-rows-[auto_auto_1fr] px-3 -mx-3">
       <h3 className="text-primary text-2xl font-bold">Hello!</h3>
-      {!isDailyWordClosedToday && (
+      {!isDailyWordClosedToday && randomWord && (
         <DailyCard
-          wordKa="გამარჯობა"
-          wordEn="Hello"
-          transcription="Gamarjoba"
+          wordKa={randomWord.name_ka}
+          wordEn={randomWord.name_en}
+          transcription={randomWord.transcription}
+          pictureUrl={randomWord.picture_url}
+          soundUrl={randomWord.sound_url}
           onClose={onCloseDailyWord}
         />
       )}
