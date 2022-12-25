@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { useCategories } from 'src/api/categories';
 import { routes } from 'src/app/routes';
 import { CategoryCard } from 'src/shared/components';
+import { useContainerPosition } from './useContainerPosition';
 
 export const Categories = () => {
   const navigate = useNavigate();
   const { categories, isLoading, error } = useCategories();
+  const { onScroll, scrollContainerRef } = useContainerPosition();
 
   if (isLoading) {
     return (
@@ -31,6 +33,8 @@ export const Categories = () => {
         'grid grid-cols-2 auto-rows-min lg:grid-cols-3 2xl:grid-cols-4 gap-4',
         'p-3 -m-3',
       ])}
+      ref={scrollContainerRef}
+      onScroll={onScroll}
     >
       {categories?.map((category) => (
         <CategoryCard
