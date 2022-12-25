@@ -37,6 +37,7 @@ export interface Database {
           transcription: string | null;
           category_id: number | null;
           picture_url: string | null;
+          sound_url: string | null;
           created_at: string;
         };
         Insert: {

@@ -44,6 +44,7 @@ export const CategoryScreen = () => {
             nameKa={word.name_ka}
             transcription={word.transcription}
             pictureUrl={word.picture_url}
+            soundUrl={word.sound_url}
           />
         ))}
       </div>
