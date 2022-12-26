@@ -51,7 +51,6 @@ html {
 body {
   overflow: hidden;
   touch-action: none;
-  position: fixed;
 }
 
 /* safari, chrome */
