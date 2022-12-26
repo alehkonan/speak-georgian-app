@@ -26,12 +26,10 @@ export const WordCard = ({
   };
 
   const onPlaySound = () => {
-    if (audioRef.current) {
-      alert('audio is ready to play');
-      alert(`audio is supported ${audioRef.current.canPlayType('audio/ogg')}`);
-      audioRef.current.autoplay = true;
-      audioRef.current.currentTime = 0;
-      audioRef.current.play();
+    const sound = audioRef.current;
+    if (sound) {
+      sound.currentTime = 0;
+      sound.play();
     }
   };
 

@@ -1,6 +1,5 @@
-import { CloseIcon, CopyIcon, HeartIcon, SoundIcon } from 'src/shared/icons';
-import { IconButton } from 'src/shared/components';
-import { useRef, useState } from 'react';
+import { SoundIcon } from 'src/shared/icons';
+import { useRef } from 'react';
 
 type Props = {
   wordKa: string;
@@ -21,9 +20,10 @@ export const DailyCard = ({
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const onPlaySound = () => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = 0;
-      audioRef.current.play();
+    const sound = audioRef.current;
+    if (sound) {
+      sound.currentTime = 0;
+      sound.play();
     }
   };
 
