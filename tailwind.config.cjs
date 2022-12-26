@@ -4,6 +4,7 @@ const colors = Object.freeze({
   deepCarminePink: '#ff2c2c',
   ripeMango: '#ffb629',
   maize: '#ffc148',
+  theme: '#ffc85f',
   orangeYellow: '#ffce70',
   caramel: '#ffda93',
   peach: '#ffe8bc',
@@ -37,6 +38,7 @@ module.exports = {
         maize: colors.maize,
         'raisin-black': colors.raisinBlack,
         'anti-flash-white': colors.antiFlashWhite,
+        theme: colors.theme,
       },
       gradientColorStops: {
         'ripe-mango': colors.ripeMango,
@@ -46,9 +48,8 @@ module.exports = {
         'deep-carmine-pink': colors.deepCarminePink,
         'picton-blue': colors.pictonBlue,
         'columbia-blue': colors.columbiaBlue,
-      },
-      backgroundImage: {
-        khachapuri: "url('/src/assets/images/background.avif')",
+        'cosmic-latte': colors.cosmicLatte,
+        'anti-flash-white': colors.antiFlashWhite,
       },
       borderColor: {
         'ripe-mango': colors.ripeMango,

@@ -7,7 +7,7 @@ export const Navigation = () => {
 
   return (
     <nav>
-      <ul className="p-3 flex justify-center gap-5 min-[380px]:gap-10">
+      <ul className="flex justify-center gap-5 min-[380px]:gap-10">
         {links.map(({ id, Icon, to, title }) => (
           <li key={id}>
             <NavLink
