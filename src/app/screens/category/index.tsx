@@ -36,7 +36,7 @@ export const CategoryScreen = () => {
           {categories?.find(({ id }) => id === categoryId)?.name}
         </h3>
       </Link>
-      <div className="h-full overflow-auto grid auto-rows-min lg:grid-cols-2 gap-3 p-2 -m-2">
+      <div className="h-full overflow-auto overscroll-contain grid auto-rows-min lg:grid-cols-2 gap-3 p-2 -m-2">
         {words?.map((word) => (
           <WordCard
             key={word.id}

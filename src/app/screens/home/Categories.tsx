@@ -29,7 +29,7 @@ export const Categories = () => {
   return (
     <div
       className={classNames([
-        'h-full overflow-auto',
+        'h-full overflow-auto overscroll-contain',
         'grid grid-cols-2 auto-rows-min lg:grid-cols-3 2xl:grid-cols-4 gap-4',
         'p-3 -m-3',
       ])}
