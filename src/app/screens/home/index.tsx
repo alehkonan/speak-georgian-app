@@ -20,7 +20,7 @@ export const HomeScreen = () => {
           onClose={onCloseDailyWord}
         />
       )}
-      <div className="h-full overflow-hidden grid gap-3 px-3 -mx-3">
+      <div className="h-full overflow-hidden touch-none grid gap-3 px-3 -mx-3">
         <h3 className="text-dark text-2xl font-bold">Categories</h3>
         <Categories />
       </div>
