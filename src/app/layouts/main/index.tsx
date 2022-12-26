@@ -18,7 +18,6 @@ export const MainLayout = () => {
       className={classNames([
         'grid h-screen grid-rows-[1fr_auto]',
         'bg-khachapuri bg-scroll bg-no-repeat bg-cover bg-center',
-        'touch-none',
       ])}
     >
       <main className="px-4 pt-4 sm:w-[80%] md:w-[60%] sm:mx-auto max-w-4xl overflow-hidden">

@@ -33,10 +33,6 @@
   font-display: swap;
 }
 
-html {
-  font-family: SF-Pro-Rounded, sans-serif;
-}
-
 :root {
   --ripe-mango-color: #ffb629;
   --calamansi-color: #fff1a5;
@@ -48,8 +44,13 @@ html {
   }
 }
 
+html {
+  font-family: SF-Pro-Rounded, sans-serif;
+}
+
 body {
   overflow: hidden;
+  touch-action: none;
 }
 
 /* safari, chrome */

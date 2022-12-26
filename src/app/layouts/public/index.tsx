@@ -11,9 +11,5 @@ export const PublicLayout = () => {
     if (isAuthenticated) navigate(routes.home);
   }, [isAuthenticated]);
 
-  return (
-    <div className="touch-none">
-      <Outlet />
-    </div>
-  );
+  return <Outlet />;
 };
