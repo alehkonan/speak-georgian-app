@@ -18,7 +18,7 @@ export const MainLayout = () => {
     <div
       className={classNames([
         'grid h-screen grid-rows-[auto_1fr_auto]',
-        'bg-gradient-to-t from-columbia-blue via-anti-flash-white to-cosmic-latte bg-scroll bg-no-repeat bg-cover bg-center',
+        'bg-gradient-to-t from-columbia-blue via-anti-flash-white to-cosmic-latte',
       ])}
     >
       <div className="h-10 -mb-5 text-theme">
@@ -27,7 +27,7 @@ export const MainLayout = () => {
       <main className="px-4 pt-4 sm:w-[80%] md:w-[60%] sm:mx-auto max-w-4xl overflow-hidden">
         <Outlet />
       </main>
-      <footer className="pb-5">
+      <footer className="pb-7">
         <Navigation />
       </footer>
     </div>

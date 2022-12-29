@@ -16,8 +16,8 @@ export default defineConfig({
       workbox: { globPatterns: ['**/*.{js,css,html,ico,png,avif,svg,txt}'] },
       manifest: {
         name: 'Speak Georgian App',
-        short_name: 'SpeakGeorgian',
-        description: 'The app to learn and repeat georgian words',
+        short_name: 'Speak Georgian',
+        description: 'The app to learn georgian words',
         theme_color: '#ffc85f',
         background_color: '#ffc85f',
         icons: [

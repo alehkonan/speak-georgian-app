@@ -3,6 +3,7 @@ import { routes } from 'src/app/routes';
 import { useLogin } from 'src/features/login';
 import { Button, Form, InputField } from 'src/shared/components';
 import * as zod from 'zod';
+import { GoogleSignIn } from './GoogleSignIn';
 
 const schema = zod.object({
   email: zod.string().email(),
@@ -47,6 +48,7 @@ export const LoginScreen = () => {
         </Button>
       </Form>
       {error && <span className="text-red-500">{error.message}</span>}
+      <GoogleSignIn />
     </div>
   );
 };
