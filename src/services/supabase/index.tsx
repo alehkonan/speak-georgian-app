@@ -11,13 +11,16 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 const supabaseClient = createClient<Database>(supabaseUrl, supabaseKey);
 
 export const getSession = () => supabaseClient.auth.getSession();
+
 export const getUser = () => supabaseClient.auth.getUser();
 
 export const signUp = (credentials: SignUpWithPasswordCredentials) =>
   supabaseClient.auth.signUp(credentials);
+
 export const signInWithPassword = (
   credentials: SignInWithPasswordCredentials
 ) => supabaseClient.auth.signInWithPassword(credentials);
+
 export const signInWithGoogle = () =>
   supabaseClient.auth.signInWithOAuth({
     provider: 'google',

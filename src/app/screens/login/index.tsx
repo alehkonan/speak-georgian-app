@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { routes } from 'src/app/routes';
-import { useLogin } from 'src/features/login';
-import { signInWithGoogle } from 'src/services/supabase';
+import { useSignIn } from 'src/features/signIn';
 import { Button, Form, InputField } from 'src/shared/components';
 import * as zod from 'zod';
 
@@ -14,10 +13,11 @@ type FormType = zod.infer<typeof schema>;
 
 export const LoginScreen = () => {
   const navigate = useNavigate();
-  const { error, onLogin, isLoading } = useLogin();
+  const { onSignInWithPassword, onSignInWithGoogle, isLoading, error } =
+    useSignIn();
 
   const onSubmit = (data: FormType) => {
-    onLogin(data);
+    onSignInWithPassword(data);
   };
 
   return (
@@ -47,8 +47,8 @@ export const LoginScreen = () => {
           Sign up
         </Button>
       </Form>
+      <Button onClick={() => onSignInWithGoogle()}>Sign in with Google</Button>
       {error && <span className="text-red-500">{error.message}</span>}
-      <Button onClick={signInWithGoogle}>Sign in with Google</Button>
     </div>
   );
 };
