@@ -1,9 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { routes } from 'src/app/routes';
 import { useLogin } from 'src/features/login';
+import { signInWithGoogle } from 'src/services/supabase';
 import { Button, Form, InputField } from 'src/shared/components';
 import * as zod from 'zod';
-import { GoogleSignIn } from './GoogleSignIn';
 
 const schema = zod.object({
   email: zod.string().email(),
@@ -48,7 +48,7 @@ export const LoginScreen = () => {
         </Button>
       </Form>
       {error && <span className="text-red-500">{error.message}</span>}
-      <GoogleSignIn />
+      <Button onClick={signInWithGoogle}>Sign in with Google</Button>
     </div>
   );
 };

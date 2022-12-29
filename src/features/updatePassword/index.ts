@@ -1,10 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
-import { supabaseClient } from 'src/services/supabase';
+import { updateUserPassword } from 'src/services/supabase';
 
 export const useUpdatePassword = () => {
-  const updatePasswordMutation = useMutation((password: string) =>
-    supabaseClient.auth.updateUser({ password })
-  );
+  const updatePasswordMutation = useMutation(updateUserPassword);
 
   return {
     onUpdatePassword: updatePasswordMutation.mutate,

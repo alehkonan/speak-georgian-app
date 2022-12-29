@@ -1,12 +1,11 @@
-import { supabaseClient } from './../services/supabase/index';
 import { apiKeys } from '.';
 import { useQuery } from '@tanstack/react-query';
+import { getWordsByCategory } from 'src/services/supabase';
 
 export const useWords = (categoryId: number) => {
   const { data, isLoading } = useQuery(
     apiKeys.wordsByCategory(categoryId),
-    async () =>
-      await supabaseClient.from('words').select().eq('category_id', categoryId),
+    () => getWordsByCategory(categoryId),
     {
       enabled: !isNaN(categoryId),
     }

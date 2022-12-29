@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { supabaseClient } from 'src/services/supabase';
+import { getUser } from 'src/services/supabase';
 import { apiKeys } from '.';
 
 export const useUser = () => {
-  const userQuery = useQuery(apiKeys.user, () => supabaseClient.auth.getUser());
+  const userQuery = useQuery(apiKeys.user, getUser);
 
   return {
     user: userQuery.data?.data.user,
