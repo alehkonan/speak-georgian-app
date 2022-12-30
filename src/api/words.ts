@@ -1,9 +1,9 @@
 import { apiKeys } from '.';
 import { useQuery } from '@tanstack/react-query';
-import { getWordsByCategory } from 'src/services/supabase';
+import { getAllWords, getWordsByCategory } from 'src/services/supabase';
 
 export const useWords = (categoryId: number) => {
-  const { data, isLoading } = useQuery(
+  const { data, isLoading, error } = useQuery(
     apiKeys.wordsByCategory(categoryId),
     () => getWordsByCategory(categoryId),
     {
@@ -13,7 +13,19 @@ export const useWords = (categoryId: number) => {
 
   return {
     words: data?.data,
-    error: data?.error,
+    count: data?.count || 0,
     isLoading,
+    error: error instanceof Error ? error : data?.error,
+  };
+};
+
+export const useAllWords = () => {
+  const { data, isLoading, error } = useQuery(apiKeys.words, getAllWords);
+
+  return {
+    words: data?.data,
+    count: data?.data?.length || 0,
+    isLoading,
+    error: error instanceof Error ? error : data?.error,
   };
 };

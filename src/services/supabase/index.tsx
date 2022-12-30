@@ -10,47 +10,60 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 
 const supabaseClient = createClient<Database>(supabaseUrl, supabaseKey);
 
-export const getSession = () => supabaseClient.auth.getSession();
-
-export const getUser = () => supabaseClient.auth.getUser();
-
-export const signUp = (credentials: SignUpWithPasswordCredentials) =>
-  supabaseClient.auth.signUp(credentials);
-
+// Authentication
 export const signInWithPassword = (
   credentials: SignInWithPasswordCredentials
 ) => supabaseClient.auth.signInWithPassword(credentials);
-
 export const signInWithGoogle = () => {
   const { origin } = window.location;
-  supabaseClient.auth.signInWithOAuth({
+  return supabaseClient.auth.signInWithOAuth({
     provider: 'google',
-    options: {
-      redirectTo: origin,
-    },
+    options: { redirectTo: origin },
+  });
+};
+export const signUp = (credentials: SignUpWithPasswordCredentials) => {
+  return supabaseClient.auth.signUp(credentials);
+};
+export const signOut = () => supabaseClient.auth.signOut();
+export const updateUserPassword = (password: string) => {
+  return supabaseClient.auth.updateUser({ password });
+};
+export const resetPasswordForEmail = (email: string, redirectRoute: string) => {
+  return supabaseClient.auth.resetPasswordForEmail(email, {
+    redirectTo: `${window.location.origin}${redirectRoute}`,
   });
 };
 
-export const updateUserPassword = (password: string) =>
-  supabaseClient.auth.updateUser({ password });
+export const getSession = () => supabaseClient.auth.getSession();
+export const getUser = () => supabaseClient.auth.getUser();
 
-export const resetPasswordForEmail = (email: string, redirectRoute: string) =>
-  supabaseClient.auth.resetPasswordForEmail(email, {
-    redirectTo: `${window.location.origin}${redirectRoute}`,
-  });
+// Data
+export const getCategories = async () => {
+  const data = await supabaseClient.from('categories').select();
+  return data;
+};
 
-export const signOut = () => supabaseClient.auth.signOut();
-
-export const getCategories = async () =>
-  await supabaseClient.from('categories').select();
-
-export const getWordsCount = async () =>
-  await supabaseClient
+export const getWordsCount = async () => {
+  const data = await supabaseClient
     .from('words')
     .select('*', { head: true, count: 'exact' });
+  return data;
+};
 
-export const getWord = async (wordId: number) =>
-  await supabaseClient.from('words').select('*').eq('id', wordId);
+export const getWord = async (wordId: number) => {
+  const data = await supabaseClient.from('words').select('*').eq('id', wordId);
+  return data;
+};
 
-export const getWordsByCategory = async (categoryId: number) =>
-  await supabaseClient.from('words').select().eq('category_id', categoryId);
+export const getWordsByCategory = async (categoryId: number) => {
+  const data = await supabaseClient
+    .from('words')
+    .select()
+    .eq('category_id', categoryId);
+  return data;
+};
+
+export const getAllWords = async () => {
+  const data = await supabaseClient.from('words').select();
+  return data;
+};

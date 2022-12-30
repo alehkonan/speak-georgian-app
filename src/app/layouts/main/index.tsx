@@ -24,10 +24,10 @@ export const MainLayout = () => {
       <div className="h-10 -mb-5 text-theme">
         <Wave className="h-full w-full" />
       </div>
-      <main className="px-4 pt-4 sm:w-[80%] md:w-[60%] sm:mx-auto max-w-4xl overflow-hidden">
+      <main className="p-4 sm:w-[80%] md:w-[60%] sm:mx-auto max-w-4xl overflow-hidden">
         <Outlet />
       </main>
-      <footer className="pt-2 pb-7">
+      <footer className="pb-7">
         <Navigation />
       </footer>
     </div>

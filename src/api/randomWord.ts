@@ -3,13 +3,10 @@ import format from 'date-fns/format';
 import isSameDay from 'date-fns/isSameDay';
 import { useState } from 'react';
 import { getWord, getWordsCount } from 'src/services/supabase';
+import { getRandomInteger } from 'src/shared/utils';
 import { apiKeys } from '.';
 
 const DAILY_WORD = 'dailyWord';
-
-const getRandomInteger = (min: number, max: number) => {
-  return Math.floor(Math.random() * (max - min)) + min;
-};
 
 const getDailyWord = () => {
   try {
@@ -36,7 +33,7 @@ export const useRandomWord = () => {
   });
 
   useQuery(
-    [apiKeys.randomWord],
+    apiKeys.randomWord,
     () => getWord(getRandomInteger(1, countQuery.data?.count!)),
     {
       enabled: Boolean(countQuery.data?.count) && !dailyWord,
