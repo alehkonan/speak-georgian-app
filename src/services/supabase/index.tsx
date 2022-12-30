@@ -21,10 +21,15 @@ export const signInWithPassword = (
   credentials: SignInWithPasswordCredentials
 ) => supabaseClient.auth.signInWithPassword(credentials);
 
-export const signInWithGoogle = () =>
+export const signInWithGoogle = () => {
+  const { origin } = window.location;
   supabaseClient.auth.signInWithOAuth({
     provider: 'google',
+    options: {
+      redirectTo: origin,
+    },
   });
+};
 
 export const updateUserPassword = (password: string) =>
   supabaseClient.auth.updateUser({ password });
