@@ -29,14 +29,16 @@ export const CategoryScreen = () => {
   }
 
   return (
-    <div className="grid gap-5 h-full grid-rows-[auto_1fr] px-3 -mx-3">
-      <Link to={routes.home} className="flex items-center gap-3">
-        <ChevronLeftIcon className="text-dark" />
-        <h3 className="text-dark text-2xl font-bold">
-          {categories?.find(({ id }) => id === categoryId)?.name}
-        </h3>
-      </Link>
-      <div className="h-full overflow-auto overscroll-contain grid auto-rows-min lg:grid-cols-2 gap-3 p-2 -m-2">
+    <div className="h-full flex flex-col gap-3 px-3 -mx-3">
+      <div>
+        <Link to={routes.home} className="inline-flex items-center gap-3">
+          <ChevronLeftIcon className="text-dark" />
+          <h3 className="text-dark text-2xl font-bold">
+            {categories?.find(({ id }) => id === categoryId)?.name}
+          </h3>
+        </Link>
+      </div>
+      <div className="flex-1 overflow-auto overscroll-contain grid auto-rows-min lg:grid-cols-2 gap-3 p-2 -m-2">
         {words?.map((word) => (
           <WordCard
             key={word.id}
