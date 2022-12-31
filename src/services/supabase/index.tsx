@@ -39,7 +39,7 @@ export const getUser = () => supabaseClient.auth.getUser();
 
 // Data
 export const getCategories = async () => {
-  const data = await supabaseClient.from('categories').select();
+  const data = await supabaseClient.from('categories').select().order('name');
   return data;
 };
 

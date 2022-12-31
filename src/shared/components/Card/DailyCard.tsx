@@ -28,7 +28,7 @@ export const DailyCard = ({
   };
 
   return (
-    <div className="flex bg-white rounded-2xl shadow-md w-card justify-self-center">
+    <div className="self-center flex bg-white rounded-2xl shadow-md w-card justify-self-center">
       <div className="flex-1 grid p-2">
         <span className="text-sm text-raisin-black opacity-50">Daily word</span>
         <div className="grid grid-rows-2 p-2">
