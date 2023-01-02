@@ -57,6 +57,47 @@ export interface Database {
           created_at?: string | null;
         };
       };
+      statistics: {
+        Row: {
+          id: number;
+          user_id?: string;
+          category_id: number | null;
+          word_id: number;
+          listened: number;
+          translation_shown: number;
+          right_answers: number;
+          wrong_answers: number;
+          total_answers: number;
+          is_learned: boolean;
+          created_at: string;
+        };
+        Insert: {
+          id?: number;
+          user_id?: string;
+          category_id?: number;
+          word_id: number;
+          listened?: number;
+          translation_shown?: number;
+          right_answers?: number;
+          wrong_answers?: number;
+          total_answers?: number;
+          is_learned?: boolean;
+          created_at?: string;
+        };
+        Update: {
+          id?: number;
+          user_id?: string;
+          category_id?: number;
+          word_id?: number;
+          listened?: number;
+          translation_shown?: number;
+          right_answers?: number;
+          wrong_answers?: number;
+          total_answers?: number;
+          is_learned?: boolean;
+          created_at?: string;
+        };
+      };
     };
     Views: {
       [_ in never]: never;

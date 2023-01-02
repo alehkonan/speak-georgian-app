@@ -1,9 +1,14 @@
 import classNames from 'classnames';
 import { PropsWithChildren, useEffect, useRef, useState } from 'react';
+import {
+  incrementRightAnswers,
+  incrementWrongAnswers,
+} from 'src/services/supabase';
 import { SoundIcon } from 'src/shared/icons';
 import { GameCardPicture } from './GameCardPicture';
 
 type Props = {
+  wordId: number;
   nameKa: string;
   nameEn: string;
   transcription: string | null;
@@ -18,6 +23,7 @@ const NavButton = ({ children }: PropsWithChildren) => {
 };
 
 export const GameCard = ({
+  wordId,
   nameEn,
   nameKa,
   transcription,
@@ -28,6 +34,9 @@ export const GameCard = ({
 }: Props) => {
   const [clickedAnswer, setClickedAnswer] = useState<string>();
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const isRight = (answer: string) => answer === nameEn;
+  const isClicked = (answer: string) => answer === clickedAnswer;
 
   const onPlaySound = () => {
     const sound = audioRef.current;
@@ -40,6 +49,9 @@ export const GameCard = ({
   const onCheckAnswer = (answer: string) => {
     setClickedAnswer(answer);
     setTimeout(onShowNextCard, 1000);
+    isRight(answer)
+      ? incrementRightAnswers(wordId)
+      : incrementWrongAnswers(wordId);
   };
 
   useEffect(() => {
@@ -55,8 +67,8 @@ export const GameCard = ({
           <NavButton>Next</NavButton>
         </div>
       )}
-      <p className="text-center">
-        <span className="text-raisin-black text-xl font-bold">{nameKa}</span>{' '}
+      <p className="flex justify-center items-center gap-x-2 flex-wrap">
+        <span className="text-raisin-black text-xl font-bold">{nameKa}</span>
         {transcription && (
           <span className="text-raisin-black opacity-50">
             ({transcription})
@@ -68,14 +80,14 @@ export const GameCard = ({
           <button
             key={answer}
             className={classNames([
-              'border p-2 hover:bg-slate-100 transition-all',
+              'border p-2 transition-all',
               {
                 'bg-green-400 hover:bg-green-400':
-                  answer === nameEn && clickedAnswer === answer,
+                  isClicked(answer) && isRight(answer),
               },
               {
                 'bg-red-400 hover:bg-red-400':
-                  answer !== nameEn && clickedAnswer === answer,
+                  isClicked(answer) && !isRight(answer),
               },
             ])}
             onClick={() => onCheckAnswer(answer)}

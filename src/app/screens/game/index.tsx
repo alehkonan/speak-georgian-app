@@ -57,6 +57,7 @@ export const GameScreen = () => {
         <>
           <div className="grid place-items-center">
             <GameCard
+              wordId={word.id}
               nameEn={word.name_en}
               nameKa={word.name_ka}
               pictureUrl={word.picture_url}

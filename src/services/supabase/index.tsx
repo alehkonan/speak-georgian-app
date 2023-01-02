@@ -67,3 +67,63 @@ export const getAllWords = async () => {
   const data = await supabaseClient.from('words').select();
   return data;
 };
+
+export const getWordStatistic = async (wordId: number) => {
+  const { data } = await getUser();
+  const userId = data.user?.id;
+  const { data: statistic } = await supabaseClient
+    .from('statistics')
+    .select()
+    .eq('word_id', wordId)
+    .eq('user_id', userId);
+
+  return statistic?.at(0);
+};
+
+export const incrementWrongAnswers = async (wordId: number) => {
+  const { data: userData } = await getUser();
+  const userId = userData.user?.id;
+
+  if (!userId) return;
+
+  const statistic = await getWordStatistic(wordId);
+
+  if (statistic) {
+    await supabaseClient.from('statistics').update({
+      id: statistic.id,
+      wrong_answers: statistic.wrong_answers + 1,
+      total_answers: statistic.total_answers + 1,
+    });
+  } else {
+    await supabaseClient.from('statistics').insert({
+      word_id: wordId,
+      user_id: userId,
+      wrong_answers: 1,
+      total_answers: 1,
+    });
+  }
+};
+
+export const incrementRightAnswers = async (wordId: number) => {
+  const { data: userData } = await getUser();
+  const userId = userData.user?.id;
+
+  if (!userId) return;
+
+  const statistic = await getWordStatistic(wordId);
+
+  if (statistic) {
+    await supabaseClient.from('statistics').update({
+      id: statistic.id,
+      right_answers: statistic.right_answers + 1,
+      total_answers: statistic.total_answers + 1,
+    });
+  } else {
+    await supabaseClient.from('statistics').insert({
+      word_id: wordId,
+      user_id: userId,
+      right_answers: 1,
+      total_answers: 1,
+    });
+  }
+};
