@@ -68,61 +68,42 @@ export const getAllWords = async () => {
   return data;
 };
 
-export const getWordStatistic = async (wordId: number) => {
-  const { data } = await getUser();
-  const userId = data.user?.id;
+export const getWordStatistic = async (userId: string, wordId: number) => {
   const { data: statistic } = await supabaseClient
     .from('statistics')
     .select()
     .eq('word_id', wordId)
     .eq('user_id', userId);
 
+  console.log('stat array', statistic);
+
   return statistic?.at(0);
 };
 
-export const incrementWrongAnswers = async (wordId: number) => {
+export const incrementAnswers = async (wordId: number, isRight: boolean) => {
   const { data: userData } = await getUser();
   const userId = userData.user?.id;
 
   if (!userId) return;
 
-  const statistic = await getWordStatistic(wordId);
+  const wordStatistic = await getWordStatistic(userId, wordId);
 
-  if (statistic) {
+  console.log('word stat: ', wordStatistic);
+
+  if (wordStatistic) {
+    const { right_answers, wrong_answers, total_answers } = wordStatistic;
     await supabaseClient.from('statistics').update({
-      id: statistic.id,
-      wrong_answers: statistic.wrong_answers + 1,
-      total_answers: statistic.total_answers + 1,
+      id: wordStatistic.id,
+      right_answers: isRight ? right_answers + 1 : right_answers,
+      wrong_answers: isRight ? wrong_answers : wrong_answers + 1,
+      total_answers: total_answers + 1,
     });
   } else {
     await supabaseClient.from('statistics').insert({
       word_id: wordId,
       user_id: userId,
-      wrong_answers: 1,
-      total_answers: 1,
-    });
-  }
-};
-
-export const incrementRightAnswers = async (wordId: number) => {
-  const { data: userData } = await getUser();
-  const userId = userData.user?.id;
-
-  if (!userId) return;
-
-  const statistic = await getWordStatistic(wordId);
-
-  if (statistic) {
-    await supabaseClient.from('statistics').update({
-      id: statistic.id,
-      right_answers: statistic.right_answers + 1,
-      total_answers: statistic.total_answers + 1,
-    });
-  } else {
-    await supabaseClient.from('statistics').insert({
-      word_id: wordId,
-      user_id: userId,
-      right_answers: 1,
+      right_answers: isRight ? 1 : 0,
+      wrong_answers: isRight ? 0 : 1,
       total_answers: 1,
     });
   }

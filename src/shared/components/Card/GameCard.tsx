@@ -1,9 +1,6 @@
 import classNames from 'classnames';
 import { PropsWithChildren, useEffect, useRef, useState } from 'react';
-import {
-  incrementRightAnswers,
-  incrementWrongAnswers,
-} from 'src/services/supabase';
+import { incrementAnswers } from 'src/services/supabase';
 import { SoundIcon } from 'src/shared/icons';
 import { GameCardPicture } from './GameCardPicture';
 
@@ -49,9 +46,7 @@ export const GameCard = ({
   const onCheckAnswer = (answer: string) => {
     setClickedAnswer(answer);
     setTimeout(onShowNextCard, 1000);
-    isRight(answer)
-      ? incrementRightAnswers(wordId)
-      : incrementWrongAnswers(wordId);
+    incrementAnswers(wordId, isRight(answer));
   };
 
   useEffect(() => {
