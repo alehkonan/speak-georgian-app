@@ -54,7 +54,7 @@ export const GameCard = ({
   }, [nameEn]);
 
   return (
-    <div className="bg-white rounded-lg grid p-3 gap-2 w-full md:w-4/5">
+    <div className="bg-white rounded-lg grid p-3 gap-2 w-full md:w-4/5 snap-always snap-center">
       {pictureUrl && (
         <div className="flex justify-between items-center">
           <NavButton>Previous</NavButton>

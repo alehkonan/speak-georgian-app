@@ -23,7 +23,7 @@ export const useAllWords = () => {
   const { data, isLoading, error } = useQuery(apiKeys.words, getAllWords);
 
   return {
-    words: data?.data,
+    words: data?.data || [],
     count: data?.data?.length || 0,
     isLoading,
     error: error instanceof Error ? error : data?.error,

@@ -75,8 +75,6 @@ export const getWordStatistic = async (userId: string, wordId: number) => {
     .eq('word_id', wordId)
     .eq('user_id', userId);
 
-  console.log('stat array', statistic);
-
   return statistic?.at(0);
 };
 
@@ -87,8 +85,6 @@ export const incrementAnswers = async (wordId: number, isRight: boolean) => {
   if (!userId) return;
 
   const wordStatistic = await getWordStatistic(userId, wordId);
-
-  console.log('word stat: ', wordStatistic);
 
   if (wordStatistic) {
     const { right_answers, wrong_answers, total_answers } = wordStatistic;
