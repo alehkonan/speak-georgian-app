@@ -19,6 +19,7 @@ export const GameScreen = () => {
               <div className="w-[1000%] grid grid-cols-10 justify-items-center gap-2 px-1 items-center">
                 {gameWords.map((word) => (
                   <GameCard
+                    key={word.id}
                     wordId={word.id}
                     nameEn={word.name_en}
                     nameKa={word.name_ka}
