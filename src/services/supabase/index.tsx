@@ -36,13 +36,22 @@ export const resetPasswordForEmail = (email: string, redirectRoute: string) => {
 
 export const getSession = () => supabaseClient.auth.getSession();
 export const getUser = () => supabaseClient.auth.getUser();
+const getUserId = async () => {
+  const { data: userData } = await getUser();
+  const userId = userData.user?.id;
 
-// Data
+  if (!userId) throw new Error('User id is not defined');
+
+  return userId;
+};
+
+// Categories Table
 export const getCategories = async () => {
   const data = await supabaseClient.from('categories').select().order('name');
   return data;
 };
 
+// Words Table
 export const getWordsCount = async () => {
   const data = await supabaseClient
     .from('words')
@@ -56,11 +65,42 @@ export const getWord = async (wordId: number) => {
 };
 
 export const getWordsByCategory = async (categoryId: number) => {
-  const data = await supabaseClient
+  const userId = await getUserId();
+
+  const { data, error } = await supabaseClient
     .from('words')
-    .select()
-    .eq('category_id', categoryId);
-  return data;
+    .select('*, favorites(is_favorite)')
+    .eq('category_id', categoryId)
+    .eq('favorites.user_id', userId)
+    .order('name_en');
+
+  if (error) throw new Error(error.message, { cause: error });
+
+  return data?.map((word) => ({
+    ...word,
+    favorites: Array.isArray(word.favorites)
+      ? Boolean(word.favorites.at(0)?.is_favorite)
+      : false,
+  }));
+};
+
+export const getFavoriteWords = async () => {
+  const userId = await getUserId();
+  const { data, error } = await supabaseClient
+    .from('words')
+    .select('*, favorites!inner(is_favorite)')
+    .eq('favorites.user_id', userId)
+    .eq('favorites.is_favorite', true)
+    .order('name_en');
+
+  if (error) throw new Error(error.message, { cause: error });
+
+  return data?.map((word) => ({
+    ...word,
+    favorites: Array.isArray(word.favorites)
+      ? Boolean(word.favorites.at(0)?.is_favorite)
+      : false,
+  }));
 };
 
 export const getAllWords = async () => {
@@ -68,7 +108,8 @@ export const getAllWords = async () => {
   return data;
 };
 
-export const getWordStatistic = async (userId: string, wordId: number) => {
+// Statistics Table
+const getWordStatistic = async (userId: string, wordId: number) => {
   const { data: statistic } = await supabaseClient
     .from('statistics')
     .select()
@@ -79,11 +120,7 @@ export const getWordStatistic = async (userId: string, wordId: number) => {
 };
 
 export const incrementAnswers = async (wordId: number, isRight: boolean) => {
-  const { data: userData } = await getUser();
-  const userId = userData.user?.id;
-
-  if (!userId) return;
-
+  const userId = await getUserId();
   const wordStatistic = await getWordStatistic(userId, wordId);
 
   if (wordStatistic) {
@@ -102,5 +139,46 @@ export const incrementAnswers = async (wordId: number, isRight: boolean) => {
       wrong_answers: isRight ? 0 : 1,
       total_answers: 1,
     });
+  }
+};
+
+// Favorites Table
+const getWordIsFavorite = async (userId: string, wordId: number) => {
+  const { data: wordsInFavorite } = await supabaseClient
+    .from('favorites')
+    .select()
+    .eq('word_id', wordId)
+    .eq('user_id', userId);
+
+  return wordsInFavorite?.at(0);
+};
+
+export const switchWordIsFavorite = async (wordId: number) => {
+  const userId = await getUserId();
+  const wordInFavorite = await getWordIsFavorite(userId, wordId);
+
+  if (wordInFavorite) {
+    const { data } = await supabaseClient
+      .from('favorites')
+      .update({
+        id: wordInFavorite.id,
+        is_favorite: !wordInFavorite.is_favorite,
+      })
+      .select()
+      .single();
+
+    return Boolean(data?.is_favorite);
+  } else {
+    const { data } = await supabaseClient
+      .from('favorites')
+      .insert({
+        word_id: wordId,
+        user_id: userId,
+        is_favorite: true,
+      })
+      .select()
+      .single();
+
+    return Boolean(data?.is_favorite);
   }
 };

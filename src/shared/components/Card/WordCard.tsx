@@ -1,24 +1,35 @@
 import classNames from 'classnames';
 import { useRef, useState } from 'react';
+import { useFavoriteWordsByCategory } from 'src/api/favorites';
 import { SoundIcon } from 'src/shared/icons';
 
 type Props = {
+  id: number;
   nameKa: string;
   nameEn: string;
   transcription: string | null;
   pictureUrl: string | null;
   soundUrl: string | null;
+  categoryId: number | null;
+  isFavorite: boolean;
 };
 
 export const WordCard = ({
+  id,
   nameEn,
   nameKa,
   transcription,
   pictureUrl,
   soundUrl,
+  categoryId,
+  isFavorite,
 }: Props) => {
   const [isTranslationShown, setTranslationShown] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const { switchIsFavorite, isLoading } = useFavoriteWordsByCategory(
+    id,
+    categoryId
+  );
 
   const onCopyWord = async () => {
     await navigator.clipboard.writeText(nameKa);
@@ -81,9 +92,17 @@ export const WordCard = ({
             </button>
           )}
         </div>
-        <div className="justify-self-end">
-          <button className="text-raisin-black text-sm font-semibold opacity-50">
-            Add to favorites
+        <div className="justify-self-end self-end">
+          <button
+            className="text-raisin-black text-sm font-semibold opacity-50"
+            onClick={switchIsFavorite}
+            disabled={isLoading}
+          >
+            {isLoading
+              ? 'Loading...'
+              : isFavorite
+              ? 'Remove from favorites'
+              : 'Add to favorites'}
           </button>
         </div>
       </div>
