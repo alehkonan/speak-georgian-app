@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useAllWords } from 'src/api/words';
 import { Button, GameCard } from 'src/shared/components';
-import { GAME_WORDS_COUNT, useGame } from './useGame';
+import { useGame } from './useGame';
 
 export const GameScreen = () => {
   const { words, isLoading, error } = useAllWords();
@@ -30,7 +30,7 @@ export const GameScreen = () => {
             >
               <div
                 className={classNames([
-                  `w-[${GAME_WORDS_COUNT * 100}%]`,
+                  'w-[1000%]',
                   'grid grid-cols-10 justify-items-center gap-2 px-1 items-center',
                 ])}
               >
