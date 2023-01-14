@@ -33,5 +33,6 @@ export const generateGameWords = (allWords: Word[], count: number) => {
   return randomWords.map((word) => ({
     ...word,
     answers: generateAnswers(word.name_en, answers),
+    isAnswered: false,
   }));
 };

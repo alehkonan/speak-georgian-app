@@ -1,19 +1,54 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Word } from 'src/shared/types';
 import { generateGameWords } from './utils';
 
-const GAME_WORDS_COUNT = 10;
+export const GAME_WORDS_COUNT = 10;
 
 type GameWord = Word & {
   answers: string[];
+  isAnswered: boolean;
+};
+
+type GameResult = Word & {
+  isCorrect: boolean;
 };
 
 export const useGame = (allWords: Word[]) => {
   const [gameWords, setGameWords] = useState<GameWord[]>([]);
+  const [results, setResults] = useState<GameResult[]>();
   const [isGameStarted, setGameStarted] = useState(false);
+  const tempResults = new Set<GameResult>();
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const startGame = useCallback(() => setGameStarted(true), []);
-  const finishGame = useCallback(() => setGameStarted(false), []);
+  const showNextCard = () => {
+    if (!containerRef.current) return;
+    const { scrollLeft, offsetWidth } = containerRef.current;
+    containerRef.current.scrollTo({
+      left: scrollLeft + offsetWidth,
+      behavior: 'smooth',
+    });
+  };
+
+  const startGame = useCallback(() => {
+    setResults(undefined);
+    setGameStarted(true);
+  }, []);
+
+  const finishGame = useCallback(() => {
+    containerRef.current?.scrollTo({ left: 0 });
+    setGameStarted(false);
+  }, []);
+
+  const closeResults = () => setResults(undefined);
+
+  const checkIfGameIsFinished = (result: GameResult) => {
+    tempResults.add(result);
+    if (tempResults.size === GAME_WORDS_COUNT) {
+      finishGame();
+      setResults([...tempResults]);
+      tempResults.clear();
+    }
+  };
 
   useEffect(() => {
     if (isGameStarted) {
@@ -25,7 +60,12 @@ export const useGame = (allWords: Word[]) => {
   return {
     isGameStarted,
     gameWords,
+    results,
+    containerRef,
+    showNextCard,
+    closeResults,
     startGame,
     finishGame,
+    checkIfGameIsFinished,
   };
 };

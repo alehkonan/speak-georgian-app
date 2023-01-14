@@ -1,17 +1,14 @@
 import classNames from 'classnames';
-import { PropsWithChildren, useEffect, useRef, useState } from 'react';
+import { PropsWithChildren, useRef, useState } from 'react';
 import { incrementAnswers } from 'src/services/supabase';
 import { SoundIcon } from 'src/shared/icons';
+import { Word } from 'src/shared/types';
 import { GameCardPicture } from './GameCardPicture';
 
 type Props = {
-  wordId: number;
-  nameKa: string;
-  nameEn: string;
-  transcription: string | null;
-  pictureUrl: string | null;
-  soundUrl: string | null;
+  word: Word;
   answers: string[];
+  onLastWordCheck: (result: Word & { isCorrect: boolean }) => void;
   onShowNextCard: () => void;
 };
 
@@ -20,19 +17,15 @@ const NavButton = ({ children }: PropsWithChildren) => {
 };
 
 export const GameCard = ({
-  wordId,
-  nameEn,
-  nameKa,
-  transcription,
-  pictureUrl,
+  word,
   answers,
-  soundUrl,
+  onLastWordCheck,
   onShowNextCard,
 }: Props) => {
   const [clickedAnswer, setClickedAnswer] = useState<string>();
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const isRight = (answer: string) => answer === nameEn;
+  const isRight = (answer: string) => answer === word.name_en;
   const isClicked = (answer: string) => answer === clickedAnswer;
 
   const onPlaySound = () => {
@@ -43,30 +36,37 @@ export const GameCard = ({
     }
   };
 
-  const onCheckAnswer = (answer: string) => {
+  const onAnswerClick = (answer: string) => {
     setClickedAnswer(answer);
-    setTimeout(onShowNextCard, 1000);
-    incrementAnswers(wordId, isRight(answer));
+    incrementAnswers(word.id, isRight(answer));
+    setTimeout(() => {
+      onShowNextCard();
+      onLastWordCheck({
+        ...word,
+        isCorrect: isRight(answer),
+      });
+    }, 500);
   };
-
-  useEffect(() => {
-    setClickedAnswer(undefined);
-  }, [nameEn]);
 
   return (
     <div className="bg-white rounded-lg grid p-3 gap-2 w-full md:w-4/5 snap-always snap-center">
-      {pictureUrl && (
+      {word.picture_url && (
         <div className="flex justify-between items-center">
           <NavButton>Previous</NavButton>
-          <GameCardPicture nameEn={nameEn} pictureUrl={pictureUrl} />
+          <GameCardPicture
+            nameEn={word.name_en}
+            pictureUrl={word.picture_url}
+          />
           <NavButton>Next</NavButton>
         </div>
       )}
       <p className="flex justify-center items-center gap-x-2 flex-wrap">
-        <span className="text-raisin-black text-xl font-bold">{nameKa}</span>
-        {transcription && (
+        <span className="text-raisin-black text-xl font-bold">
+          {word.name_ka}
+        </span>
+        {word.transcription && (
           <span className="text-raisin-black opacity-50">
-            ({transcription})
+            ({word.transcription})
           </span>
         )}
       </p>
@@ -85,7 +85,7 @@ export const GameCard = ({
                   isClicked(answer) && !isRight(answer),
               },
             ])}
-            onClick={() => onCheckAnswer(answer)}
+            onClick={() => onAnswerClick(answer)}
             disabled={Boolean(clickedAnswer)}
           >
             {answer}

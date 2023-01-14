@@ -1,12 +1,21 @@
+import classNames from 'classnames';
 import { useAllWords } from 'src/api/words';
 import { Button, GameCard } from 'src/shared/components';
-import { useGame } from './useGame';
+import { GAME_WORDS_COUNT, useGame } from './useGame';
 
 export const GameScreen = () => {
   const { words, isLoading, error } = useAllWords();
-  const { isGameStarted, gameWords, startGame, finishGame } = useGame(words);
-
-  if (isLoading) return <p>Loading...</p>;
+  const {
+    isGameStarted,
+    gameWords,
+    results,
+    containerRef,
+    closeResults,
+    startGame,
+    finishGame,
+    checkIfGameIsFinished,
+    showNextCard,
+  } = useGame(words);
 
   if (error) return <p className="text-red-500">{error.message}</p>;
 
@@ -15,19 +24,23 @@ export const GameScreen = () => {
       {isGameStarted ? (
         <>
           <div className="grid place-items-center">
-            <div className="w-full overflow-auto snap-x snap-mandatory scrollbar-hide">
-              <div className="w-[1000%] grid grid-cols-10 justify-items-center gap-2 px-1 items-center">
+            <div
+              className="w-full overflow-auto snap-x snap-mandatory scrollbar-hide"
+              ref={containerRef}
+            >
+              <div
+                className={classNames([
+                  `w-[${GAME_WORDS_COUNT * 100}%]`,
+                  'grid grid-cols-10 justify-items-center gap-2 px-1 items-center',
+                ])}
+              >
                 {gameWords.map((word) => (
                   <GameCard
                     key={word.id}
-                    wordId={word.id}
-                    nameEn={word.name_en}
-                    nameKa={word.name_ka}
-                    pictureUrl={word.picture_url}
-                    soundUrl={word.sound_url}
-                    transcription={word.transcription}
+                    word={word}
                     answers={word.answers}
-                    onShowNextCard={() => console.log('next')}
+                    onShowNextCard={showNextCard}
+                    onLastWordCheck={checkIfGameIsFinished}
                   />
                 ))}
               </div>
@@ -41,16 +54,35 @@ export const GameScreen = () => {
         <>
           <div className="grid place-items-center">
             <div className="bg-white p-4 rounded-lg w-4/5">
-              <p>This is the game mode.</p>
-              <p>
-                After the game is started you can see all available words one by
-                one and try to guess their meaning.
-              </p>
-              <p>To start the game tap the button bellow</p>
-              <p>Good luck!</p>
+              {results ? (
+                <div className="grid gap-3">
+                  <p className="font-semibold">Congratulation! Great result!</p>
+                  <div>
+                    <p>
+                      Correct answers:{' '}
+                      {results.filter((result) => result.isCorrect).length}
+                    </p>
+                    <p>
+                      Wrong answers:{' '}
+                      {results.filter((result) => !result.isCorrect).length}
+                    </p>
+                  </div>
+                  <Button onClick={closeResults}>close results</Button>
+                </div>
+              ) : (
+                <>
+                  <p>This is the game mode.</p>
+                  <p>
+                    After the game is started you can see all available words
+                    one by one and try to guess their meaning.
+                  </p>
+                  <p>To start the game tap the button bellow</p>
+                  <p>Good luck!</p>
+                </>
+              )}
             </div>
           </div>
-          <Button primary onClick={startGame}>
+          <Button primary onClick={startGame} disabled={isLoading}>
             Start the game
           </Button>
         </>
