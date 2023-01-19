@@ -54,6 +54,9 @@ module.exports = {
       borderColor: {
         'ripe-mango': colors.ripeMango,
       },
+      backgroundColor: {
+        'raisin-black': colors.raisinBlack,
+      },
       fontFamily: {
         georgian: 'DejaVuSans',
       },
