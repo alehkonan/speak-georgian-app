@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { routes } from 'src/app/routes';
 import { useSignIn } from 'src/features/signIn';
-import { Button, Form, InputField } from 'src/shared/components';
+import { Button, Divider, Form, InputField } from 'src/shared/components';
 import * as zod from 'zod';
 
 const schema = zod.object({
@@ -47,6 +47,7 @@ export const LoginScreen = () => {
           Sign up
         </Button>
       </Form>
+      <Divider text="or use your social networks" />
       <Button onClick={() => onSignInWithGoogle()}>Sign in with Google</Button>
       {error && <span className="text-red-500">{error.message}</span>}
     </div>
