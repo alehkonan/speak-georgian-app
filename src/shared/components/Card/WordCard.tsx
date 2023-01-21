@@ -1,7 +1,8 @@
 import classNames from 'classnames';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useFavoriteWordsByCategory } from 'src/api/favorites';
 import { SoundIcon } from 'src/shared/icons';
+import { recalculateFontSize } from 'src/shared/utils';
 
 type Props = {
   id: number;
@@ -44,6 +45,18 @@ export const WordCard = ({
     }
   };
 
+  const nameKaContainerRef = useCallback(
+    (node: HTMLDivElement | null) =>
+      node && recalculateFontSize(node, nameKa, 1.6),
+    [nameKa]
+  );
+
+  const transcriptionContainerRef = useCallback(
+    (node: HTMLDivElement | null) =>
+      node && transcription && recalculateFontSize(node, transcription, 2),
+    [transcription]
+  );
+
   return (
     <div className={classNames(['bg-white shadow rounded-2xl', 'flex'])}>
       {pictureUrl && (
@@ -55,26 +68,21 @@ export const WordCard = ({
           />
         </div>
       )}
-      <div className="flex-1 p-2 grid">
-        <div>
-          <button
-            className="text-raisin-black text-xl font-bold"
-            onClick={onCopyWord}
-          >
+      <div className="flex-1 p-2 grid w-10">
+        <div className="text-xl" ref={nameKaContainerRef}>
+          <button className="text-raisin-black font-bold" onClick={onCopyWord}>
             {nameKa}
           </button>
         </div>
-        <div>
+        <div className="" ref={transcriptionContainerRef}>
           <button
-            className="inline-flex items-center gap-2"
+            className="text-raisin-black opacity-50 inline-flex items-center gap-2"
             onClick={onPlaySound}
           >
-            <span className="text-raisin-black opacity-50">
-              ({transcription || 'no transcription'})
-            </span>
+            <span>({transcription || 'no transcription'})</span>
             {soundUrl && (
               <div>
-                <SoundIcon className="w-5 h-5 text-raisin-black opacity-50" />
+                <SoundIcon className="w-5 h-5" />
                 <audio ref={audioRef} src={soundUrl}></audio>
               </div>
             )}
