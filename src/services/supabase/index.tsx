@@ -84,6 +84,26 @@ export const getWordsByCategory = async (categoryId: number) => {
   }));
 };
 
+export const getWordsBySearchValue = async (searchValue: string) => {
+  const userId = await getUserId();
+
+  const { data, error } = await supabaseClient
+    .from('words')
+    .select('*, favorites(is_favorite)')
+    .ilike('name_en', `%${searchValue}%`)
+    .eq('favorites.user_id', userId)
+    .order('name_en');
+
+  if (error) throw new Error(error.message, { cause: error });
+
+  return data?.map((word) => ({
+    ...word,
+    favorites: Array.isArray(word.favorites)
+      ? Boolean(word.favorites.at(0)?.is_favorite)
+      : false,
+  }));
+};
+
 export const getFavoriteWords = async () => {
   const userId = await getUserId();
   const { data, error } = await supabaseClient

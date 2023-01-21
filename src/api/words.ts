@@ -1,6 +1,10 @@
 import { apiKeys } from '.';
 import { useQuery } from '@tanstack/react-query';
-import { getAllWords, getWordsByCategory } from 'src/services/supabase';
+import {
+  getAllWords,
+  getWordsByCategory,
+  getWordsBySearchValue,
+} from 'src/services/supabase';
 
 export const useWords = (categoryId: number) => {
   const {
@@ -31,5 +35,19 @@ export const useAllWords = () => {
     count: data?.data?.length || 0,
     isLoading,
     error: error instanceof Error ? error : data?.error,
+  };
+};
+
+export const useSearchWords = (searchValue: string) => {
+  const { data, isFetching } = useQuery({
+    queryKey: apiKeys.wordsBySearch(searchValue),
+    queryFn: ({ queryKey: [, , { search }] }) =>
+      getWordsBySearchValue(search as string),
+    enabled: Boolean(searchValue.trim()),
+  });
+
+  return {
+    results: data,
+    isSearching: isFetching,
   };
 };

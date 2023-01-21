@@ -11,7 +11,7 @@ type Props = {
   pictureUrl: string | null;
   soundUrl: string | null;
   categoryId: number | null;
-  isFavorite: boolean;
+  isFavorite?: boolean;
 };
 
 export const WordCard = ({
