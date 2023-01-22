@@ -47,13 +47,13 @@ export const WordCard = ({
 
   const nameKaContainerRef = useCallback(
     (node: HTMLDivElement | null) =>
-      node && recalculateFontSize(node, nameKa, 1.6),
+      node && recalculateFontSize(node, nameKa, 0.55),
     [nameKa]
   );
 
   const transcriptionContainerRef = useCallback(
     (node: HTMLDivElement | null) =>
-      node && transcription && recalculateFontSize(node, transcription, 2),
+      node && transcription && recalculateFontSize(node, transcription, 0.45),
     [transcription]
   );
 
