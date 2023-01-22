@@ -53,7 +53,7 @@ export const recalculateFontSize = (
   const isWordFit = containerWidth > wordWidth;
 
   if (!isWordFit) {
-    const fontSize = containerWidth / word.length / fontRatio;
+    const fontSize = Math.floor(containerWidth / word.length / fontRatio);
     node.style.fontSize = `${fontSize}px`;
   }
 };
