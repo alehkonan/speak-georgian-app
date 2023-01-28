@@ -62,16 +62,24 @@ export const getWordsCount = async () => {
   return response.count;
 };
 
-export const getAllWords = async () => {
+export const getNotLearnedWords = async () => {
   const userId = await getUserId();
   const response = await wordsSelector(userId);
 
-  return response.data?.map(mapWord);
+  if (response.error) {
+    throw new Error(response.error.message, { cause: response.error });
+  }
+
+  return response.data?.map(mapWord).filter((word) => !word.isLearned);
 };
 
 export const getWord = async (wordId: number) => {
   const userId = await getUserId();
   const response = await wordsSelector(userId).eq('id', wordId);
+
+  if (response.error) {
+    throw new Error(response.error.message, { cause: response.error });
+  }
 
   return response.data?.map(mapWord).at(0);
 };

@@ -8,4 +8,5 @@ export const apiKeys = {
   words: ['words'],
   wordsByCategory: (categoryId: number) => ['words', { categoryId }],
   favoriteWords: ['words', 'favorite'],
+  notLearnedWords: ['words', 'notLearned'],
 } as const;

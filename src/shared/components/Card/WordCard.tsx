@@ -1,25 +1,15 @@
 import classNames from 'classnames';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Word } from 'src/services/supabase';
-import { SoundIcon } from 'src/shared/icons';
 import { recalculateFontSize } from 'src/shared/utils';
-import { FavoriteButton } from './FavoriteButton';
+import { CardActions } from './CardActions';
 
 export const WordCard = (word: Word) => {
   const [isTranslationShown, setTranslationShown] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const onCopyWord = async () => {
     await navigator.clipboard.writeText(word.ka);
     alert('Text copied');
-  };
-
-  const onPlaySound = () => {
-    const sound = audioRef.current;
-    if (sound) {
-      sound.currentTime = 0;
-      sound.play();
-    }
   };
 
   const nameKaContainerRef = useCallback(
@@ -53,23 +43,14 @@ export const WordCard = (word: Word) => {
             {word.ka}
           </button>
         </div>
-        <div className="" ref={transcriptionContainerRef}>
-          <button
-            className="text-raisin-black opacity-50 inline-flex items-center gap-2"
-            onClick={onPlaySound}
-          >
-            <span>({word.transcription || 'no transcription'})</span>
-            {word.soundUrl && (
-              <div>
-                <SoundIcon className="w-5 h-5" />
-                <audio ref={audioRef} src={word.soundUrl}></audio>
-              </div>
-            )}
-          </button>
+        <div ref={transcriptionContainerRef}>
+          <span className="text-raisin-black opacity-50">
+            ({word.transcription || 'no transcription'})
+          </span>
         </div>
         <div>
           {isTranslationShown ? (
-            <span className="text-raisin-black opacity-50">{word.en}</span>
+            <span className="text-raisin-black opacity-70">{word.en}</span>
           ) : (
             <button
               className="text-raisin-black text-sm font-semibold opacity-30"
@@ -79,15 +60,11 @@ export const WordCard = (word: Word) => {
             </button>
           )}
         </div>
-        <div className="flex gap-3 justify-self-end self-end">
-          <button
-            className="text-raisin-black text-sm font-semibold opacity-50"
-            onClick={() => console.log('mark as learned')}
-          >
-            Already know
-          </button>
-          <FavoriteButton wordId={word.id} isFavorite={word.isFavorite} />
-        </div>
+        <CardActions
+          wordId={word.id}
+          isLearned={word.isLearned}
+          isFavorite={word.isFavorite}
+        />
       </div>
     </div>
   );

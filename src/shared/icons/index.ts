@@ -1,4 +1,5 @@
 export { ReactComponent as ArrowRightIcon } from './icon-arrow-right.svg';
+export { ReactComponent as CheckIcon } from './check.svg';
 export { ReactComponent as ChevronDownIcon } from './icon-chevron-down.svg';
 export { ReactComponent as ChevronLeftIcon } from './chevron-left.svg';
 export { ReactComponent as CloseIcon } from './close.svg';
@@ -8,6 +9,7 @@ export { ReactComponent as EyeSlashIcon } from './eye-slash.svg';
 export { ReactComponent as GameIcon } from './game.svg';
 export { ReactComponent as HeartIcon } from './heart.svg';
 export { ReactComponent as HomeIcon } from './home.svg';
+export { ReactComponent as LoaderIcon } from './loader.svg';
 export { ReactComponent as PersonIcon } from './person.svg';
 export { ReactComponent as PlusIcon } from './icon-plus.svg';
 export { ReactComponent as SoundIcon } from './sound.svg';

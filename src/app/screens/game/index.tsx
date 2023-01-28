@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import { useAllWords } from 'src/api/words';
+import { useNotLearnedWords } from 'src/api/words';
 import { Button, GameCard } from 'src/shared/components';
 import { useGame } from './useGame';
 
 export const GameScreen = () => {
-  const { words, isLoading, error } = useAllWords();
+  const { words, isLoading, error } = useNotLearnedWords();
 
   const {
     gameWords,

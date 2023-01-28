@@ -1,16 +1,16 @@
 import { apiKeys } from '.';
 import { useQuery } from '@tanstack/react-query';
 import {
-  getAllWords,
   getFavoriteWords,
+  getNotLearnedWords,
   getWordsByCategory,
   getWordsBySearchValue,
 } from 'src/services/supabase';
 
-export const useAllWords = () => {
+export const useNotLearnedWords = () => {
   const query = useQuery({
-    queryKey: apiKeys.words,
-    queryFn: getAllWords,
+    queryKey: apiKeys.notLearnedWords,
+    queryFn: getNotLearnedWords,
   });
 
   return {

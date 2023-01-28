@@ -1,22 +1,28 @@
 import { ComponentProps } from 'react';
 import classNames from 'classnames';
+import { LoaderIcon } from 'src/shared/icons';
 
-type Props = ComponentProps<'button'>;
+type Props = ComponentProps<'button'> & {
+  isLoading?: boolean;
+};
 
-export const IconButton = ({ className, children, ...props }: Props) => {
+export const IconButton = ({
+  className,
+  children,
+  isLoading,
+  ...props
+}: Props) => {
   return (
     <button
       className={classNames([
         'grid place-items-center',
         'rounded-full',
         'w-9 h-9',
-        'text-white',
-        'bg-gradient-to-t from-ripe-mango via-orange-yellow to-caramel',
         className,
       ])}
       {...props}
     >
-      {children}
+      {isLoading ? <LoaderIcon /> : children}
     </button>
   );
 };

@@ -33,3 +33,33 @@ export const incrementAnswers = async (wordId: number, isRight: boolean) => {
     });
   }
 };
+
+export const setWordAsLearned = async (wordId: number) => {
+  const userId = await getUserId();
+  const wordInStatistics = await getWordStatistic(userId, wordId);
+
+  if (wordInStatistics) {
+    const { data } = await supabaseClient
+      .from('statistics')
+      .update({
+        id: wordInStatistics.id,
+        is_learned: !wordInStatistics.is_learned,
+      })
+      .select()
+      .single();
+
+    return Boolean(data?.is_learned);
+  } else {
+    const { data } = await supabaseClient
+      .from('statistics')
+      .insert({
+        word_id: wordId,
+        user_id: userId,
+        is_learned: true,
+      })
+      .select()
+      .single();
+
+    return Boolean(data?.is_learned);
+  }
+};
