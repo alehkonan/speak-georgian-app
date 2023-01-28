@@ -10,11 +10,11 @@ export const DailyWord = () => {
 
   return (
     <DailyCard
-      wordKa={randomWord.name_ka}
-      wordEn={randomWord.name_en}
+      wordKa={randomWord.ka}
+      wordEn={randomWord.en}
       transcription={randomWord.transcription}
-      pictureUrl={randomWord.picture_url}
-      soundUrl={randomWord.sound_url}
+      pictureUrl={randomWord.pictureUrl}
+      soundUrl={randomWord.soundUrl}
       onClose={onCloseDailyWord}
     />
   );

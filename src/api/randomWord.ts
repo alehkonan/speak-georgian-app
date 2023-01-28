@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import format from 'date-fns/format';
 import isSameDay from 'date-fns/isSameDay';
 import { useState } from 'react';
-import { getWord, getWordsCount } from 'src/services/supabase';
+import { getWord, getWordsCount, Word } from 'src/services/supabase';
 import { getRandomInteger } from 'src/shared/utils';
 import { apiKeys } from '.';
 
@@ -14,8 +14,10 @@ const getDailyWord = () => {
 
     if (dailyWord === null) return null;
 
-    const word = JSON.parse(dailyWord);
+    const word = JSON.parse(dailyWord) as Word & { fetchedAt?: string };
     const fetchedAt = word?.fetchedAt;
+
+    if (!fetchedAt) throw new Error('word is not fetched');
 
     const isFetchedToday = isSameDay(new Date(fetchedAt), new Date());
 
