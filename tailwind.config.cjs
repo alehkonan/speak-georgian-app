@@ -56,6 +56,11 @@ module.exports = {
       },
       backgroundColor: {
         'raisin-black': colors.raisinBlack,
+        'picton-blue': colors.pictonBlue,
+        'steel-blue': colors.steelBlue,
+        caramel: colors.caramel,
+        maize: colors.maize,
+        'ripe-mango': colors.ripeMango,
       },
       fontFamily: {
         georgian: 'DejaVuSans',

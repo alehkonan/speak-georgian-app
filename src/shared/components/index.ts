@@ -5,3 +5,4 @@ export { Form } from './Form';
 export { IconButton } from './Button/IconButton';
 export { Input } from './Input';
 export { InputField } from './InputField';
+export { Switch } from './Switch';
