@@ -1,8 +1,7 @@
 import classNames from 'classnames';
 import { PropsWithChildren, useRef, useState } from 'react';
-import { incrementAnswers } from 'src/services/supabase';
+import { incrementAnswers, Word } from 'src/services/supabase';
 import { SoundIcon } from 'src/shared/icons';
-import { Word } from 'src/shared/types';
 import { GameCardPicture } from './GameCardPicture';
 
 type Props = {
@@ -25,7 +24,7 @@ export const GameCard = ({
   const [clickedAnswer, setClickedAnswer] = useState<string>();
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const isRight = (answer: string) => answer === word.name_en;
+  const isRight = (answer: string) => answer === word.en;
   const isClicked = (answer: string) => answer === clickedAnswer;
 
   const onPlaySound = () => {
@@ -50,20 +49,15 @@ export const GameCard = ({
 
   return (
     <div className="bg-white rounded-lg grid p-3 gap-2 w-full md:w-4/5 snap-always snap-center">
-      {word.picture_url && (
+      {word.pictureUrl && (
         <div className="flex justify-between items-center">
           <NavButton>Previous</NavButton>
-          <GameCardPicture
-            nameEn={word.name_en}
-            pictureUrl={word.picture_url}
-          />
+          <GameCardPicture nameEn={word.en} pictureUrl={word.pictureUrl} />
           <NavButton>Next</NavButton>
         </div>
       )}
       <p className="flex justify-center items-center gap-x-2 flex-wrap">
-        <span className="text-raisin-black text-xl font-bold">
-          {word.name_ka}
-        </span>
+        <span className="text-raisin-black text-xl font-bold">{word.ka}</span>
         {word.transcription && (
           <span className="text-raisin-black opacity-50">
             ({word.transcription})

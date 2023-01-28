@@ -1,39 +1,16 @@
 import classNames from 'classnames';
 import { useCallback, useRef, useState } from 'react';
-import { useFavoriteWordsByCategory } from 'src/api/favorites';
+import { Word } from 'src/services/supabase';
 import { SoundIcon } from 'src/shared/icons';
 import { recalculateFontSize } from 'src/shared/utils';
+import { FavoriteButton } from './FavoriteButton';
 
-type Props = {
-  id: number;
-  nameKa: string;
-  nameEn: string;
-  transcription: string | null;
-  pictureUrl: string | null;
-  soundUrl: string | null;
-  categoryId: number | null;
-  isFavorite?: boolean;
-};
-
-export const WordCard = ({
-  id,
-  nameEn,
-  nameKa,
-  transcription,
-  pictureUrl,
-  soundUrl,
-  categoryId,
-  isFavorite,
-}: Props) => {
+export const WordCard = (word: Word) => {
   const [isTranslationShown, setTranslationShown] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const { switchIsFavorite, isLoading } = useFavoriteWordsByCategory(
-    id,
-    categoryId
-  );
 
   const onCopyWord = async () => {
-    await navigator.clipboard.writeText(nameKa);
+    await navigator.clipboard.writeText(word.ka);
     alert('Text copied');
   };
 
@@ -47,31 +24,33 @@ export const WordCard = ({
 
   const nameKaContainerRef = useCallback(
     (node: HTMLDivElement | null) =>
-      node && recalculateFontSize(node, nameKa, 0.55),
-    [nameKa]
+      node && recalculateFontSize(node, word.ka, 0.55),
+    [word.ka]
   );
 
   const transcriptionContainerRef = useCallback(
     (node: HTMLDivElement | null) =>
-      node && transcription && recalculateFontSize(node, transcription, 0.45),
-    [transcription]
+      node &&
+      word.transcription &&
+      recalculateFontSize(node, word.transcription, 0.45),
+    [word.transcription]
   );
 
   return (
     <div className={classNames(['bg-white shadow rounded-2xl', 'flex'])}>
-      {pictureUrl && (
+      {word.pictureUrl && (
         <div className="flex-shrink-0 basis-1/3">
           <img
             className="w-full h-full aspect-square object-cover object-top rounded-l-2xl"
-            src={pictureUrl}
-            alt={nameEn}
+            src={word.pictureUrl}
+            alt={word.en}
           />
         </div>
       )}
       <div className="flex-1 p-2 grid w-10">
         <div className="text-xl" ref={nameKaContainerRef}>
           <button className="text-raisin-black font-bold" onClick={onCopyWord}>
-            {nameKa}
+            {word.ka}
           </button>
         </div>
         <div className="" ref={transcriptionContainerRef}>
@@ -79,18 +58,18 @@ export const WordCard = ({
             className="text-raisin-black opacity-50 inline-flex items-center gap-2"
             onClick={onPlaySound}
           >
-            <span>({transcription || 'no transcription'})</span>
-            {soundUrl && (
+            <span>({word.transcription || 'no transcription'})</span>
+            {word.soundUrl && (
               <div>
                 <SoundIcon className="w-5 h-5" />
-                <audio ref={audioRef} src={soundUrl}></audio>
+                <audio ref={audioRef} src={word.soundUrl}></audio>
               </div>
             )}
           </button>
         </div>
         <div>
           {isTranslationShown ? (
-            <span className="text-raisin-black opacity-50">{nameEn}</span>
+            <span className="text-raisin-black opacity-50">{word.en}</span>
           ) : (
             <button
               className="text-raisin-black text-sm font-semibold opacity-30"
@@ -100,18 +79,14 @@ export const WordCard = ({
             </button>
           )}
         </div>
-        <div className="justify-self-end self-end">
+        <div className="flex gap-3 justify-self-end self-end">
           <button
             className="text-raisin-black text-sm font-semibold opacity-50"
-            onClick={switchIsFavorite}
-            disabled={isLoading}
+            onClick={() => console.log('mark as learned')}
           >
-            {isLoading
-              ? 'Loading...'
-              : isFavorite
-              ? 'Remove from favorites'
-              : 'Add to favorites'}
+            Already know
           </button>
+          <FavoriteButton wordId={word.id} isFavorite={word.isFavorite} />
         </div>
       </div>
     </div>

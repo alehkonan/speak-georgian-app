@@ -28,30 +28,27 @@ const getDailyWord = () => {
 export const useRandomWord = () => {
   const [dailyWord, setDailyWord] = useState(getDailyWord);
 
-  const countQuery = useQuery(apiKeys.wordsCount, getWordsCount, {
+  const { data: count } = useQuery(apiKeys.wordsCount, getWordsCount, {
     enabled: !dailyWord,
   });
 
-  useQuery(
-    apiKeys.randomWord,
-    () => getWord(getRandomInteger(1, countQuery.data?.count!)),
-    {
-      enabled: Boolean(countQuery.data?.count) && !dailyWord,
-      onSuccess: ({ data }) => {
-        const word = data?.at(0);
-        if (word) {
-          localStorage.setItem(
-            DAILY_WORD,
-            JSON.stringify({
-              ...word,
-              fetchedAt: format(new Date(), 'yyyy-MM-dd'),
-            })
-          );
-          setDailyWord(word);
-        }
-      },
-    }
-  );
+  useQuery({
+    queryKey: apiKeys.randomWord,
+    queryFn: () => getWord(getRandomInteger(1, count!)),
+    enabled: Boolean(count) && !dailyWord,
+    onSuccess: (word) => {
+      if (word) {
+        localStorage.setItem(
+          DAILY_WORD,
+          JSON.stringify({
+            ...word,
+            fetchedAt: format(new Date(), 'yyyy-MM-dd'),
+          })
+        );
+        setDailyWord(word);
+      }
+    },
+  });
 
   return dailyWord;
 };

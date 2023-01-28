@@ -1,51 +1,20 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getFavoriteWords, switchWordIsFavorite } from 'src/services/supabase';
-import { Word } from 'src/shared/types';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { setWordAsFavorite } from 'src/services/supabase';
 import { apiKeys } from '.';
 
-export const useFavoriteWordsByCategory = (
-  wordId: number,
-  categoryId: number | null
-) => {
+export const useFavorites = () => {
   const queryClient = useQueryClient();
 
-  const onSwitchFavorites = (isFavorite: boolean) => {
-    if (!categoryId) return;
+  const { mutate, isLoading, isError } = useMutation({
+    mutationFn: (wordId: number) => setWordAsFavorite(wordId),
+    onSuccess: () => queryClient.invalidateQueries(apiKeys.words),
+  });
 
-    queryClient.setQueryData<Word[]>(
-      apiKeys.wordsByCategory(categoryId),
-      (words) =>
-        words?.map((word) => ({
-          ...word,
-          favorites: word.id === wordId ? isFavorite : word.favorites,
-        }))
-    );
-    queryClient.refetchQueries(apiKeys.favoriteWords);
-  };
-
-  const { mutate, isLoading, isError } = useMutation(
-    () => switchWordIsFavorite(wordId),
-    {
-      onSuccess: onSwitchFavorites,
-    }
-  );
+  const switchFavorite = (wordId: number) => mutate(wordId);
 
   return {
-    switchIsFavorite: () => mutate(),
+    switchFavorite,
     isLoading,
     isError,
-  };
-};
-
-export const useFavoriteWords = () => {
-  const { data, isLoading, error } = useQuery(
-    apiKeys.favoriteWords,
-    getFavoriteWords
-  );
-
-  return {
-    words: data,
-    isLoading,
-    error: error instanceof Error ? error : null,
   };
 };

@@ -1,4 +1,4 @@
-import { Word } from 'src/shared/types';
+import { Word } from 'src/services/supabase';
 import { generateRandomElements, getRandomInteger } from 'src/shared/utils';
 
 export const generateAnswers = (
@@ -27,12 +27,12 @@ export const generateAnswers = (
 export const generateGameWords = (allWords: Word[], count: number) => {
   if (!allWords.length) return [];
 
-  const answers = allWords.map((word) => word.name_en);
+  const answers = allWords.map((word) => word.en);
   const randomWords = generateRandomElements<Word>(allWords, count);
 
   return randomWords.map((word) => ({
     ...word,
-    answers: generateAnswers(word.name_en, answers),
+    answers: generateAnswers(word.en, answers),
     isAnswered: false,
   }));
 };

@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { useCategories } from 'src/api/categories';
-import { useWords } from 'src/api/words';
+import { useCategoryWords } from 'src/api/words';
 import { RouteParam } from 'src/app/params';
 import { routes } from 'src/app/routes';
 import { WordCard } from 'src/shared/components';
@@ -9,7 +9,7 @@ import { ChevronLeftIcon } from 'src/shared/icons';
 export const CategoryScreen = () => {
   const params = useParams<RouteParam>();
   const categoryId = Number(params.id);
-  const { words, isLoading, error } = useWords(categoryId);
+  const { words, isLoading, error } = useCategoryWords(categoryId);
   const { categories } = useCategories();
 
   if (isLoading) {
@@ -40,17 +40,7 @@ export const CategoryScreen = () => {
       </div>
       <div className="flex-1 overflow-auto overscroll-contain grid auto-rows-min lg:grid-cols-2 gap-3 p-2 -m-2">
         {words?.map((word) => (
-          <WordCard
-            id={word.id}
-            key={word.id}
-            nameEn={word.name_en}
-            nameKa={word.name_ka}
-            transcription={word.transcription}
-            pictureUrl={word.picture_url}
-            soundUrl={word.sound_url}
-            categoryId={word.category_id}
-            isFavorite={word.favorites}
-          />
+          <WordCard key={word.id} {...word} />
         ))}
       </div>
     </div>

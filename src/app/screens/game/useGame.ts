@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import type { Word } from 'src/shared/types';
+import { useCallback, useRef, useState } from 'react';
+import { Word } from 'src/services/supabase';
 import { generateGameWords } from './utils';
 
 export const GAME_WORDS_COUNT = 10;
@@ -13,10 +13,9 @@ type GameResult = Word & {
   isCorrect: boolean;
 };
 
-export const useGame = (allWords: Word[]) => {
-  const [gameWords, setGameWords] = useState<GameWord[]>([]);
+export const useGame = (allWords: Word[] | undefined) => {
+  const [gameWords, setGameWords] = useState<GameWord[]>();
   const [results, setResults] = useState<GameResult[]>();
-  const [isGameStarted, setGameStarted] = useState(false);
   const tempResults = new Set<GameResult>();
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -30,13 +29,16 @@ export const useGame = (allWords: Word[]) => {
   };
 
   const startGame = useCallback(() => {
+    if (!allWords) return;
+
+    const words = generateGameWords(allWords, GAME_WORDS_COUNT);
     setResults(undefined);
-    setGameStarted(true);
-  }, []);
+    setGameWords(words);
+  }, [allWords]);
 
   const finishGame = useCallback(() => {
+    setGameWords(undefined);
     containerRef.current?.scrollTo({ left: 0 });
-    setGameStarted(false);
   }, []);
 
   const closeResults = () => setResults(undefined);
@@ -50,15 +52,7 @@ export const useGame = (allWords: Word[]) => {
     }
   };
 
-  useEffect(() => {
-    if (isGameStarted) {
-      const words = generateGameWords(allWords, GAME_WORDS_COUNT);
-      setGameWords(words);
-    }
-  }, [isGameStarted]);
-
   return {
-    isGameStarted,
     gameWords,
     results,
     containerRef,

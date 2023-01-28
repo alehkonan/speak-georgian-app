@@ -5,8 +5,8 @@ import { useGame } from './useGame';
 
 export const GameScreen = () => {
   const { words, isLoading, error } = useAllWords();
+
   const {
-    isGameStarted,
     gameWords,
     results,
     containerRef,
@@ -21,7 +21,7 @@ export const GameScreen = () => {
 
   return (
     <div className="h-full grid grid-rows-[1fr_auto]">
-      {isGameStarted ? (
+      {gameWords ? (
         <>
           <div className="grid place-items-center">
             <div
