@@ -14,12 +14,12 @@ export const Switch = ({ enabled }: Props) => {
       onChange={setChecked}
       className={`${
         checked ? 'bg-steel-blue' : 'bg-gray-200'
-      } relative inline-flex h-6 w-11 items-center rounded-full`}
+      } relative inline-flex h-7 w-14 items-center rounded-full`}
     >
       <span
         className={`${
-          checked ? 'translate-x-6 bg-ripe-mango' : 'translate-x-1 bg-white'
-        } inline-block h-4 w-4 transform rounded-full transition`}
+          checked ? 'translate-x-8 bg-yellow-300' : 'translate-x-1 bg-white'
+        } inline-block h-5 w-5 transform rounded-full transition`}
       />
     </HeadlessSwitch>
   );

@@ -10,7 +10,7 @@ export const ProfileScreen = () => {
   console.log(user);
 
   return (
-    <div className="text-lg text-raisin-black">
+    <div className="text-lg text-raisin-black flex flex-col gap-2">
       <div className="flex items-center justify-between">
         <span className="text-xl font-bold">
           {user?.user_metadata.full_name}
@@ -21,7 +21,6 @@ export const ProfileScreen = () => {
           alt="user avatar"
         />
       </div>
-      <Divider text="user information" />
       <div className="grid grid-cols-2 gap-2">
         <span>Account created at</span>
         <span>{user && format(new Date(user.created_at), 'dd MMM yyyy')}</span>
@@ -30,22 +29,22 @@ export const ProfileScreen = () => {
         <span>Role</span>
         <span>{user?.role}</span>
       </div>
-      <Divider text="user settings" />
-      <div className="grid grid-cols-2 gap-2">
-        <span>Show daily word</span>
+      <div className="grid grid-cols-3 gap-2">
+        <Divider className="col-span-3" text="user settings" />
+        <span className="col-span-2">Show daily word</span>
         <Switch enabled />
-        <span>Show translation by default</span>
+        <span className="col-span-2">Show translation by default</span>
         <Switch />
-        <span>Show pictures in game mode</span>
+        <span className="col-span-2">Show pictures in game mode</span>
         <Switch />
       </div>
-      <Divider text="Statistics" />
-      <div className="grid grid-cols-2 gap-2">
-        <span>Total words in the app</span>
+      <div className="grid grid-cols-3 gap-2">
+        <Divider className="col-span-3" text="Statistics" />
+        <span className="col-span-2">Total words in the app</span>
         <span>1000</span>
-        <span>Learned words</span>
+        <span className="col-span-2">Learned words</span>
         <span>10</span>
-        <span>Favorites words</span>
+        <span className="col-span-2">Favorites words</span>
         <span>13</span>
       </div>
       <div className="flex justify-center mt-2">
