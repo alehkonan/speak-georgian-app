@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useFavorites } from 'src/api/favorites';
 import { useStatistics } from 'src/api/statistics';
 import { CheckIcon, HeartIcon } from 'src/shared/icons';
@@ -16,7 +17,13 @@ export const CardActions = ({ wordId, isFavorite, isLearned }: Props) => {
   return (
     <div className="flex gap-3 justify-self-end self-end">
       <IconButton
-        className={`text-raisin-black opacity-${isLearned ? 90 : 10}`}
+        className={classNames([
+          'text-raisin-black',
+          {
+            'opacity-10': !isLearned,
+            'opacity-90': isLearned,
+          },
+        ])}
         onClick={() => statistics.markAsLearned(wordId)}
         isLoading={statistics.isLoading}
         disabled={statistics.isLoading}
@@ -24,7 +31,13 @@ export const CardActions = ({ wordId, isFavorite, isLearned }: Props) => {
         <CheckIcon />
       </IconButton>
       <IconButton
-        className={`text-raisin-black opacity-${isFavorite ? 90 : 10}`}
+        className={classNames([
+          'text-raisin-black',
+          {
+            'opacity-10': !isFavorite,
+            'opacity-90': isFavorite,
+          },
+        ])}
         onClick={() => favorites.switchFavorite(wordId)}
         isLoading={favorites.isLoading}
         disabled={favorites.isLoading}
