@@ -1,8 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import { getUserSettings } from 'src/services/supabase';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { getUserSettings, updateUserSettings } from 'src/services/supabase';
 import { apiKeys } from '.';
 
-export const useUserSettings = () => {
+export const useGetUserSettings = () => {
   const { data: settings, isLoading } = useQuery({
     queryKey: apiKeys.userSettings,
     queryFn: getUserSettings,
@@ -10,6 +10,19 @@ export const useUserSettings = () => {
 
   return {
     settings,
-    isLoading,
+    isGettingSettings: isLoading,
+  };
+};
+
+export const useUpdateUserSettings = () => {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading } = useMutation({
+    mutationFn: updateUserSettings,
+    onSuccess: () => queryClient.invalidateQueries(apiKeys.userSettings),
+  });
+
+  return {
+    updateSettings: mutate,
+    isUpdatingSettings: isLoading,
   };
 };

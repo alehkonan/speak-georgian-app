@@ -123,6 +123,7 @@ export interface Database {
           id: number;
           user_id: string;
           show_daily_word: boolean;
+          show_translation: boolean;
           show_transcription: boolean;
           show_pictures_in_game: boolean;
           created_at: string;
@@ -131,6 +132,7 @@ export interface Database {
           id?: number;
           user_id: string;
           show_daily_word?: boolean;
+          show_translation?: boolean;
           show_transcription?: boolean;
           show_pictures_in_game?: boolean;
           created_at?: string;
@@ -139,6 +141,7 @@ export interface Database {
           id: number;
           user_id?: string;
           show_daily_word?: boolean;
+          show_translation?: boolean;
           show_transcription?: boolean;
           show_pictures_in_game?: boolean;
           created_at?: string;

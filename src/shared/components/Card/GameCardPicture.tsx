@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
+import { useGetUserSettings } from 'src/api/userSettings';
 
 export const GameCardPicture = ({
   pictureUrl,
@@ -8,9 +9,14 @@ export const GameCardPicture = ({
   pictureUrl: string;
   nameEn: string;
 }) => {
+  const { settings } = useGetUserSettings();
   const [isShown, setShown] = useState(false);
 
-  useEffect(() => setShown(false), [nameEn]);
+  useEffect(() => {
+    if (settings) {
+      setShown(settings.shouldShowPictureInGame);
+    }
+  }, [settings]);
 
   return (
     <div className="w-1/2 aspect-square relative">

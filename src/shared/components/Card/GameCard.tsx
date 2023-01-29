@@ -1,7 +1,7 @@
 import classNames from 'classnames';
-import { PropsWithChildren, useRef, useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
+import { useGetUserSettings } from 'src/api/userSettings';
 import { incrementAnswers, Word } from 'src/services/supabase';
-import { SoundIcon } from 'src/shared/icons';
 import { GameCardPicture } from './GameCardPicture';
 
 type Props = {
@@ -22,18 +22,11 @@ export const GameCard = ({
   onShowNextCard,
 }: Props) => {
   const [clickedAnswer, setClickedAnswer] = useState<string>();
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const { settings } = useGetUserSettings();
 
   const isRight = (answer: string) => answer === word.en;
   const isClicked = (answer: string) => answer === clickedAnswer;
-
-  const onPlaySound = () => {
-    const sound = audioRef.current;
-    if (sound) {
-      sound.currentTime = 0;
-      sound.play();
-    }
-  };
 
   const onAnswerClick = (answer: string) => {
     setClickedAnswer(answer);
@@ -58,7 +51,7 @@ export const GameCard = ({
       )}
       <p className="flex justify-center items-center gap-x-2 flex-wrap">
         <span className="text-raisin-black text-xl font-bold">{word.ka}</span>
-        {word.transcription && (
+        {word.transcription && settings?.shouldShowTranscription && (
           <span className="text-raisin-black opacity-50">
             ({word.transcription})
           </span>

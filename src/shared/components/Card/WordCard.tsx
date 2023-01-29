@@ -1,10 +1,12 @@
 import classNames from 'classnames';
 import { useCallback, useState } from 'react';
+import { useGetUserSettings } from 'src/api/userSettings';
 import { Word } from 'src/services/supabase';
 import { recalculateFontSize } from 'src/shared/utils';
 import { CardActions } from './CardActions';
 
 export const WordCard = (word: Word) => {
+  const { settings } = useGetUserSettings();
   const [isTranslationShown, setTranslationShown] = useState(false);
 
   const onCopyWord = async () => {
@@ -43,13 +45,15 @@ export const WordCard = (word: Word) => {
             {word.ka}
           </button>
         </div>
-        <div ref={transcriptionContainerRef}>
-          <span className="text-raisin-black opacity-50">
-            ({word.transcription || 'no transcription'})
-          </span>
-        </div>
+        {settings?.shouldShowTranscription && (
+          <div ref={transcriptionContainerRef}>
+            <span className="text-raisin-black opacity-50">
+              ({word.transcription || 'no transcription'})
+            </span>
+          </div>
+        )}
         <div>
-          {isTranslationShown ? (
+          {settings?.shouldShowTranslation || isTranslationShown ? (
             <span className="text-raisin-black opacity-70">{word.en}</span>
           ) : (
             <button

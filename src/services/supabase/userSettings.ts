@@ -2,8 +2,10 @@ import { supabaseClient } from './client';
 import { getUserId } from './user';
 
 type UserSettings = {
+  settingId: number;
   shouldShowDailyWord: boolean;
   shouldShowTranslation: boolean;
+  shouldShowTranscription: boolean;
   shouldShowPictureInGame: boolean;
 };
 
@@ -32,16 +34,36 @@ export const getUserSettings = async (): Promise<UserSettings> => {
 
   if (!userSettings) {
     const newUserSettings = await addUserSettings(userId);
+
+    if (!newUserSettings) throw new Error('No user settings found');
+
     return {
-      shouldShowDailyWord: Boolean(newUserSettings?.show_daily_word),
-      shouldShowTranslation: Boolean(newUserSettings?.show_transcription),
-      shouldShowPictureInGame: Boolean(newUserSettings?.show_pictures_in_game),
+      settingId: newUserSettings.id,
+      shouldShowDailyWord: newUserSettings.show_daily_word,
+      shouldShowTranslation: newUserSettings.show_translation,
+      shouldShowTranscription: newUserSettings.show_transcription,
+      shouldShowPictureInGame: newUserSettings.show_pictures_in_game,
     };
   }
 
   return {
-    shouldShowDailyWord: Boolean(userSettings?.show_daily_word),
-    shouldShowTranslation: Boolean(userSettings?.show_transcription),
-    shouldShowPictureInGame: Boolean(userSettings?.show_pictures_in_game),
+    settingId: userSettings.id,
+    shouldShowDailyWord: userSettings.show_daily_word,
+    shouldShowTranslation: userSettings.show_translation,
+    shouldShowTranscription: userSettings.show_transcription,
+    shouldShowPictureInGame: userSettings.show_pictures_in_game,
   };
+};
+
+export const updateUserSettings = async (
+  newSettings: Pick<UserSettings, 'settingId'> &
+    Omit<Partial<UserSettings>, 'settingId'>
+) => {
+  await supabaseClient.from('user-settings').update({
+    id: newSettings.settingId,
+    show_daily_word: newSettings.shouldShowDailyWord,
+    show_translation: newSettings.shouldShowTranslation,
+    show_transcription: newSettings.shouldShowTranscription,
+    show_pictures_in_game: newSettings.shouldShowPictureInGame,
+  });
 };
