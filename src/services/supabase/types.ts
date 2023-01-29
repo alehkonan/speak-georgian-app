@@ -118,6 +118,32 @@ export interface Database {
           created_at?: string;
         };
       };
+      'user-settings': {
+        Row: {
+          id: number;
+          user_id: string;
+          show_daily_word: boolean;
+          show_transcription: boolean;
+          show_pictures_in_game: boolean;
+          created_at: string;
+        };
+        Insert: {
+          id?: number;
+          user_id: string;
+          show_daily_word?: boolean;
+          show_transcription?: boolean;
+          show_pictures_in_game?: boolean;
+          created_at?: string;
+        };
+        Update: {
+          id: number;
+          user_id?: string;
+          show_daily_word?: boolean;
+          show_transcription?: boolean;
+          show_pictures_in_game?: boolean;
+          created_at?: string;
+        };
+      };
     };
     Views: {
       [_ in never]: never;

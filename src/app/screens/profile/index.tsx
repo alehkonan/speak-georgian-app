@@ -1,13 +1,22 @@
 import format from 'date-fns/format';
 import { useUser } from 'src/api/user';
+import { useUserSettings } from 'src/api/userSettings';
 import { useLogout } from 'src/features/logout';
 import { Button, Divider, Switch } from 'src/shared/components';
+import { LoaderIcon } from 'src/shared/icons';
 
 export const ProfileScreen = () => {
-  const { user } = useUser();
+  const { user, isLoading: isLoadingUser } = useUser();
   const { onLogout, isLoading } = useLogout();
+  const { settings, isLoading: isLoadingSettings } = useUserSettings();
 
-  console.log(user);
+  if (isLoadingUser || isLoadingSettings) {
+    return (
+      <div className="h-full grid place-items-center">
+        <LoaderIcon className="text-maize w-10 h-10" />
+      </div>
+    );
+  }
 
   return (
     <div className="text-lg text-raisin-black flex flex-col gap-2">
@@ -32,11 +41,11 @@ export const ProfileScreen = () => {
       <div className="grid grid-cols-3 gap-2">
         <Divider className="col-span-3" text="user settings" />
         <span className="col-span-2">Show daily word</span>
-        <Switch enabled />
+        <Switch enabled={settings?.shouldShowDailyWord} />
         <span className="col-span-2">Show translation by default</span>
-        <Switch />
+        <Switch enabled={settings?.shouldShowTranslation} />
         <span className="col-span-2">Show pictures in game mode</span>
-        <Switch />
+        <Switch enabled={settings?.shouldShowPictureInGame} />
       </div>
       <div className="grid grid-cols-3 gap-2">
         <Divider className="col-span-3" text="Statistics" />
