@@ -11,6 +11,21 @@ const getWordStatistic = async (userId: string, wordId: number) => {
   return statistic?.at(0);
 };
 
+export const getUserStatistics = async () => {
+  const userId = await getUserId();
+
+  const { data: statistics, error } = await supabaseClient
+    .from('statistics')
+    .select()
+    .eq('user_id', userId);
+
+  if (error) {
+    throw new Error(error.message, { cause: error });
+  }
+
+  return statistics;
+};
+
 export const incrementAnswers = async (wordId: number, isRight: boolean) => {
   const userId = await getUserId();
   const wordStatistic = await getWordStatistic(userId, wordId);

@@ -1,6 +1,14 @@
 import { supabaseClient } from './client';
 
 export const getCategories = async () => {
-  const data = await supabaseClient.from('categories').select().order('name');
-  return data;
+  const { data: categories, error } = await supabaseClient
+    .from('categories')
+    .select('*, words(id)')
+    .order('name');
+
+  if (error) {
+    throw new Error(error.message, { cause: error });
+  }
+
+  return categories;
 };

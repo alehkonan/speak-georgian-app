@@ -4,7 +4,7 @@ type Props = {
 };
 
 export const Progress = ({ value, max }: Props) => {
-  const percent = Math.round((value / max) * 100);
+  const percent = Math.round((value / max) * 100) || 0;
 
   return (
     <div className="flex items-center gap-1">

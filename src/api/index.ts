@@ -1,6 +1,7 @@
 export const apiKeys = {
   user: ['user'],
   userSettings: ['userSettings'],
+  userStatistics: ['userStatistics'],
   session: ['session'],
   categories: ['categories'],
   randomWord: ['randomWord'],

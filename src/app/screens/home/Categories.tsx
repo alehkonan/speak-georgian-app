@@ -1,8 +1,8 @@
-import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import { useCategories } from 'src/api/categories';
 import { routes } from 'src/app/routes';
 import { CategoryCard } from 'src/shared/components';
+import { LoaderIcon } from 'src/shared/icons';
 
 export const Categories = () => {
   const navigate = useNavigate();
@@ -10,8 +10,8 @@ export const Categories = () => {
 
   if (isLoading) {
     return (
-      <div>
-        <p>Loading categories...</p>
+      <div className="h-full grid place-items-center">
+        <LoaderIcon className="text-ripe-mango" />
       </div>
     );
   }
@@ -34,8 +34,8 @@ export const Categories = () => {
           <CategoryCard
             key={category.id}
             title={category.name}
-            learnedWordsCount={12}
-            wordsCount={50}
+            learnedWordsCount={category.learnedWordsCount}
+            wordsCount={category.wordsCount}
             pictureUrl={category.picture_url}
             onSelectCard={() => navigate(`${routes.category}/${category.id}`)}
           />
