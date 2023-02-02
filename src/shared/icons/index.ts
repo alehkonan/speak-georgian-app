@@ -4,6 +4,7 @@ export { ReactComponent as ChevronDownIcon } from './icon-chevron-down.svg';
 export { ReactComponent as ChevronLeftIcon } from './chevron-left.svg';
 export { ReactComponent as CloseIcon } from './close.svg';
 export { ReactComponent as CopyIcon } from './copy.svg';
+export { ReactComponent as DeleteIcon } from './delete.svg';
 export { ReactComponent as EyeIcon } from './eye.svg';
 export { ReactComponent as EyeSlashIcon } from './eye-slash.svg';
 export { ReactComponent as GameIcon } from './game.svg';
