@@ -127,3 +127,14 @@ export const getLearnedWords = async () => {
 
   return response.data?.map(mapWord);
 };
+
+export const deleteWord = async (wordId: number) => {
+  const { error } = await supabaseClient
+    .from('words')
+    .delete()
+    .eq('id', wordId);
+
+  if (error) {
+    throw new Error(error.message, { cause: error });
+  }
+};

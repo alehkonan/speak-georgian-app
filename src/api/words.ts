@@ -1,6 +1,7 @@
 import { apiKeys } from '.';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
+  deleteWord,
   getFavoriteWords,
   getNotLearnedWords,
   getWordsByCategory,
@@ -60,5 +61,18 @@ export const useFavoriteWords = () => {
     words: query.data,
     isLoading: query.isLoading,
     error: query.error instanceof Error ? query.error : null,
+  };
+};
+
+export const useDeleteWord = () => {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading } = useMutation({
+    mutationFn: deleteWord,
+    onSuccess: () => queryClient.invalidateQueries(apiKeys.words),
+  });
+
+  return {
+    deleteWord: (wordId: number) => mutate(wordId),
+    isDeleting: isLoading,
   };
 };

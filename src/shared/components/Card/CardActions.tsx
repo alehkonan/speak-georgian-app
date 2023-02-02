@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import { useFavorites } from 'src/api/favorites';
 import { useStatistics } from 'src/api/statistics';
-import { CheckIcon, HeartIcon } from 'src/shared/icons';
+import { useDeleteWord } from 'src/api/words';
+import { CheckIcon, DeleteIcon, HeartIcon } from 'src/shared/icons';
 import { IconButton } from '../Button/IconButton';
 
 type Props = {
@@ -10,20 +11,32 @@ type Props = {
   isFavorite: boolean | undefined;
 };
 
+const getClassName = (isActive?: boolean) =>
+  classNames([
+    'text-raisin-black',
+    'hover:opacity-50',
+    {
+      'opacity-10': !isActive,
+      'opacity-90': isActive,
+    },
+  ]);
+
 export const CardActions = ({ wordId, isFavorite, isLearned }: Props) => {
   const favorites = useFavorites();
   const statistics = useStatistics();
+  const { deleteWord, isDeleting } = useDeleteWord();
 
   return (
-    <div className="flex gap-3 justify-self-end self-end">
+    <div className="flex gap-2 justify-self-end self-end">
       <IconButton
-        className={classNames([
-          'text-raisin-black',
-          {
-            'opacity-10': !isLearned,
-            'opacity-90': isLearned,
-          },
-        ])}
+        className={getClassName()}
+        onClick={() => deleteWord(wordId)}
+        isLoading={isDeleting}
+      >
+        <DeleteIcon />
+      </IconButton>
+      <IconButton
+        className={getClassName(isLearned)}
         onClick={() => statistics.markAsLearned(wordId)}
         isLoading={statistics.isLoading}
         disabled={statistics.isLoading}
@@ -31,13 +44,7 @@ export const CardActions = ({ wordId, isFavorite, isLearned }: Props) => {
         <CheckIcon />
       </IconButton>
       <IconButton
-        className={classNames([
-          'text-raisin-black',
-          {
-            'opacity-10': !isFavorite,
-            'opacity-90': isFavorite,
-          },
-        ])}
+        className={getClassName(isFavorite)}
         onClick={() => favorites.switchFavorite(wordId)}
         isLoading={favorites.isLoading}
         disabled={favorites.isLoading}
