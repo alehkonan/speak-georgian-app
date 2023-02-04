@@ -18,6 +18,7 @@ export const IconButton = ({
         'grid place-items-center',
         'rounded-full',
         'w-9 h-9',
+        'border',
         className,
       ])}
       {...props}

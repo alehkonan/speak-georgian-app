@@ -14,3 +14,4 @@ export { ReactComponent as LoaderIcon } from './loader.svg';
 export { ReactComponent as PersonIcon } from './person.svg';
 export { ReactComponent as PlusIcon } from './icon-plus.svg';
 export { ReactComponent as SoundIcon } from './sound.svg';
+export { ReactComponent as TranslateIcon } from './translate.svg';

@@ -1,74 +1,71 @@
 import classNames from 'classnames';
-import { useCallback, useState } from 'react';
 import { useGetUserSettings } from 'src/api/userSettings';
 import { Word } from 'src/services/supabase';
-import { recalculateFontSize } from 'src/shared/utils';
-import { CardActions } from './CardActions';
+import { IconButton } from '../Button/IconButton';
+import { useCardActions } from './useCardActions';
+
+const getClassName = (isActive?: boolean) =>
+  classNames([
+    'text-raisin-black',
+    {
+      'opacity-10': !isActive,
+      'opacity-90': isActive,
+    },
+  ]);
 
 export const WordCard = (word: Word) => {
   const { settings } = useGetUserSettings();
-  const [isTranslationShown, setTranslationShown] = useState(false);
-
-  const onCopyWord = async () => {
-    await navigator.clipboard.writeText(word.ka);
-    alert('Text copied');
-  };
-
-  const nameKaContainerRef = useCallback(
-    (node: HTMLDivElement | null) =>
-      node && recalculateFontSize(node, word.ka, 0.55),
-    [word.ka]
-  );
-
-  const transcriptionContainerRef = useCallback(
-    (node: HTMLDivElement | null) =>
-      node &&
-      word.transcription &&
-      recalculateFontSize(node, word.transcription, 0.45),
-    [word.transcription]
-  );
+  const { cardActions, isTranslationShown } = useCardActions({
+    wordId: word.id,
+    isFavorite: word.isFavorite,
+    isLearned: word.isLearned,
+  });
 
   return (
-    <div className={classNames(['bg-white shadow rounded-2xl', 'flex'])}>
-      {word.pictureUrl && (
-        <div className="flex-shrink-0 basis-1/3">
+    <div
+      className={classNames([
+        'bg-white border rounded-lg',
+        'grid grid-cols-3 grid-rows-[auto_1fr_auto]',
+        'min-h-[8rem]',
+      ])}
+    >
+      <div className="row-span-3">
+        {word.pictureUrl ? (
           <img
-            className="w-full h-full aspect-square object-cover object-top rounded-l-2xl"
+            className="w-full h-full aspect-square object-cover object-top rounded-l-lg"
             src={word.pictureUrl}
             alt={word.en}
           />
-        </div>
-      )}
-      <div className="flex-1 p-2 grid w-10">
-        <div className="text-xl" ref={nameKaContainerRef}>
-          <button className="text-raisin-black font-bold" onClick={onCopyWord}>
-            {word.ka}
-          </button>
-        </div>
-        {settings?.shouldShowTranscription && (
-          <div ref={transcriptionContainerRef}>
-            <span className="text-raisin-black opacity-50">
-              ({word.transcription || 'no transcription'})
-            </span>
+        ) : (
+          <div className="h-full grid place-items-center">
+            <span>No picture</span>
           </div>
         )}
-        <div>
-          {settings?.shouldShowTranslation || isTranslationShown ? (
-            <span className="text-raisin-black opacity-70">{word.en}</span>
-          ) : (
-            <button
-              className="text-raisin-black text-sm font-semibold opacity-30"
-              onClick={() => setTranslationShown(true)}
-            >
-              Tap to see translation
-            </button>
-          )}
-        </div>
-        <CardActions
-          wordId={word.id}
-          isLearned={word.isLearned}
-          isFavorite={word.isFavorite}
-        />
+      </div>
+      <div className="col-span-2 p-1 border-b">
+        <span className="font-bold text-xl text-left leading-4">
+          {isTranslationShown ? word.en : word.ka}
+        </span>
+      </div>
+      <div className="col-span-2 p-1">
+        {settings?.shouldShowTranscription && (
+          <span className="text-raisin-black leading-3">
+            ({word.transcription || 'no transcription'})
+          </span>
+        )}
+      </div>
+      <div className="col-span-2 flex gap-2 justify-self-end self-end p-1">
+        {cardActions.map(({ id, Icon, onClick, isActive, isLoading }) => (
+          <IconButton
+            key={id}
+            className={getClassName(isActive)}
+            onClick={onClick}
+            isLoading={isLoading}
+            disabled={isLoading}
+          >
+            <Icon />
+          </IconButton>
+        ))}
       </div>
     </div>
   );

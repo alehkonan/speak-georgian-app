@@ -32,28 +32,3 @@ export const generateRandomElements = <Element = string>(
   const shuffled = [...elements].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, count);
 };
-
-/**
- * A function to recalculate font size to fit the container
- * @param {HTMLElement} node container node element
- * @param {String} word that should be fit
- * @param {Number} fontRatio letter width / letter height
- */
-export const recalculateFontSize = (
-  node: HTMLElement,
-  word: string,
-  fontRatio: number
-) => {
-  const { width: containerWidth } = node.getBoundingClientRect();
-  const style = getComputedStyle(node);
-
-  const currentFontSize = Number(style.fontSize.replace('px', ''));
-  const letterWidth = currentFontSize * fontRatio;
-  const wordWidth = word.length * letterWidth;
-  const isWordFit = containerWidth > wordWidth;
-
-  if (!isWordFit) {
-    const fontSize = Math.floor(containerWidth / word.length / fontRatio);
-    node.style.fontSize = `${fontSize}px`;
-  }
-};
