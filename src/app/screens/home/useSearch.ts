@@ -11,10 +11,14 @@ export const useSearch = () => {
 
   const onSearch = useCallback((value: string) => setSearchValue(value), []);
 
+  const clearSearch = useCallback(() => setSearchValue(''), []);
+
   return {
+    searchValue,
     results,
     isSearching,
     onSearch,
+    clearSearch,
     hasSearch: Boolean(debouncedValue) && Boolean(searchValue),
   };
 };
