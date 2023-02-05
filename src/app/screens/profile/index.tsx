@@ -58,20 +58,6 @@ export const ProfileScreen = () => {
           }
           disabled={isUpdatingSettings}
         />
-        <span className="col-span-2">
-          Always show translation in word cards
-        </span>
-        <Switch
-          enabled={settings?.shouldShowTranslation}
-          onSwitch={(checked) =>
-            settings &&
-            updateSettings({
-              settingId: settings.settingId,
-              shouldShowTranslation: checked,
-            })
-          }
-          disabled={isUpdatingSettings}
-        />
         <span className="col-span-2">Show transcription for words</span>
         <Switch
           enabled={settings?.shouldShowTranscription}

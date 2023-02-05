@@ -4,7 +4,6 @@ import { getUserId } from './user';
 type UserSettings = {
   settingId: number;
   shouldShowDailyWord: boolean;
-  shouldShowTranslation: boolean;
   shouldShowTranscription: boolean;
   shouldShowPictureInGame: boolean;
 };
@@ -40,7 +39,6 @@ export const getUserSettings = async (): Promise<UserSettings> => {
     return {
       settingId: newUserSettings.id,
       shouldShowDailyWord: newUserSettings.show_daily_word,
-      shouldShowTranslation: newUserSettings.show_translation,
       shouldShowTranscription: newUserSettings.show_transcription,
       shouldShowPictureInGame: newUserSettings.show_pictures_in_game,
     };
@@ -49,7 +47,6 @@ export const getUserSettings = async (): Promise<UserSettings> => {
   return {
     settingId: userSettings.id,
     shouldShowDailyWord: userSettings.show_daily_word,
-    shouldShowTranslation: userSettings.show_translation,
     shouldShowTranscription: userSettings.show_transcription,
     shouldShowPictureInGame: userSettings.show_pictures_in_game,
   };
@@ -62,7 +59,6 @@ export const updateUserSettings = async (
   await supabaseClient.from('user-settings').update({
     id: newSettings.settingId,
     show_daily_word: newSettings.shouldShowDailyWord,
-    show_translation: newSettings.shouldShowTranslation,
     show_transcription: newSettings.shouldShowTranscription,
     show_pictures_in_game: newSettings.shouldShowPictureInGame,
   });
