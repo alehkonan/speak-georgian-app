@@ -1,6 +1,6 @@
-import classNames from 'classnames';
 import { useNotLearnedWords } from 'src/api/words';
-import { Button, GameCard } from 'src/shared/components';
+import { Button } from 'src/shared/components';
+import { Game } from './Game';
 import { useGame } from './useGame';
 
 export const GameScreen = () => {
@@ -9,47 +9,22 @@ export const GameScreen = () => {
   const {
     gameWords,
     results,
-    containerRef,
     closeResults,
     startGame,
     finishGame,
     checkIfGameIsFinished,
-    showNextCard,
   } = useGame(words);
 
   if (error) return <p className="text-red-500">{error.message}</p>;
 
   return (
-    <div className="h-full grid grid-rows-[1fr_auto]">
+    <div className="h-full grid grid-rows-[1fr_auto] gap-1">
       {gameWords ? (
-        <>
-          <div className="grid place-items-center">
-            <div
-              className="w-full overflow-auto snap-x snap-mandatory scrollbar-hide"
-              ref={containerRef}
-            >
-              <div
-                className={classNames([
-                  'w-[1000%]',
-                  'grid grid-cols-10 justify-items-center gap-2 px-1 items-center',
-                ])}
-              >
-                {gameWords.map((word) => (
-                  <GameCard
-                    key={word.id}
-                    word={word}
-                    answers={word.answers}
-                    onShowNextCard={showNextCard}
-                    onLastWordCheck={checkIfGameIsFinished}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-          <Button primary onClick={finishGame}>
-            Stop the game
-          </Button>
-        </>
+        <Game
+          gameWords={gameWords}
+          onLastWordCheck={checkIfGameIsFinished}
+          onFinishGame={finishGame}
+        />
       ) : (
         <>
           <div className="grid place-items-center">

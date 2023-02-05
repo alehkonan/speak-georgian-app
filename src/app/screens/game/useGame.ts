@@ -1,32 +1,14 @@
 import { useCallback, useRef, useState } from 'react';
 import { Word } from 'src/services/supabase';
+import { GameResult, GameWord } from './types';
 import { generateGameWords } from './utils';
 
 export const GAME_WORDS_COUNT = 10;
-
-type GameWord = Word & {
-  answers: string[];
-  isAnswered: boolean;
-};
-
-type GameResult = Word & {
-  isCorrect: boolean;
-};
 
 export const useGame = (allWords: Word[] | undefined) => {
   const [gameWords, setGameWords] = useState<GameWord[]>();
   const [results, setResults] = useState<GameResult[]>();
   const tempResults = new Set<GameResult>();
-  const containerRef = useRef<HTMLDivElement | null>(null);
-
-  const showNextCard = () => {
-    if (!containerRef.current) return;
-    const { scrollLeft, offsetWidth } = containerRef.current;
-    containerRef.current.scrollTo({
-      left: scrollLeft + offsetWidth,
-      behavior: 'smooth',
-    });
-  };
 
   const startGame = useCallback(() => {
     if (!allWords) return;
@@ -36,11 +18,7 @@ export const useGame = (allWords: Word[] | undefined) => {
     setGameWords(words);
   }, [allWords]);
 
-  const finishGame = useCallback(() => {
-    setGameWords(undefined);
-    containerRef.current?.scrollTo({ left: 0 });
-  }, []);
-
+  const finishGame = useCallback(() => setGameWords(undefined), []);
   const closeResults = () => setResults(undefined);
 
   const checkIfGameIsFinished = (result: GameResult) => {
@@ -55,8 +33,6 @@ export const useGame = (allWords: Word[] | undefined) => {
   return {
     gameWords,
     results,
-    containerRef,
-    showNextCard,
     closeResults,
     startGame,
     finishGame,
