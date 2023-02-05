@@ -2,37 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: SF-Pro-Rounded;
-  src: url(/src/assets/fonts/SF-Pro-Rounded-Regular.woff2);
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: SF-Pro-Rounded;
-  src: url(/src/assets/fonts/SF-Pro-Rounded-Semibold.woff2);
-  font-weight: 600;
-  font-display: swap;
-}
-@font-face {
-  font-family: SF-Pro-Rounded;
-  src: url(/src/assets/fonts/SF-Pro-Rounded-Bold.woff2);
-  font-weight: 700;
-  font-display: swap;
-}
-@font-face {
-  font-family: DejaVuSans;
-  src: url(/src/assets/fonts/DejaVuSans.ttf);
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: DejaVuSans;
-  src: url(/src/assets/fonts/DejaVuSans-Bold.ttf);
-  font-weight: 700;
-  font-display: swap;
-}
-
 :root {
   --ripe-mango-color: #ffb629;
   --calamansi-color: #fff1a5;
@@ -42,10 +11,6 @@
   .h-screen {
     height: 100dvh;
   }
-}
-
-html {
-  font-family: SF-Pro-Rounded, sans-serif;
 }
 
 body {

@@ -62,9 +62,6 @@ module.exports = {
         maize: colors.maize,
         'ripe-mango': colors.ripeMango,
       },
-      fontFamily: {
-        georgian: 'DejaVuSans',
-      },
     },
   },
   plugins: [require('tailwind-scrollbar-hide')],

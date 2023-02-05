@@ -37,7 +37,7 @@ export const DailyCard = ({
               className="inline-flex items-center gap-2 cursor-pointer"
               onClick={onPlaySound}
             >
-              <span className="text-raisin-black text-2xl font-bold font-georgian">
+              <span className="text-raisin-black text-2xl font-bold">
                 {wordKa}
               </span>
               {soundUrl && (
