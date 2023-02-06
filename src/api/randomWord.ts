@@ -2,9 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import format from 'date-fns/format';
 import isSameDay from 'date-fns/isSameDay';
 import { useState } from 'react';
-import { getWord, getWordsCount, Word } from 'src/services/supabase';
+import { getWord, Word } from 'src/services/supabase';
 import { getRandomInteger } from 'src/shared/utils';
 import { apiKeys } from '.';
+import { useWordsCount } from './words';
 
 const DAILY_WORD = 'dailyWord';
 
@@ -30,9 +31,7 @@ const getDailyWord = () => {
 export const useRandomWord = () => {
   const [dailyWord, setDailyWord] = useState(getDailyWord);
 
-  const { data: count } = useQuery(apiKeys.wordsCount, getWordsCount, {
-    enabled: !dailyWord,
-  });
+  const { count } = useWordsCount();
 
   useQuery({
     queryKey: apiKeys.randomWord,

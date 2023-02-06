@@ -1,22 +1,20 @@
 import { apiKeys } from '.';
 import { useQuery } from '@tanstack/react-query';
-import { getCategories, getUserStatistics } from 'src/services/supabase';
+import { getCategories } from 'src/services/supabase';
 import { useMemo } from 'react';
+import { useGetStatistics } from './statistics';
 
 export const useCategories = () => {
   const categoriesQuery = useQuery(apiKeys.categories, getCategories);
 
-  const statisticsQuery = useQuery({
-    queryKey: apiKeys.userStatistics,
-    queryFn: getUserStatistics,
-  });
+  const { statistics, error, isLoading } = useGetStatistics();
 
   const categories = useMemo(() => {
-    if (!categoriesQuery.data && !statisticsQuery.data) return [];
+    if (!categoriesQuery.data && !statistics) return [];
 
     return categoriesQuery.data?.map(({ words: wordIds, ...category }) => {
       const words = Array.isArray(wordIds) ? wordIds : [];
-      const categoryStatistics = statisticsQuery.data?.filter(({ word_id }) =>
+      const categoryStatistics = statistics?.filter(({ word_id }) =>
         words.find(({ id }) => id === word_id)
       );
       const learnedWordsCount =
@@ -30,13 +28,13 @@ export const useCategories = () => {
         wordsCount: words.length,
       };
     });
-  }, [categoriesQuery, statisticsQuery]);
+  }, [categoriesQuery, statistics]);
 
-  const error = categoriesQuery.error || statisticsQuery.error;
+  const anyError = categoriesQuery.error || error;
 
   return {
     categories,
-    error: error instanceof Error ? error : null,
-    isLoading: categoriesQuery.isLoading || statisticsQuery.isLoading,
+    error: anyError instanceof Error ? anyError : null,
+    isLoading: categoriesQuery.isLoading || isLoading,
   };
 };

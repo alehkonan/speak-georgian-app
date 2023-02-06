@@ -6,7 +6,20 @@ import {
   getNotLearnedWords,
   getWordsByCategory,
   getWordsBySearchValue,
+  getWordsCount,
 } from 'src/services/supabase';
+
+export const useWordsCount = () => {
+  const { data: count, error } = useQuery({
+    queryKey: apiKeys.wordsCount,
+    queryFn: getWordsCount,
+  });
+
+  return {
+    count,
+    error: error instanceof Error ? error : null,
+  };
+};
 
 export const useNotLearnedWords = () => {
   const query = useQuery({

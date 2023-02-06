@@ -55,11 +55,15 @@ const mapWord = (word: any): Word => ({
 });
 
 export const getWordsCount = async () => {
-  const response = await supabaseClient
+  const { count, error } = await supabaseClient
     .from('words')
     .select('*', { head: true, count: 'exact' });
 
-  return response.count;
+  if (error) {
+    throw new Error(error.message, { cause: error });
+  }
+
+  return count;
 };
 
 export const getNotLearnedWords = async () => {

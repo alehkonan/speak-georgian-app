@@ -1,5 +1,5 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { setWordAsLearned } from 'src/services/supabase';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { getUserStatistics, setWordAsLearned } from 'src/services/supabase';
 import { apiKeys } from '.';
 
 export const useStatistics = () => {
@@ -16,6 +16,19 @@ export const useStatistics = () => {
 
   return {
     markAsLearned,
+    isLoading,
+  };
+};
+
+export const useGetStatistics = () => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: apiKeys.userStatistics,
+    queryFn: getUserStatistics,
+  });
+
+  return {
+    statistics: data,
+    error: error instanceof Error ? error : null,
     isLoading,
   };
 };
