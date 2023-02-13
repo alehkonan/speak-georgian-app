@@ -1,20 +1,24 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { setWordAsFavorite } from 'src/services/supabase';
-import { apiKeys } from '.';
+import { apiKeys } from './apiKeys';
+
+type Payload = {
+  userId: string;
+  wordId: number;
+};
 
 export const useFavorites = () => {
   const queryClient = useQueryClient();
 
-  const { mutate, isLoading, isError } = useMutation({
-    mutationFn: (wordId: number) => setWordAsFavorite(wordId),
+  const { mutate, isLoading, error } = useMutation({
+    mutationFn: ({ userId, wordId }: Payload) =>
+      setWordAsFavorite(userId, wordId),
     onSuccess: () => queryClient.invalidateQueries(apiKeys.words),
   });
 
-  const switchFavorite = (wordId: number) => mutate(wordId);
-
   return {
-    switchFavorite,
+    switchFavorite: mutate,
     isLoading,
-    isError,
+    error: error instanceof Error ? error : null,
   };
 };

@@ -1,7 +1,15 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { routes } from 'src/app/routes';
 import { useSignIn } from 'src/features/signIn';
-import { Button, Divider, Form, InputField } from 'src/shared/components';
+import {
+  Button,
+  Divider,
+  ErrorMessage,
+  Form,
+  IconButton,
+  InputField,
+} from 'src/shared/components';
+import { ChevronLeftIcon } from 'src/shared/icons';
 import * as zod from 'zod';
 
 const schema = zod.object({
@@ -21,8 +29,16 @@ export const LoginScreen = () => {
   };
 
   return (
-    <div className="p-4 grid gap-4">
-      <h2 className="text-xl font-bold">Log in</h2>
+    <div className="grid gap-4">
+      <div className="flex items-center gap-3">
+        <IconButton
+          title="Back to Welcome screen"
+          onClick={() => navigate(routes.welcome)}
+        >
+          <ChevronLeftIcon />
+        </IconButton>
+        <h2 className="text-xl font-bold">Log in</h2>
+      </div>
       <Form<FormType>
         className="grid gap-2"
         schema={schema}
@@ -49,7 +65,7 @@ export const LoginScreen = () => {
       </Form>
       <Divider text="or use your social networks" />
       <Button onClick={() => onSignInWithGoogle()}>Sign in with Google</Button>
-      {error && <span className="text-red-500">{error.message}</span>}
+      {error && <ErrorMessage message={error.message} />}
     </div>
   );
 };

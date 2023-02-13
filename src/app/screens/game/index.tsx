@@ -1,10 +1,12 @@
+import { useUser } from 'src/api/user';
 import { useNotLearnedWords } from 'src/api/words';
-import { Button } from 'src/shared/components';
+import { Button, ErrorMessage } from 'src/shared/components';
 import { Game } from './Game';
 import { useGame } from './useGame';
 
 export const GameScreen = () => {
-  const { words, isLoading, error } = useNotLearnedWords();
+  const { user } = useUser();
+  const { words, isLoading, error } = useNotLearnedWords(user?.id);
 
   const {
     gameWords,
@@ -15,7 +17,7 @@ export const GameScreen = () => {
     checkIfGameIsFinished,
   } = useGame(words);
 
-  if (error) return <p className="text-red-500">{error.message}</p>;
+  if (error) return <ErrorMessage message={error.message} />;
 
   return (
     <div className="h-full grid grid-rows-[1fr_auto] gap-1">

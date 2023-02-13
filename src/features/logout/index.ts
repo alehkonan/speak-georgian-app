@@ -1,16 +1,22 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { apiKeys } from 'src/api';
+import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+import { routes } from 'src/app/routes';
 import { signOut } from 'src/services/supabase';
 
 export const useLogout = () => {
-  const queryClient = useQueryClient();
-  const signOutMutation = useMutation(signOut, {
-    onSuccess: () => queryClient.invalidateQueries(apiKeys.session),
+  const navigate = useNavigate();
+  const {
+    mutate: onLogout,
+    isLoading,
+    error,
+  } = useMutation({
+    mutationFn: signOut,
+    onSuccess: () => navigate(routes.welcome),
   });
 
   return {
-    onLogout: signOutMutation.mutate,
-    isLoading: signOutMutation.isLoading,
-    error: signOutMutation.data?.error,
+    onLogout,
+    isLoading,
+    error: error instanceof Error ? error : null,
   };
 };

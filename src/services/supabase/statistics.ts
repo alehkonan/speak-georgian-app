@@ -1,19 +1,18 @@
 import { supabaseClient } from './client';
-import { getUserId } from './user';
 
 const getWordStatistic = async (userId: string, wordId: number) => {
-  const { data: statistic } = await supabaseClient
+  const { data: statistic, error } = await supabaseClient
     .from('statistics')
     .select()
     .eq('word_id', wordId)
     .eq('user_id', userId);
 
+  if (error) throw error;
+
   return statistic?.at(0);
 };
 
-export const getUserStatistics = async () => {
-  const userId = await getUserId();
-
+export const getUserStatistics = async (userId: string) => {
   const { data: statistics, error } = await supabaseClient
     .from('statistics')
     .select()
@@ -26,8 +25,11 @@ export const getUserStatistics = async () => {
   return statistics;
 };
 
-export const incrementAnswers = async (wordId: number, isRight: boolean) => {
-  const userId = await getUserId();
+export const incrementAnswers = async (
+  userId: string,
+  wordId: number,
+  isRight: boolean
+) => {
   const wordStatistic = await getWordStatistic(userId, wordId);
 
   if (wordStatistic) {
@@ -49,12 +51,11 @@ export const incrementAnswers = async (wordId: number, isRight: boolean) => {
   }
 };
 
-export const setWordAsLearned = async (wordId: number) => {
-  const userId = await getUserId();
+export const setWordAsLearned = async (userId: string, wordId: number) => {
   const wordInStatistics = await getWordStatistic(userId, wordId);
 
   if (wordInStatistics) {
-    const { data } = await supabaseClient
+    const { data, error } = await supabaseClient
       .from('statistics')
       .update({
         id: wordInStatistics.id,
@@ -63,9 +64,11 @@ export const setWordAsLearned = async (wordId: number) => {
       .select()
       .single();
 
+    if (error) throw new Error(error.message);
+
     return Boolean(data?.is_learned);
   } else {
-    const { data } = await supabaseClient
+    const { data, error } = await supabaseClient
       .from('statistics')
       .insert({
         word_id: wordId,
@@ -74,6 +77,8 @@ export const setWordAsLearned = async (wordId: number) => {
       })
       .select()
       .single();
+
+    if (error) throw new Error(error.message);
 
     return Boolean(data?.is_learned);
   }

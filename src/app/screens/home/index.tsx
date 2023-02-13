@@ -1,14 +1,23 @@
+import { Session } from '@supabase/supabase-js';
 import classNames from 'classnames';
+import { useNavigate, useRouteLoaderData } from 'react-router-dom';
+import { ROOT_ID } from 'src/app';
+import { routes } from 'src/app/routes';
+import { DailyWord } from 'src/app/widgets';
 import { IconButton, Input } from 'src/shared/components';
-import { CloseIcon } from 'src/shared/icons';
+import { ChevronLeftIcon, CloseIcon } from 'src/shared/icons';
 import { Categories } from './Categories';
-import { DailyWord } from './DailyWord';
-import { Greeting } from './Greeting';
 import { SearchResults } from './SearchResults';
 import { useScrollPosition } from './useScrollPosition';
 import { useSearch } from './useSearch';
 
 export const HomeScreen = () => {
+  const navigate = useNavigate();
+  const session = useRouteLoaderData(ROOT_ID) as Session | null | undefined;
+
+  // TODO fix that Layout is rendered before loader
+  console.log('session in Component: ', session);
+
   const {
     searchValue,
     isSearching,
@@ -29,8 +38,25 @@ export const HomeScreen = () => {
       ref={containerRef}
       onScroll={onScroll}
     >
-      <Greeting />
-      <DailyWord />
+      {session ? (
+        <>
+          <h3 className="text-raisin-black text-2xl font-bold">
+            Hello, {session.user.user_metadata.name}!
+          </h3>
+          <DailyWord />
+        </>
+      ) : (
+        <div className="flex items-center gap-3">
+          <IconButton
+            title="Back to Welcome screen"
+            onClick={() => navigate(routes.welcome)}
+          >
+            <ChevronLeftIcon />
+          </IconButton>
+          <h2 className="text-xl font-bold">Categories</h2>
+        </div>
+      )}
+
       <div className="relative">
         <Input
           className="sticky top-0 w-full"

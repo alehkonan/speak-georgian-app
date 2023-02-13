@@ -1,7 +1,6 @@
-import { apiKeys } from '.';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { apiKeys } from './apiKeys';
+import { useQuery } from '@tanstack/react-query';
 import {
-  deleteWord,
   getFavoriteWords,
   getNotLearnedWords,
   getWordsByCategory,
@@ -10,82 +9,73 @@ import {
 } from 'src/services/supabase';
 
 export const useWordsCount = () => {
-  const { data: count, error } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: apiKeys.wordsCount,
     queryFn: getWordsCount,
   });
 
   return {
-    count,
+    count: data,
+    isLoading,
     error: error instanceof Error ? error : null,
   };
 };
 
-export const useNotLearnedWords = () => {
-  const query = useQuery({
+export const useNotLearnedWords = (userId?: string) => {
+  const { data, isLoading, error } = useQuery({
     queryKey: apiKeys.notLearnedWords,
-    queryFn: getNotLearnedWords,
+    queryFn: () => getNotLearnedWords(userId),
+    enabled: Boolean(userId),
   });
 
   return {
-    words: query.data,
-    count: query.data?.length || 0,
-    isLoading: query.isLoading,
-    error: query.error instanceof Error ? query.error : null,
+    words: data,
+    count: data?.length || 0,
+    isLoading,
+    error: error instanceof Error ? error : null,
   };
 };
 
-export const useCategoryWords = (categoryId: number) => {
-  const query = useQuery({
+export const useCategoryWords = (categoryId: number, userId?: string) => {
+  const { data, isLoading, error } = useQuery({
     queryKey: apiKeys.wordsByCategory(categoryId),
-    queryFn: () => getWordsByCategory(categoryId),
+    queryFn: () => getWordsByCategory(categoryId, userId),
     enabled: !isNaN(categoryId),
   });
 
   return {
-    words: query.data,
-    count: query.data?.length || 0,
-    isLoading: query.isLoading,
-    error: query.error instanceof Error ? query.error : null,
+    words: data,
+    count: data?.length || 0,
+    isLoading,
+    error: error instanceof Error ? error : null,
   };
 };
 
-export const useSearchWords = (searchValue: string) => {
-  const { data, isFetching } = useQuery({
+export const useSearchWords = (searchValue: string, userId?: string) => {
+  const { data, isFetching, error } = useQuery({
     queryKey: apiKeys.wordsBySearch(searchValue),
     queryFn: ({ queryKey: [, { search }] }) =>
-      getWordsBySearchValue(search as string),
+      getWordsBySearchValue(search as string, userId),
     enabled: Boolean(searchValue.trim()),
   });
 
   return {
     results: data,
     isSearching: isFetching,
+    error: error instanceof Error ? error : null,
   };
 };
 
-export const useFavoriteWords = () => {
-  const query = useQuery({
+export const useFavoriteWords = (userId?: string) => {
+  const { data, isLoading, error } = useQuery({
     queryKey: apiKeys.favoriteWords,
-    queryFn: getFavoriteWords,
+    queryFn: () => getFavoriteWords(userId!),
+    enabled: Boolean(userId),
   });
 
   return {
-    words: query.data,
-    isLoading: query.isLoading,
-    error: query.error instanceof Error ? query.error : null,
-  };
-};
-
-export const useDeleteWord = () => {
-  const queryClient = useQueryClient();
-  const { mutate, isLoading } = useMutation({
-    mutationFn: deleteWord,
-    onSuccess: () => queryClient.invalidateQueries(apiKeys.words),
-  });
-
-  return {
-    deleteWord: (wordId: number) => mutate(wordId),
-    isDeleting: isLoading,
+    words: data,
+    isLoading,
+    error: error instanceof Error ? error : null,
   };
 };

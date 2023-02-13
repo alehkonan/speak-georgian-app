@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { PropsWithChildren, useState } from 'react';
+import { useUser } from 'src/api/user';
 import { useGetUserSettings } from 'src/api/userSettings';
 import { incrementAnswers, Word } from 'src/services/supabase';
 import { GameCardPicture } from './GameCardPicture';
@@ -23,14 +24,15 @@ export const GameCard = ({
 }: Props) => {
   const [clickedAnswer, setClickedAnswer] = useState<string>();
 
-  const { settings } = useGetUserSettings();
+  const { user } = useUser();
+  const { settings } = useGetUserSettings(user?.id);
 
   const isRight = (answer: string) => answer === word.en;
   const isClicked = (answer: string) => answer === clickedAnswer;
 
   const onAnswerClick = (answer: string) => {
     setClickedAnswer(answer);
-    incrementAnswers(word.id, isRight(answer));
+    user?.id && incrementAnswers(user.id, word.id, isRight(answer));
     setTimeout(() => {
       onShowNextCard();
       onLastWordCheck({

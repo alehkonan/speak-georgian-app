@@ -1,8 +1,14 @@
-import { Link } from 'react-router-dom';
-import { useUser } from 'src/api/user';
+import { Link, useNavigate } from 'react-router-dom';
 import { routes } from 'src/app/routes';
 import { useSignUp } from 'src/features/signup';
-import { Button, Form, InputField } from 'src/shared/components';
+import {
+  Button,
+  ErrorMessage,
+  Form,
+  IconButton,
+  InputField,
+} from 'src/shared/components';
+import { ChevronLeftIcon } from 'src/shared/icons';
 import * as zod from 'zod';
 
 const schema = zod.object({
@@ -21,8 +27,8 @@ const schema = zod.object({
 type FormType = zod.infer<typeof schema>;
 
 export const SignupScreen = () => {
-  const { onSignUp, error, isLoading } = useSignUp();
-  const { user } = useUser();
+  const navigate = useNavigate();
+  const { onSignUp, isLoading, error } = useSignUp();
 
   const onSubmit = ({ email, firstName, lastName, password }: FormType) => {
     onSignUp({
@@ -38,8 +44,13 @@ export const SignupScreen = () => {
   };
 
   return (
-    <div className="p-4 grid gap-4">
-      <h2 className="text-xl font-bold">Create your account</h2>
+    <div className="grid gap-4">
+      <div className="flex items-center gap-3">
+        <IconButton onClick={() => navigate(routes.welcome)}>
+          <ChevronLeftIcon />
+        </IconButton>
+        <h2 className="text-xl font-bold">Create your account</h2>
+      </div>
       <Form<FormType>
         className="grid gap-2"
         schema={schema}
@@ -64,10 +75,7 @@ export const SignupScreen = () => {
           Create an account
         </Button>
       </Form>
-      {user && (
-        <span>To continue registration check your email {user.email}</span>
-      )}
-      {error && <span>{error.message}</span>}
+      {error && <ErrorMessage message={error.message} />}
     </div>
   );
 };

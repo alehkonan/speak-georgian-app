@@ -4,23 +4,49 @@ import {
 } from '@supabase/supabase-js';
 import { supabaseClient } from './client';
 
-export const signInWithPassword = (
+export const signInWithPassword = async (
   credentials: SignInWithPasswordCredentials
-) => supabaseClient.auth.signInWithPassword(credentials);
+) => {
+  const { data, error } = await supabaseClient.auth.signInWithPassword(
+    credentials
+  );
 
-export const signInWithGoogle = () => {
+  if (error) {
+    throw new Error(error.message, { cause: error });
+  }
+
+  return data;
+};
+
+export const signInWithGoogle = async () => {
   const { origin } = window.location;
-  return supabaseClient.auth.signInWithOAuth({
+  const { data, error } = await supabaseClient.auth.signInWithOAuth({
     provider: 'google',
     options: { redirectTo: origin },
   });
+
+  if (error) {
+    throw new Error(error.message, { cause: error });
+  }
+
+  return data;
 };
 
-export const signUp = (credentials: SignUpWithPasswordCredentials) => {
-  return supabaseClient.auth.signUp(credentials);
+export const signUp = async (credentials: SignUpWithPasswordCredentials) => {
+  const { data, error } = await supabaseClient.auth.signUp(credentials);
+
+  if (error) throw error;
+
+  return data;
 };
 
-export const signOut = () => supabaseClient.auth.signOut();
+export const signOut = async () => {
+  const { error } = await supabaseClient.auth.signOut();
+
+  if (error) {
+    throw new Error(error.message, { cause: error });
+  }
+};
 
 export const updateUserPassword = (password: string) => {
   return supabaseClient.auth.updateUser({ password });
@@ -32,4 +58,12 @@ export const resetPasswordForEmail = (email: string, redirectRoute: string) => {
   });
 };
 
-export const getSession = () => supabaseClient.auth.getSession();
+export const getSession = async () => {
+  const { data, error } = await supabaseClient.auth.getSession();
+
+  if (error) {
+    throw new Error(error.message, { cause: error });
+  }
+
+  return data.session;
+};

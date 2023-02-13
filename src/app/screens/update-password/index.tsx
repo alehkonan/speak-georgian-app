@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { routes } from 'src/app/routes';
 import { useUpdatePassword } from 'src/features/updatePassword';
-import { Button, Form, InputField } from 'src/shared/components';
+import { Button, ErrorMessage, Form, InputField } from 'src/shared/components';
 import * as zod from 'zod';
 
 const schema = zod.object({
@@ -18,7 +18,7 @@ type FormType = zod.infer<typeof schema>;
 
 export const UpdatePasswordScreen = () => {
   const navigate = useNavigate();
-  const { onUpdatePassword, isLoading } = useUpdatePassword();
+  const { onUpdatePassword, isLoading, error } = useUpdatePassword();
 
   const onSubmit = (data: FormType) => {
     onUpdatePassword(data.password);
@@ -42,6 +42,7 @@ export const UpdatePasswordScreen = () => {
         </Button>
         <Button onClick={() => navigate(routes.home)}>Go to main screen</Button>
       </Form>
+      {error && <ErrorMessage message={error.message} />}
     </div>
   );
 };

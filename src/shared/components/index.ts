@@ -1,8 +1,11 @@
 export * from './Card';
 export { Button } from './Button';
 export { Divider } from './Divider';
+export { Empty } from './Empty';
+export { ErrorMessage } from './ErrorMessage';
 export { Form } from './Form';
-export { IconButton } from './Button/IconButton';
+export { IconButton } from './IconButton';
 export { Input } from './Input';
 export { InputField } from './InputField';
+export { Loader } from './Loader';
 export { Switch } from './Switch';

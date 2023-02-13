@@ -1,17 +1,9 @@
 import { supabaseClient } from './client';
 
-export const getUser = () => supabaseClient.auth.getUser();
+export const getUser = async () => {
+  const { data, error } = await supabaseClient.auth.getUser();
 
-export const getUserId = async () => {
-  const response = await getUser();
+  if (error) throw error;
 
-  if (response.error) {
-    throw new Error(response.error.message, { cause: response.error });
-  }
-
-  const userId = response.data.user?.id;
-
-  if (!userId) throw new Error('User is not found');
-
-  return userId;
+  return data.user;
 };

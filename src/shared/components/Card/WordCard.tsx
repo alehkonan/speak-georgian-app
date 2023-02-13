@@ -1,7 +1,8 @@
 import classNames from 'classnames';
+import { useUser } from 'src/api/user';
 import { useGetUserSettings } from 'src/api/userSettings';
 import { Word } from 'src/services/supabase';
-import { IconButton } from '../Button/IconButton';
+import { IconButton } from '../IconButton';
 import { useCardActions } from './useCardActions';
 
 const getClassName = (isActive?: boolean) =>
@@ -14,8 +15,10 @@ const getClassName = (isActive?: boolean) =>
   ]);
 
 export const WordCard = (word: Word) => {
-  const { settings } = useGetUserSettings();
+  const { user } = useUser();
+  const { settings } = useGetUserSettings(user?.id);
   const { cardActions, isTranslationShown } = useCardActions({
+    userId: user?.id,
     wordId: word.id,
     isFavorite: word.isFavorite,
     isLearned: word.isLearned,

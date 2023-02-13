@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { GameIcon, HeartIcon, HomeIcon, PersonIcon } from 'src/shared/icons';
 import { routes } from '../../routes';
 
-export const useNavigationLinks = () => {
+export const useNavigation = () => {
   const links = useMemo(
     () => [
       {

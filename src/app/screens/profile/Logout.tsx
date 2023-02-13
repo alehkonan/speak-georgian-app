@@ -1,14 +1,15 @@
 import { useLogout } from 'src/features/logout';
-import { Button } from 'src/shared/components';
+import { Button, ErrorMessage } from 'src/shared/components';
 
 export const Logout = () => {
-  const { onLogout, isLoading } = useLogout();
+  const { onLogout, isLoading, error } = useLogout();
 
   return (
     <div className="flex justify-center">
       <Button onClick={() => onLogout()} disabled={isLoading}>
         Logout
       </Button>
+      {error && <ErrorMessage message={error.message} />}
     </div>
   );
 };

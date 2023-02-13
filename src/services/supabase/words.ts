@@ -1,5 +1,4 @@
 import { supabaseClient } from './client';
-import { getUserId } from './user';
 
 export type Word = {
   id: number;
@@ -13,7 +12,10 @@ export type Word = {
   isLearned: boolean;
 };
 
-const wordsSelector = (userId: string) =>
+const wordsSelector = () =>
+  supabaseClient.from('words').select().order('name_en');
+
+const userWordsSelector = (userId: string) =>
   supabaseClient
     .from('words')
     .select('*, favorites(is_favorite), statistics(is_learned)')
@@ -63,12 +65,13 @@ export const getWordsCount = async () => {
     throw new Error(error.message, { cause: error });
   }
 
-  return count;
+  return count || 0;
 };
 
-export const getNotLearnedWords = async () => {
-  const userId = await getUserId();
-  const response = await wordsSelector(userId);
+export const getNotLearnedWords = async (userId: string | undefined) => {
+  const response = userId
+    ? await userWordsSelector(userId)
+    : await wordsSelector();
 
   if (response.error) {
     throw new Error(response.error.message, { cause: response.error });
@@ -78,8 +81,7 @@ export const getNotLearnedWords = async () => {
 };
 
 export const getWord = async (wordId: number) => {
-  const userId = await getUserId();
-  const response = await wordsSelector(userId).eq('id', wordId);
+  const response = await wordsSelector().eq('id', wordId);
 
   if (response.error) {
     throw new Error(response.error.message, { cause: response.error });
@@ -88,9 +90,12 @@ export const getWord = async (wordId: number) => {
   return response.data?.map(mapWord).at(0);
 };
 
-export const getWordsByCategory = async (categoryId: number) => {
-  const userId = await getUserId();
-  const response = await wordsSelector(userId).eq('category_id', categoryId);
+export const getWordsByCategory = async (
+  categoryId: number,
+  userId?: string
+) => {
+  const selector = userId ? userWordsSelector(userId) : wordsSelector();
+  const response = await selector.eq('category_id', categoryId);
 
   if (response.error) {
     throw new Error(response.error.message, { cause: response.error });
@@ -99,9 +104,12 @@ export const getWordsByCategory = async (categoryId: number) => {
   return response.data?.map(mapWord);
 };
 
-export const getWordsBySearchValue = async (searchValue: string) => {
-  const userId = await getUserId();
-  const res = await wordsSelector(userId).ilike('name_en', `%${searchValue}%`);
+export const getWordsBySearchValue = async (
+  searchValue: string,
+  userId?: string
+) => {
+  const selector = userId ? userWordsSelector(userId) : wordsSelector();
+  const res = await selector.ilike('name_en', `%${searchValue}%`);
 
   if (res.error) {
     throw new Error(res.error.message, { cause: res.error });
@@ -110,8 +118,7 @@ export const getWordsBySearchValue = async (searchValue: string) => {
   return res.data?.map(mapWord);
 };
 
-export const getFavoriteWords = async () => {
-  const userId = await getUserId();
+export const getFavoriteWords = async (userId: string) => {
   const response = await onlyFavoriteWordsSelector(userId);
 
   if (response.error) {
@@ -121,8 +128,7 @@ export const getFavoriteWords = async () => {
   return response.data?.map(mapWord);
 };
 
-export const getLearnedWords = async () => {
-  const userId = await getUserId();
+export const getLearnedWords = async (userId: string) => {
   const response = await onlyLearnedWordsSelector(userId);
 
   if (response.error) {
@@ -130,15 +136,4 @@ export const getLearnedWords = async () => {
   }
 
   return response.data?.map(mapWord);
-};
-
-export const deleteWord = async (wordId: number) => {
-  const { error } = await supabaseClient
-    .from('words')
-    .delete()
-    .eq('id', wordId);
-
-  if (error) {
-    throw new Error(error.message, { cause: error });
-  }
 };

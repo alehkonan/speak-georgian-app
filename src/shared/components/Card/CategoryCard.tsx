@@ -3,10 +3,10 @@ import { Progress } from '../Progress';
 
 type Props = {
   title: string;
-  wordsCount: number;
-  learnedWordsCount: number;
   pictureUrl: string | null;
   onSelectCard: () => void;
+  wordsCount?: number;
+  learnedWordsCount?: number;
 };
 
 export const CategoryCard = ({
@@ -16,6 +16,9 @@ export const CategoryCard = ({
   learnedWordsCount,
   onSelectCard,
 }: Props) => {
+  const hasProgress =
+    learnedWordsCount !== undefined && wordsCount !== undefined;
+
   return (
     <div className="grid gap-1">
       <div
@@ -32,7 +35,7 @@ export const CategoryCard = ({
           src={pictureUrl || undefined}
           alt={title}
         />
-        <Progress value={learnedWordsCount} max={wordsCount} />
+        {hasProgress && <Progress value={learnedWordsCount} max={wordsCount} />}
       </div>
       <span className="text-dark text-sm font-bold">{title}</span>
     </div>

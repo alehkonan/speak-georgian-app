@@ -1,5 +1,5 @@
 import { Word } from 'src/services/supabase';
-import { WordCard } from 'src/shared/components';
+import { Empty, WordCard } from 'src/shared/components';
 
 type Props = {
   results: Word[] | undefined;
@@ -14,9 +14,7 @@ export const SearchResults = ({ results, isSearching }: Props) => {
       {results?.length ? (
         results.map((word) => <WordCard key={word.id} {...word} />)
       ) : (
-        <p className="text-lg text-raisin-black opacity-50 justify-self-center">
-          Can't find this word
-        </p>
+        <Empty />
       )}
     </div>
   );

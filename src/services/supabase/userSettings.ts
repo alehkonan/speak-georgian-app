@@ -1,5 +1,4 @@
 import { supabaseClient } from './client';
-import { getUserId } from './user';
 
 type UserSettings = {
   settingId: number;
@@ -9,25 +8,23 @@ type UserSettings = {
 };
 
 const addUserSettings = async (userId: string) => {
-  const { data } = await supabaseClient
+  const { data, error } = await supabaseClient
     .from('user-settings')
     .insert({ user_id: userId })
     .select();
 
+  if (error) throw error;
+
   return data?.at(0);
 };
 
-export const getUserSettings = async (): Promise<UserSettings> => {
-  const userId = await getUserId();
-
+export const getUserSettings = async (userId: string) => {
   const { data, error } = await supabaseClient
     .from('user-settings')
     .select()
     .eq('user_id', userId);
 
-  if (error) {
-    throw new Error(error.message, { cause: error });
-  }
+  if (error) throw error;
 
   const userSettings = data.at(0);
 
@@ -56,10 +53,12 @@ export const updateUserSettings = async (
   newSettings: Pick<UserSettings, 'settingId'> &
     Omit<Partial<UserSettings>, 'settingId'>
 ) => {
-  await supabaseClient.from('user-settings').update({
+  const { error } = await supabaseClient.from('user-settings').update({
     id: newSettings.settingId,
     show_daily_word: newSettings.shouldShowDailyWord,
     show_transcription: newSettings.shouldShowTranscription,
     show_pictures_in_game: newSettings.shouldShowPictureInGame,
   });
+
+  if (error) throw error;
 };

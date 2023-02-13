@@ -1,37 +1,33 @@
 import { useNavigate } from 'react-router-dom';
 import { routes } from 'src/app/routes';
-import { Button } from 'src/shared/components';
-import { ArrowRightIcon, ChevronDownIcon, PlusIcon } from 'src/shared/icons';
-import { Background } from './Background';
-import { ReactComponent as TextBackground } from './hill.svg';
+import { FieldWithMountains, Hill, Logo } from 'src/assets/svg';
+import { Button, Divider } from 'src/shared/components';
 
 export const WelcomeScreen = () => {
   const navigate = useNavigate();
 
   return (
     <div className="h-screen flex flex-col justify-end">
-      <Background />
-      <div className="relative h-dynamic grid items-center pb-10">
-        <TextBackground className="absolute h-full w-full" />
-        <div className="text-center z-0">
-          <strong className="text-3xl">Welcome</strong>
-          <p className="text-sm">to Speak Georgian App</p>
-          <p className="text-sm">have fun and enjoy 🙌</p>
-        </div>
-        <div className="self-end grid justify-items-center gap-1 z-0">
-          <p className="text-center uppercase text-sm">
-            Log in or create a new account
-          </p>
-          <ChevronDownIcon />
-          <div className="flex justify-center flex-wrap gap-3">
-            <Button primary onClick={() => navigate(routes.login)}>
-              <span>LOG IN</span>
-              <ArrowRightIcon />
-            </Button>
-            <Button onClick={() => navigate(routes.signup)}>
-              <span>SIGN UP</span>
-              <PlusIcon />
-            </Button>
+      <div className="fixed w-full h-full -z-10 grid place-items-center">
+        <FieldWithMountains className="absolute w-full h-full" />
+        <Logo className="z-0 w-2/5" />
+      </div>
+      <div className="relative flex flex-col justify-end items-center">
+        <Hill className="absolute h-[115%] w-full -z-10 text-white" />
+        <div className="w-4/5 max-w-xl flex flex-col gap-2 pb-10">
+          <div className="text-center">
+            <p className="text-3xl font-bold">Welcome!</p>
+            <p>
+              to <strong>Speak Georgian App</strong>
+            </p>
+          </div>
+          <Button primary onClick={() => navigate(routes.home)}>
+            See words
+          </Button>
+          <Divider text="or use your account" />
+          <div className="grid grid-cols-1 min-[350px]:grid-cols-2 gap-1">
+            <Button onClick={() => navigate(routes.login)}>Log in</Button>
+            <Button onClick={() => navigate(routes.signup)}>Sign up</Button>
           </div>
         </div>
       </div>

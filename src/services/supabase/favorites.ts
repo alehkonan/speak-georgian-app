@@ -1,5 +1,4 @@
 import { supabaseClient } from './client';
-import { getUserId } from './user';
 
 const getWordIsFavorite = async (userId: string, wordId: number) => {
   const { data: wordsInFavorite } = await supabaseClient
@@ -11,8 +10,7 @@ const getWordIsFavorite = async (userId: string, wordId: number) => {
   return wordsInFavorite?.at(0);
 };
 
-export const setWordAsFavorite = async (wordId: number) => {
-  const userId = await getUserId();
+export const setWordAsFavorite = async (userId: string, wordId: number) => {
   const wordInFavorite = await getWordIsFavorite(userId, wordId);
 
   if (wordInFavorite) {

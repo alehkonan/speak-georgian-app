@@ -21,9 +21,6 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      height: {
-        dynamic: 'max(30%, calc(45% - 25vw))',
-      },
       width: {
         card: 'min(100%, 30rem)',
       },

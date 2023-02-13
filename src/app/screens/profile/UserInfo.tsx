@@ -1,17 +1,13 @@
 import format from 'date-fns/format';
 import { useUser } from 'src/api/user';
-import { LoaderIcon } from 'src/shared/icons';
+import { ErrorMessage, Loader } from 'src/shared/components';
 
 export const UserInfo = () => {
-  const { user, isLoading } = useUser();
+  const { user, isLoading, error } = useUser();
 
-  if (isLoading) {
-    return (
-      <div className="grid place-items-center">
-        <LoaderIcon className="text-maize w-10 h-10" />
-      </div>
-    );
-  }
+  if (isLoading) return <Loader />;
+
+  if (error) return <ErrorMessage message={error.message} />;
 
   return (
     <div>

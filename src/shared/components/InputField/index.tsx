@@ -5,6 +5,7 @@ import {
   useController,
   UseControllerProps,
 } from 'react-hook-form';
+import { ErrorMessage } from '../ErrorMessage';
 
 type Props<FormType extends FieldValues> = {
   label?: JSX.Element | string;
@@ -28,11 +29,7 @@ export const InputField = <FormType extends FieldValues>({
         {label}
       </label>
       <Input id={id} className="w-full" type={type} {...field} />
-      {error && (
-        <span className="text-center text-xs text-red-500">
-          {error.message}
-        </span>
-      )}
+      {error?.message && <ErrorMessage message={error.message} />}
     </div>
   );
 };

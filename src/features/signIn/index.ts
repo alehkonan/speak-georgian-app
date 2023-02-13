@@ -1,18 +1,39 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { apiKeys } from 'src/api';
+import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+import { routes } from 'src/app/routes';
 import { signInWithGoogle, signInWithPassword } from 'src/services/supabase';
 
 export const useSignIn = () => {
-  const queryClient = useQueryClient();
-  const signInMutation = useMutation(signInWithPassword, {
-    onSuccess: () => queryClient.invalidateQueries(apiKeys.session),
+  const navigate = useNavigate();
+
+  const {
+    mutate: onSignInWithPassword,
+    isLoading: isSignInWithPasswordLoading,
+    error: signInWithPasswordError,
+  } = useMutation({
+    mutationFn: signInWithPassword,
+    onSuccess: () => navigate(routes.home),
   });
-  const signInWithGoogleMutation = useMutation(signInWithGoogle);
+
+  const {
+    mutate: onSignInWithGoogle,
+    isLoading: isSignInWithGoogleLoading,
+    error: signInWithGoogleError,
+  } = useMutation({
+    mutationFn: signInWithGoogle,
+  });
+
+  const error =
+    signInWithPasswordError instanceof Error
+      ? signInWithPasswordError
+      : signInWithGoogleError instanceof Error
+      ? signInWithGoogleError
+      : null;
 
   return {
-    onSignInWithPassword: signInMutation.mutate,
-    onSignInWithGoogle: signInWithGoogleMutation.mutate,
-    isLoading: signInMutation.isLoading || signInWithGoogleMutation.isLoading,
-    error: signInMutation.data?.error || signInWithGoogleMutation.data?.error,
+    onSignInWithPassword,
+    onSignInWithGoogle,
+    isLoading: isSignInWithPasswordLoading || isSignInWithGoogleLoading,
+    error,
   };
 };

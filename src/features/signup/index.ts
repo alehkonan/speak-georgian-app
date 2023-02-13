@@ -1,17 +1,17 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { apiKeys } from 'src/api';
+import { apiKeys } from 'src/api/apiKeys';
 import { signUp } from 'src/services/supabase';
 
 export const useSignUp = () => {
   const queryClient = useQueryClient();
-  const signUpMutation = useMutation(signUp, {
-    onSuccess: ({ data }) =>
-      queryClient.setQueryData(apiKeys.user, { data: { user: data.user } }),
+  const { mutate, isLoading, error } = useMutation({
+    mutationFn: signUp,
+    onSuccess: () => queryClient.invalidateQueries(apiKeys.user),
   });
 
   return {
-    onSignUp: signUpMutation.mutate,
-    isLoading: signUpMutation.isLoading,
-    error: signUpMutation.data?.error,
+    onSignUp: mutate,
+    isLoading,
+    error: error instanceof Error ? error : null,
   };
 };

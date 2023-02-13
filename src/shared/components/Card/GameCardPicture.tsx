@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
+import { useUser } from 'src/api/user';
 import { useGetUserSettings } from 'src/api/userSettings';
 
 export const GameCardPicture = ({
@@ -9,7 +10,8 @@ export const GameCardPicture = ({
   pictureUrl: string;
   nameEn: string;
 }) => {
-  const { settings } = useGetUserSettings();
+  const { user } = useUser();
+  const { settings } = useGetUserSettings(user?.id);
   const [isShown, setShown] = useState(false);
 
   useEffect(() => {

@@ -1,34 +1,41 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getUserStatistics, setWordAsLearned } from 'src/services/supabase';
-import { apiKeys } from '.';
+import { apiKeys } from './apiKeys';
+
+type Payload = {
+  userId: string;
+  wordId: number;
+};
 
 export const useStatistics = () => {
   const queryClient = useQueryClient();
-  const { mutate, isLoading } = useMutation({
-    mutationFn: (wordId: number) => setWordAsLearned(wordId),
+
+  const { mutate, isLoading, error } = useMutation({
+    mutationFn: ({ userId, wordId }: Payload) =>
+      setWordAsLearned(userId, wordId),
     onSuccess: () => {
       queryClient.invalidateQueries(apiKeys.words);
       queryClient.invalidateQueries(apiKeys.userStatistics);
     },
   });
 
-  const markAsLearned = (wordId: number) => mutate(wordId);
-
   return {
-    markAsLearned,
+    markAsLearned: mutate,
     isLoading,
+    error: error instanceof Error ? error : null,
   };
 };
 
-export const useGetStatistics = () => {
+export const useGetStatistics = (userId?: string) => {
   const { data, isLoading, error } = useQuery({
     queryKey: apiKeys.userStatistics,
-    queryFn: getUserStatistics,
+    queryFn: () => getUserStatistics(userId!),
+    enabled: Boolean(userId),
   });
 
   return {
     statistics: data,
-    error: error instanceof Error ? error : null,
     isLoading,
+    error: error instanceof Error ? error : null,
   };
 };

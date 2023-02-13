@@ -1,13 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import { getUser } from 'src/services/supabase';
-import { apiKeys } from '.';
+import { apiKeys } from './apiKeys';
 
 export const useUser = () => {
-  const userQuery = useQuery(apiKeys.user, getUser);
+  const { data, isLoading, error } = useQuery({
+    queryKey: apiKeys.user,
+    queryFn: getUser,
+  });
 
   return {
-    user: userQuery.data?.data.user,
-    isLoading: userQuery.isLoading,
-    error: userQuery.data?.error,
+    user: data,
+    isLoading,
+    error: error instanceof Error ? error : null,
   };
 };

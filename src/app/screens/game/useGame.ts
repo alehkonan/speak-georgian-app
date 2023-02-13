@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Word } from 'src/services/supabase';
 import { GameResult, GameWord } from './types';
 import { generateGameWords } from './utils';

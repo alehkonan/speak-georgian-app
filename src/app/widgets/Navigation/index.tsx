@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
-import { useNavigationLinks } from './useNavigationLinks';
+import { useNavigation } from './useNavigation';
 
 export const Navigation = () => {
-  const links = useNavigationLinks();
+  const links = useNavigation();
 
   return (
     <nav>

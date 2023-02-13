@@ -24,6 +24,9 @@ export const Button = ({ className, children, primary, ...props }: Props) => {
             primary,
           'border border-ripe-mango': !primary,
         },
+        {
+          'bg-white': !primary,
+        },
         className,
       ])}
       {...props}

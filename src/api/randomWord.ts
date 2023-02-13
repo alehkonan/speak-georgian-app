@@ -1,10 +1,11 @@
+// TODO make this login on the server
 import { useQuery } from '@tanstack/react-query';
 import format from 'date-fns/format';
 import isSameDay from 'date-fns/isSameDay';
 import { useState } from 'react';
 import { getWord, Word } from 'src/services/supabase';
 import { getRandomInteger } from 'src/shared/utils';
-import { apiKeys } from '.';
+import { apiKeys } from './apiKeys';
 import { useWordsCount } from './words';
 
 const DAILY_WORD = 'dailyWord';

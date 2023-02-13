@@ -1,28 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import { useCategories } from 'src/api/categories';
+import { useUser } from 'src/api/user';
 import { routes } from 'src/app/routes';
-import { CategoryCard } from 'src/shared/components';
-import { LoaderIcon } from 'src/shared/icons';
+import { CategoryCard, ErrorMessage, Loader } from 'src/shared/components';
 
 export const Categories = () => {
   const navigate = useNavigate();
-  const { categories, isLoading, error } = useCategories();
+  const { user } = useUser();
+  const { categories, isLoading, error } = useCategories(user?.id);
 
-  if (isLoading) {
-    return (
-      <div className="h-full grid place-items-center">
-        <LoaderIcon className="text-ripe-mango" />
-      </div>
-    );
-  }
+  if (isLoading) return <Loader />;
 
-  if (error) {
-    return (
-      <div>
-        <p>{error.message}</p>
-      </div>
-    );
-  }
+  if (error) return <ErrorMessage message={error.message} />;
 
   return (
     <div>
@@ -34,9 +23,9 @@ export const Categories = () => {
           <CategoryCard
             key={category.id}
             title={category.name}
-            learnedWordsCount={category.learnedWordsCount}
-            wordsCount={category.wordsCount}
-            pictureUrl={category.picture_url}
+            learnedWordsCount={category.wordsLearned}
+            wordsCount={category.wordIds.length}
+            pictureUrl={category.pictureUrl}
             onSelectCard={() => navigate(`${routes.category}/${category.id}`)}
           />
         ))}
