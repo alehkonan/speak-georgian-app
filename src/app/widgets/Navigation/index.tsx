@@ -14,11 +14,12 @@ export const Navigation = () => {
               to={to}
               className={({ isActive }) =>
                 classNames([
-                  'flex justify-center items-center',
+                  'grid place-items-center',
                   'h-12 w-12 rounded-full',
-                  { 'bg-yellow-500': isActive },
-                  { 'text-sky-700': !isActive },
-                  { 'text-white': isActive },
+                  ' text-steel-blue',
+                  {
+                    'border shadow-lg text-lapis-lazuli': isActive,
+                  },
                 ])
               }
             >
