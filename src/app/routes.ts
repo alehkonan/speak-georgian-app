@@ -5,6 +5,7 @@ export const routes = {
   signup: '/signup',
   forgotPassword: '/forgot-password',
   updatePassword: '/update-password',
+  verbs: '/verbs',
   category: '/category',
   game: '/game',
   favorites: '/favorites',

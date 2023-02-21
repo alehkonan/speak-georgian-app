@@ -58,6 +58,7 @@ module.exports = {
         caramel: colors.caramel,
         maize: colors.maize,
         'ripe-mango': colors.ripeMango,
+        'anti-flash-white': colors.antiFlashWhite,
       },
     },
   },

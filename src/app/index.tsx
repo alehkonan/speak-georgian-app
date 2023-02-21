@@ -17,6 +17,7 @@ import { NotFoundScreen } from './screens/notFound';
 import { ProfileScreen } from './screens/profile';
 import { SignupScreen } from './screens/signup';
 import { UpdatePasswordScreen } from './screens/update-password';
+import { VerbsScreen } from './screens/verbs';
 import { WelcomeScreen } from './screens/welcome';
 
 export const ROOT_ID = 'root';
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: routes.home,
         element: <HomeScreen />,
+      },
+      {
+        path: routes.verbs,
+        element: <VerbsScreen />,
       },
       {
         path: `${routes.category}/:${params.id}`,
