@@ -1,4 +1,5 @@
 export const apiKeys = {
+  session: ['session'],
   user: ['user'],
   userSettings: ['user', 'settings'],
   userStatistics: ['user', 'statistics'],

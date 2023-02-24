@@ -1,6 +1,9 @@
 import {
   createBrowserRouter,
+  createRoutesFromElements,
+  LoaderFunction,
   redirect,
+  Route,
   RouterProvider,
 } from 'react-router-dom';
 import { getSession } from 'src/services/supabase';
@@ -20,99 +23,56 @@ import { UpdatePasswordScreen } from './screens/update-password';
 import { VerbsScreen } from './screens/verbs';
 import { WelcomeScreen } from './screens/welcome';
 
-export const ROOT_ID = 'root';
+const publicRouteLoader: LoaderFunction = async () => {
+  const session = await getSession();
+  return session && redirect(routes.home);
+};
 
-const router = createBrowserRouter([
-  // public routes
-  {
-    id: ROOT_ID,
-    path: routes.home,
-    element: <Layout />,
-    loader: async () => {
-      const session = await getSession();
-      // TODO fix that Layout is rendered before loader
-      console.log('session in loader: ', session);
-      return session;
-    },
-    children: [
-      {
-        path: routes.home,
-        element: <HomeScreen />,
-      },
-      {
-        path: routes.verbs,
-        element: <VerbsScreen />,
-      },
-      {
-        path: `${routes.category}/:${params.id}`,
-        element: <CategoryScreen />,
-      },
-    ],
-  },
-  {
-    path: routes.welcome,
-    element: <WelcomeScreen />,
-    loader: async () => {
-      const session = await getSession();
-      return session && redirect(routes.home);
-    },
-  },
-  {
-    path: routes.home,
-    element: <Layout />,
-    loader: async () => {
-      const session = await getSession();
-      return session && redirect(routes.home);
-    },
-    children: [
-      {
-        path: routes.login,
-        element: <LoginScreen />,
-      },
-      {
-        path: routes.signup,
-        element: <SignupScreen />,
-      },
-      {
-        path: routes.forgotPassword,
-        element: <ForgotPasswordScreen />,
-      },
-      {
-        path: routes.updatePassword,
-        element: <UpdatePasswordScreen />,
-      },
-    ],
-  },
-  // protected routes
-  {
-    path: routes.home,
-    element: <Layout />,
-    loader: async () => {
-      const session = await getSession();
-      // TODO fix that Layout is rendered before loader
-      console.log('session in loader: ', session);
-      return session ? session : redirect(routes.login);
-    },
-    children: [
-      {
-        path: routes.game,
-        element: <GameScreen />,
-      },
-      {
-        path: routes.favorites,
-        element: <FavoritesScreen />,
-      },
-      {
-        path: routes.profile,
-        element: <ProfileScreen />,
-      },
-    ],
-  },
-  {
-    path: '*',
-    element: <NotFoundScreen />,
-  },
-]);
+const privateRouteLoader: LoaderFunction = async () => {
+  const session = await getSession();
+  return !session && redirect(routes.welcome);
+};
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
+      <Route path={routes.welcome} element={<WelcomeScreen />} />
+
+      <Route element={<Layout />}>
+        {/* common routes */}
+        <Route>
+          <Route index element={<HomeScreen />} />
+          <Route path={routes.verbs} element={<VerbsScreen />} />
+          <Route
+            path={`${routes.category}/:${params.id}`}
+            element={<CategoryScreen />}
+          />
+        </Route>
+        {/* public routes */}
+        <Route loader={publicRouteLoader}>
+          <Route path={routes.login} element={<LoginScreen />} />
+          <Route path={routes.signup} element={<SignupScreen />} />
+          <Route
+            path={routes.forgotPassword}
+            element={<ForgotPasswordScreen />}
+          />
+          <Route
+            path={routes.updatePassword}
+            element={<UpdatePasswordScreen />}
+          />
+        </Route>
+        {/* private routes */}
+        <Route loader={privateRouteLoader}>
+          <Route path={routes.game} element={<GameScreen />} />
+          <Route path={routes.favorites} element={<FavoritesScreen />} />
+          <Route path={routes.profile} element={<ProfileScreen />} />
+        </Route>
+      </Route>
+
+      <Route path="*" element={<NotFoundScreen />} />
+    </Route>
+  )
+);
 
 export const App = () => {
   return <RouterProvider router={router} />;

@@ -1,7 +1,6 @@
-import { Session } from '@supabase/supabase-js';
 import classNames from 'classnames';
-import { useNavigate, useRouteLoaderData } from 'react-router-dom';
-import { ROOT_ID } from 'src/app';
+import { useNavigate } from 'react-router-dom';
+import { useSession } from 'src/api/session';
 import { routes } from 'src/app/routes';
 import { DailyWord } from 'src/app/widgets';
 import { IconButton, Input } from 'src/shared/components';
@@ -12,11 +11,8 @@ import { useScrollPosition } from './useScrollPosition';
 import { useSearch } from './useSearch';
 
 export const HomeScreen = () => {
+  const { session } = useSession();
   const navigate = useNavigate();
-  const session = useRouteLoaderData(ROOT_ID) as Session | null | undefined;
-
-  // TODO fix that Layout is rendered before loader
-  console.log('session in Component: ', session);
 
   const {
     searchValue,

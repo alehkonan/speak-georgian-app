@@ -1,13 +1,11 @@
 import classNames from 'classnames';
-import { Outlet, useLoaderData } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { Navigation } from '../widgets/Navigation';
-import { Session } from '@supabase/supabase-js';
 import { Wave } from 'src/assets/svg';
+import { useSession } from 'src/api/session';
 
 export const Layout = () => {
-  const session = useLoaderData() as Session | null | undefined;
-  // TODO fix that Layout is rendered before loader
-  console.log('session in Layout: ', session);
+  const { session } = useSession();
 
   return (
     <div
@@ -22,7 +20,7 @@ export const Layout = () => {
       <main className="p-4 sm:w-[80%] md:w-[60%] sm:mx-auto max-w-4xl overflow-hidden">
         <Outlet />
       </main>
-      <footer className="pb-7">{!!session && <Navigation />}</footer>
+      <footer className="pb-7">{session && <Navigation />}</footer>
     </div>
   );
 };
