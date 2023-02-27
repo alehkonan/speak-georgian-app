@@ -17,6 +17,7 @@ import { GameScreen } from './screens/game';
 import { HomeScreen } from './screens/home';
 import { LoginScreen } from './screens/login';
 import { NotFoundScreen } from './screens/notFound';
+import { PhrasesScreen } from './screens/phrases';
 import { ProfileScreen } from './screens/profile';
 import { SignupScreen } from './screens/signup';
 import { UpdatePasswordScreen } from './screens/update-password';
@@ -43,6 +44,7 @@ const router = createBrowserRouter(
         <Route>
           <Route index element={<HomeScreen />} />
           <Route path={routes.verbs} element={<VerbsScreen />} />
+          <Route path={routes.phrases} element={<PhrasesScreen />} />
           <Route
             path={`${routes.category}/:${params.id}`}
             element={<CategoryScreen />}
