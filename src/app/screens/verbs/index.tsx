@@ -9,7 +9,7 @@ export const VerbsScreen = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="h-full grid grid-rows-[auto_1fr] gap-2">
+    <div className="h-full px-2 -mx-2 grid grid-rows-[auto_1fr] gap-3">
       <div className="flex items-center gap-3">
         <IconButton
           title="Back to Home screen"
