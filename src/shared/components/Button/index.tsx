@@ -1,36 +1,39 @@
-import { ComponentProps } from 'react';
+import { ComponentProps, HTMLAttributes } from 'react';
 import classNames from 'classnames';
+import { Link, To } from 'react-router-dom';
 
 type Props = ComponentProps<'button'> & {
   primary?: boolean;
+  to?: To;
 };
 
-export const Button = ({ className, children, primary, ...props }: Props) => {
+const buttonClassName = (
+  primary: boolean
+): HTMLAttributes<HTMLButtonElement>['className'] =>
+  classNames([
+    'flex justify-center items-center gap-1',
+    'px-5 py-2',
+    'rounded-3xl',
+    'min-w-[120px]',
+    'border border-ripe-mango',
+    'disabled:border disabled:border-gray-400',
+    'disabled:bg-gray-50 disabled:text-gray-400 disabled:bg-none',
+    {
+      'bg-ripe-mango text-white': primary,
+      'bg-white text-ripe-mango': !primary,
+    },
+  ]);
+
+export const Button = ({ children, primary = false, to, ...props }: Props) => {
+  if (to)
+    return (
+      <Link className={buttonClassName(primary)} to={to}>
+        {children}
+      </Link>
+    );
+
   return (
-    <button
-      className={classNames([
-        'flex justify-center items-center gap-1',
-        'px-5 py-2',
-        'rounded-3xl',
-        'min-w-[120px]',
-        'disabled:border disabled:border-gray-400',
-        'disabled:bg-gray-50 disabled:text-gray-400 disabled:bg-none',
-        {
-          'text-white': primary,
-          'text-ripe-mango': !primary,
-        },
-        {
-          'bg-gradient-to-t from-ripe-mango via-orange-yellow to-caramel':
-            primary,
-          'border border-ripe-mango': !primary,
-        },
-        {
-          'bg-white': !primary,
-        },
-        className,
-      ])}
-      {...props}
-    >
+    <button className={buttonClassName(primary)} {...props}>
       {children}
     </button>
   );
