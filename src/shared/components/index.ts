@@ -8,4 +8,5 @@ export { IconButton } from './IconButton';
 export { Input } from './Input';
 export { InputField } from './InputField';
 export { Loader } from './Loader';
+export { Screen } from './Screen';
 export { Switch } from './Switch';

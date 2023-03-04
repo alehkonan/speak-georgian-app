@@ -7,6 +7,7 @@ export const routes = {
   updatePassword: '/update-password',
   verbs: '/verbs',
   phrases: '/phrases',
+  words: '/words',
   category: '/category',
   game: '/game',
   favorites: '/favorites',

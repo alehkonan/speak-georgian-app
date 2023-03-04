@@ -7,6 +7,7 @@ import {
   Form,
   IconButton,
   InputField,
+  Screen,
 } from 'src/shared/components';
 import { ChevronLeftIcon } from 'src/shared/icons';
 import * as zod from 'zod';
@@ -44,13 +45,7 @@ export const SignupScreen = () => {
   };
 
   return (
-    <div className="grid gap-4">
-      <div className="flex items-center gap-3">
-        <IconButton onClick={() => navigate(routes.welcome)}>
-          <ChevronLeftIcon />
-        </IconButton>
-        <h2 className="text-xl font-bold">Create your account</h2>
-      </div>
+    <Screen name="Create your account" showName backTo={routes.welcome}>
       <Form<FormType>
         className="grid gap-2"
         schema={schema}
@@ -76,6 +71,6 @@ export const SignupScreen = () => {
         </Button>
       </Form>
       {error && <ErrorMessage message={error.message} />}
-    </div>
+    </Screen>
   );
 };

@@ -1,76 +1,58 @@
-import classNames from 'classnames';
-import { useNavigate } from 'react-router-dom';
 import { useSession } from 'src/api/session';
 import { routes } from 'src/app/routes';
 import { DailyWord } from 'src/app/widgets';
-import { IconButton, Input } from 'src/shared/components';
-import { ChevronLeftIcon, CloseIcon } from 'src/shared/icons';
-import { Categories } from './Categories';
-import { SearchResults } from './SearchResults';
-import { useScrollPosition } from './useScrollPosition';
-import { useSearch } from './useSearch';
+import { Button, Screen } from 'src/shared/components';
+import { ArrowRightIcon } from 'src/shared/icons';
 
 export const HomeScreen = () => {
   const { session } = useSession();
-  const navigate = useNavigate();
-
-  const {
-    searchValue,
-    isSearching,
-    onSearch,
-    clearSearch,
-    results,
-    hasSearch,
-  } = useSearch();
-  const { onScroll, containerRef } = useScrollPosition('home-screen');
 
   return (
-    <div
-      className={classNames([
-        'h-full overflow-auto overscroll-contain',
-        'flex flex-col gap-3',
-        'px-2 -mx-2',
-      ])}
-      ref={containerRef}
-      onScroll={onScroll}
+    <Screen
+      name="Home screen"
+      showName={!session}
+      backTo={session ? undefined : routes.welcome}
     >
-      {session ? (
-        <>
-          <h3 className="text-raisin-black text-2xl font-bold">
-            Hello, {session.user.user_metadata.name}!
-          </h3>
-          <DailyWord />
-        </>
-      ) : (
-        <div className="flex items-center gap-3">
-          <IconButton
-            title="Back to Welcome screen"
-            onClick={() => navigate(routes.welcome)}
-          >
-            <ChevronLeftIcon />
-          </IconButton>
-          <h2 className="text-xl font-bold">Categories</h2>
-        </div>
+      {session && (
+        <h3 className="text-raisin-black text-2xl font-bold">
+          Hello, {session.user.user_metadata.name}!
+        </h3>
       )}
-
-      <div className="relative">
-        <Input
-          className="sticky top-0 w-full"
-          placeholder="Find a word..."
-          value={searchValue}
-          onChange={({ target }) => onSearch(target.value.trim())}
-        />
-        <div className="absolute right-0 top-0 h-full flex items-center p-1">
-          <IconButton onClick={clearSearch}>
-            <CloseIcon />
-          </IconButton>
-        </div>
+      {session && <DailyWord />}
+      <div>
+        <p>Here words are grouped by categories</p>
+        <p>
+          There are only simple words that you can learn, see how to pronounce
+          it and add to your favorites
+        </p>
       </div>
-      {hasSearch ? (
-        <SearchResults results={results} isSearching={isSearching} />
-      ) : (
-        <Categories />
-      )}
-    </div>
+      <div className="flex justify-end">
+        <Button to={routes.words}>
+          <span>Go to words</span>
+          <ArrowRightIcon />
+        </Button>
+      </div>
+      <div>
+        <p>One of the most difficult part in georgian language is Verbs</p>
+        <p>In different tenses and with different pronouns verbs are changed</p>
+        <p>On verbs page you can choose all variants and use right variant</p>
+      </div>
+      <div className="flex justify-end">
+        <Button to={routes.verbs}>
+          <span>Go to verbs</span>
+          <ArrowRightIcon />
+        </Button>
+      </div>
+      <div>
+        <p>Sometimes it is possible to say a phrase in one word</p>
+        <p>Some common phrases that you can use are gathered here</p>
+      </div>
+      <div className="flex justify-end">
+        <Button to={routes.phrases}>
+          <span>Go to phrases</span>
+          <ArrowRightIcon />
+        </Button>
+      </div>
+    </Screen>
   );
 };

@@ -1,14 +1,12 @@
-import { useNavigate } from 'react-router-dom';
 import { routes } from 'src/app/routes';
 import { useResetPassword } from 'src/features/resetPassword';
 import {
   Button,
   ErrorMessage,
   Form,
-  IconButton,
   InputField,
+  Screen,
 } from 'src/shared/components';
-import { ChevronLeftIcon } from 'src/shared/icons';
 import * as zod from 'zod';
 
 const schema = zod.object({
@@ -18,7 +16,6 @@ const schema = zod.object({
 type FormType = zod.infer<typeof schema>;
 
 export const ForgotPasswordScreen = () => {
-  const navigate = useNavigate();
   const { onUpdatePassword, isLoading, error } = useResetPassword();
 
   const onSubmit = (data: FormType) => {
@@ -26,17 +23,7 @@ export const ForgotPasswordScreen = () => {
   };
 
   return (
-    <div className="grid gap-4">
-      <div className="flex items-center gap-3">
-        <IconButton
-          title="Back to login screen"
-          onClick={() => navigate(routes.login)}
-        >
-          <ChevronLeftIcon />
-        </IconButton>
-        <h2 className="text-xl font-bold">Reset password</h2>
-      </div>
-
+    <Screen name="Reset password" showName backTo={routes.login}>
       <Form<FormType>
         className="grid gap-2"
         schema={schema}
@@ -48,6 +35,6 @@ export const ForgotPasswordScreen = () => {
         </Button>
       </Form>
       {error && <ErrorMessage message={error.message} />}
-    </div>
+    </Screen>
   );
 };

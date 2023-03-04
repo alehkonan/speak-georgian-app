@@ -1,4 +1,4 @@
-import { Divider } from 'src/shared/components';
+import { Divider, Screen } from 'src/shared/components';
 import { Logout } from './Logout';
 import { UserInfo } from './UserInfo';
 import { UserSettings } from './UserSettings';
@@ -6,7 +6,7 @@ import { UserStatistics } from './UserStatistics';
 
 export const ProfileScreen = () => {
   return (
-    <div className="grid gap-2">
+    <Screen name="Profile">
       <UserInfo />
       <Divider text="user settings" />
       <UserSettings />
@@ -14,6 +14,6 @@ export const ProfileScreen = () => {
       <UserStatistics />
       <Divider />
       <Logout />
-    </div>
+    </Screen>
   );
 };

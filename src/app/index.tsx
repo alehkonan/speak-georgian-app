@@ -23,6 +23,7 @@ import { SignupScreen } from './screens/signup';
 import { UpdatePasswordScreen } from './screens/update-password';
 import { VerbsScreen } from './screens/verbs';
 import { WelcomeScreen } from './screens/welcome';
+import { WordsScreen } from './screens/words';
 
 const publicRouteLoader: LoaderFunction = async () => {
   const session = await getSession();
@@ -45,6 +46,7 @@ const router = createBrowserRouter(
           <Route index element={<HomeScreen />} />
           <Route path={routes.verbs} element={<VerbsScreen />} />
           <Route path={routes.phrases} element={<PhrasesScreen />} />
+          <Route path={routes.words} element={<WordsScreen />} />
           <Route
             path={`${routes.category}/:${params.id}`}
             element={<CategoryScreen />}
