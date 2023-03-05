@@ -4,155 +4,206 @@ export type Json =
   | boolean
   | null
   | { [key: string]: Json }
-  | Json[];
+  | Json[]
 
 export interface Database {
   public: {
     Tables: {
       categories: {
         Row: {
-          id: number;
-          created_at: string;
-          name: string;
-          picture_url: string | null;
-        };
+          created_at: string
+          id: number
+          name: string
+          picture_url: string | null
+        }
         Insert: {
-          id?: number;
-          created_at?: string;
-          name: string;
-          picture_url?: string;
-        };
+          created_at?: string
+          id?: number
+          name?: string
+          picture_url?: string | null
+        }
         Update: {
-          id?: number;
-          created_at?: string;
-          name: string;
-          picture_url?: string;
-        };
-      };
-      words: {
-        Row: {
-          id: number;
-          name_en: string;
-          name_ka: string;
-          transcription: string | null;
-          category_id: number | null;
-          picture_url: string | null;
-          sound_url: string | null;
-          created_at: string;
-        };
-        Insert: {
-          id?: number;
-          name_en?: string | null;
-          name_ka?: string | null;
-          category_id?: number | null;
-          picture_url?: string | null;
-          created_at?: string | null;
-        };
-        Update: {
-          id?: number;
-          name_en?: string | null;
-          name_ka?: string | null;
-          category_id?: number | null;
-          picture_url?: string | null;
-          created_at?: string | null;
-        };
-      };
-      statistics: {
-        Row: {
-          id: number;
-          user_id?: string;
-          word_id: number;
-          listened: number;
-          translation_shown: number;
-          right_answers: number;
-          wrong_answers: number;
-          total_answers: number;
-          is_learned: boolean;
-          created_at: string;
-        };
-        Insert: {
-          id?: number;
-          user_id?: string;
-          word_id: number;
-          listened?: number;
-          translation_shown?: number;
-          right_answers?: number;
-          wrong_answers?: number;
-          total_answers?: number;
-          is_learned?: boolean;
-          created_at?: string;
-        };
-        Update: {
-          id?: number;
-          user_id?: string;
-          word_id?: number;
-          listened?: number;
-          translation_shown?: number;
-          right_answers?: number;
-          wrong_answers?: number;
-          total_answers?: number;
-          is_learned?: boolean;
-          created_at?: string;
-        };
-      };
+          created_at?: string
+          id?: number
+          name?: string
+          picture_url?: string | null
+        }
+      }
       favorites: {
         Row: {
-          id: number;
-          word_id: number;
-          user_id: string;
-          is_favorite: boolean;
-          created_at: string;
-        };
+          created_at: string
+          id: number
+          is_favorite: boolean
+          user_id: string
+          word_id: number
+        }
         Insert: {
-          id?: number;
-          word_id: number;
-          user_id: string;
-          is_favorite: boolean;
-          created_at?: string;
-        };
+          created_at?: string
+          id?: number
+          is_favorite?: boolean
+          user_id: string
+          word_id: number
+        }
         Update: {
-          id: number;
-          word_id?: number;
-          user_id?: string;
-          is_favorite?: boolean;
-          created_at?: string;
-        };
-      };
-      'user-settings': {
+          created_at?: string
+          id?: number
+          is_favorite?: boolean
+          user_id?: string
+          word_id?: number
+        }
+      }
+      statistics: {
         Row: {
-          id: number;
-          user_id: string;
-          show_daily_word: boolean;
-          show_transcription: boolean;
-          show_pictures_in_game: boolean;
-          created_at: string;
-        };
+          created_at: string
+          id: number
+          is_learned: boolean
+          listened: number
+          right_answers: number
+          total_answers: number
+          translation_shown: number
+          user_id: string
+          word_id: number
+          wrong_answers: number
+        }
         Insert: {
-          id?: number;
-          user_id: string;
-          show_daily_word?: boolean;
-          show_transcription?: boolean;
-          show_pictures_in_game?: boolean;
-          created_at?: string;
-        };
+          created_at?: string
+          id?: number
+          is_learned?: boolean
+          listened?: number
+          right_answers?: number
+          total_answers?: number
+          translation_shown?: number
+          user_id: string
+          word_id: number
+          wrong_answers?: number
+        }
         Update: {
-          id: number;
-          user_id?: string;
-          show_daily_word?: boolean;
-          show_transcription?: boolean;
-          show_pictures_in_game?: boolean;
-          created_at?: string;
-        };
-      };
-    };
+          created_at?: string
+          id?: number
+          is_learned?: boolean
+          listened?: number
+          right_answers?: number
+          total_answers?: number
+          translation_shown?: number
+          user_id?: string
+          word_id?: number
+          wrong_answers?: number
+        }
+      }
+      "user-settings": {
+        Row: {
+          created_at: string | null
+          id: number
+          show_daily_word: boolean
+          show_pictures_in_game: boolean
+          show_transcription: boolean
+          show_translation: boolean
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          show_daily_word?: boolean
+          show_pictures_in_game?: boolean
+          show_transcription?: boolean
+          show_translation?: boolean
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          show_daily_word?: boolean
+          show_pictures_in_game?: boolean
+          show_transcription?: boolean
+          show_translation?: boolean
+          user_id?: string
+        }
+      }
+      verbs: {
+        Row: {
+          created_at: string
+          first_person_in_future_word_id: number | null
+          first_person_in_past_word_id: number | null
+          first_person_in_present_word_id: number | null
+          id: number
+          second_person_in_future_word_id: number | null
+          second_person_in_past_word_id: number | null
+          second_person_in_present_word_id: number | null
+          third_person_in_future_word_id: number | null
+          third_person_in_past_word_id: number | null
+          third_person_in_present_word_id: number | null
+        }
+        Insert: {
+          created_at?: string
+          first_person_in_future_word_id?: number | null
+          first_person_in_past_word_id?: number | null
+          first_person_in_present_word_id?: number | null
+          id?: number
+          second_person_in_future_word_id?: number | null
+          second_person_in_past_word_id?: number | null
+          second_person_in_present_word_id?: number | null
+          third_person_in_future_word_id?: number | null
+          third_person_in_past_word_id?: number | null
+          third_person_in_present_word_id?: number | null
+        }
+        Update: {
+          created_at?: string
+          first_person_in_future_word_id?: number | null
+          first_person_in_past_word_id?: number | null
+          first_person_in_present_word_id?: number | null
+          id?: number
+          second_person_in_future_word_id?: number | null
+          second_person_in_past_word_id?: number | null
+          second_person_in_present_word_id?: number | null
+          third_person_in_future_word_id?: number | null
+          third_person_in_past_word_id?: number | null
+          third_person_in_present_word_id?: number | null
+        }
+      }
+      words: {
+        Row: {
+          category_id: number | null
+          created_at: string
+          id: number
+          name_en: string
+          name_ka: string
+          picture_url: string | null
+          sound_url: string | null
+          transcription: string | null
+        }
+        Insert: {
+          category_id?: number | null
+          created_at?: string
+          id?: number
+          name_en?: string
+          name_ka?: string
+          picture_url?: string | null
+          sound_url?: string | null
+          transcription?: string | null
+        }
+        Update: {
+          category_id?: number | null
+          created_at?: string
+          id?: number
+          name_en?: string
+          name_ka?: string
+          picture_url?: string | null
+          sound_url?: string | null
+          transcription?: string | null
+        }
+      }
+    }
     Views: {
-      [_ in never]: never;
-    };
+      [_ in never]: never
+    }
     Functions: {
-      [_ in never]: never;
-    };
+      [_ in never]: never
+    }
     Enums: {
-      [_ in never]: never;
-    };
-  };
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
 }

@@ -1,13 +1,14 @@
 {
   "name": "speak-georgian-app",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "supabase:generate": "bash ./scripts/generate-types.sh"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.8",
