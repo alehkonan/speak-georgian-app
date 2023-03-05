@@ -1,16 +1,15 @@
-import type { PersonalPronounce, Verb, VerbTense } from './types';
+import type { Tense, Verb } from 'src/services/supabase';
+import { useState } from 'react';
 import { Tab } from '@headlessui/react';
 import classNames from 'classnames';
-import { toGeorgianPronounce } from './utils';
-import { IconButton } from 'src/shared/components';
+import { Empty, IconButton } from 'src/shared/components';
 import { TranslateIcon } from 'src/shared/icons';
-import { useState } from 'react';
 
 type Props = {
   verb: Verb;
 };
 
-const tenses: VerbTense[] = ['past', 'present', 'future'];
+const tenses: Tense[] = ['past', 'present', 'future'];
 
 export const VerbCard = ({ verb }: Props) => {
   const [isTranslationShown, setTranslationShown] = useState(false);
@@ -19,22 +18,30 @@ export const VerbCard = ({ verb }: Props) => {
     <div className="p-2 rounded shadow bg-white grid gap-2">
       <Tab.Group defaultIndex={1}>
         <Tab.Panels>
-          {tenses.map((tense) => (
-            <Tab.Panel key={tense} className="flex items-center">
-              <div className="flex-1">
-                {Object.entries(verb[tense].ka).map(([pronounce, word]) => (
-                  <p key={pronounce} className="text-center">
-                    {toGeorgianPronounce(pronounce as PersonalPronounce)} {word}
-                  </p>
-                ))}
-              </div>
-              {isTranslationShown && (
-                <p className="w-24 text-center">{verb[tense].en}</p>
-              )}
-            </Tab.Panel>
-          ))}
+          {tenses.map((tense) => {
+            const words = Object.values(verb[tense]).filter(Boolean);
+
+            console.log(words);
+
+            return (
+              <Tab.Panel key={tense} className="min-h-[6rem]">
+                {words.length ? (
+                  words.map((word) => (
+                    <p key={word?.en} className="text-center">
+                      <span className="font-medium text-lg">{word?.ka}</span>
+                      {isTranslationShown && (
+                        <span className="italic"> {word?.en}</span>
+                      )}
+                    </p>
+                  ))
+                ) : (
+                  <Empty />
+                )}
+              </Tab.Panel>
+            );
+          })}
         </Tab.Panels>
-        <Tab.List className="flex gap-2 justify-center">
+        <Tab.List className="flex gap-2 justify-end">
           {tenses.map((tense) => (
             <Tab
               key={tense}

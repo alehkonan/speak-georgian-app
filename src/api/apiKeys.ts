@@ -5,6 +5,7 @@ export const apiKeys = {
   userStatistics: ['user', 'statistics'],
   categories: ['categories'],
   words: ['words'],
+  verbs: ['verbs'],
   randomWord: ['randomWord'],
   wordsCount: ['wordsCount'],
   wordsBySearch: (search: string) => ['searchedWords', { search }],
