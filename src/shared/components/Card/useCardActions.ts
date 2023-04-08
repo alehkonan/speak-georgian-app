@@ -1,7 +1,6 @@
 import { FC, useMemo, useState } from 'react';
 import { useFavorites } from 'src/api/favorites';
 import { useStatistics } from 'src/api/statistics';
-import { useUser } from 'src/api/user';
 import { CheckIcon, HeartIcon, TranslateIcon } from 'src/shared/icons';
 
 type CardAction = {

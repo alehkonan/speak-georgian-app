@@ -55,7 +55,7 @@ export const useSearchWords = (searchValue: string, userId?: string) => {
   const { data, isFetching, error } = useQuery({
     queryKey: apiKeys.wordsBySearch(searchValue),
     queryFn: ({ queryKey: [, { search }] }) =>
-      getWordsBySearchValue(search as string, userId),
+      getWordsBySearchValue(search, userId),
     enabled: Boolean(searchValue.trim()),
   });
 

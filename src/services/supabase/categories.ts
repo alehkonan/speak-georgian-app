@@ -15,7 +15,7 @@ const mapCategory = (category: any): Category => ({
   name: category.name,
   pictureUrl: category.picture_url,
   soundUrl: category.sound_url,
-  wordIds: category.words,
+  wordIds: category.words.map((word: { id: number } | null) => word?.id),
 });
 
 export const getCategories = async (userId?: string) => {

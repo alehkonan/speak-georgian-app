@@ -4,8 +4,8 @@ import { getCategories } from 'src/services/supabase';
 
 export const useCategories = (userId?: string) => {
   const { data, isLoading, error } = useQuery({
-    queryKey: apiKeys.categories,
-    queryFn: () => getCategories(userId),
+    queryKey: apiKeys.categories(userId),
+    queryFn: ({ queryKey: [, { userId }] }) => getCategories(userId),
   });
 
   return {
