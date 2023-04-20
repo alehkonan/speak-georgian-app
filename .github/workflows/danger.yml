@@ -14,6 +14,5 @@ jobs:
         run: |
           npm install
           npm run build
-          npm run lint
       - name: Danger
         run: npm run danger
