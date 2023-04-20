@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
-    "supabase:generate": "bash ./scripts/generate-types.sh"
+    "supabase:generate": "bash ./scripts/generate-types.sh",
+    "danger": "danger ci"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.8",
@@ -31,6 +32,7 @@
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.13",
+    "danger": "^11.2.6",
     "eslint": "^8.37.0",
     "eslint-config-standard-with-typescript": "^34.0.1",
     "eslint-plugin-import": "^2.27.5",
