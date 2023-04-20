@@ -1,0 +1,20 @@
+name: Danger
+on: [pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18.x
+      - name: install deps
+        run: |
+          npm install
+          npm run build
+      - name: Danger
+        run: npm run danger
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
