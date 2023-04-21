@@ -5,7 +5,7 @@
  */
 export const formatDate = (date: string | null) => {
   if (!date) return '';
-  const dateFormatter = Intl.DateTimeFormat('ru-RU', { dateStyle: 'medium' });
+  const dateFormatter = Intl.DateTimeFormat('en-GB', { dateStyle: 'medium' });
   return dateFormatter.format(new Date(date));
 };
 
