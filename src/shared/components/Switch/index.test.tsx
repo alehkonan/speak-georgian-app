@@ -1,26 +1,36 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { Switch } from '.';
 
 describe('<Switch />', () => {
-  it('should render component', () => {
-    const element = render(<Switch />);
+  it('should be unchecked without enabled prop', () => {
+    const { getByTestId } = render(<Switch />);
 
-    expect(element.asFragment()).toMatchInlineSnapshot(`
-      <DocumentFragment>
-        <button
-          aria-checked="false"
-          class="relative inline-flex h-7 w-14 items-center rounded-full bg-gray-200"
-          data-headlessui-state=""
-          id="headlessui-switch-:r0:"
-          role="switch"
-          tabindex="0"
-          type="button"
-        >
-          <span
-            class="inline-block h-5 w-5 transform rounded-full transition translate-x-1 bg-white"
-          />
-        </button>
-      </DocumentFragment>
-    `);
+    const switchButton = getByTestId('switch');
+
+    expect(switchButton).toHaveAttribute('aria-checked', 'false');
+    expect(switchButton).toHaveClass('bg-gray-200');
+  });
+
+  it('should be checked with enabled prop', () => {
+    const { getByTestId } = render(<Switch enabled />);
+
+    const switchButton = getByTestId('switch');
+
+    expect(switchButton).toHaveAttribute('aria-checked', 'true');
+    expect(switchButton).toHaveClass('bg-steel-blue');
+  });
+
+  it('should change state by click', () => {
+    const onSwitch = jest.fn();
+
+    const { getByTestId } = render(<Switch enabled onSwitch={onSwitch} />);
+
+    const switchButton = getByTestId('switch');
+
+    fireEvent.click(switchButton);
+
+    expect(onSwitch).toBeCalled();
+    expect(switchButton).toHaveAttribute('aria-checked', 'false');
+    expect(switchButton).toHaveClass('bg-gray-200');
   });
 });

@@ -17,6 +17,7 @@ export const Switch = ({ enabled, onSwitch, disabled }: Props) => {
 
   return (
     <HeadlessSwitch
+      data-testid="switch"
       checked={checked}
       onChange={(value: boolean) => {
         setChecked(value);
