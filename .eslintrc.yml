@@ -9,6 +9,8 @@ extends:
   - plugin:jest-dom/recommended
   - eslint-config-prettier
 settings:
+  react:
+    version: detect
   import/resolver:
     node:
       extensions: ['.js', '.ts', '.jsx', '.tsx']
