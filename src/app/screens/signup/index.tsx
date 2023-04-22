@@ -1,16 +1,14 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import * as zod from 'zod';
 import { routes } from 'src/app/routes';
 import { useSignUp } from 'src/features/signup';
 import {
   Button,
   ErrorMessage,
   Form,
-  IconButton,
   InputField,
   Screen,
 } from 'src/shared/components';
-import { ChevronLeftIcon } from 'src/shared/icons';
-import * as zod from 'zod';
 
 const schema = zod.object({
   firstName: zod.string(),
@@ -28,7 +26,6 @@ const schema = zod.object({
 type FormType = zod.infer<typeof schema>;
 
 export const SignupScreen = () => {
-  const navigate = useNavigate();
   const { onSignUp, isLoading, error } = useSignUp();
 
   const onSubmit = ({ email, firstName, lastName, password }: FormType) => {

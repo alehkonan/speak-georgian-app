@@ -1,6 +1,7 @@
+import type { To } from 'react-router-dom';
 import { ComponentProps, HTMLAttributes } from 'react';
 import classNames from 'classnames';
-import { Link, To } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 type Props = ComponentProps<'button'> & {
   primary?: boolean;

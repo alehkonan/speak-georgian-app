@@ -1,6 +1,7 @@
+import type { To } from 'react-router-dom';
 import { ComponentProps } from 'react';
 import { LoaderIcon } from 'src/shared/icons';
-import { Link, To } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 type Props = ComponentProps<'button'> & {

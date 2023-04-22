@@ -5,7 +5,7 @@ import { apiKeys } from './apiKeys';
 export const useGetUserSettings = (userId?: string) => {
   const { data, isLoading, error } = useQuery({
     queryKey: apiKeys.userSettings,
-    queryFn: () => getUserSettings(userId!),
+    queryFn: userId ? () => getUserSettings(userId) : undefined,
     enabled: Boolean(userId),
   });
 

@@ -16,7 +16,7 @@ export const useScrollPosition = (containerName: string) => {
         top: Number(scrollPosition),
       });
     }
-  }, []);
+  }, [containerName]);
 
   return {
     onScroll,

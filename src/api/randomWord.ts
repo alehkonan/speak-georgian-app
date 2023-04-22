@@ -36,7 +36,7 @@ export const useRandomWord = () => {
 
   useQuery({
     queryKey: apiKeys.randomWord,
-    queryFn: () => getWord(getRandomInteger(1, count!)),
+    queryFn: count ? () => getWord(getRandomInteger(1, count)) : undefined,
     enabled: Boolean(count) && !dailyWord,
     onSuccess: (word) => {
       if (word) {

@@ -34,6 +34,7 @@ export const DailyCard = ({
         <div className="grid grid-rows-2 p-2">
           <div>
             <button
+              type="button"
               className="inline-flex items-center gap-2 cursor-pointer"
               onClick={onPlaySound}
             >
@@ -43,7 +44,10 @@ export const DailyCard = ({
               {soundUrl && (
                 <div>
                   <SoundIcon className="w-5 h-5 text-raisin-black opacity-50" />
-                  <audio ref={audioRef} src={soundUrl}></audio>
+                  <audio ref={audioRef}>
+                    <source src={soundUrl} />
+                    <track kind="captions" />
+                  </audio>
                 </div>
               )}
             </button>

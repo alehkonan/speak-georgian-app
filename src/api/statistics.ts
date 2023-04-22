@@ -29,7 +29,7 @@ export const useStatistics = () => {
 export const useGetStatistics = (userId?: string) => {
   const { data, isLoading, error } = useQuery({
     queryKey: apiKeys.userStatistics,
-    queryFn: () => getUserStatistics(userId!),
+    queryFn: userId ? () => getUserStatistics(userId) : undefined,
     enabled: Boolean(userId),
   });
 

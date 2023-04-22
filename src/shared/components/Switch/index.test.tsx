@@ -1,3 +1,5 @@
+/* eslint-disable jest-dom/prefer-checked */
+// it's not a standard checkbox but button with aria attribute
 import { fireEvent, render } from '@testing-library/react';
 import { Switch } from '.';
 
@@ -29,7 +31,7 @@ describe('<Switch />', () => {
 
     fireEvent.click(switchButton);
 
-    expect(onSwitch).toBeCalled();
+    expect(onSwitch).toHaveBeenCalled();
     expect(switchButton).toHaveAttribute('aria-checked', 'false');
     expect(switchButton).toHaveClass('bg-gray-200');
   });
