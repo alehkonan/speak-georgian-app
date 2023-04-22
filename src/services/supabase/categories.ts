@@ -10,6 +10,7 @@ export type Category = {
   wordsLearned?: number;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapCategory = (category: any): Category => ({
   id: category.id,
   name: category.name,

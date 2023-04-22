@@ -3,6 +3,7 @@ import React from 'react';
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   text?: string;
+  className?: string;
 };
 
 export const Divider = ({ text, className, ...props }: Props) => {

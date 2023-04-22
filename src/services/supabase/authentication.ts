@@ -1,4 +1,4 @@
-import {
+import type {
   SignInWithPasswordCredentials,
   SignUpWithPasswordCredentials,
 } from '@supabase/supabase-js';

@@ -1,7 +1,7 @@
+import type { LoaderFunction } from 'react-router-dom';
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  LoaderFunction,
   redirect,
   Route,
   RouterProvider,

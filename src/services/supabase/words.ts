@@ -40,6 +40,7 @@ const onlyLearnedWordsSelector = (userId: string) =>
     .eq('statistics.user_id', userId)
     .order('name_en');
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapWord = (word: any): Word => ({
   id: word.id,
   en: word.name_en,

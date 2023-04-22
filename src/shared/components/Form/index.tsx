@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ComponentProps, PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { ZodSchema } from 'zod';
 
@@ -9,7 +9,7 @@ type Props<FormType> = {
   className?: string;
 };
 
-export const Form = <FormType extends {}>({
+export const Form = <FormType extends object>({
   schema,
   children,
   onSubmit,

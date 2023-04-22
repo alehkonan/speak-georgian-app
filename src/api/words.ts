@@ -69,7 +69,7 @@ export const useSearchWords = (searchValue: string, userId?: string) => {
 export const useFavoriteWords = (userId?: string) => {
   const { data, isLoading, error } = useQuery({
     queryKey: apiKeys.favoriteWords,
-    queryFn: () => getFavoriteWords(userId!),
+    queryFn: userId ? () => getFavoriteWords(userId) : undefined,
     enabled: Boolean(userId),
   });
 
