@@ -14,7 +14,6 @@ jobs:
           path: ~/.npm
           key: node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: List deps
-        if: steps.npm-cache.outputs.cache-hit = 'true'
         run: npm list
       - name: Install deps
         if: steps.npm-cache.outputs.cache-hit != 'true'
