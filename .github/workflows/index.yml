@@ -32,6 +32,21 @@ jobs:
       - name: Run tests
         run: npm run test
 
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Cache deps
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install deps
+        run: npm ci
+      - name: Build
+        run: npm run build
+
   danger-comments:
     runs-on: ubuntu-22.04
     steps:
@@ -48,8 +63,6 @@ jobs:
           key: node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install deps
         run: npm ci
-      - name: Build
-        run: npm run build
       - name: Add danger comments
         run: npm run danger
         env:
