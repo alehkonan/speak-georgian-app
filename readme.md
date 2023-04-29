@@ -49,7 +49,7 @@ Features that realized in the app:
 - screen with favorites words and phrases.
 - profile page with statistics and account managing.
 
-![app screenshot](https://github.com/alehkonan/speak-georgian-app/raw/main/documentation/images/welcome-screen.avif)
+![app screenshot](https://github.com/alehkonan/speak-georgian-app/raw/main/documentation/images/welcome-screen.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -93,13 +93,15 @@ This is the instruction for setting up this project locally.
 ## Roadmap
 
 - [x] Authentication with supabase
-- [ ] Authentication with OAuth
+- [x] Authentication with Google
 - [x] Fill categories
-- [ ] Fill words for categories
+- [x] Fill words for categories
+- [x] Implement favorites functionality
+- [x] Add Profile screen with statistics
+- [x] Add Game screen for learning words
 - [ ] Implement play sound for word
-- [ ] Implement favorites functionality
-- [ ] Add Profile screen with statistics
-- [ ] Add Game screen for learning words
+- [ ] Extend game results
+- [ ] Add a screen with phrases
 
 See the [open issues](https://github.com/alehkonan/speak-georgian-app/issues) for a full list of proposed features (and known issues).
 
@@ -117,7 +119,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Aleh Konan - [@createdCheese](https://twitter.com/createdCheese) - olegkonanff@gmail.com
+Aleh Konan - [@gismentovich](https://twitter.com/gismentovich) - olegkonanff@gmail.com
 
 Project Link: [https://github.com/alehkonan/speak-georgian-app](https://github.com/alehkonan/speak-georgian-app)
 

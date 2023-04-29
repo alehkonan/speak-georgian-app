@@ -1,4 +1,6 @@
-import { danger, message } from 'danger';
+import { danger, warn } from 'danger';
 
-const modifiedMD = danger.git.modified_files.join('- ');
-message(`Changed Files in this PR: \n - ${modifiedMD}`);
+const hasModifiedPackages = danger.git.fileMatch('package.json').modified;
+if (hasModifiedPackages) {
+  warn('NPM packages have been changed');
+}
