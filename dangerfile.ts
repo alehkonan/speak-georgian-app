@@ -21,9 +21,7 @@ if (hasAppChanges && !hasTestChanges) {
 }
 
 // look for dependencies
-schedule(async () => {
-  const unused = await depcheck('.', { ignoreMatches: ['src'] });
-
+const promise = depcheck('.', { ignoreMatches: ['src'] }).then((unused) => {
   markdown(`
     > unused dependencies: \n
     - ${unused.dependencies.join('\n')}
@@ -33,3 +31,5 @@ schedule(async () => {
     - ${Object.keys(unused.missing).join('\n')}
   `);
 });
+
+schedule(promise);
