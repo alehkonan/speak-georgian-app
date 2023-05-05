@@ -48,14 +48,6 @@ jobs:
       - name: Build
         run: npm run build
 
-  check-deps:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/github-script@v6
-        with:
-          script: console.log(github)
-
   danger-comments:
     runs-on: ubuntu-22.04
     steps:
