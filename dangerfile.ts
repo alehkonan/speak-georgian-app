@@ -21,6 +21,8 @@ if (hasAppChanges && !hasTestChanges) {
 }
 
 // look for dependencies
+console.log(depcheck);
+
 const promise = depcheck('.', { ignoreMatches: ['src'] }).then((unused) => {
   markdown(`
     > unused dependencies: \n
