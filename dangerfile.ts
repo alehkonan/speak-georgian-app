@@ -1,5 +1,4 @@
-import { danger, markdown, message, warn } from 'danger';
-import { execSync } from 'node:child_process';
+import { danger, warn } from 'danger';
 
 // look if there are changes in packages
 const packageChanged = danger.git.modified_files.includes('package.json');
@@ -19,8 +18,3 @@ const hasTestChanges = testChanges.length > 0;
 if (hasAppChanges && !hasTestChanges) {
   warn("There are library changes, but not tests. That's OK as long as you're refactoring existing code");
 }
-
-// look for dependencies
-
-const output = execSync('npm outdated').toString();
-markdown(String(output));
