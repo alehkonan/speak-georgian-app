@@ -1,5 +1,5 @@
-import { danger, markdown, schedule, warn } from 'danger';
-import depcheck from 'depcheck';
+import { danger, message, warn } from 'danger';
+import { execSync } from 'node:child_process';
 
 // look if there are changes in packages
 const packageChanged = danger.git.modified_files.includes('package.json');
@@ -21,17 +21,6 @@ if (hasAppChanges && !hasTestChanges) {
 }
 
 // look for dependencies
-console.log(depcheck);
 
-const promise = depcheck('.', { ignoreMatches: ['src'] }).then((unused) => {
-  markdown(`
-    > unused dependencies: \n
-    - ${unused.dependencies.join('\n')}
-    > unused dev dependencies: \n
-    - ${unused.devDependencies.join('\n')}
-    > missing dependencies: \n
-    - ${Object.keys(unused.missing).join('\n')}
-  `);
-});
-
-schedule(promise);
+const output = execSync('npm outdated').toString();
+message(output);
