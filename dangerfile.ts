@@ -1,4 +1,4 @@
-import { danger, message, warn } from 'danger';
+import { danger, markdown, message, warn } from 'danger';
 import { execSync } from 'node:child_process';
 
 // look if there are changes in packages
@@ -23,4 +23,4 @@ if (hasAppChanges && !hasTestChanges) {
 // look for dependencies
 
 const output = execSync('npm outdated').toString();
-message(output);
+markdown(String(output));
