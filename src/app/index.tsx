@@ -1,83 +1,60 @@
-import type { LoaderFunction } from 'react-router-dom';
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  redirect,
-  Route,
-  RouterProvider,
-} from 'react-router-dom';
-import { getSession } from 'src/services/supabase';
+import { Suspense, lazy } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './layout';
-import { params } from './params';
-import { routes } from './routes';
-import { CategoryScreen } from './screens/category';
-import { FavoritesScreen } from './screens/favorites';
-import { ForgotPasswordScreen } from './screens/forgot-password';
-import { GameScreen } from './screens/game';
-import { HomeScreen } from './screens/home';
-import { LoginScreen } from './screens/login';
-import { NotFoundScreen } from './screens/notFound';
-import { PhrasesScreen } from './screens/phrases';
-import { ProfileScreen } from './screens/profile';
-import { SignupScreen } from './screens/signup';
-import { UpdatePasswordScreen } from './screens/update-password';
-import { VerbsScreen } from './screens/verbs';
-import { WelcomeScreen } from './screens/welcome';
-import { WordsScreen } from './screens/words';
+import { params, routes } from './routes';
+import { useSession } from 'src/api/session';
 
-const publicRouteLoader: LoaderFunction = async () => {
-  const session = await getSession();
-  return session && redirect(routes.home);
-};
-
-const privateRouteLoader: LoaderFunction = async () => {
-  const session = await getSession();
-  return !session && redirect(routes.welcome);
-};
-
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route>
-      <Route path={routes.welcome} element={<WelcomeScreen />} />
-
-      <Route element={<Layout />}>
-        {/* common routes */}
-        <Route>
-          <Route index element={<HomeScreen />} />
-          <Route path={routes.verbs} element={<VerbsScreen />} />
-          <Route path={routes.phrases} element={<PhrasesScreen />} />
-          <Route path={routes.words} element={<WordsScreen />} />
-          <Route
-            path={`${routes.category}/:${params.id}`}
-            element={<CategoryScreen />}
-          />
-        </Route>
-        {/* public routes */}
-        <Route loader={publicRouteLoader}>
-          <Route path={routes.login} element={<LoginScreen />} />
-          <Route path={routes.signup} element={<SignupScreen />} />
-          <Route
-            path={routes.forgotPassword}
-            element={<ForgotPasswordScreen />}
-          />
-          <Route
-            path={routes.updatePassword}
-            element={<UpdatePasswordScreen />}
-          />
-        </Route>
-        {/* private routes */}
-        <Route loader={privateRouteLoader}>
-          <Route path={routes.game} element={<GameScreen />} />
-          <Route path={routes.favorites} element={<FavoritesScreen />} />
-          <Route path={routes.profile} element={<ProfileScreen />} />
-        </Route>
-      </Route>
-
-      <Route path="*" element={<NotFoundScreen />} />
-    </Route>
-  )
-);
+const HomeScreen = lazy(() => import('./screens/home'));
+const CategoryScreen = lazy(() => import('./screens/category'));
+const FavoritesScreen = lazy(() => import('./screens/favorites'));
+const ForgotPasswordScreen = lazy(() => import('./screens/forgot-password'));
+const GameScreen = lazy(() => import('./screens/game'));
+const LoginScreen = lazy(() => import('./screens/login'));
+const NotFoundScreen = lazy(() => import('./screens/notFound'));
+const PhrasesScreen = lazy(() => import('./screens/phrases'));
+const ProfileScreen = lazy(() => import('./screens/profile'));
+const SignupScreen = lazy(() => import('./screens/signup'));
+const UpdatePasswordScreen = lazy(() => import('./screens/update-password'));
+const VerbsScreen = lazy(() => import('./screens/verbs'));
+const WelcomeScreen = lazy(() => import('./screens/welcome'));
+const WordCategoriesScreen = lazy(() => import('./screens/categories'));
 
 export const App = () => {
-  return <RouterProvider router={router} />;
+  const { session } = useSession();
+
+  return (
+    <BrowserRouter>
+      <Suspense>
+        <Routes>
+          <Route path={routes.welcome} element={<WelcomeScreen />} />
+          <Route element={<Layout />}>
+            <Route index element={<HomeScreen />} />
+            <Route path={routes.verbs} element={<VerbsScreen />} />
+            <Route path={routes.phrases} element={<PhrasesScreen />} />
+            <Route path={routes.category}>
+              <Route index element={<WordCategoriesScreen />} />
+              <Route path={params.id} element={<CategoryScreen />} />
+            </Route>
+
+            {!session && (
+              <>
+                <Route path={routes.login} element={<LoginScreen />} />
+                <Route path={routes.signup} element={<SignupScreen />} />
+                <Route path={routes.forgotPassword} element={<ForgotPasswordScreen />} />
+                <Route path={routes.updatePassword} element={<UpdatePasswordScreen />} />
+              </>
+            )}
+            {session && (
+              <>
+                <Route path={routes.game} element={<GameScreen />} />
+                <Route path={routes.favorites} element={<FavoritesScreen />} />
+                <Route path={routes.profile} element={<ProfileScreen />} />
+              </>
+            )}
+            <Route path="*" element={<NotFoundScreen />} />
+          </Route>
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
+  );
 };

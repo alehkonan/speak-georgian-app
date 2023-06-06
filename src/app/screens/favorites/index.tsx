@@ -1,14 +1,8 @@
 import { useUser } from 'src/api/user';
 import { useFavoriteWords } from 'src/api/words';
-import {
-  Empty,
-  ErrorMessage,
-  Loader,
-  Screen,
-  WordCard,
-} from 'src/shared/components';
+import { Empty, ErrorMessage, Loader, Screen, WordCard } from 'src/shared/components';
 
-export const FavoritesScreen = () => {
+const FavoritesScreen = () => {
   const { user } = useUser();
   const { words, isLoading, error } = useFavoriteWords(user?.id);
 
@@ -18,13 +12,9 @@ export const FavoritesScreen = () => {
 
   return (
     <Screen name="Favorites" showName>
-      <div className="grid gap-2">
-        {words ? (
-          words.map((word) => <WordCard key={word.id} {...word} />)
-        ) : (
-          <Empty />
-        )}
-      </div>
+      <div className="grid gap-2">{words ? words.map((word) => <WordCard key={word.id} {...word} />) : <Empty />}</div>
     </Screen>
   );
 };
+
+export default FavoritesScreen;

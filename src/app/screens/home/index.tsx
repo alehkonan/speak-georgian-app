@@ -4,30 +4,19 @@ import { DailyWord } from 'src/app/widgets';
 import { Button, Screen } from 'src/shared/components';
 import { ArrowRightIcon } from 'src/shared/icons';
 
-export const HomeScreen = () => {
+const HomeScreen = () => {
   const { session } = useSession();
 
   return (
-    <Screen
-      name="Home screen"
-      showName={!session}
-      backTo={session ? undefined : routes.welcome}
-    >
-      {session && (
-        <h3 className="text-raisin-black text-2xl font-bold">
-          Hello, {session.user.user_metadata.name}!
-        </h3>
-      )}
+    <Screen name="Home screen" showName={!session} backTo={session ? undefined : routes.welcome}>
+      {session && <h3 className="text-raisin-black text-2xl font-bold">Hello, {session.user.user_metadata.name}!</h3>}
       {session && <DailyWord />}
       <div>
         <p>Here words are grouped by categories</p>
-        <p>
-          There are only simple words that you can learn, see how to pronounce
-          it and add to your favorites
-        </p>
+        <p>There are only simple words that you can learn, see how to pronounce it and add to your favorites</p>
       </div>
       <div className="flex justify-end">
-        <Button to={routes.words}>
+        <Button to={routes.category}>
           <span>Go to words</span>
           <ArrowRightIcon />
         </Button>
@@ -56,3 +45,5 @@ export const HomeScreen = () => {
     </Screen>
   );
 };
+
+export default HomeScreen;

@@ -1,12 +1,6 @@
 import { routes } from 'src/app/routes';
 import { useResetPassword } from 'src/features/resetPassword';
-import {
-  Button,
-  ErrorMessage,
-  Form,
-  InputField,
-  Screen,
-} from 'src/shared/components';
+import { Button, ErrorMessage, Form, InputField, Screen } from 'src/shared/components';
 import * as zod from 'zod';
 
 const schema = zod.object({
@@ -15,7 +9,7 @@ const schema = zod.object({
 
 type FormType = zod.infer<typeof schema>;
 
-export const ForgotPasswordScreen = () => {
+const ForgotPasswordScreen = () => {
   const { onUpdatePassword, isLoading, error } = useResetPassword();
 
   const onSubmit = (data: FormType) => {
@@ -24,11 +18,7 @@ export const ForgotPasswordScreen = () => {
 
   return (
     <Screen name="Reset password" showName backTo={routes.login}>
-      <Form<FormType>
-        className="grid gap-2"
-        schema={schema}
-        onSubmit={onSubmit}
-      >
+      <Form<FormType> className="grid gap-2" schema={schema} onSubmit={onSubmit}>
         <InputField<FormType> name="email" type="email" label="Email" />
         <Button primary disabled={isLoading}>
           Reset password
@@ -38,3 +28,5 @@ export const ForgotPasswordScreen = () => {
     </Screen>
   );
 };
+
+export default ForgotPasswordScreen;

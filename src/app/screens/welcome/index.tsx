@@ -2,7 +2,7 @@ import { routes } from 'src/app/routes';
 import { FieldWithMountains, Hill, Logo } from 'src/assets/svg';
 import { Button, Divider } from 'src/shared/components';
 
-export const WelcomeScreen = () => {
+const WelcomeScreen = () => {
   return (
     <div className="h-screen flex flex-col justify-end">
       <div className="fixed w-full h-full -z-10 grid place-items-center">
@@ -29,3 +29,5 @@ export const WelcomeScreen = () => {
     </div>
   );
 };
+
+export default WelcomeScreen;

@@ -4,7 +4,7 @@ import { UserInfo } from './UserInfo';
 import { UserSettings } from './UserSettings';
 import { UserStatistics } from './UserStatistics';
 
-export const ProfileScreen = () => {
+const ProfileScreen = () => {
   return (
     <Screen name="Profile">
       <UserInfo />
@@ -17,3 +17,5 @@ export const ProfileScreen = () => {
     </Screen>
   );
 };
+
+export default ProfileScreen;

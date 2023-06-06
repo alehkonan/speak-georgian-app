@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { routes } from 'src/app/routes';
 
-export const NotFoundScreen = () => {
+const NotFoundScreen = () => {
   return (
     <div className="h-screen grid place-items-center">
       <div className="border rounded p-10 text-center flex flex-col gap-2">
@@ -14,3 +14,5 @@ export const NotFoundScreen = () => {
     </div>
   );
 };
+
+export default NotFoundScreen;

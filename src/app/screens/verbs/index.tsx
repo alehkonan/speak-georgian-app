@@ -3,7 +3,7 @@ import { routes } from 'src/app/routes';
 import { Screen } from 'src/shared/components';
 import { VerbCard } from './VerbCard';
 
-export const VerbsScreen = () => {
+const VerbsScreen = () => {
   const { verbs, isLoading } = useVerbs();
 
   return (
@@ -16,3 +16,5 @@ export const VerbsScreen = () => {
     </Screen>
   );
 };
+
+export default VerbsScreen;
