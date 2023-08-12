@@ -3,7 +3,7 @@ export type Json =
   | number
   | boolean
   | null
-  | { [key: string]: Json }
+  | { [key: string]: Json | undefined }
   | Json[]
 
 export interface Database {
@@ -28,6 +28,7 @@ export interface Database {
           name?: string
           picture_url?: string | null
         }
+        Relationships: []
       }
       favorites: {
         Row: {
@@ -51,6 +52,54 @@ export interface Database {
           user_id?: string
           word_id?: number
         }
+        Relationships: [
+          {
+            foreignKeyName: "favorites_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "favorites_word_id_fkey"
+            columns: ["word_id"]
+            referencedRelation: "words"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      phrases: {
+        Row: {
+          category_id: number | null
+          created_at: string
+          en: string
+          id: number
+          ka: string
+          transcription: string | null
+        }
+        Insert: {
+          category_id?: number | null
+          created_at?: string
+          en?: string
+          id?: number
+          ka?: string
+          transcription?: string | null
+        }
+        Update: {
+          category_id?: number | null
+          created_at?: string
+          en?: string
+          id?: number
+          ka?: string
+          transcription?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "phrases_category_id_fkey"
+            columns: ["category_id"]
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       statistics: {
         Row: {
@@ -89,6 +138,20 @@ export interface Database {
           word_id?: number
           wrong_answers?: number
         }
+        Relationships: [
+          {
+            foreignKeyName: "statistics_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "statistics_word_id_fkey"
+            columns: ["word_id"]
+            referencedRelation: "words"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       "user-settings": {
         Row: {
@@ -118,6 +181,14 @@ export interface Database {
           show_translation?: boolean
           user_id?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: "user-settings_user_id_fkey"
+            columns: ["user_id"]
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       verbs: {
         Row: {
@@ -126,6 +197,7 @@ export interface Database {
           first_person_in_past_word_id: number | null
           first_person_in_present_word_id: number | null
           id: number
+          original: string
           second_person_in_future_word_id: number | null
           second_person_in_past_word_id: number | null
           second_person_in_present_word_id: number | null
@@ -139,6 +211,7 @@ export interface Database {
           first_person_in_past_word_id?: number | null
           first_person_in_present_word_id?: number | null
           id?: number
+          original?: string
           second_person_in_future_word_id?: number | null
           second_person_in_past_word_id?: number | null
           second_person_in_present_word_id?: number | null
@@ -152,6 +225,7 @@ export interface Database {
           first_person_in_past_word_id?: number | null
           first_person_in_present_word_id?: number | null
           id?: number
+          original?: string
           second_person_in_future_word_id?: number | null
           second_person_in_past_word_id?: number | null
           second_person_in_present_word_id?: number | null
@@ -159,6 +233,62 @@ export interface Database {
           third_person_in_past_word_id?: number | null
           third_person_in_present_word_id?: number | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "verbs_first_person_in_future_word_id_fkey"
+            columns: ["first_person_in_future_word_id"]
+            referencedRelation: "words"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "verbs_first_person_in_past_word_id_fkey"
+            columns: ["first_person_in_past_word_id"]
+            referencedRelation: "words"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "verbs_first_person_in_present_word_id_fkey"
+            columns: ["first_person_in_present_word_id"]
+            referencedRelation: "words"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "verbs_second_person_in_future_word_id_fkey"
+            columns: ["second_person_in_future_word_id"]
+            referencedRelation: "words"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "verbs_second_person_in_past_word_id_fkey"
+            columns: ["second_person_in_past_word_id"]
+            referencedRelation: "words"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "verbs_second_person_in_present_word_id_fkey"
+            columns: ["second_person_in_present_word_id"]
+            referencedRelation: "words"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "verbs_third_person_in_future_word_id_fkey"
+            columns: ["third_person_in_future_word_id"]
+            referencedRelation: "words"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "verbs_third_person_in_past_word_id_fkey"
+            columns: ["third_person_in_past_word_id"]
+            referencedRelation: "words"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "verbs_third_person_in_present_word_id_fkey"
+            columns: ["third_person_in_present_word_id"]
+            referencedRelation: "words"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       words: {
         Row: {
@@ -191,6 +321,14 @@ export interface Database {
           sound_url?: string | null
           transcription?: string | null
         }
+        Relationships: [
+          {
+            foreignKeyName: "words_category_id_fkey"
+            columns: ["category_id"]
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          }
+        ]
       }
     }
     Views: {
