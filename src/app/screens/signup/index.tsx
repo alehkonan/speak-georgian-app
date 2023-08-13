@@ -2,13 +2,7 @@ import { Link } from 'react-router-dom';
 import * as zod from 'zod';
 import { routes } from 'src/app/routes';
 import { useSignUp } from 'src/features/signup';
-import {
-  Button,
-  ErrorMessage,
-  Form,
-  InputField,
-  Screen,
-} from 'src/shared/components';
+import { Button, ErrorMessage, Form, InputField, Screen } from 'src/shared/components';
 
 const schema = zod.object({
   firstName: zod.string(),
@@ -25,7 +19,7 @@ const schema = zod.object({
 
 type FormType = zod.infer<typeof schema>;
 
-export const SignupScreen = () => {
+const SignupScreen = () => {
   const { onSignUp, isLoading, error } = useSignUp();
 
   const onSubmit = ({ email, firstName, lastName, password }: FormType) => {
@@ -43,19 +37,11 @@ export const SignupScreen = () => {
 
   return (
     <Screen name="Create your account" showName backTo={routes.welcome}>
-      <Form<FormType>
-        className="grid gap-2"
-        schema={schema}
-        onSubmit={onSubmit}
-      >
+      <Form<FormType> className="grid gap-2" schema={schema} onSubmit={onSubmit}>
         <InputField<FormType> name="firstName" type="text" label="First name" />
         <InputField<FormType> name="lastName" type="text" label="Last name" />
         <InputField<FormType> name="email" type="email" label="Email" />
-        <InputField<FormType>
-          name="password"
-          type="password"
-          label="Password"
-        />
+        <InputField<FormType> name="password" type="password" label="Password" />
         <p className="text-center">
           Already have an account?{' '}
           <Link className="text-steel-blue" to={routes.login}>
@@ -71,3 +57,5 @@ export const SignupScreen = () => {
     </Screen>
   );
 };
+
+export default SignupScreen;

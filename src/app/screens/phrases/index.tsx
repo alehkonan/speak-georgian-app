@@ -1,7 +1,7 @@
 import { routes } from 'src/app/routes';
 import { Screen } from 'src/shared/components';
 
-export const PhrasesScreen = () => {
+const PhrasesScreen = () => {
   return (
     <Screen name="Phrases" showName backTo={routes.home}>
       <div className="flex flex-col gap-2 overflow-auto">
@@ -10,3 +10,5 @@ export const PhrasesScreen = () => {
     </Screen>
   );
 };
+
+export default PhrasesScreen;

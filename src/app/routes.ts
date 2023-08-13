@@ -7,9 +7,14 @@ export const routes = {
   updatePassword: '/update-password',
   verbs: '/verbs',
   phrases: '/phrases',
-  words: '/words',
   category: '/category',
   game: '/game',
   favorites: '/favorites',
   profile: '/profile',
 } as const;
+
+export const params = {
+  id: ':id',
+} as const;
+
+export type RouteParam = keyof typeof params;

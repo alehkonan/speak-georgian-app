@@ -4,29 +4,18 @@ import { Button, ErrorMessage } from 'src/shared/components';
 import { Game } from './Game';
 import { useGame } from './useGame';
 
-export const GameScreen = () => {
+const GameScreen = () => {
   const { user } = useUser();
   const { words, isLoading, error } = useNotLearnedWords(user?.id);
 
-  const {
-    gameWords,
-    results,
-    closeResults,
-    startGame,
-    finishGame,
-    checkIfGameIsFinished,
-  } = useGame(words);
+  const { gameWords, results, closeResults, startGame, finishGame, checkIfGameIsFinished } = useGame(words);
 
   if (error) return <ErrorMessage message={error.message} />;
 
   return (
     <div className="h-full grid grid-rows-[1fr_auto] gap-1">
       {gameWords ? (
-        <Game
-          gameWords={gameWords}
-          onLastWordCheck={checkIfGameIsFinished}
-          onFinishGame={finishGame}
-        />
+        <Game gameWords={gameWords} onLastWordCheck={checkIfGameIsFinished} onFinishGame={finishGame} />
       ) : (
         <>
           <div className="grid place-items-center">
@@ -35,14 +24,8 @@ export const GameScreen = () => {
                 <div className="grid gap-3">
                   <p className="font-semibold">Congratulation! Great result!</p>
                   <div>
-                    <p>
-                      Correct answers:{' '}
-                      {results.filter((result) => result.isCorrect).length}
-                    </p>
-                    <p>
-                      Wrong answers:{' '}
-                      {results.filter((result) => !result.isCorrect).length}
-                    </p>
+                    <p>Correct answers: {results.filter((result) => result.isCorrect).length}</p>
+                    <p>Wrong answers: {results.filter((result) => !result.isCorrect).length}</p>
                   </div>
                   <Button onClick={closeResults}>close results</Button>
                 </div>
@@ -50,8 +33,7 @@ export const GameScreen = () => {
                 <>
                   <p>This is the game mode.</p>
                   <p>
-                    After the game is started you can see all available words
-                    one by one and try to guess their meaning.
+                    After the game is started you can see all available words one by one and try to guess their meaning.
                   </p>
                   <p>To start the game tap the button bellow</p>
                   <p>Good luck!</p>
@@ -67,3 +49,5 @@ export const GameScreen = () => {
     </div>
   );
 };
+
+export default GameScreen;

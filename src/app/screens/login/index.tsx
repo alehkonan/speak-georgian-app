@@ -1,14 +1,7 @@
 import { Link } from 'react-router-dom';
 import { routes } from 'src/app/routes';
 import { useSignIn } from 'src/features/signIn';
-import {
-  Button,
-  Divider,
-  ErrorMessage,
-  Form,
-  InputField,
-  Screen,
-} from 'src/shared/components';
+import { Button, Divider, ErrorMessage, Form, InputField, Screen } from 'src/shared/components';
 import * as zod from 'zod';
 
 const schema = zod.object({
@@ -18,9 +11,8 @@ const schema = zod.object({
 
 type FormType = zod.infer<typeof schema>;
 
-export const LoginScreen = () => {
-  const { onSignInWithPassword, onSignInWithGoogle, isLoading, error } =
-    useSignIn();
+const LoginScreen = () => {
+  const { onSignInWithPassword, onSignInWithGoogle, isLoading, error } = useSignIn();
 
   const onSubmit = (data: FormType) => {
     onSignInWithPassword(data);
@@ -28,21 +20,10 @@ export const LoginScreen = () => {
 
   return (
     <Screen name="Login" showName backTo={routes.welcome}>
-      <Form<FormType>
-        className="grid gap-2"
-        schema={schema}
-        onSubmit={onSubmit}
-      >
+      <Form<FormType> className="grid gap-2" schema={schema} onSubmit={onSubmit}>
         <InputField<FormType> name="email" type="email" label="Email" />
-        <InputField<FormType>
-          name="password"
-          type="password"
-          label="Password"
-        />
-        <Link
-          className="justify-self-end text-ripe-mango"
-          to={routes.forgotPassword}
-        >
+        <InputField<FormType> name="password" type="password" label="Password" />
+        <Link className="justify-self-end text-ripe-mango" to={routes.forgotPassword}>
           Forgot password
         </Link>
         <Button primary disabled={isLoading}>
@@ -58,3 +39,5 @@ export const LoginScreen = () => {
     </Screen>
   );
 };
+
+export default LoginScreen;

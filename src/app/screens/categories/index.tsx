@@ -6,25 +6,13 @@ import { CloseIcon } from 'src/shared/icons';
 import { SearchResults } from './SearchResults';
 import { useSearch } from './useSearch';
 
-export const WordsScreen = () => {
+const WordCategoriesScreen = () => {
   const { user } = useUser();
   const { categories, isLoading } = useCategories(user?.id);
-  const {
-    searchValue,
-    isSearching,
-    onSearch,
-    clearSearch,
-    results,
-    hasSearch,
-  } = useSearch();
+  const { searchValue, isSearching, onSearch, clearSearch, results, hasSearch } = useSearch();
 
   return (
-    <Screen
-      name="Categories"
-      showName
-      backTo={routes.home}
-      isLoading={isLoading}
-    >
+    <Screen name="Categories" showName backTo={routes.home} isLoading={isLoading}>
       <div className="relative">
         <Input
           className="sticky top-0 w-full"
@@ -57,3 +45,5 @@ export const WordsScreen = () => {
     </Screen>
   );
 };
+
+export default WordCategoriesScreen;

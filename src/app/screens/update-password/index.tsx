@@ -16,7 +16,7 @@ const schema = zod.object({
 
 type FormType = zod.infer<typeof schema>;
 
-export const UpdatePasswordScreen = () => {
+const UpdatePasswordScreen = () => {
   const navigate = useNavigate();
   const { onUpdatePassword, isLoading, error } = useUpdatePassword();
 
@@ -27,16 +27,8 @@ export const UpdatePasswordScreen = () => {
   return (
     <div className="p-4 grid gap-4">
       <h2 className="text-xl font-bold">Reset password</h2>
-      <Form<FormType>
-        className="grid gap-2"
-        schema={schema}
-        onSubmit={onSubmit}
-      >
-        <InputField<FormType>
-          name="password"
-          type="password"
-          label="New password"
-        />
+      <Form<FormType> className="grid gap-2" schema={schema} onSubmit={onSubmit}>
+        <InputField<FormType> name="password" type="password" label="New password" />
         <Button primary disabled={isLoading}>
           Update password
         </Button>
@@ -46,3 +38,5 @@ export const UpdatePasswordScreen = () => {
     </div>
   );
 };
+
+export default UpdatePasswordScreen;
