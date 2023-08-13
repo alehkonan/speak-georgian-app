@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export $(grep -v '^#' .env.local | xargs)
+export $(cat .env.local | xargs)
 
 yes $SUPABASE_ACCESS_TOKEN | npx supabase login
 
