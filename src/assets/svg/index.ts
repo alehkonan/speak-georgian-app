@@ -1,4 +1,5 @@
-export { ReactComponent as FieldWithMountains } from './field-with-mountains.svg';
-export { ReactComponent as Hill } from './hill.svg';
-export { ReactComponent as Logo } from './logo.svg';
-export { ReactComponent as Wave } from './wave.svg';
+/* eslint-disable import/no-unresolved */
+export { default as FieldWithMountains } from './field-with-mountains.svg?react';
+export { default as Hill } from './hill.svg?react';
+export { default as Logo } from './logo.svg?react';
+export { default as Wave } from './wave.svg?react';

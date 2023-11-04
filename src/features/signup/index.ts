@@ -4,14 +4,14 @@ import { signUp } from 'src/services/supabase';
 
 export const useSignUp = () => {
   const queryClient = useQueryClient();
-  const { mutate, isLoading, error } = useMutation({
+  const { mutate, isPending, error } = useMutation({
     mutationFn: signUp,
-    onSuccess: () => queryClient.invalidateQueries(apiKeys.user),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: apiKeys.user }),
   });
 
   return {
     onSignUp: mutate,
-    isLoading,
+    isLoading: isPending,
     error: error instanceof Error ? error : null,
   };
 };

@@ -7,7 +7,7 @@ export const useLogout = () => {
   const navigate = useNavigate();
   const {
     mutate: onLogout,
-    isLoading,
+    isPending,
     error,
   } = useMutation({
     mutationFn: signOut,
@@ -16,7 +16,7 @@ export const useLogout = () => {
 
   return {
     onLogout,
-    isLoading,
+    isLoading: isPending,
     error: error instanceof Error ? error : null,
   };
 };

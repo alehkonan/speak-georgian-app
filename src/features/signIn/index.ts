@@ -8,7 +8,7 @@ export const useSignIn = () => {
 
   const {
     mutate: onSignInWithPassword,
-    isLoading: isSignInWithPasswordLoading,
+    isPending: isSignInWithPasswordLoading,
     error: signInWithPasswordError,
   } = useMutation({
     mutationFn: signInWithPassword,
@@ -17,7 +17,7 @@ export const useSignIn = () => {
 
   const {
     mutate: onSignInWithGoogle,
-    isLoading: isSignInWithGoogleLoading,
+    isPending: isSignInWithGoogleLoading,
     error: signInWithGoogleError,
   } = useMutation({
     mutationFn: signInWithGoogle,

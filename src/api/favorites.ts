@@ -10,15 +10,15 @@ type Payload = {
 export const useFavorites = () => {
   const queryClient = useQueryClient();
 
-  const { mutate, isLoading, error } = useMutation({
+  const { mutate, isPending, error } = useMutation({
     mutationFn: ({ userId, wordId }: Payload) =>
       setWordAsFavorite(userId, wordId),
-    onSuccess: () => queryClient.invalidateQueries(apiKeys.words),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: apiKeys.words }),
   });
 
   return {
     switchFavorite: mutate,
-    isLoading,
+    isLoading: isPending,
     error: error instanceof Error ? error : null,
   };
 };

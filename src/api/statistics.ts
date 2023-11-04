@@ -10,18 +10,18 @@ type Payload = {
 export const useStatistics = () => {
   const queryClient = useQueryClient();
 
-  const { mutate, isLoading, error } = useMutation({
+  const { mutate, isPending, error } = useMutation({
     mutationFn: ({ userId, wordId }: Payload) =>
       setWordAsLearned(userId, wordId),
     onSuccess: () => {
-      queryClient.invalidateQueries(apiKeys.words);
-      queryClient.invalidateQueries(apiKeys.userStatistics);
+      queryClient.invalidateQueries({ queryKey: apiKeys.words });
+      queryClient.invalidateQueries({ queryKey: apiKeys.userStatistics });
     },
   });
 
   return {
     markAsLearned: mutate,
-    isLoading,
+    isLoading: isPending,
     error: error instanceof Error ? error : null,
   };
 };
