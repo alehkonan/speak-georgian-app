@@ -1,6 +1,5 @@
 // TODO make this login on the server
 import { useQuery } from '@tanstack/react-query';
-import format from 'date-fns/format';
 import isSameDay from 'date-fns/isSameDay';
 import { useState } from 'react';
 import { getWord, Word } from 'src/services/supabase';
@@ -30,7 +29,7 @@ const getDailyWord = () => {
 };
 
 export const useRandomWord = () => {
-  const [dailyWord, setDailyWord] = useState(getDailyWord);
+  const [dailyWord] = useState(getDailyWord);
 
   const { count } = useWordsCount();
 
@@ -38,18 +37,6 @@ export const useRandomWord = () => {
     queryKey: apiKeys.randomWord,
     queryFn: count ? () => getWord(getRandomInteger(1, count)) : undefined,
     enabled: Boolean(count) && !dailyWord,
-    onSuccess: (word) => {
-      if (word) {
-        localStorage.setItem(
-          DAILY_WORD,
-          JSON.stringify({
-            ...word,
-            fetchedAt: format(new Date(), 'yyyy-MM-dd'),
-          })
-        );
-        setDailyWord(word);
-      }
-    },
   });
 
   return dailyWord;

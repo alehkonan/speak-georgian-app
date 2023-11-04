@@ -15,7 +15,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["vite-plugin-pwa/client", "jest"],
+    "types": ["jest"],
     "baseUrl": "."
   },
   "include": ["src", "./jestDomSetup.ts"],

@@ -19,14 +19,15 @@ export const useGetUserSettings = (userId?: string) => {
 export const useUpdateUserSettings = () => {
   const queryClient = useQueryClient();
 
-  const { mutate, isLoading, error } = useMutation({
+  const { mutate, isPending, error } = useMutation({
     mutationFn: updateUserSettings,
-    onSuccess: () => queryClient.invalidateQueries(apiKeys.userSettings),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: apiKeys.userSettings }),
   });
 
   return {
     updateSettings: mutate,
-    isUpdatingSettings: isLoading,
+    isUpdatingSettings: isPending,
     error: error instanceof Error ? error : null,
   };
 };
