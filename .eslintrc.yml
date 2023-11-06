@@ -8,6 +8,8 @@ extends:
   - plugin:jest/recommended
   - plugin:jest-dom/recommended
   - eslint-config-prettier
+plugins:
+  - simple-import-sort
 settings:
   react:
     version: detect
@@ -17,3 +19,5 @@ settings:
       moduleDirectory: ['node_modules', '.']
 rules:
   react/react-in-jsx-scope: off
+  simple-import-sort/imports: warn
+  simple-import-sort/exports: warn
