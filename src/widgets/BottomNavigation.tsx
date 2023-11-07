@@ -5,7 +5,7 @@ import { routes } from 'src/routes';
 
 const links = [
   {
-    to: routes.home,
+    to: routes.root,
     title: 'Home',
     Icon: HomeIcon,
   },

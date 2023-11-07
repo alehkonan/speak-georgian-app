@@ -1,7 +1,5 @@
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
-import { useUser } from 'src/api/user';
-import { useGetUserSettings } from 'src/api/userSettings';
+import { useState } from 'react';
 
 export const GameCardPicture = ({
   pictureUrl,
@@ -10,18 +8,10 @@ export const GameCardPicture = ({
   pictureUrl: string;
   nameEn: string;
 }) => {
-  const { user } = useUser();
-  const { settings } = useGetUserSettings(user?.id);
   const [isShown, setShown] = useState(false);
 
-  useEffect(() => {
-    if (settings) {
-      setShown(settings.shouldShowPictureInGame);
-    }
-  }, [settings]);
-
   return (
-    <div className="w-1/2 aspect-square relative">
+    <div className="relative aspect-square w-1/2">
       <img
         className={classNames([
           'w-full h-full object-cover object-top absolute',
@@ -32,10 +22,10 @@ export const GameCardPicture = ({
       />
       {!isShown && (
         <button
-          className="w-full h-full absolute grid place-items-center"
+          className="absolute grid h-full w-full place-items-center"
           onClick={() => setShown(true)}
         >
-          <span className="text-raisin-black opacity-50 text-sm font-semibold">
+          <span className="text-sm font-semibold text-raisin-black opacity-50">
             Tap to see the picture
           </span>
         </button>

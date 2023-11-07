@@ -1,5 +1,5 @@
 export const routes = {
-  home: '/',
+  root: '/',
   welcome: '/welcome',
   login: '/login',
   signup: '/signup',

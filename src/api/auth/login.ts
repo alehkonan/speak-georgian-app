@@ -1,4 +1,5 @@
 import { type SignInWithPasswordCredentials } from '@supabase/supabase-js';
+
 import { supabaseApi } from '../api';
 
 export const login = async (credentials: SignInWithPasswordCredentials) => {

@@ -9,11 +9,11 @@ type Props = React.HTMLAttributes<HTMLDivElement> & {
 export const Divider = ({ text, className, ...props }: Props) => {
   return (
     <div className={classNames(['flex items-center', className])} {...props}>
-      <div className="flex-1 h-[1px] rounded bg-raisin-black opacity-30"></div>
+      <div className="h-[1px] flex-1 rounded bg-raisin-black opacity-30"></div>
       {text && (
         <p className="mx-1 lowercase text-raisin-black opacity-50">{text}</p>
       )}
-      <div className="flex-1 h-[1px] rounded bg-raisin-black opacity-30"></div>
+      <div className="h-[1px] flex-1 rounded bg-raisin-black opacity-30"></div>
     </div>
   );
 };

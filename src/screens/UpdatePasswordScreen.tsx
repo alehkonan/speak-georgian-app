@@ -25,7 +25,7 @@ export const UpdatePasswordScreen = () => {
   };
 
   return (
-    <div className="p-4 grid gap-4">
+    <div className="grid gap-4 p-4">
       <h2 className="text-xl font-bold">Reset password</h2>
       <Form<FormType>
         className="grid gap-2"
@@ -38,7 +38,7 @@ export const UpdatePasswordScreen = () => {
           label="New password"
         />
         <Button primary>Update password</Button>
-        <Button onClick={() => navigate(routes.home)}>Go to main screen</Button>
+        <Button onClick={() => navigate(routes.root)}>Go to main screen</Button>
       </Form>
     </div>
   );

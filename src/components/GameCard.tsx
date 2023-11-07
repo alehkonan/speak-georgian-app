@@ -12,7 +12,7 @@ type Props = {
 };
 
 const NavButton = ({ children }: PropsWithChildren) => {
-  return <button className="flex-1 h-full border opacity-0">{children}</button>;
+  return <button className="h-full flex-1 border opacity-0">{children}</button>;
 };
 
 export const GameCard = ({
@@ -38,9 +38,9 @@ export const GameCard = ({
   };
 
   return (
-    <div className="bg-white rounded-lg grid p-3 gap-2 w-full md:w-4/5 snap-always snap-center">
+    <div className="grid w-full snap-center snap-always gap-2 rounded-lg bg-white p-3 md:w-4/5">
       {word.picture_url && (
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <NavButton>Previous</NavButton>
           <GameCardPicture
             nameEn={word.name_en}
@@ -49,8 +49,8 @@ export const GameCard = ({
           <NavButton>Next</NavButton>
         </div>
       )}
-      <p className="flex justify-center items-center gap-x-2 flex-wrap">
-        <span className="text-raisin-black text-xl font-bold">
+      <p className="flex flex-wrap items-center justify-center gap-x-2">
+        <span className="text-xl font-bold text-raisin-black">
           {word.name_ka}
         </span>
         {word.transcription && (

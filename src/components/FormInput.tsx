@@ -26,7 +26,7 @@ export const FormInput = <FormType extends FieldValues>({
 
   return (
     <div className="grid">
-      <label htmlFor={id} className="text-sm font-semibold mb-1">
+      <label htmlFor={id} className="mb-1 text-sm font-semibold">
         {label}
       </label>
       <Input id={id} className="w-full" type={type} {...field} />

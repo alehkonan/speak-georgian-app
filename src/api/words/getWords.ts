@@ -1,4 +1,5 @@
 import { array } from 'zod';
+
 import { supabaseApi } from '../api';
 import { WordSchema } from '../schemas/word';
 

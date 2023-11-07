@@ -28,22 +28,22 @@ export const DailyCard = ({
   };
 
   return (
-    <div className="self-center flex bg-white rounded-2xl shadow-md w-card justify-self-center">
-      <div className="flex-1 grid p-2">
+    <div className="flex self-center justify-self-center rounded-2xl bg-white shadow-md">
+      <div className="grid flex-1 p-2">
         <span className="text-sm text-raisin-black opacity-50">Daily word</span>
         <div className="grid grid-rows-2 p-2">
           <div>
             <button
               type="button"
-              className="inline-flex items-center gap-2 cursor-pointer"
+              className="inline-flex cursor-pointer items-center gap-2"
               onClick={onPlaySound}
             >
-              <span className="text-raisin-black text-2xl font-bold">
+              <span className="text-2xl font-bold text-raisin-black">
                 {wordKa}
               </span>
               {soundUrl && (
                 <div>
-                  <SoundIcon className="w-5 h-5 text-raisin-black opacity-50" />
+                  <SoundIcon className="h-5 w-5 text-raisin-black opacity-50" />
                   <audio ref={audioRef}>
                     <source src={soundUrl} />
                     <track kind="captions" />
@@ -58,21 +58,21 @@ export const DailyCard = ({
         </div>
         <div className="flex gap-3">
           <button
-            className="text-raisin-black opacity-50 font-semibold text-sm"
+            className="text-sm font-semibold text-raisin-black opacity-50"
             onClick={onClose}
           >
             Already know
           </button>
-          <button className="text-raisin-black opacity-50 font-semibold text-sm">
+          <button className="text-sm font-semibold text-raisin-black opacity-50">
             Add to favorites
           </button>
         </div>
       </div>
 
       {pictureUrl && (
-        <div className="flex-shrink-0 basis-1/3">
+        <div className="shrink-0 basis-1/3">
           <img
-            className="aspect-square w-full object-cover h-full rounded-r-xl"
+            className="aspect-square h-full w-full rounded-r-xl object-cover"
             src={pictureUrl}
             alt={wordKa}
           />

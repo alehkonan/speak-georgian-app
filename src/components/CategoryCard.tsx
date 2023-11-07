@@ -1,4 +1,3 @@
-import { CircularProgressbar } from 'react-circular-progressbar';
 import { type To } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -6,42 +5,17 @@ type Props = {
   title: string;
   pictureUrl?: string;
   navigateTo: To;
-  wordsCount?: number;
-  learnedWordsCount?: number;
 };
 
-export const CategoryCard = ({
-  title,
-  pictureUrl,
-  wordsCount,
-  learnedWordsCount,
-  navigateTo,
-}: Props) => {
-  const progressPercent =
-    Math.round(((learnedWordsCount ?? 0) / (wordsCount ?? 0)) * 100) || 0;
-
+export const CategoryCard = ({ title, pictureUrl, navigateTo }: Props) => {
   return (
-    <Link className="bg-white p-2 grid gap-2 rounded-lg shadow" to={navigateTo}>
-      <div className="flex justify-between items-center">
-        <span className="text-raisin-black text-center font-bold">{title}</span>
-        {!!learnedWordsCount && (
-          <CircularProgressbar
-            value={progressPercent}
-            text={`${progressPercent} %`}
-            strokeWidth={14}
-            className=""
-            styles={{
-              root: { width: '18px' },
-              path: { stroke: '#ffb629' },
-              trail: { stroke: '#fff7e8' },
-              text: { fill: '#1f2024' },
-            }}
-          />
-        )}
+    <Link className="grid gap-2 rounded-lg bg-white p-2 shadow" to={navigateTo}>
+      <div className="flex items-center justify-between">
+        <span className="text-center font-bold text-raisin-black">{title}</span>
       </div>
       <img
-        className="w-3/4 aspect-square mx-auto"
-        src={pictureUrl || undefined}
+        className="mx-auto aspect-square w-3/4"
+        src={pictureUrl}
         alt={title}
       />
     </Link>

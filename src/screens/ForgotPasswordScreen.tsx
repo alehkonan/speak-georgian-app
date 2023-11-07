@@ -17,7 +17,7 @@ export const ForgotPasswordScreen = () => {
   };
 
   return (
-    <Screen title="Reset password" backTo={routes.login}>
+    <Screen title="Reset password" prevRoute={routes.login}>
       <Form<FormType>
         className="grid gap-2"
         schema={schema}

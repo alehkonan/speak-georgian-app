@@ -21,9 +21,6 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      width: {
-        card: 'min(100%, 30rem)',
-      },
       textColor: {
         'ripe-mango': colors.ripeMango,
         'orange-yellow': colors.orangeYellow,
@@ -37,17 +34,6 @@ module.exports = {
         'anti-flash-white': colors.antiFlashWhite,
         theme: colors.theme,
       },
-      gradientColorStops: {
-        'ripe-mango': colors.ripeMango,
-        'orange-yellow': colors.orangeYellow,
-        caramel: colors.caramel,
-        'coral-red': colors.coralRed,
-        'deep-carmine-pink': colors.deepCarminePink,
-        'picton-blue': colors.pictonBlue,
-        'columbia-blue': colors.columbiaBlue,
-        'cosmic-latte': colors.cosmicLatte,
-        'anti-flash-white': colors.antiFlashWhite,
-      },
       borderColor: {
         'ripe-mango': colors.ripeMango,
       },
@@ -60,7 +46,16 @@ module.exports = {
         'ripe-mango': colors.ripeMango,
         'anti-flash-white': colors.antiFlashWhite,
       },
+      backgroundImage: {
+        'page-gradient': `linear-gradient(to top, ${colors.columbiaBlue}, ${colors.antiFlashWhite}, ${colors.cosmicLatte})`,
+      },
+      gridTemplateColumns: {
+        'auto-fit-250': 'repeat(auto-fit, minmax(min-content, 250px))',
+      },
     },
   },
-  plugins: [require('tailwind-scrollbar-hide'), require('tailwindcss-safe-area')],
+  plugins: [
+    require('tailwind-scrollbar-hide'),
+    require('tailwindcss-safe-area'),
+  ],
 };

@@ -11,11 +11,14 @@
   .h-screen {
     height: 100dvh;
   }
+
+  .min-h-screen {
+    min-height: 100dvh;
+  }
 }
 
 body {
-  overflow: hidden;
-  touch-action: none;
+  overscroll-behavior: none;
 }
 
 /* safari, chrome */
@@ -39,12 +42,4 @@ progress {
 progress::-moz-progress-bar {
   border-radius: 10px;
   background-color: var(--ripe-mango-color);
-}
-
-*:focus-visible {
-  outline: none;
-  box-shadow: 1px 1px 1px var(--ripe-mango-color),
-    1px -1px 1px var(--ripe-mango-color), -1px 1px 1px var(--ripe-mango-color),
-    -1px -1px 1px var(--ripe-mango-color);
-  border-color: var(--ripe-mango-color);
 }

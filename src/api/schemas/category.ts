@@ -4,7 +4,7 @@ export const CategorySchema = zod.object({
   id: zod.number(),
   name: zod.string(),
   picture_url: zod.string().optional(),
-  created_at: zod.string().datetime(),
+  created_at: zod.string().datetime({ offset: true }),
 });
 
 export type Category = zod.infer<typeof CategorySchema>;

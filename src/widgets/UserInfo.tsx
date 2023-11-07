@@ -10,7 +10,7 @@ export const UserInfo = () => {
       <div className="flex items-center gap-2">
         {user?.user_metadata.picture && (
           <img
-            className="w-10 aspect-square rounded-full"
+            className="aspect-square w-10 rounded-full"
             src={user.user_metadata.picture}
             alt="user avatar"
           />

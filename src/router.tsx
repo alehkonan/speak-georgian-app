@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
+import { Layout } from './layout/Layout';
 import { routes } from './routes';
 
 export const router = createBrowserRouter([
@@ -11,18 +12,17 @@ export const router = createBrowserRouter([
     },
   },
   {
-    path: routes.home,
-    lazy: async () => {
-      const { HomeScreen } = await import('./screens/HomeScreen');
-      return { Component: HomeScreen };
-    },
-  },
-  {
-    path: routes.category,
-    lazy: async () => {
-      const { CategoriesScreen } = await import('./screens/CategoriesScreen');
-      return { Component: CategoriesScreen };
-    },
+    path: routes.root,
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        lazy: async () => {
+          const { CategoriesScreen } = await import('./screens/Categories');
+          return { Component: CategoriesScreen };
+        },
+      },
+    ],
   },
   {
     path: '/category/:id',
