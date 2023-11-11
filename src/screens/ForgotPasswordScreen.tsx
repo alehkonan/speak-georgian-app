@@ -1,8 +1,8 @@
+import { paths } from 'src/app/paths';
 import { Button } from 'src/components/Button';
 import { Form } from 'src/components/Form';
 import { FormInput } from 'src/components/FormInput';
 import { Screen } from 'src/components/Screen';
-import { routes } from 'src/routes';
 import zod from 'zod';
 
 const schema = zod.object({
@@ -17,7 +17,7 @@ export const ForgotPasswordScreen = () => {
   };
 
   return (
-    <Screen title="Reset password" prevRoute={routes.login}>
+    <Screen title="Reset password" prevRoute={paths.login}>
       <Form<FormType>
         className="grid gap-2"
         schema={schema}

@@ -1,7 +1,8 @@
+import { generatePath } from 'react-router-dom';
+import { paths } from 'src/app/paths';
 import { CategoryCard } from 'src/components/CategoryCard';
 import { Screen } from 'src/components/Screen';
 import { useCategoriesQuery } from 'src/queries/useCategoriesQuery';
-import { routes } from 'src/routes';
 import { twJoin } from 'tailwind-merge';
 
 export const CategoriesScreen = () => {
@@ -19,7 +20,9 @@ export const CategoriesScreen = () => {
           <CategoryCard
             key={category.id}
             title={category.name}
-            navigateTo={`${routes.category}/${category.id}`}
+            navigateTo={generatePath(paths.category, {
+              id: String(category.id),
+            })}
             pictureUrl={category.picture_url}
           />
         ))}

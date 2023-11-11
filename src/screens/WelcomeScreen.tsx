@@ -1,7 +1,7 @@
+import { paths } from 'src/app/paths';
 import { FieldWithMountains, Hill, Logo } from 'src/assets/images';
 import { Button } from 'src/components/Button';
 import { Divider } from 'src/components/Divider';
-import { routes } from 'src/routes';
 
 export const WelcomeScreen = () => {
   return (
@@ -17,13 +17,13 @@ export const WelcomeScreen = () => {
             <span>Welcome to</span>
             <strong>Speak Georgian App</strong>
           </p>
-          <Button primary to={routes.root}>
+          <Button primary to={paths.root}>
             Try it now
           </Button>
           <Divider text="or use your account" />
           <div className="grid grid-cols-1 gap-1 min-[350px]:grid-cols-2">
-            <Button to={routes.login}>Log in</Button>
-            <Button to={routes.signup}>Sign up</Button>
+            <Button to={paths.login}>Log in</Button>
+            <Button to={paths.signup}>Sign up</Button>
           </div>
         </div>
       </div>

@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
+import { paths } from 'src/app/paths';
 import { Button } from 'src/components/Button';
 import { Form } from 'src/components/Form';
 import { FormInput } from 'src/components/FormInput';
-import { routes } from 'src/routes';
 import zod from 'zod';
 
 const schema = zod.object({
@@ -38,7 +38,7 @@ export const UpdatePasswordScreen = () => {
           label="New password"
         />
         <Button primary>Update password</Button>
-        <Button onClick={() => navigate(routes.root)}>Go to main screen</Button>
+        <Button onClick={() => navigate(paths.root)}>Go to main screen</Button>
       </Form>
     </div>
   );

@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
+import { paths } from 'src/app/paths';
 import { Button } from 'src/components/Button';
 import { Form } from 'src/components/Form';
 import { FormInput } from 'src/components/FormInput';
 import { Screen } from 'src/components/Screen';
-import { routes } from 'src/routes';
 import zod from 'zod';
 
 const schema = zod.object({
@@ -23,7 +23,7 @@ type FormType = zod.infer<typeof schema>;
 
 export const SignupScreen = () => {
   return (
-    <Screen title="Create your account" prevRoute={routes.welcome}>
+    <Screen title="Create your account" prevRoute={paths.welcome}>
       <Form<FormType>
         className="grid gap-2"
         schema={schema}
@@ -35,7 +35,7 @@ export const SignupScreen = () => {
         <FormInput<FormType> name="password" type="password" label="Password" />
         <p className="text-center">
           Already have an account?{' '}
-          <Link className="text-steel-blue" to={routes.login}>
+          <Link className="text-steel-blue" to={paths.login}>
             Log in
           </Link>
         </p>

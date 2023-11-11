@@ -1,26 +1,26 @@
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
+import { paths } from 'src/app/paths';
 import { GameIcon, HeartIcon, HomeIcon, PersonIcon } from 'src/assets/icons';
-import { routes } from 'src/routes';
 
 const links = [
   {
-    to: routes.root,
+    to: paths.root,
     title: 'Home',
     Icon: HomeIcon,
   },
   {
-    to: routes.game,
+    to: paths.game,
     title: 'Game',
     Icon: GameIcon,
   },
   {
-    to: routes.favorites,
+    to: paths.favorites,
     title: 'Favorites',
     Icon: HeartIcon,
   },
   {
-    to: routes.profile,
+    to: paths.profile,
     title: 'Profile',
     Icon: PersonIcon,
   },
