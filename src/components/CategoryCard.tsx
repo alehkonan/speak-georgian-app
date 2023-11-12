@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 type Props = {
   title: string;
-  pictureUrl?: string;
+  pictureUrl?: string | null;
   navigateTo: To;
 };
 
@@ -15,7 +15,7 @@ export const CategoryCard = ({ title, pictureUrl, navigateTo }: Props) => {
       </div>
       <img
         className="mx-auto aspect-square w-3/4"
-        src={pictureUrl}
+        src={pictureUrl || undefined}
         alt={title}
       />
     </Link>

@@ -1,6 +1,7 @@
 import { RouterProvider } from 'react-router-dom';
 import { useGetUser } from 'src/cache/user/useGetUser';
 import { Loader } from 'src/components/Loader';
+
 import { router, userRouter } from './router';
 
 export const App = () => {

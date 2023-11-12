@@ -1,12 +1,12 @@
 import { generatePath } from 'react-router-dom';
 import { paths } from 'src/app/paths';
+import { useGetCategories } from 'src/cache/category/useGetCategories';
 import { CategoryCard } from 'src/components/CategoryCard';
 import { Screen } from 'src/components/Screen';
-import { useCategoriesQuery } from 'src/queries/useCategoriesQuery';
 import { twJoin } from 'tailwind-merge';
 
 export const CategoriesScreen = () => {
-  const { data: categories, isLoading } = useCategoriesQuery();
+  const { data: categories, isLoading } = useGetCategories();
 
   return (
     <Screen title="Categories" isLoading={isLoading}>
