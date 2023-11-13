@@ -9,5 +9,5 @@ export const App = () => {
 
   if (isLoading) return <Loader />;
 
-  return <RouterProvider router={user ? userRouter : router} />;
+  return <RouterProvider router={user?.id ? userRouter : router} />;
 };

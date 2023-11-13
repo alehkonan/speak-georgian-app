@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, redirect } from 'react-router-dom';
 
 import { Layout } from '../layout/Layout';
 import { paths } from './paths';
@@ -9,6 +9,11 @@ export const router = createBrowserRouter([
   {
     path: paths.root,
     element: <Layout />,
+    loader: () => {
+      const isVisited = localStorage.getItem('visited');
+      if (!isVisited) return redirect(paths.welcome);
+      return null;
+    },
     children: [
       routes.login,
       routes.forgotPassword,

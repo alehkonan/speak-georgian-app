@@ -1,15 +1,21 @@
 import { generatePath } from 'react-router-dom';
 import { paths } from 'src/app/paths';
 import { useGetCategories } from 'src/cache/category/useGetCategories';
+import { useGetUser } from 'src/cache/user/useGetUser';
 import { CategoryCard } from 'src/components/CategoryCard';
 import { Screen } from 'src/components/Screen';
 import { twJoin } from 'tailwind-merge';
 
 export const CategoriesScreen = () => {
+  const { data: user } = useGetUser();
   const { data: categories, isLoading } = useGetCategories();
 
   return (
-    <Screen title="Categories" isLoading={isLoading}>
+    <Screen
+      title="Categories"
+      isLoading={isLoading}
+      prevRoute={!user?.id ? paths.welcome : undefined}
+    >
       <div
         className={twJoin([
           'mx-auto w-full max-w-5xl p-2',

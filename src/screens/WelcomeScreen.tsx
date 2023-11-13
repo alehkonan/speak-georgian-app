@@ -4,6 +4,8 @@ import { Button } from 'src/components/Button';
 import { Divider } from 'src/components/Divider';
 
 export const WelcomeScreen = () => {
+  localStorage.setItem('visited', 'true');
+
   return (
     <div className="flex h-screen flex-col justify-end">
       <div className="fixed -z-10 grid h-full w-full place-items-center">
@@ -13,14 +15,13 @@ export const WelcomeScreen = () => {
       <div className="relative flex flex-col items-center justify-end">
         <Hill className="absolute -z-10 h-[115%] w-full text-white" />
         <div className="flex w-4/5 max-w-xl flex-col gap-2 pb-10">
-          <p className="flex flex-wrap justify-center gap-2 text-xl">
-            <span>Welcome to</span>
-            <strong>Speak Georgian App</strong>
-          </p>
+          <h1 className="text-center text-xl font-bold text-ripe-mango">
+            Speak Georgian
+          </h1>
           <Button primary to={paths.root}>
-            Try it now
+            Words
           </Button>
-          <Divider text="or use your account" />
+          <Divider />
           <div className="grid grid-cols-1 gap-1 min-[350px]:grid-cols-2">
             <Button to={paths.login}>Log in</Button>
             <Button to={paths.signup}>Sign up</Button>
