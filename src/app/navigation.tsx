@@ -1,9 +1,28 @@
+import { Tab, Tabs } from '@nextui-org/react';
+import { ReactNode, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { GameIcon, HeartIcon, HomeIcon, PersonIcon } from 'src/assets/icons';
-import { NavItem } from 'src/shared/components/BottomNavigation';
 
 import { paths } from './paths';
 
-export const navItems: NavItem[] = [
+type NavTab = {
+  path: `/${string}`;
+  title: string;
+  icon?: ReactNode;
+};
+
+export const publicTabs: NavTab[] = [
+  {
+    path: paths.root,
+    title: 'Home',
+  },
+  {
+    path: paths.login,
+    title: 'Login',
+  },
+];
+
+export const privateTabs: NavTab[] = [
   {
     path: paths.root,
     title: 'Home',
@@ -25,3 +44,39 @@ export const navItems: NavItem[] = [
     icon: <PersonIcon />,
   },
 ];
+
+type Props = {
+  isPrivate?: boolean;
+};
+
+export const Navigation = ({ isPrivate }: Props) => {
+  const tabs = isPrivate ? privateTabs : publicTabs;
+  const [selectedKey, setSelectedKey] = useState(window.location.pathname);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (tabs.find(({ path }) => path === pathname)) {
+      setSelectedKey(pathname);
+    }
+  }, [pathname, tabs]);
+
+  return (
+    <Tabs
+      selectedKey={selectedKey}
+      onSelectionChange={(key) => navigate(String(key))}
+    >
+      {tabs.map(({ path, title, icon }) => (
+        <Tab
+          key={path}
+          title={
+            <div className="flex items-center gap-2">
+              {icon}
+              <span>{title}</span>
+            </div>
+          }
+        />
+      ))}
+    </Tabs>
+  );
+};

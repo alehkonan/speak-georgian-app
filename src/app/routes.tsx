@@ -56,7 +56,7 @@ export const publicRoutes: RouteObject[] = [
 export const privateRoutes: RouteObject[] = [
   {
     path: paths.root,
-    element: <Layout withNavigation />,
+    element: <Layout isPrivate />,
     children: [
       ...commonRoutes,
       {

@@ -1,5 +1,6 @@
 import { BreadcrumbItem, Breadcrumbs, Spinner } from '@nextui-org/react';
 import { PropsWithChildren } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export type Breadcrumb = {
   path: string;
@@ -16,6 +17,8 @@ export const Screen = ({
   isLoading,
   breadcrumbs,
 }: PropsWithChildren<Props>) => {
+  const navigate = useNavigate();
+
   return (
     <div className="flex h-full flex-col overflow-hidden">
       <main className="flex-1 overflow-auto sm:order-1">
@@ -28,7 +31,7 @@ export const Screen = ({
           variant="solid"
         >
           {breadcrumbs.map(({ label, path }) => (
-            <BreadcrumbItem key={path} href={path}>
+            <BreadcrumbItem key={path} onPress={() => navigate(path)}>
               {label}
             </BreadcrumbItem>
           ))}
