@@ -1,4 +1,5 @@
-import { Button } from 'src/shared/components/Button';
+import { Button } from '@nextui-org/react';
+import { useLogout } from 'src/cache/auth/useLogout';
 import { Divider } from 'src/shared/components/Divider';
 import { Screen } from 'src/shared/components/Screen';
 
@@ -7,15 +8,21 @@ import { UserSettings } from '../widgets/UserSettings';
 import { UserStatistics } from '../widgets/UserStatistics';
 
 export const ProfileScreen = () => {
+  const { mutate: logout, isPending } = useLogout();
+
   return (
     <Screen>
-      <UserInfo />
-      <Divider text="user settings" />
-      <UserSettings />
-      <Divider text="Statistics" />
-      <UserStatistics />
-      <Divider />
-      <Button>Logout</Button>
+      <div className="p-5">
+        <UserInfo />
+        <Divider text="user settings" />
+        <UserSettings />
+        <Divider text="Statistics" />
+        <UserStatistics />
+        <Divider />
+        <Button color="primary" isLoading={isPending} onClick={() => logout()}>
+          Logout
+        </Button>
+      </div>
     </Screen>
   );
 };
