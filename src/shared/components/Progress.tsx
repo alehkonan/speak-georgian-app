@@ -8,7 +8,7 @@ export const Progress = ({ value, max }: Props) => {
 
   return (
     <div className="flex items-center gap-1">
-      <progress className="w-full appearance-none" value={value} max={max} />
+      <progress className="w-full appearance-none" max={max} value={value} />
       <span className="text-xs">{percent}%</span>
     </div>
   );

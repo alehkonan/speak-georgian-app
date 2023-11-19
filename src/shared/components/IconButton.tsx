@@ -20,7 +20,7 @@ export const IconButton = ({
 }: Props) => {
   if (to)
     return (
-      <Link to={to} className={classNames(buttonClassName, className)}>
+      <Link className={classNames(buttonClassName, className)} to={to}>
         {children}
       </Link>
     );

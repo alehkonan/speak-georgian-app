@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { paths } from 'src/app/paths';
-import { Button } from 'src/components/Button';
-import { Form } from 'src/components/Form';
-import { FormInput } from 'src/components/FormInput';
+import { Button } from 'src/shared/components/Button';
+import { Form } from 'src/shared/components/Form';
+import { FormInput } from 'src/shared/components/FormInput';
 import zod from 'zod';
 
 const schema = zod.object({
@@ -33,9 +33,9 @@ export const UpdatePasswordScreen = () => {
         onSubmit={onSubmit}
       >
         <FormInput<FormType>
+          label="New password"
           name="password"
           type="password"
-          label="New password"
         />
         <Button primary>Update password</Button>
         <Button onClick={() => navigate(paths.root)}>Go to main screen</Button>

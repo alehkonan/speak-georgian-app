@@ -74,8 +74,8 @@ export const GameCard = ({
                   isClicked(answer) && !isRight(answer),
               },
             ])}
-            onClick={() => onAnswerClick(answer)}
             disabled={Boolean(clickedAnswer)}
+            onClick={() => onAnswerClick(answer)}
           >
             {answer}
           </button>

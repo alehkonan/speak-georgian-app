@@ -17,12 +17,6 @@ export const Switch = ({ enabled, onSwitch, disabled }: Props) => {
 
   return (
     <HeadlessSwitch
-      data-testid="switch"
-      checked={checked}
-      onChange={(value: boolean) => {
-        setChecked(value);
-        onSwitch && onSwitch(value);
-      }}
       className={classNames([
         'relative inline-flex h-7 w-14 items-center rounded-full',
         {
@@ -30,7 +24,13 @@ export const Switch = ({ enabled, onSwitch, disabled }: Props) => {
           'bg-gray-200': !checked,
         },
       ])}
+      checked={checked}
+      data-testid="switch"
       disabled={disabled}
+      onChange={(value: boolean) => {
+        setChecked(value);
+        onSwitch && onSwitch(value);
+      }}
     >
       <span
         className={classNames([

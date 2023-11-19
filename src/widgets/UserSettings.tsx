@@ -1,4 +1,4 @@
-import { Switch } from 'src/components/Switch';
+import { Switch } from 'src/shared/components/Switch';
 
 export const UserSettings = () => {
   return (

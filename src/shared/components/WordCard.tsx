@@ -23,9 +23,9 @@ export const WordCard = ({ word }: Props) => {
       <div className="row-span-3">
         {word.picture_url ? (
           <img
+            alt={word.name_en}
             className="aspect-square h-full w-full rounded-l-lg object-cover object-top"
             src={word.picture_url}
-            alt={word.name_en}
           />
         ) : (
           <div className="grid h-full place-items-center">

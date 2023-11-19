@@ -20,8 +20,8 @@ export const Form = <FormType extends object>({
   return (
     <FormProvider {...methods}>
       <form
-        noValidate
         className={className}
+        noValidate
         onSubmit={methods.handleSubmit(onSubmit)}
       >
         {children}

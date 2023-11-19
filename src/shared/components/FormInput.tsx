@@ -26,10 +26,10 @@ export const FormInput = <FormType extends FieldValues>({
 
   return (
     <div className="grid">
-      <label htmlFor={id} className="mb-1 text-sm font-semibold">
+      <label className="mb-1 text-sm font-semibold" htmlFor={id}>
         {label}
       </label>
-      <Input id={id} className="w-full" type={type} {...field} />
+      <Input className="w-full" id={id} type={type} {...field} />
       {error?.message && <ErrorMessage message={error.message} />}
     </div>
   );

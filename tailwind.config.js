@@ -1,3 +1,7 @@
+import { nextui } from '@nextui-org/react';
+import scrollbarHide from 'tailwind-scrollbar-hide';
+import safeArea from 'tailwindcss-safe-area';
+
 const colors = Object.freeze({
   raisinBlack: '#1f2024',
   coralRed: '#ff4040',
@@ -17,7 +21,7 @@ const colors = Object.freeze({
 });
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
@@ -55,8 +59,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require('tailwind-scrollbar-hide'),
-    require('tailwindcss-safe-area'),
-  ],
+  plugins: [scrollbarHide, safeArea, nextui()],
 };

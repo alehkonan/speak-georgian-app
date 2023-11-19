@@ -1,18 +1,17 @@
-import { useQuery } from '@tanstack/react-query';
 import format from 'date-fns/format';
-import { queryKeys } from 'src/queries';
+import { useGetUser } from 'src/cache/user/useGetUser';
 
 export const UserInfo = () => {
-  const { data: user } = useQuery({ ...queryKeys.user.details });
+  const { data: user } = useGetUser();
 
   return (
     <div>
       <div className="flex items-center gap-2">
         {user?.user_metadata.picture && (
           <img
+            alt="user avatar"
             className="aspect-square w-10 rounded-full"
             src={user.user_metadata.picture}
-            alt="user avatar"
           />
         )}
         <span className="text-xl font-bold">

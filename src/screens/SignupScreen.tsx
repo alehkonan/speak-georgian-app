@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { paths } from 'src/app/paths';
-import { Button } from 'src/components/Button';
-import { Form } from 'src/components/Form';
-import { FormInput } from 'src/components/FormInput';
-import { Screen } from 'src/components/Screen';
+import { Button } from 'src/shared/components/Button';
+import { Form } from 'src/shared/components/Form';
+import { FormInput } from 'src/shared/components/FormInput';
+import { Screen } from 'src/shared/components/Screen';
 import zod from 'zod';
 
 const schema = zod.object({
@@ -23,16 +23,16 @@ type FormType = zod.infer<typeof schema>;
 
 export const SignupScreen = () => {
   return (
-    <Screen title="Create your account" prevRoute={paths.welcome}>
+    <Screen prevRoute={paths.welcome} title="Create your account">
       <Form<FormType>
         className="grid gap-2"
         schema={schema}
         onSubmit={console.log}
       >
-        <FormInput<FormType> name="firstName" type="text" label="First name" />
-        <FormInput<FormType> name="lastName" type="text" label="Last name" />
-        <FormInput<FormType> name="email" type="email" label="Email" />
-        <FormInput<FormType> name="password" type="password" label="Password" />
+        <FormInput<FormType> label="First name" name="firstName" type="text" />
+        <FormInput<FormType> label="Last name" name="lastName" type="text" />
+        <FormInput<FormType> label="Email" name="email" type="email" />
+        <FormInput<FormType> label="Password" name="password" type="password" />
         <p className="text-center">
           Already have an account?{' '}
           <Link className="text-steel-blue" to={paths.login}>

@@ -14,9 +14,9 @@ export const CategoryCard = ({ title, pictureUrl, navigateTo }: Props) => {
         <span className="text-center font-bold text-raisin-black">{title}</span>
       </div>
       <img
+        alt={title}
         className="mx-auto aspect-square w-3/4"
         src={pictureUrl || undefined}
-        alt={title}
       />
     </Link>
   );

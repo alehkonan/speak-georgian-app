@@ -17,8 +17,8 @@ export const GameCardPicture = ({
           'w-full h-full object-cover object-top absolute',
           { 'opacity-0': !isShown },
         ])}
-        src={pictureUrl}
         alt={nameEn}
+        src={pictureUrl}
       />
       {!isShown && (
         <button

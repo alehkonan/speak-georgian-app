@@ -1,13 +1,17 @@
-import { RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { useGetUser } from 'src/cache/user/useGetUser';
-import { Loader } from 'src/components/Loader';
+import { Loader } from 'src/shared/components/Loader';
 
-import { router, userRouter } from './router';
+import { privateRoutes, publicRoutes } from './routes';
 
 export const App = () => {
   const { data: user, isLoading } = useGetUser();
 
   if (isLoading) return <Loader />;
 
-  return <RouterProvider router={user?.id ? userRouter : router} />;
+  return (
+    <RouterProvider
+      router={createBrowserRouter(user ? privateRoutes : publicRoutes)}
+    />
+  );
 };

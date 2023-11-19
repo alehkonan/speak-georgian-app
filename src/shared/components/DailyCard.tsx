@@ -34,8 +34,8 @@ export const DailyCard = ({
         <div className="grid grid-rows-2 p-2">
           <div>
             <button
-              type="button"
               className="inline-flex cursor-pointer items-center gap-2"
+              type="button"
               onClick={onPlaySound}
             >
               <span className="text-2xl font-bold text-raisin-black">
@@ -72,9 +72,9 @@ export const DailyCard = ({
       {pictureUrl && (
         <div className="shrink-0 basis-1/3">
           <img
+            alt={wordKa}
             className="aspect-square h-full w-full rounded-r-xl object-cover"
             src={pictureUrl}
-            alt={wordKa}
           />
         </div>
       )}

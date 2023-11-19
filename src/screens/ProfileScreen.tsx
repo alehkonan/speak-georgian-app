@@ -1,6 +1,6 @@
-import { Button } from 'src/components/Button';
-import { Divider } from 'src/components/Divider';
-import { Screen } from 'src/components/Screen';
+import { Button } from 'src/shared/components/Button';
+import { Divider } from 'src/shared/components/Divider';
+import { Screen } from 'src/shared/components/Screen';
 
 import { UserInfo } from '../widgets/UserInfo';
 import { UserSettings } from '../widgets/UserSettings';

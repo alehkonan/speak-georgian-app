@@ -1,4 +1,4 @@
-import { Screen } from 'src/components/Screen';
+import { Screen } from 'src/shared/components/Screen';
 
 export const GameScreen = () => {
   return (

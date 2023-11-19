@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { paths } from 'src/app/paths';
-import { Button } from 'src/components/Button';
-import { Divider } from 'src/components/Divider';
-import { Form } from 'src/components/Form';
-import { FormInput } from 'src/components/FormInput';
-import { Screen } from 'src/components/Screen';
+import { Button } from 'src/shared/components/Button';
+import { Divider } from 'src/shared/components/Divider';
+import { Form } from 'src/shared/components/Form';
+import { FormInput } from 'src/shared/components/FormInput';
+import { Screen } from 'src/shared/components/Screen';
 import zod from 'zod';
 
 const schema = zod.object({
@@ -20,14 +20,14 @@ export const LoginScreen = () => {
   };
 
   return (
-    <Screen title="Login" prevRoute={paths.welcome}>
+    <Screen prevRoute={paths.welcome} title="Login">
       <Form<FormType>
         className="grid gap-2"
         schema={schema}
         onSubmit={onSubmit}
       >
-        <FormInput<FormType> name="email" type="email" label="Email" />
-        <FormInput<FormType> name="password" type="password" label="Password" />
+        <FormInput<FormType> label="Email" name="email" type="email" />
+        <FormInput<FormType> label="Password" name="password" type="password" />
         <Link
           className="justify-self-end text-ripe-mango"
           to={paths.forgotPassword}
@@ -35,7 +35,7 @@ export const LoginScreen = () => {
           Forgot password
         </Link>
         <Button primary>Log in</Button>
-        <Button type="button" to={paths.signup}>
+        <Button to={paths.signup} type="button">
           Sign up
         </Button>
       </Form>

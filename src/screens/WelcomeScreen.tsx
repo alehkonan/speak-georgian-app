@@ -1,7 +1,7 @@
 import { paths } from 'src/app/paths';
 import { FieldWithMountains, Hill, Logo } from 'src/assets/images';
-import { Button } from 'src/components/Button';
-import { Divider } from 'src/components/Divider';
+import { Button } from 'src/shared/components/Button';
+import { Divider } from 'src/shared/components/Divider';
 
 export const WelcomeScreen = () => {
   localStorage.setItem('visited', 'true');
@@ -18,7 +18,7 @@ export const WelcomeScreen = () => {
           <h1 className="text-center text-xl font-bold text-ripe-mango">
             Speak Georgian
           </h1>
-          <Button primary to={paths.root}>
+          <Button to={paths.root} primary>
             Words
           </Button>
           <Divider />

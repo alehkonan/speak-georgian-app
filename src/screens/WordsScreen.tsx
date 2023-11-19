@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
+import { paths } from 'src/app/paths';
 import { useGetCategories } from 'src/cache/category/useGetCategories';
 import { useGetCategoryWords } from 'src/cache/category/useGetCategoryWords';
-import { Screen } from 'src/components/Screen';
-import { WordCard } from 'src/components/WordCard';
+import { Screen } from 'src/shared/components/Screen';
+import { WordCard } from 'src/shared/components/WordCard';
 import { twJoin } from 'tailwind-merge';
 
 export const WordsScreen = () => {
@@ -21,7 +22,11 @@ export const WordsScreen = () => {
   );
 
   return (
-    <Screen title={title} isLoading={isGettingCategories || isGettingWords}>
+    <Screen
+      isLoading={isGettingCategories || isGettingWords}
+      prevRoute={paths.root}
+      title={title}
+    >
       <div
         className={twJoin([
           'mx-auto w-full max-w-5xl p-2',
