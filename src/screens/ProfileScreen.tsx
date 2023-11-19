@@ -8,7 +8,7 @@ import { UserStatistics } from '../widgets/UserStatistics';
 
 export const ProfileScreen = () => {
   return (
-    <Screen title="Profile">
+    <Screen>
       <UserInfo />
       <Divider text="user settings" />
       <UserSettings />

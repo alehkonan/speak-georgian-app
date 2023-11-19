@@ -1,56 +1,62 @@
+import {
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  Chip,
+  Image,
+} from '@nextui-org/react';
 import { useState } from 'react';
-import { Word } from 'src/api/schemas/word';
 import { TranslateIcon } from 'src/assets/icons';
 import { twJoin } from 'tailwind-merge';
 
-import { IconButton } from './IconButton';
-
 type Props = {
-  word: Word;
+  word: string;
+  translation: string;
+  transcription?: string;
+  pictureUrl?: string;
 };
 
-export const WordCard = ({ word }: Props) => {
+export const WordCard = ({
+  word,
+  translation,
+  transcription,
+  pictureUrl,
+}: Props) => {
   const [isTranslationShown, setTranslationShown] = useState(false);
 
   return (
-    <div
-      className={twJoin([
-        'bg-white border rounded-lg',
-        'grid grid-cols-3 grid-rows-[auto_1fr_auto]',
-        'min-h-[8rem]',
-      ])}
-    >
-      <div className="row-span-3">
-        {word.picture_url ? (
-          <img
-            alt={word.name_en}
-            className="aspect-square h-full w-full rounded-l-lg object-cover object-top"
-            src={word.picture_url}
+    <Card>
+      <CardBody className="justify-end p-0">
+        {pictureUrl && (
+          <Image
+            alt={word}
+            className="aspect-square object-cover"
+            src={pictureUrl}
+            removeWrapper
           />
-        ) : (
-          <div className="grid h-full place-items-center">
-            <span>No picture</span>
-          </div>
         )}
-      </div>
-      <div className="col-span-2 border-b p-1">
-        <span className="text-left text-xl font-bold leading-4">
-          {isTranslationShown ? word.name_en : word.name_ka}
-        </span>
-      </div>
-      <div className="col-span-2 p-1">
-        <span className="leading-3 text-raisin-black">
-          ({word.transcription || 'No transcription'})
-        </span>
-      </div>
-      <div className="col-span-2 flex gap-2 self-end justify-self-end p-1">
-        <IconButton
-          className="text-raisin-black"
+        <div
+          className={twJoin([
+            'bottom-0 z-20 m-1 flex flex-wrap gap-1',
+            pictureUrl && 'absolute',
+          ])}
+        >
+          <Chip variant="faded">{isTranslationShown ? translation : word}</Chip>
+          {transcription && !isTranslationShown && (
+            <Chip variant="faded">{transcription}</Chip>
+          )}
+        </div>
+      </CardBody>
+      <CardFooter className="justify-end">
+        <Button
+          color={isTranslationShown ? 'primary' : 'default'}
+          isIconOnly
           onClick={() => setTranslationShown(!isTranslationShown)}
         >
           <TranslateIcon />
-        </IconButton>
-      </div>
-    </div>
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };

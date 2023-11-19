@@ -1,23 +1,28 @@
-import { type To } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Card, CardBody, Chip, Image } from '@nextui-org/react';
+import { type To, useNavigate } from 'react-router-dom';
 
 type Props = {
   title: string;
   pictureUrl?: string | null;
-  navigateTo: To;
+  path: To;
 };
 
-export const CategoryCard = ({ title, pictureUrl, navigateTo }: Props) => {
+export const CategoryCard = ({ title, pictureUrl, path }: Props) => {
+  const navigate = useNavigate();
+
   return (
-    <Link className="grid gap-2 rounded-lg bg-white p-2 shadow" to={navigateTo}>
-      <div className="flex items-center justify-between">
-        <span className="text-center font-bold text-raisin-black">{title}</span>
-      </div>
-      <img
-        alt={title}
-        className="mx-auto aspect-square w-3/4"
-        src={pictureUrl || undefined}
-      />
-    </Link>
+    <Card shadow="sm" disableRipple isPressable onPress={() => navigate(path)}>
+      <CardBody className="p-0">
+        <Chip className="absolute z-20 m-1" variant="faded">
+          {title}
+        </Chip>
+        <Image
+          alt={title}
+          className="aspect-square object-cover"
+          src={pictureUrl || undefined}
+          removeWrapper
+        />
+      </CardBody>
+    </Card>
   );
 };

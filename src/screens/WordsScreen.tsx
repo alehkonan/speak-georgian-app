@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import { paths } from 'src/app/paths';
 import { useGetCategories } from 'src/cache/category/useGetCategories';
 import { useGetCategoryWords } from 'src/cache/category/useGetCategoryWords';
-import { Screen } from 'src/shared/components/Screen';
+import { CardContainer } from 'src/shared/components/CardContainer';
+import { Breadcrumb, Screen } from 'src/shared/components/Screen';
 import { WordCard } from 'src/shared/components/WordCard';
-import { twJoin } from 'tailwind-merge';
 
 export const WordsScreen = () => {
   const { id } = useParams();
@@ -16,25 +16,31 @@ export const WordsScreen = () => {
   const { data: words, isLoading: isGettingWords } =
     useGetCategoryWords(categoryId);
 
-  const title = useMemo(
-    () => categories?.find(({ id }) => id === categoryId)?.name,
-    [categories, categoryId],
-  );
+  const breadcrumbs = useMemo<Breadcrumb[]>(() => {
+    const category = categories?.find(({ id }) => id === categoryId);
+
+    return [
+      { path: paths.root, label: 'Categories' },
+      { path: paths.category, label: category?.name },
+    ];
+  }, [categories, categoryId]);
 
   return (
     <Screen
-      isLoading={isGettingCategories || isGettingWords}
-      prevRoute={paths.root}
-      title={title}
+      breadcrumbs={breadcrumbs}
+      isLoading={isGettingWords || isGettingCategories}
     >
-      <div
-        className={twJoin([
-          'mx-auto w-full max-w-5xl p-2',
-          'grid auto-rows-min grid-cols-auto-fill-250 gap-2',
-        ])}
-      >
-        {words?.map((word) => <WordCard key={word.id} word={word} />)}
-      </div>
+      <CardContainer>
+        {words?.map((word) => (
+          <WordCard
+            key={word.id}
+            pictureUrl={word.picture_url || undefined}
+            transcription={word.transcription || undefined}
+            translation={word.name_en}
+            word={word.name_ka}
+          />
+        ))}
+      </CardContainer>
     </Screen>
   );
 };

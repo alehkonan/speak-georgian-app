@@ -1,4 +1,3 @@
-import { paths } from 'src/app/paths';
 import { Button } from 'src/shared/components/Button';
 import { Form } from 'src/shared/components/Form';
 import { FormInput } from 'src/shared/components/FormInput';
@@ -17,7 +16,7 @@ export const ForgotPasswordScreen = () => {
   };
 
   return (
-    <Screen prevRoute={paths.login} title="Reset password">
+    <Screen>
       <Form<FormType>
         className="grid gap-2"
         schema={schema}

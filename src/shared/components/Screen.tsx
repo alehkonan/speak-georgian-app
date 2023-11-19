@@ -1,40 +1,39 @@
+import { BreadcrumbItem, Breadcrumbs, Spinner } from '@nextui-org/react';
 import { PropsWithChildren } from 'react';
-import { type To } from 'react-router-dom';
-import { ChevronLeftIcon } from 'src/assets/icons';
-import { twJoin } from 'tailwind-merge';
 
-import { IconButton } from './IconButton';
-import { Loader } from './Loader';
+export type Breadcrumb = {
+  path: string;
+  label?: string;
+};
 
 type Props = {
-  title?: string;
-  prevRoute?: To;
   isLoading?: boolean;
+  breadcrumbs?: Breadcrumb[];
 };
 
 export const Screen = ({
   children,
-  title,
-  prevRoute,
   isLoading,
+  breadcrumbs,
 }: PropsWithChildren<Props>) => {
   return (
-    <div className="flex h-full flex-col">
-      <header
-        className={twJoin([
-          'flex items-center gap-3 p-4',
-          prevRoute ? 'justify-between' : 'justify-center',
-        ])}
-      >
-        {prevRoute && (
-          <IconButton to={prevRoute}>
-            <ChevronLeftIcon />
-          </IconButton>
-        )}
-        <h2 className="text-xl font-bold">{title}</h2>
-        {prevRoute && <IconButton className="invisible" />}
-      </header>
-      {isLoading ? <Loader /> : children}
+    <div className="flex h-full flex-col overflow-hidden">
+      <main className="flex-1 overflow-auto sm:order-1">
+        {isLoading ? <Spinner /> : children}
+      </main>
+      {breadcrumbs && (
+        <Breadcrumbs
+          className="px-4 py-2 sm:pt-5"
+          color="warning"
+          variant="solid"
+        >
+          {breadcrumbs.map(({ label, path }) => (
+            <BreadcrumbItem key={path} href={path}>
+              {label}
+            </BreadcrumbItem>
+          ))}
+        </Breadcrumbs>
+      )}
     </div>
   );
 };

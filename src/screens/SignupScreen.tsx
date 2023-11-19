@@ -23,7 +23,7 @@ type FormType = zod.infer<typeof schema>;
 
 export const SignupScreen = () => {
   return (
-    <Screen prevRoute={paths.welcome} title="Create your account">
+    <Screen>
       <Form<FormType>
         className="grid gap-2"
         schema={schema}

@@ -20,7 +20,7 @@ export const LoginScreen = () => {
   };
 
   return (
-    <Screen prevRoute={paths.welcome} title="Login">
+    <Screen>
       <Form<FormType>
         className="grid gap-2"
         schema={schema}
