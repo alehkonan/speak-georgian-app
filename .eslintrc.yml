@@ -8,6 +8,7 @@ extends:
   - plugin:jest/recommended
   - plugin:jest-dom/recommended
   - plugin:tailwindcss/recommended
+  - plugin:lodash/recommended
   - eslint-config-prettier
 plugins:
   - simple-import-sort
@@ -20,5 +21,17 @@ settings:
       moduleDirectory: ['node_modules', '.']
 rules:
   react/react-in-jsx-scope: off
+  react/jsx-max-depth:
+    - warn
+    - max: 10
+  react/jsx-sort-props:
+    - warn
+    - ignoreCase: true
+      callbacksLast: true
+      shorthandLast: true
+      multiline: first
+      reservedFirst: true
+  react/jsx-no-useless-fragment: warn
   simple-import-sort/imports: warn
   simple-import-sort/exports: warn
+  lodash/prefer-lodash-method: off
