@@ -1,84 +1,58 @@
-import { PropsWithChildren, useState } from 'react';
-import { Word } from 'src/api/schemas/word';
-import { twJoin } from 'tailwind-merge';
-
-import { GameCardPicture } from './GameCardPicture';
+import { Button, Card, CardBody, CardHeader, Image } from '@nextui-org/react';
+import shuffle from 'lodash/shuffle';
+import { useMemo, useState } from 'react';
 
 type Props = {
-  word: Word;
-  answers: string[];
-  onLastWordCheck: (result: Word & { isCorrect: boolean }) => void;
-  onShowNextCard: () => void;
-};
-
-const NavButton = ({ children }: PropsWithChildren) => {
-  return <button className="h-full flex-1 border opacity-0">{children}</button>;
+  word: string;
+  translation: string;
+  translations: string[];
+  pictureUrl?: string;
 };
 
 export const GameCard = ({
   word,
-  answers,
-  onLastWordCheck,
-  onShowNextCard,
+  translation,
+  translations,
+  pictureUrl,
 }: Props) => {
-  const [clickedAnswer, setClickedAnswer] = useState<string>();
+  const [answer, setAnswer] = useState<string>();
 
-  const isRight = (answer: string) => answer === word.name_en;
-  const isClicked = (answer: string) => answer === clickedAnswer;
-
-  const onAnswerClick = (answer: string) => {
-    setClickedAnswer(answer);
-    setTimeout(() => {
-      onShowNextCard();
-      onLastWordCheck({
-        ...word,
-        isCorrect: isRight(answer),
-      });
-    }, 500);
-  };
+  const variants = useMemo(
+    () => shuffle([translation, ...translations]),
+    [translation, translations],
+  );
 
   return (
-    <div className="grid w-full snap-center snap-always gap-2 rounded-lg bg-white p-3 md:w-4/5">
-      {word.picture_url && (
-        <div className="flex items-center justify-between">
-          <NavButton>Previous</NavButton>
-          <GameCardPicture
-            nameEn={word.name_en}
-            pictureUrl={word.picture_url}
+    <Card shadow="sm">
+      <CardHeader className="justify-center pb-0">
+        <p className="text-lg font-semibold">{word}</p>
+      </CardHeader>
+      <CardBody className="gap-4">
+        {pictureUrl && (
+          <Image
+            className="aspect-square w-full max-w-md self-center object-cover"
+            src={pictureUrl}
+            removeWrapper
           />
-          <NavButton>Next</NavButton>
-        </div>
-      )}
-      <p className="flex flex-wrap items-center justify-center gap-x-2">
-        <span className="text-xl font-bold text-raisin-black">
-          {word.name_ka}
-        </span>
-        {word.transcription && (
-          <span className="text-raisin-black opacity-50">
-            ({word.transcription})
-          </span>
         )}
-      </p>
-      <div className="grid grid-cols-2">
-        {answers.map((answer) => (
-          <button
-            key={answer}
-            className={twJoin([
-              'border p-2 transition-all',
-              isClicked(answer) &&
-                isRight(answer) &&
-                'bg-green-400 hover:bg-green-400',
-              isClicked(answer) &&
-                !isRight(answer) &&
-                'bg-red-400 hover:bg-red-400',
-            ])}
-            disabled={Boolean(clickedAnswer)}
-            onClick={() => onAnswerClick(answer)}
-          >
-            {answer}
-          </button>
-        ))}
-      </div>
-    </div>
+        <div className="grid grid-cols-2 gap-2">
+          {variants.map((variant) => (
+            <Button
+              key={word}
+              color={
+                answer === variant
+                  ? answer === translation
+                    ? 'success'
+                    : 'danger'
+                  : 'default'
+              }
+              onClick={() => setAnswer(variant)}
+            >
+              {variant}
+            </Button>
+          ))}
+        </div>
+      </CardBody>
+    </Card>
   );
 };
