@@ -1,5 +1,5 @@
-import classNames from 'classnames';
 import { useState } from 'react';
+import { twJoin } from 'tailwind-merge';
 
 export const GameCardPicture = ({
   pictureUrl,
@@ -13,9 +13,9 @@ export const GameCardPicture = ({
   return (
     <div className="relative aspect-square w-1/2">
       <img
-        className={classNames([
+        className={twJoin([
           'w-full h-full object-cover object-top absolute',
-          { 'opacity-0': !isShown },
+          !isShown && 'opacity-0',
         ])}
         alt={nameEn}
         src={pictureUrl}

@@ -1,6 +1,6 @@
-import classNames from 'classnames';
 import { PropsWithChildren, useState } from 'react';
 import { Word } from 'src/api/schemas/word';
+import { twJoin } from 'tailwind-merge';
 
 import { GameCardPicture } from './GameCardPicture';
 
@@ -63,16 +63,14 @@ export const GameCard = ({
         {answers.map((answer) => (
           <button
             key={answer}
-            className={classNames([
+            className={twJoin([
               'border p-2 transition-all',
-              {
-                'bg-green-400 hover:bg-green-400':
-                  isClicked(answer) && isRight(answer),
-              },
-              {
-                'bg-red-400 hover:bg-red-400':
-                  isClicked(answer) && !isRight(answer),
-              },
+              isClicked(answer) &&
+                isRight(answer) &&
+                'bg-green-400 hover:bg-green-400',
+              isClicked(answer) &&
+                !isRight(answer) &&
+                'bg-red-400 hover:bg-red-400',
             ])}
             disabled={Boolean(clickedAnswer)}
             onClick={() => onAnswerClick(answer)}
