@@ -1,10 +1,10 @@
 import { Avatar, Button, Switch } from '@nextui-org/react';
-import format from 'date-fns/format';
 import { PersonIcon } from 'src/assets/icons';
 import { useLogout } from 'src/cache/auth/useLogout';
 import { useGetUser } from 'src/cache/user/useGetUser';
 import { ProfileWidget } from 'src/shared/components/ProfileWidget';
 import { Screen } from 'src/shared/components/Screen';
+import { formatDate } from 'src/shared/utils/dates';
 
 export const ProfileScreen = () => {
   const { data: user } = useGetUser();
@@ -21,7 +21,7 @@ export const ProfileScreen = () => {
         <span>Name: </span>
         <span>{user?.user_metadata.full_name}</span>
         <span>Created:</span>
-        <span>{format(new Date(user?.created_at ?? ''), 'dd.MM.yyyy')}</span>
+        <span>{formatDate(user?.created_at)}</span>
         <span>Provider:</span>
         <span>{user?.app_metadata.provider}</span>
       </ProfileWidget>

@@ -3,8 +3,12 @@
  * @param {String | null} date Date as a string
  * @returns formatted date as a string
  */
-export const formatDate = (date: string | null) => {
+export const formatDate = (date?: string | null) => {
   if (!date) return '';
-  const dateFormatter = Intl.DateTimeFormat('en-GB', { dateStyle: 'medium' });
-  return dateFormatter.format(new Date(date));
+  try {
+    const dateFormatter = Intl.DateTimeFormat('cs', { dateStyle: 'short' });
+    return dateFormatter.format(new Date(date));
+  } catch (error) {
+    return '';
+  }
 };
