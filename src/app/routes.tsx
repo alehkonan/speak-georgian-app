@@ -1,4 +1,5 @@
 import { type RouteObject } from 'react-router-dom';
+import { NotFoundScreen } from 'src/screens/NotFound';
 
 import { FavoritesScreen } from '../screens/Favorites';
 import { GameScreen } from '../screens/Game';
@@ -40,6 +41,10 @@ export const publicRoutes: RouteObject[] = [
       },
     ],
   },
+  {
+    path: '*',
+    element: <NotFoundScreen />,
+  },
 ];
 
 export const privateRoutes: RouteObject[] = [
@@ -61,5 +66,9 @@ export const privateRoutes: RouteObject[] = [
         element: <ProfileScreen />,
       },
     ],
+  },
+  {
+    path: '*',
+    element: <NotFoundScreen />,
   },
 ];

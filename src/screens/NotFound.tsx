@@ -6,9 +6,15 @@ import { Screen } from 'src/shared/components/Screen';
 export const NotFoundScreen = () => {
   return (
     <Screen>
-      <h2 className="text-xl font-bold">Page not found</h2>
-      <span>😕</span>
-      <Button as={Link} to={paths.root}>
+      <h2 className="text-center text-3xl font-bold">Page not found</h2>
+      <span className="text-center text-3xl">😕</span>
+      <Button
+        as={Link}
+        className="text-lg"
+        color="warning"
+        to={paths.root}
+        variant="flat"
+      >
         Go to the home screen 🏠
       </Button>
     </Screen>
