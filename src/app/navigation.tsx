@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { GameIcon, HeartIcon, HomeIcon, PersonIcon } from 'src/assets/icons';
 
 import { paths } from './paths';
+import { twJoin } from 'tailwind-merge';
 
 type NavTab = {
   path: `/${string}`;
@@ -72,7 +73,9 @@ export const Navigation = ({ isPrivate }: Props) => {
           title={
             <div className="flex items-center gap-2">
               {icon}
-              <span>{title}</span>
+              <span className={twJoin(['sm:block', isPrivate && 'hidden'])}>
+                {title}
+              </span>
             </div>
           }
         />

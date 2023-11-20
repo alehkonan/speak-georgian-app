@@ -22,7 +22,9 @@ export const Screen = ({
   return (
     <div className="flex h-full flex-col overflow-hidden">
       <main className="flex-1 overflow-auto sm:order-1">
-        {isLoading ? <Spinner /> : children}
+        <div className="mx-auto grid max-w-5xl gap-3 p-5 pt-10">
+          {isLoading ? <Spinner /> : children}
+        </div>
       </main>
       {breadcrumbs && (
         <Breadcrumbs
