@@ -2,9 +2,9 @@ import { Tab, Tabs } from '@nextui-org/react';
 import { ReactNode, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GameIcon, HeartIcon, HomeIcon, PersonIcon } from 'src/assets/icons';
+import { twJoin } from 'tailwind-merge';
 
 import { paths } from './paths';
-import { twJoin } from 'tailwind-merge';
 
 type NavTab = {
   path: `/${string}`;

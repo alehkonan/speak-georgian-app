@@ -1,36 +1,44 @@
-import { ComponentProps, useId } from 'react';
+import { Input, InputProps } from '@nextui-org/react';
 import {
   FieldValues,
   useController,
   UseControllerProps,
 } from 'react-hook-form';
 
-import { ErrorMessage } from './ErrorMessage';
-import { Input } from './Input';
-
-type Props<FormType extends FieldValues> = {
-  label?: JSX.Element | string;
-  type?: ComponentProps<'input'>['type'];
-} & UseControllerProps<FormType>;
+type Props<FormType extends FieldValues> = Omit<
+  InputProps,
+  'name' | 'defaultValue' | 'disabled'
+> &
+  UseControllerProps<FormType>;
 
 export const FormInput = <FormType extends FieldValues>({
-  label,
-  type,
-  ...props
+  name,
+  rules,
+  shouldUnregister,
+  defaultValue,
+  control,
+  disabled,
+  color,
+  ...inputProps
 }: Props<FormType>) => {
-  const id = useId();
   const {
     field,
     fieldState: { error },
-  } = useController(props);
+  } = useController({
+    name,
+    control,
+    defaultValue,
+    disabled,
+    rules,
+    shouldUnregister,
+  });
 
   return (
-    <div className="grid">
-      <label className="mb-1 text-sm font-semibold" htmlFor={id}>
-        {label}
-      </label>
-      <Input className="w-full" id={id} type={type} {...field} />
-      {error?.message && <ErrorMessage message={error.message} />}
-    </div>
+    <Input
+      color={error ? 'danger' : color}
+      errorMessage={error?.message}
+      {...field}
+      {...inputProps}
+    />
   );
 };

@@ -1,7 +1,8 @@
+import { Button, Divider } from '@nextui-org/react';
+import { Link } from 'react-router-dom';
+import { loginWithGoogle } from 'src/api/auth/loginWithGoogle';
 import { paths } from 'src/app/paths';
 import { FieldWithMountains, Hill, Logo } from 'src/assets/images';
-import { Button } from 'src/shared/components/Button';
-import { Divider } from 'src/shared/components/Divider';
 
 export const WelcomeScreen = () => {
   localStorage.setItem('visited', 'true');
@@ -18,14 +19,24 @@ export const WelcomeScreen = () => {
           <h1 className="text-center text-xl font-bold text-ripe-mango">
             Speak Georgian
           </h1>
-          <Button to={paths.root} primary>
-            Words
+          <Button
+            as={Link}
+            className="font-semibold"
+            color="warning"
+            to={paths.root}
+            variant="flat"
+          >
+            Go to words
           </Button>
           <Divider />
-          <div className="grid grid-cols-1 gap-1 min-[350px]:grid-cols-2">
-            <Button to={paths.login}>Log in</Button>
-            <Button to={paths.signup}>Sign up</Button>
-          </div>
+          <Button
+            className="font-semibold"
+            color="warning"
+            variant="flat"
+            onClick={loginWithGoogle}
+          >
+            Login with Google
+          </Button>
         </div>
       </div>
     </div>

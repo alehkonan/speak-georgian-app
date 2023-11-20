@@ -22,7 +22,7 @@ export const Form = <FormType extends object>({
       <form
         className={className}
         noValidate
-        onSubmit={methods.handleSubmit(onSubmit)}
+        onSubmit={methods.handleSubmit(onSubmit, console.error)}
       >
         {children}
       </form>

@@ -7,7 +7,12 @@ import { privateRoutes, publicRoutes } from './routes';
 export const App = () => {
   const { data: user, isLoading } = useGetUser();
 
-  if (isLoading) return <Spinner />;
+  if (isLoading)
+    return (
+      <div className="grid place-items-center p-10">
+        <Spinner />
+      </div>
+    );
 
   return (
     <RouterProvider

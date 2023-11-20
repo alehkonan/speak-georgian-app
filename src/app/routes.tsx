@@ -1,15 +1,12 @@
 import { type RouteObject } from 'react-router-dom';
 
-import { FavoritesScreen } from '../screens/FavoritesScreen';
-import { ForgotPasswordScreen } from '../screens/ForgotPasswordScreen';
-import { GameScreen } from '../screens/GameScreen';
+import { FavoritesScreen } from '../screens/Favorites';
+import { GameScreen } from '../screens/Game';
 import { HomeScreen } from '../screens/Home';
-import { LoginScreen } from '../screens/LoginScreen';
-import { ProfileScreen } from '../screens/ProfileScreen';
-import { SignupScreen } from '../screens/SignupScreen';
-import { UpdatePasswordScreen } from '../screens/UpdatePasswordScreen';
-import { WelcomeScreen } from '../screens/WelcomeScreen';
-import { WordsScreen } from '../screens/WordsScreen';
+import { LoginScreen } from '../screens/Login';
+import { ProfileScreen } from '../screens/Profile';
+import { WelcomeScreen } from '../screens/Welcome';
+import { WordsScreen } from '../screens/Words';
 import { Layout } from './Layout';
 import { checkIfVisited } from './loaders';
 import { paths } from './paths';
@@ -41,14 +38,6 @@ export const publicRoutes: RouteObject[] = [
         path: paths.login,
         element: <LoginScreen />,
       },
-      {
-        path: paths.signup,
-        element: <SignupScreen />,
-      },
-      {
-        path: paths.forgotPassword,
-        element: <ForgotPasswordScreen />,
-      },
     ],
   },
 ];
@@ -70,10 +59,6 @@ export const privateRoutes: RouteObject[] = [
       {
         path: paths.profile,
         element: <ProfileScreen />,
-      },
-      {
-        path: paths.updatePassword,
-        element: <UpdatePasswordScreen />,
       },
     ],
   },
