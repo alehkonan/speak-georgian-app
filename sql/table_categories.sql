@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS categories (
+  id BIGINT PRIMARY KEY generated always AS IDENTITY,
+  name text NOT NULL,
+  created_at TIMESTAMP WITH TIME zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+)
