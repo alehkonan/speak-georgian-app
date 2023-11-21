@@ -10,12 +10,7 @@ export const GameScreen = () => {
     <Screen>
       {isStarted ? (
         <div className="grid gap-8 self-center">
-          <GameCard
-            pictureUrl="https://sjvxbuqvopcxcdetqebf.supabase.co/storage/v1/object/public/pictures/people/boy.avif"
-            translation="boy"
-            translations={['come on', 'hello', `I don't understand this never`]}
-            word="ბიჭი"
-          />
+          <GameCard />
           <Button color="primary" onClick={() => setStarted(false)}>
             Stop the game
           </Button>

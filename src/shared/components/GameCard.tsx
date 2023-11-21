@@ -1,54 +1,63 @@
-import { Button, Card, CardBody, CardHeader, Image } from '@nextui-org/react';
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Image,
+  Spinner,
+} from '@nextui-org/react';
 import shuffle from 'lodash/shuffle';
 import { useMemo, useState } from 'react';
+import { useGetGameWord } from 'src/cache/word/useGetGameWord';
 
-type Props = {
-  word: string;
-  translation: string;
-  translations: string[];
-  pictureUrl?: string;
-};
-
-export const GameCard = ({
-  word,
-  translation,
-  translations,
-  pictureUrl,
-}: Props) => {
+export const GameCard = () => {
   const [answer, setAnswer] = useState<string>();
+  const { data: gameWord, refetch, error, isFetching } = useGetGameWord();
 
-  const variants = useMemo(
-    () => shuffle([translation, ...translations]),
-    [translation, translations],
-  );
+  const options = useMemo(() => {
+    if (!gameWord) return [];
+    return shuffle([gameWord.name_en, ...gameWord.variants]);
+  }, [gameWord]);
+
+  const handleOption = (option: string) => {
+    setAnswer(option);
+    setTimeout(() => {
+      setAnswer(undefined);
+      refetch();
+    }, 1000);
+  };
+
+  if (isFetching) return <Spinner />;
+  if (error) return 'Error';
 
   return (
     <Card shadow="sm">
       <CardHeader className="justify-center pb-0">
-        <p className="text-lg font-semibold">{word}</p>
+        <p className="text-lg font-semibold">{gameWord?.name_ka}</p>
       </CardHeader>
       <CardBody className="gap-4">
-        {pictureUrl && (
+        {gameWord?.picture_url && (
           <Image
             className="aspect-square w-full max-w-md self-center object-cover"
-            src={pictureUrl}
+            src={gameWord.picture_url}
             removeWrapper
           />
         )}
         <div className="grid grid-cols-2 gap-2">
-          {variants.map((variant) => (
+          {options.map((option) => (
             <Button
-              key={word}
+              key={option}
               color={
-                answer === variant
-                  ? answer === translation
+                answer === option
+                  ? option === gameWord?.name_en
                     ? 'success'
                     : 'danger'
                   : 'default'
               }
-              onClick={() => setAnswer(variant)}
+              disabled={Boolean(answer)}
+              onClick={() => handleOption(option)}
             >
-              {variant}
+              {option}
             </Button>
           ))}
         </div>

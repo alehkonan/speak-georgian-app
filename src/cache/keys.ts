@@ -8,4 +8,7 @@ export const queryKeys = createQueryKeyStore({
     list: null,
     words: (categoryId: number) => [categoryId],
   },
+  word: {
+    game: null,
+  },
 });
