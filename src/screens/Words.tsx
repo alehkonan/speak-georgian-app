@@ -38,6 +38,7 @@ export const WordsScreen = () => {
             transcription={word.transcription || undefined}
             translation={word.name_en}
             word={word.name_ka}
+            wordId={word.id}
           />
         ))}
       </CardContainer>

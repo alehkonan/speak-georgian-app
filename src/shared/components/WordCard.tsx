@@ -7,10 +7,13 @@ import {
   Image,
 } from '@nextui-org/react';
 import { useState } from 'react';
-import { TranslateIcon } from 'src/assets/icons';
+import { HeartIcon, TranslateIcon } from 'src/assets/icons';
+import { useToggleFavoriteWord } from 'src/cache/favorites/useToggleFavoriteWord';
+import { useGetUser } from 'src/cache/user/useGetUser';
 import { twJoin } from 'tailwind-merge';
 
 type Props = {
+  wordId: number;
   word: string;
   translation: string;
   transcription?: string;
@@ -18,12 +21,15 @@ type Props = {
 };
 
 export const WordCard = ({
+  wordId,
   word,
   translation,
   transcription,
   pictureUrl,
 }: Props) => {
-  const [isTranslationShown, setTranslationShown] = useState(false);
+  const [isTranslated, setTranslated] = useState(false);
+  const { data: user } = useGetUser(false);
+  const { mutate: toggleFav, isPending } = useToggleFavoriteWord();
 
   return (
     <Card>
@@ -42,17 +48,29 @@ export const WordCard = ({
             pictureUrl && 'absolute',
           ])}
         >
-          <Chip variant="faded">{isTranslationShown ? translation : word}</Chip>
-          {transcription && !isTranslationShown && (
+          <Chip variant="faded">{isTranslated ? translation : word}</Chip>
+          {transcription && !isTranslated && (
             <Chip variant="faded">{transcription}</Chip>
           )}
         </div>
       </CardBody>
-      <CardFooter className="justify-end">
+      <CardFooter className="justify-end gap-2">
+        {user && (
+          <Button
+            color="default"
+            isLoading={isPending}
+            title="Add to favorite"
+            isIconOnly
+            onClick={() => toggleFav({ userId: user.id, wordId })}
+          >
+            <HeartIcon className="opacity-50" />
+          </Button>
+        )}
         <Button
-          color={isTranslationShown ? 'primary' : 'default'}
+          color={isTranslated ? 'primary' : 'default'}
+          title={isTranslated ? 'Hide translation' : 'Show translation'}
           isIconOnly
-          onClick={() => setTranslationShown(!isTranslationShown)}
+          onClick={() => setTranslated(!isTranslated)}
         >
           <TranslateIcon />
         </Button>
