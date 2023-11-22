@@ -1,10 +1,4 @@
-CREATE TYPE game_words AS (
-  name_en text,
-  name_ka text,
-  picture_url text,
-  variants text []
-);
-CREATE OR REPLACE FUNCTION get_game_word() RETURNS setof game_words AS $$
+CREATE OR REPLACE FUNCTION get_game_word() RETURNS setof game_word AS $$
 DECLARE variants text [];
 word words %ROWTYPE;
 BEGIN
