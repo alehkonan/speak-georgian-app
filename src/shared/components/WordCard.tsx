@@ -8,7 +8,7 @@ import {
 } from '@nextui-org/react';
 import { useState } from 'react';
 import { HeartIcon, TranslateIcon } from 'src/assets/icons';
-import { useToggleFavoriteWord } from 'src/cache/favorites/useToggleFavoriteWord';
+import { useToggleFavoriteWord } from 'src/cache/favorite/useToggleFavoriteWord';
 import { useGetUser } from 'src/cache/user/useGetUser';
 import { twJoin } from 'tailwind-merge';
 

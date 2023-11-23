@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import toast, { Toaster } from 'react-hot-toast';
 
 import { App } from './app/App';
 
@@ -20,6 +21,7 @@ const queryClient = new QueryClient({
     },
     mutations: {
       retry: false,
+      onError: (error) => toast.error(error.message),
     },
   },
 });
@@ -29,6 +31,7 @@ root.render(
     <NextUIProvider>
       <QueryClientProvider client={queryClient}>
         <App />
+        <Toaster />
         <ReactQueryDevtools />
       </QueryClientProvider>
     </NextUIProvider>

@@ -36,7 +36,7 @@ export const WordsScreen = () => {
       isLoading={isGettingWords || isGettingCategories}
     >
       {error && <ErrorCard error={error} onRetry={refetch} />}
-      <CardContainer>
+      <CardContainer isEmpty={!words?.length}>
         {words?.map((word) => (
           <WordCard
             key={word.id}

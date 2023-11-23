@@ -1,7 +1,15 @@
+import { Card, CardBody } from '@nextui-org/react';
 import { PropsWithChildren } from 'react';
 import { twJoin } from 'tailwind-merge';
 
-export const CardContainer = ({ children }: PropsWithChildren) => {
+type Props = {
+  isEmpty?: boolean;
+};
+
+export const CardContainer = ({
+  children,
+  isEmpty,
+}: PropsWithChildren<Props>) => {
   return (
     <div
       className={twJoin([
@@ -9,7 +17,15 @@ export const CardContainer = ({ children }: PropsWithChildren) => {
         'grid-cols-auto-fill-250 sm:grid-cols-auto-fit-250',
       ])}
     >
-      {children}
+      {isEmpty ? (
+        <Card className="border bg-slate-100 sm:w-96" shadow="none">
+          <CardBody>
+            <p className="text-center font-semibold">Empty</p>
+          </CardBody>
+        </Card>
+      ) : (
+        children
+      )}
     </div>
   );
 };

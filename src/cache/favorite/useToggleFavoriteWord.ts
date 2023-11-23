@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { toggleFavoriteWord } from 'src/api/favorites/toggleFavoriteWord';
+import { toggleFavoriteWord } from 'src/api/favorite/toggleFavoriteWord';
 
 export const useToggleFavoriteWord = () => {
   return useMutation({

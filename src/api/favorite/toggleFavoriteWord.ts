@@ -9,8 +9,8 @@ type Params = {
 
 export const toggleFavoriteWord = async ({ userId, wordId }: Params) => {
   const { data, error } = await supabaseApi.rpc('toggle_favorite_word', {
-    user_id_input: userId,
-    word_id_input: wordId,
+    user_id_param: userId,
+    word_id_param: wordId,
   });
 
   if (error) throw error;
