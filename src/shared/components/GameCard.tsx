@@ -8,7 +8,9 @@ import {
 } from '@nextui-org/react';
 import shuffle from 'lodash/shuffle';
 import { useMemo, useState } from 'react';
-import { useGetGameWord } from 'src/cache/word/useGetGameWord';
+import { useGetGameWord } from 'src/cache/game/useGetGameWord';
+
+import { ErrorCard } from './ErrorCard';
 
 export const GameCard = () => {
   const [answer, setAnswer] = useState<string>();
@@ -28,7 +30,7 @@ export const GameCard = () => {
   };
 
   if (isFetching) return <Spinner />;
-  if (error) return 'Error';
+  if (error) return <ErrorCard error={error} onRetry={refetch} />;
 
   return (
     <Card shadow="sm">

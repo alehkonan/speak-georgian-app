@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS settings(
   show_daily_word boolean DEFAULT TRUE,
   show_transcription boolean DEFAULT TRUE,
   show_game_pictures boolean DEFAULT TRUE,
-  created_at timestamp DEFAULT NOW(),
+  created_at timestamp with time zone DEFAULT NOW(),
   CONSTRAINT user_settings UNIQUE (user_id),
   FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE
 );

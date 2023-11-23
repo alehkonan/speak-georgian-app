@@ -13,19 +13,28 @@ export const CategoriesScreen = () => {
 
   return (
     <Screen breadcrumbs={breadcrumbs} isLoading={isLoading}>
-      {error && <ErrorCard error={error} onRetry={refetch} />}
-      <CardContainer>
-        {categories?.map((category) => (
+      {error ? (
+        <ErrorCard error={error} onRetry={refetch} />
+      ) : (
+        <CardContainer>
+          {categories?.map((category) => (
+            <CategoryCard
+              key={category.id}
+              path={generatePath(paths.category, {
+                id: String(category.id),
+              })}
+              pictureUrl={category.picture_url}
+              title={category.name_en}
+            />
+          ))}
           <CategoryCard
-            key={category.id}
             path={generatePath(paths.category, {
-              id: String(category.id),
+              id: 'undefined',
             })}
-            pictureUrl={category.picture_url}
-            title={category.name_en}
+            title="Without category"
           />
-        ))}
-      </CardContainer>
+        </CardContainer>
+      )}
     </Screen>
   );
 };

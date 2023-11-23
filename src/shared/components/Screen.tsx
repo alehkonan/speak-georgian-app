@@ -22,7 +22,7 @@ export const Screen = ({
   return (
     <div className="flex h-full flex-col overflow-hidden">
       <main className="flex-1 overflow-auto sm:order-1">
-        <div className="mx-auto grid min-h-full max-w-5xl auto-rows-min gap-3 p-5 pt-10">
+        <div className="mx-auto grid min-h-full max-w-5xl gap-3 p-5 pt-10">
           {isLoading ? (
             <Spinner className="justify-self-center p-5" />
           ) : (
