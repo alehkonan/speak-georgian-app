@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Wave } from 'src/assets/images';
 
-import { Navigation } from './Navigation';
+import { Navigation } from './navigation';
 
 type Props = {
   isPrivate?: boolean;
