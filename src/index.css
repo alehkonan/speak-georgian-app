@@ -2,49 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --ripe-mango-color: #ffb629;
-  --calamansi-color: #fff1a5;
-}
-
 @supports (height: 100dvh) {
   .h-screen {
     height: 100dvh;
   }
+
+  .min-h-screen {
+    min-height: 100dvh;
+  }
 }
 
-body {
-  overflow: hidden;
-  touch-action: none;
-}
-
-/* safari, chrome */
-progress::-webkit-progress-bar {
-  background-color: var(--calamansi-color);
-  border-radius: 10px;
-}
-
-progress::-webkit-progress-value {
-  background-color: var(--ripe-mango-color);
-  border-radius: 10px;
-}
-
-/* firefox */
-progress {
-  border: none;
-  border-radius: 10px;
-  background-color: var(--calamansi-color);
-}
-
-progress::-moz-progress-bar {
-  border-radius: 10px;
-  background-color: var(--ripe-mango-color);
-}
-
-*:focus-visible {
-  outline: none;
-  box-shadow: 1px 1px 1px var(--ripe-mango-color),
-    1px -1px 1px var(--ripe-mango-color), -1px 1px 1px var(--ripe-mango-color),
-    -1px -1px 1px var(--ripe-mango-color);
-  border-color: var(--ripe-mango-color);
+html {
+  overscroll-behavior: none;
 }
