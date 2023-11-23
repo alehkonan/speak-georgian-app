@@ -2,7 +2,7 @@ import { Avatar, Button, Switch } from '@nextui-org/react';
 import { PersonIcon } from 'src/assets/icons';
 import { useLogout } from 'src/cache/auth/useLogout';
 import { useGetUser } from 'src/cache/user/useGetUser';
-import { ProfileWidget } from 'src/shared/components/ProfileWidget';
+import { ProfileCard } from 'src/shared/components/ProfileCard';
 import { Screen } from 'src/shared/components/Screen';
 import { formatDate } from 'src/shared/utils/dates';
 
@@ -12,7 +12,7 @@ export const ProfileScreen = () => {
 
   return (
     <Screen>
-      <ProfileWidget
+      <ProfileCard
         avatar={
           <Avatar icon={<PersonIcon />} src={user?.user_metadata.picture} />
         }
@@ -24,23 +24,23 @@ export const ProfileScreen = () => {
         <span>{formatDate(user?.created_at)}</span>
         <span>Provider:</span>
         <span>{user?.app_metadata.provider}</span>
-      </ProfileWidget>
-      <ProfileWidget title="Settings">
+      </ProfileCard>
+      <ProfileCard title="Settings">
         <span>Show daily word:</span>
         <Switch />
         <span>Show transcription: </span>
         <Switch />
         <span>Show pictures in game mode:</span>
         <Switch />
-      </ProfileWidget>
-      <ProfileWidget title="Statistics">
+      </ProfileCard>
+      <ProfileCard title="Statistics">
         <span>Total words: </span>
         <span>{102}</span>
         <span>Learned words: </span>
         <span>{12}</span>
         <span>Favorite words: </span>
         <span>{10}</span>
-      </ProfileWidget>
+      </ProfileCard>
       <Button color="primary" isLoading={isPending} onClick={() => logout()}>
         Logout
       </Button>

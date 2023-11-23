@@ -1,9 +1,9 @@
 import { type RouteObject } from 'react-router-dom';
 import { NotFoundScreen } from 'src/screens/NotFound';
 
+import { CategoriesScreen } from '../screens/Categories';
 import { FavoritesScreen } from '../screens/Favorites';
 import { GameScreen } from '../screens/Game';
-import { HomeScreen } from '../screens/Home';
 import { LoginScreen } from '../screens/Login';
 import { ProfileScreen } from '../screens/Profile';
 import { WelcomeScreen } from '../screens/Welcome';
@@ -15,7 +15,7 @@ import { paths } from './paths';
 const commonRoutes: RouteObject[] = [
   {
     index: true,
-    element: <HomeScreen />,
+    element: <CategoriesScreen />,
   },
   {
     path: paths.category,

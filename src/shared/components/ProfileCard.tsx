@@ -6,7 +6,7 @@ type Props = {
   avatar?: ReactNode;
 };
 
-export const ProfileWidget = ({
+export const ProfileCard = ({
   children,
   avatar,
   title,
