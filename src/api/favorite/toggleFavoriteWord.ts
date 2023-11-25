@@ -1,19 +1,20 @@
-import { boolean } from 'zod';
-
 import { supabaseApi } from '../api';
+import { WordSchema } from '../schemas/word';
 
 type Params = {
-  userId: string;
+  userId?: string;
   wordId: number;
 };
 
 export const toggleFavoriteWord = async ({ userId, wordId }: Params) => {
-  const { data, error } = await supabaseApi.rpc('toggle_favorite_word', {
-    user_id_param: userId,
-    word_id_param: wordId,
-  });
+  const { data, error } = await supabaseApi
+    .rpc('toggle_favorite_word', {
+      user_id_param: userId,
+      word_id_param: wordId,
+    })
+    .single();
 
   if (error) throw error;
 
-  return boolean().parse(data);
+  return WordSchema.parse(data);
 };

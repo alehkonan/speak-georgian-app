@@ -1,16 +1,22 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toggleFavoriteWord } from 'src/api/favorite/toggleFavoriteWord';
+import { Word } from 'src/api/schemas/word';
+
+import { queryKeys } from '../keys';
 
 export const useToggleFavoriteWord = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: toggleFavoriteWord,
-    onSuccess: (isFavorite, { userId, wordId }) => {
-      // TODO modify words cache with new favorite value
-      console.log(
-        `word with id ${wordId} for user ${userId} is ${
-          isFavorite ? 'is in' : 'in not in'
-        } favorites`,
+    onSuccess: ({ id, category_id, is_favorite }) => {
+      queryClient.setQueryData<Word[]>(
+        queryKeys.category.words(category_id || undefined).queryKey,
+        (words) => words?.map((w) => (w.id === id ? { ...w, is_favorite } : w)),
       );
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.favorite.words.queryKey,
+      });
     },
   });
 };

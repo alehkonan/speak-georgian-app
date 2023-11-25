@@ -9,7 +9,7 @@ import {
 import { useState } from 'react';
 import { HeartIcon, TranslateIcon } from 'src/assets/icons';
 import { useToggleFavoriteWord } from 'src/cache/favorite/useToggleFavoriteWord';
-import { useGetUser } from 'src/cache/user/useGetUser';
+import { useUser } from 'src/cache/user/useUser';
 import { twJoin } from 'tailwind-merge';
 
 type Props = {
@@ -18,6 +18,7 @@ type Props = {
   translation: string;
   transcription?: string;
   pictureUrl?: string;
+  isFavorite?: boolean;
 };
 
 export const WordCard = ({
@@ -26,10 +27,11 @@ export const WordCard = ({
   translation,
   transcription,
   pictureUrl,
+  isFavorite,
 }: Props) => {
   const [isTranslated, setTranslated] = useState(false);
-  const { data: user } = useGetUser(false);
-  const { mutate: toggleFav, isPending } = useToggleFavoriteWord();
+  const user = useUser();
+  const { mutate: toggleFavorite, isPending } = useToggleFavoriteWord();
 
   return (
     <Card>
@@ -57,13 +59,13 @@ export const WordCard = ({
       <CardFooter className="justify-end gap-2">
         {user && (
           <Button
-            color="default"
+            color={isFavorite ? 'danger' : 'default'}
             isLoading={isPending}
-            title="Add to favorite"
+            title={isFavorite ? 'Remove from favorite' : '"Add to favorite"'}
             isIconOnly
-            onClick={() => toggleFav({ userId: user.id, wordId })}
+            onClick={() => toggleFavorite({ userId: user.id, wordId })}
           >
-            <HeartIcon className="opacity-50" />
+            <HeartIcon className={isFavorite ? 'text-white' : 'text-black'} />
           </Button>
         )}
         <Button

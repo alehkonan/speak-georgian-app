@@ -2,11 +2,12 @@ import zod from 'zod';
 
 export const WordSchema = zod.object({
   id: zod.number(),
+  name_ka: zod.string(),
   name_en: zod.string(),
   transcription_en: zod.string().nullable(),
-  name_ka: zod.string(),
   category_id: zod.number().nullable(),
   picture_url: zod.string().nullable(),
+  is_favorite: zod.boolean().nullable(),
   created_at: zod.coerce.date(),
 });
 
