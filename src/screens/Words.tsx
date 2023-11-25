@@ -12,34 +12,28 @@ export const WordsScreen = () => {
   const { id } = useParams();
   const categoryId = Number(id);
 
-  const { data: categories, isLoading: isGettingCategories } =
-    useGetCategories();
-  const {
-    data: words,
-    isLoading: isGettingWords,
-    error,
-    refetch,
-  } = useGetCategoryWords(categoryId);
+  const categoryQuery = useGetCategories();
+  const wordsQuery = useGetCategoryWords(categoryId);
 
   const breadcrumbs = useMemo<Breadcrumb[]>(() => {
-    const category = categories?.find(({ id }) => id === categoryId);
+    const category = categoryQuery.data?.find(({ id }) => id === categoryId);
 
     return [
       { path: paths.root, label: 'Categories' },
       { path: paths.category, label: category?.name_en ?? 'No category' },
     ];
-  }, [categories, categoryId]);
+  }, [categoryQuery, categoryId]);
 
   return (
-    <Screen
-      breadcrumbs={breadcrumbs}
-      isLoading={isGettingWords || isGettingCategories}
-    >
-      {error && <ErrorCard error={error} onRetry={refetch} />}
-      <CardContainer isEmpty={!words?.length}>
-        {words?.map((word) => (
+    <Screen breadcrumbs={breadcrumbs} isLoading={wordsQuery.isLoading}>
+      {wordsQuery.error && (
+        <ErrorCard error={wordsQuery.error} onRetry={wordsQuery.refetch} />
+      )}
+      <CardContainer isEmpty={!wordsQuery.data?.length}>
+        {wordsQuery.data?.map((word) => (
           <WordCard
             key={word.id}
+            isFavorite={word.is_favorite || undefined}
             pictureUrl={word.picture_url || undefined}
             transcription={word.transcription_en || undefined}
             translation={word.name_en}

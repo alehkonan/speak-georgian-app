@@ -8,6 +8,9 @@ export const queryKeys = createQueryKeyStore({
     list: null,
     words: (id?: number) => [{ id }],
   },
+  favorite: {
+    words: null,
+  },
   game: {
     word: null,
   },
