@@ -10,6 +10,7 @@ CREATE TYPE word AS (
 );
 
 CREATE TYPE game_word AS (
+  id int,
   name_en text,
   name_ka text,
   picture_url text,
