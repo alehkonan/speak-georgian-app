@@ -13,6 +13,7 @@ import { useUpdateStatistic } from 'src/cache/statistic/useUpdateStatistic';
 import { useUser } from 'src/cache/user/useUser';
 
 import { ErrorCard } from './ErrorCard';
+import { WordStatistic } from './WordStatistic';
 
 export const GameCard = () => {
   const user = useUser();
@@ -43,9 +44,13 @@ export const GameCard = () => {
 
   if (isFetching) return <Spinner />;
   if (error) return <ErrorCard error={error} onRetry={refetch} />;
+  if (!gameWord) return null;
 
   return (
     <Card shadow="sm">
+      <div className="absolute right-0 m-1 opacity-50">
+        <WordStatistic wordId={gameWord?.id} />
+      </div>
       <CardHeader className="justify-center pb-0">
         <p className="text-lg font-semibold">{gameWord?.name_ka}</p>
       </CardHeader>
