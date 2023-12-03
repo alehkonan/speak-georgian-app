@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS statistic(
   word_id int NOT NULL,
   right_answers int DEFAULT 0,
   wrong_answers int DEFAULT 0,
+  is_learned boolean DEFAULT FALSE,
   created_at timestamp with time zone DEFAULT NOW(),
   CONSTRAINT word_statistic UNIQUE (user_id, word_id),
   FOREIGN KEY (word_id) REFERENCES public.words(id) ON DELETE CASCADE,
