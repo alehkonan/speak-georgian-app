@@ -20,7 +20,8 @@ BEGIN
       ORDER BY
         random()
       LIMIT 3) INTO variants;
-  RETURN NEXT ROW (word.name_en,
+  RETURN NEXT ROW (word.id,
+    word.name_en,
     word.name_ka,
     word.picture_url,
     variants);

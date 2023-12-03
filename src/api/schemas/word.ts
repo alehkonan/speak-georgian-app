@@ -12,6 +12,7 @@ export const WordSchema = zod.object({
 });
 
 export const GameWordSchema = zod.object({
+  id: zod.number(),
   name_en: zod.string(),
   name_ka: zod.string(),
   picture_url: zod.string().nullable(),
