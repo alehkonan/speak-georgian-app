@@ -1,5 +1,5 @@
 import { Avatar, Button, Switch } from '@nextui-org/react';
-import { PersonIcon } from 'src/assets/icons';
+import { UserRound } from 'lucide-react';
 import { useLogout } from 'src/cache/auth/useLogout';
 import { useGetUser } from 'src/cache/user/useGetUser';
 import { ProfileCard } from 'src/shared/components/ProfileCard';
@@ -14,7 +14,7 @@ export const ProfileScreen = () => {
     <Screen>
       <ProfileCard
         avatar={
-          <Avatar icon={<PersonIcon />} src={user?.user_metadata.picture} />
+          <Avatar icon={<UserRound />} src={user?.user_metadata.picture} />
         }
         title="Account info"
       >

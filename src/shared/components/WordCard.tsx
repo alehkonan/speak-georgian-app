@@ -6,8 +6,8 @@ import {
   Chip,
   Image,
 } from '@nextui-org/react';
+import { Languages, Star } from 'lucide-react';
 import { useState } from 'react';
-import { HeartIcon, TranslateIcon } from 'src/assets/icons';
 import { useToggleFavoriteWord } from 'src/cache/favorite/useToggleFavoriteWord';
 import { useUser } from 'src/cache/user/useUser';
 import { twJoin } from 'tailwind-merge';
@@ -65,7 +65,7 @@ export const WordCard = ({
             isIconOnly
             onClick={() => toggleFavorite({ userId: user.id, wordId })}
           >
-            <HeartIcon className={isFavorite ? 'text-white' : 'text-black'} />
+            <Star className={isFavorite ? 'text-white' : 'text-black'} />
           </Button>
         )}
         <Button
@@ -74,7 +74,7 @@ export const WordCard = ({
           isIconOnly
           onClick={() => setTranslated(!isTranslated)}
         >
-          <TranslateIcon />
+          <Languages />
         </Button>
       </CardFooter>
     </Card>
