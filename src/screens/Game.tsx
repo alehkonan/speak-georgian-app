@@ -9,7 +9,7 @@ export const GameScreen = () => {
   return (
     <Screen>
       {isStarted ? (
-        <div className="grid gap-8 self-center">
+        <div className="grid h-full grid-rows-[1fr_auto] items-center self-center">
           <GameCard />
           <Button color="primary" onClick={() => setStarted(false)}>
             Stop the game
@@ -17,7 +17,7 @@ export const GameScreen = () => {
         </div>
       ) : (
         <Button
-          className="self-center"
+          className="self-end"
           color="primary"
           onClick={() => setStarted(true)}
         >

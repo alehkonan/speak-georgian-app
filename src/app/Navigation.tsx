@@ -1,7 +1,7 @@
 import { Tab, Tabs } from '@nextui-org/react';
+import { Gamepad2, Home, Star, UserRound } from 'lucide-react';
 import { ReactNode, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { GameIcon, HeartIcon, HomeIcon, PersonIcon } from 'src/assets/icons';
 import { twJoin } from 'tailwind-merge';
 
 import { paths } from './paths';
@@ -27,22 +27,22 @@ export const privateTabs: NavTab[] = [
   {
     path: paths.root,
     title: 'Home',
-    icon: <HomeIcon />,
+    icon: <Home />,
   },
   {
     path: paths.game,
     title: 'Game',
-    icon: <GameIcon />,
+    icon: <Gamepad2 />,
   },
   {
     path: paths.favorites,
     title: 'Favorites',
-    icon: <HeartIcon />,
+    icon: <Star />,
   },
   {
     path: paths.profile,
     title: 'Profile',
-    icon: <PersonIcon />,
+    icon: <UserRound />,
   },
 ];
 

@@ -56,6 +56,8 @@ export default {
       },
       backgroundImage: {
         'page-gradient': `linear-gradient(to top, ${colors.columbiaBlue}, ${colors.antiFlashWhite}, ${colors.cosmicLatte})`,
+        'left-gradient': `linear-gradient(to right, ${colors.maize}, transparent)`,
+        'right-gradient': `linear-gradient(to left, ${colors.pictonBlue}, transparent)`,
       },
       gridTemplateColumns: {
         'auto-fit-250': 'repeat(auto-fit, minmax(min-content, 250px))',
