@@ -11,7 +11,7 @@ export const useToggleFavoriteWord = () => {
     mutationFn: toggleFavoriteWord,
     onSuccess: ({ id, category_id, is_favorite }) => {
       queryClient.setQueryData<Word[]>(
-        queryKeys.category.words(category_id || undefined).queryKey,
+        queryKeys.category.words(category_id).queryKey,
         (words) => words?.map((w) => (w.id === id ? { ...w, is_favorite } : w)),
       );
       queryClient.invalidateQueries({
