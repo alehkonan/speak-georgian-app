@@ -5,7 +5,7 @@ import { useGetCategories } from 'src/cache/category/useGetCategories';
 import { useGetCategoryWords } from 'src/cache/category/useGetCategoryWords';
 import { CardContainer } from 'src/shared/components/CardContainer';
 import { ErrorCard } from 'src/shared/components/ErrorCard';
-import { Breadcrumb, Screen } from 'src/shared/components/Screen';
+import { type Breadcrumb, Screen } from 'src/shared/components/Screen';
 import { WordCard } from 'src/shared/components/WordCard';
 
 export const WordsScreen = () => {

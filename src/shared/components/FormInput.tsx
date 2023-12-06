@@ -1,8 +1,8 @@
-import { Input, InputProps } from '@nextui-org/react';
+import { Input, type InputProps } from '@nextui-org/react';
 import {
-  FieldValues,
+  type FieldValues,
   useController,
-  UseControllerProps,
+  type UseControllerProps,
 } from 'react-hook-form';
 
 type Props<FormType extends FieldValues> = Omit<

@@ -1,5 +1,5 @@
 import debounce from 'lodash/debounce';
-import { UIEvent, useCallback } from 'react';
+import { type UIEvent, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export const useRestoreScrollPosition = (enabled?: boolean) => {

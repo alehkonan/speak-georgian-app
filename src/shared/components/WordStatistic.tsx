@@ -1,4 +1,4 @@
-import { Chip, ChipProps, Tooltip } from '@nextui-org/react';
+import { Chip, type ChipProps, Tooltip } from '@nextui-org/react';
 import { useMemo } from 'react';
 import { useGetWordStatistic } from 'src/cache/statistic/useGetWordStatistic';
 

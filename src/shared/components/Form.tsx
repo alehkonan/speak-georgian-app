@@ -1,7 +1,7 @@
+import type { PropsWithChildren } from 'react';
+import type { ZodSchema } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { PropsWithChildren } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { ZodSchema } from 'zod';
 
 type Props<FormType> = {
   schema: ZodSchema;

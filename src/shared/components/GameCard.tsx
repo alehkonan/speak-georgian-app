@@ -14,7 +14,6 @@ import { useGetGameWord } from 'src/cache/game/useGetGameWord';
 import { useSetWordLearned } from 'src/cache/statistic/useSetWordLearned';
 import { useUpdateStatistic } from 'src/cache/statistic/useUpdateStatistic';
 import { useUser } from 'src/cache/user/useUser';
-
 import { ErrorCard } from './ErrorCard';
 import { Swiper } from './Swiper';
 import { WordStatistic } from './WordStatistic';

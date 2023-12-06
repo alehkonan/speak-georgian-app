@@ -1,7 +1,6 @@
-import { BreadcrumbItem, Breadcrumbs, Spinner } from '@nextui-org/react';
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
+import { Breadcrumbs, Spinner, BreadcrumbItem } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
-
 import { useRestoreScrollPosition } from '../hooks/useRestoreScrollPosition';
 
 export type Breadcrumb = {

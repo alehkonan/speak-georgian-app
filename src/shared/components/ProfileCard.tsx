@@ -1,5 +1,5 @@
 import { Card, CardBody, CardHeader, Divider } from '@nextui-org/react';
-import { PropsWithChildren, ReactNode } from 'react';
+import { type PropsWithChildren, type ReactNode } from 'react';
 
 type Props = {
   title: string;

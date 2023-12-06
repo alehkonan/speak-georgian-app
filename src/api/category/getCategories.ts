@@ -1,5 +1,4 @@
 import { array } from 'zod';
-
 import { supabaseApi } from '../api';
 import { CategorySchema } from '../schemas/category';
 

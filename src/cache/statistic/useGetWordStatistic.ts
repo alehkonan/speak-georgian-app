@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { getWordStatistic } from 'src/api/statistic/getWordStatistic';
-
 import { queryKeys } from '../keys';
 import { useUser } from '../user/useUser';
 

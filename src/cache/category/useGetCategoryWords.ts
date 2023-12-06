@@ -1,7 +1,6 @@
 import { type User } from '@supabase/supabase-js';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getCategoryWords } from 'src/api/category/getWords';
-
 import { queryKeys } from '../keys';
 
 export const useGetCategoryWords = (categoryId?: number) => {

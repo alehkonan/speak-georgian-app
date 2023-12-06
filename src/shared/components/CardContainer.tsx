@@ -1,5 +1,5 @@
+import type { PropsWithChildren } from 'react';
 import { Card, CardBody } from '@nextui-org/react';
-import { PropsWithChildren } from 'react';
 import { twJoin } from 'tailwind-merge';
 
 type Props = {

@@ -9,9 +9,9 @@ import {
 } from '@nextui-org/react';
 import { Check, Languages, Star } from 'lucide-react';
 import { useState } from 'react';
+import { twJoin } from 'tailwind-merge';
 import { useToggleFavoriteWord } from 'src/cache/favorite/useToggleFavoriteWord';
 import { useUser } from 'src/cache/user/useUser';
-import { twJoin } from 'tailwind-merge';
 
 type Props = {
   wordId: number;
