@@ -6,7 +6,8 @@ CREATE TYPE word AS (
   category_id int,
   picture_url text,
   created_at timestamp with time zone,
-  is_favorite boolean
+  is_favorite boolean,
+  is_learned boolean
 );
 
 CREATE TYPE game_word AS (

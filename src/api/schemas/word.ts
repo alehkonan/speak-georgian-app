@@ -8,6 +8,7 @@ export const WordSchema = zod.object({
   category_id: zod.number().nullable(),
   picture_url: zod.string().nullable(),
   is_favorite: zod.boolean().nullable(),
+  is_learned: zod.boolean().nullable(),
   created_at: zod.coerce.date(),
 });
 

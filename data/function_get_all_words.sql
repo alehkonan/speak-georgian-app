@@ -12,11 +12,14 @@ BEGIN
       w.category_id,
       w.picture_url,
       w.created_at,
-      f.is_favorite
+      f.is_favorite,
+      s.is_learned
     FROM
       words w
     LEFT JOIN favorites f ON w.id = f.word_id
       AND f.user_id = user_id_param
+  LEFT JOIN statistic s ON w.id = s.word_id
+      AND s.user_id = user_id_param
     ORDER BY
       w.name_en;
   ELSE
@@ -29,7 +32,8 @@ BEGIN
       category_id,
       picture_url,
       created_at,
-      NULL::boolean AS is_favorite
+      NULL::boolean AS is_favorite,
+      NULL::boolean AS is_learned
     FROM
       words
     ORDER BY

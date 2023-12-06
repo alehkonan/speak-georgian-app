@@ -5,8 +5,9 @@ import {
   CardFooter,
   Chip,
   Image,
+  Tooltip,
 } from '@nextui-org/react';
-import { Languages, Star } from 'lucide-react';
+import { Check, Languages, Star } from 'lucide-react';
 import { useState } from 'react';
 import { useToggleFavoriteWord } from 'src/cache/favorite/useToggleFavoriteWord';
 import { useUser } from 'src/cache/user/useUser';
@@ -18,7 +19,8 @@ type Props = {
   translation: string;
   transcription?: string;
   pictureUrl?: string;
-  isFavorite?: boolean;
+  isFavorite: boolean | null;
+  isLearned: boolean | null;
 };
 
 export const WordCard = ({
@@ -28,6 +30,7 @@ export const WordCard = ({
   transcription,
   pictureUrl,
   isFavorite,
+  isLearned,
 }: Props) => {
   const [isTranslated, setTranslated] = useState(false);
   const user = useUser();
@@ -36,6 +39,18 @@ export const WordCard = ({
   return (
     <Card>
       <CardBody className="justify-end p-0">
+        {isLearned && (
+          <Tooltip content="This word is learned">
+            <Check
+              className={twJoin([
+                'absolute right-0 top-0 z-20',
+                'm-1 rounded-full p-1 shadow',
+                'bg-green-400 text-white',
+              ])}
+              size="28"
+            />
+          </Tooltip>
+        )}
         {pictureUrl && (
           <Image
             alt={word}
@@ -57,11 +72,18 @@ export const WordCard = ({
         </div>
       </CardBody>
       <CardFooter className="justify-end gap-2">
+        {/* <Button
+          color={isLearned ? 'primary' : 'default'}
+          title={isLearned ? 'Is learned' : 'Is not learned'}
+          isIconOnly
+        >
+          <CheckCircle />
+        </Button> */}
         {user && (
           <Button
             color={isFavorite ? 'danger' : 'default'}
             isLoading={isPending}
-            title={isFavorite ? 'Remove from favorite' : '"Add to favorite"'}
+            title={isFavorite ? 'Remove from favorite' : 'Add to favorite'}
             isIconOnly
             onClick={() => toggleFavorite({ userId: user.id, wordId })}
           >

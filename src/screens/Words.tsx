@@ -33,7 +33,8 @@ export const WordsScreen = () => {
         {wordsQuery.data?.map((word) => (
           <WordCard
             key={word.id}
-            isFavorite={word.is_favorite || undefined}
+            isFavorite={word.is_favorite}
+            isLearned={word.is_learned}
             pictureUrl={word.picture_url || undefined}
             transcription={word.transcription_en || undefined}
             translation={word.name_en}
