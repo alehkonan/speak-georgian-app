@@ -6,7 +6,7 @@ export const queryKeys = createQueryKeyStore({
   },
   category: {
     list: null,
-    words: (id?: number) => [{ id }] as const,
+    words: (id: number | null) => [{ id }] as const,
   },
   favorite: {
     words: null,

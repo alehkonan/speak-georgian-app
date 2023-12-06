@@ -1,6 +1,5 @@
 import { type RouteObject } from 'react-router-dom';
 import { NotFoundScreen } from 'src/screens/NotFound';
-
 import { CategoriesScreen } from '../screens/Categories';
 import { FavoritesScreen } from '../screens/Favorites';
 import { GameScreen } from '../screens/Game';

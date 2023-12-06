@@ -4,7 +4,7 @@ import {
   useMotionValueEvent,
   useTransform,
 } from 'framer-motion';
-import { PropsWithChildren, ReactNode } from 'react';
+import { type PropsWithChildren, type ReactNode } from 'react';
 import { twJoin } from 'tailwind-merge';
 
 type Props = {

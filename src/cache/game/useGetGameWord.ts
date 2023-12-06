@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { getGameWord } from 'src/api/game/getGameWord';
-
 import { queryKeys } from '../keys';
 
 export const useGetGameWord = () => {

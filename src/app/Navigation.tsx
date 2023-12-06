@@ -1,15 +1,18 @@
 import { Tab, Tabs } from '@nextui-org/react';
 import { Gamepad2, Home, Star, UserRound } from 'lucide-react';
-import { ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { twJoin } from 'tailwind-merge';
-
 import { paths } from './paths';
 
 type NavTab = {
   path: `/${string}`;
   title: string;
   icon?: ReactNode;
+};
+
+type Props = {
+  isPrivate?: boolean;
 };
 
 export const publicTabs: NavTab[] = [
@@ -45,10 +48,6 @@ export const privateTabs: NavTab[] = [
     icon: <UserRound />,
   },
 ];
-
-type Props = {
-  isPrivate?: boolean;
-};
 
 export const Navigation = ({ isPrivate }: Props) => {
   const tabs = isPrivate ? privateTabs : publicTabs;

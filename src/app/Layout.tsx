@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router-dom';
 import { Wave } from 'src/assets/images';
-
 import { Navigation } from './Navigation';
 
 type Props = {

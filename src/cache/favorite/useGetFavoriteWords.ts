@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { getFavoriteWords } from 'src/api/favorite/getFavoriteWords';
-
 import { queryKeys } from '../keys';
 import { useUser } from '../user/useUser';
 

@@ -1,5 +1,4 @@
 import { type LoaderFunction, redirect } from 'react-router-dom';
-
 import { paths } from './paths';
 
 export const checkIfVisited: LoaderFunction = () => {

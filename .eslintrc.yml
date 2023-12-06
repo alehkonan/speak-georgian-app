@@ -10,8 +10,6 @@ extends:
   - plugin:tailwindcss/recommended
   - plugin:lodash/recommended
   - eslint-config-prettier
-plugins:
-  - simple-import-sort
 settings:
   react:
     version: detect
@@ -32,6 +30,24 @@ rules:
       multiline: first
       reservedFirst: true
   react/jsx-no-useless-fragment: warn
-  simple-import-sort/imports: warn
-  simple-import-sort/exports: warn
   lodash/prefer-lodash-method: off
+  import/no-cycle: error
+  import/order:
+    - warn
+    - groups:
+        - type
+        - builtin
+        - external
+        - internal
+        - parent
+        - sibling
+        - index
+      newlines-between: never
+      alphabetize:
+        order: asc
+      warnOnUnassignedImports: true
+  '@typescript-eslint/adjacent-overload-signatures': warn
+  '@typescript-eslint/consistent-type-imports':
+    - warn
+    - prefer: type-imports
+      fixStyle: inline-type-imports
