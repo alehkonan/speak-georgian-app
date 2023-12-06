@@ -15,7 +15,7 @@ type Props = {
   isPrivate?: boolean;
 };
 
-export const publicTabs: NavTab[] = [
+const publicTabs: NavTab[] = [
   {
     path: paths.root,
     title: 'Home',
@@ -26,7 +26,7 @@ export const publicTabs: NavTab[] = [
   },
 ];
 
-export const privateTabs: NavTab[] = [
+const privateTabs: NavTab[] = [
   {
     path: paths.root,
     title: 'Home',

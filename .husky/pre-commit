@@ -4,5 +4,5 @@
 
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run tsc
+npm run check:types
 npm run lint
