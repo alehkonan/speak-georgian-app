@@ -10,8 +10,9 @@ export const useGetCategoryWords = (categoryId?: number) => {
   const user = queryClient.getQueryData<User>(queryKeys.user.details.queryKey);
 
   return useQuery({
-    queryKey: queryKeys.category.words(categoryId).queryKey,
-    queryFn: ({ queryKey: [, , { id }] }) => getCategoryWords(user?.id, id),
+    queryKey: queryKeys.category.words(categoryId || null).queryKey,
+    queryFn: ({ queryKey: [, , { id }] }) =>
+      getCategoryWords(user?.id, id || undefined),
     staleTime: Infinity,
   });
 };
