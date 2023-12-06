@@ -12,7 +12,7 @@ export const CategoriesScreen = () => {
   const { data: categories, isLoading, error, refetch } = useGetCategories();
 
   return (
-    <Screen breadcrumbs={breadcrumbs} isLoading={isLoading}>
+    <Screen breadcrumbs={breadcrumbs} isLoading={isLoading} saveScrollPosition>
       {error ? (
         <ErrorCard error={error} onRetry={refetch} />
       ) : (
