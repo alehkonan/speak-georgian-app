@@ -1,14 +1,17 @@
 import { Card, CardBody, CardHeader, Divider } from '@nextui-org/react';
 import { type PropsWithChildren, type ReactNode } from 'react';
+import { twJoin } from 'tailwind-merge';
 
 type Props = {
   title: string;
   avatar?: ReactNode;
+  edgeValues?: boolean;
 };
 
 export const ProfileCard = ({
   children,
   avatar,
+  edgeValues = false,
   title,
 }: PropsWithChildren<Props>) => {
   return (
@@ -18,10 +21,13 @@ export const ProfileCard = ({
         {avatar}
       </CardHeader>
       <Divider />
-      <CardBody className="gap-2">
-        <div className="grid grid-cols-2 gap-x-4 gap-y-2 sm:grid-cols-[240px_auto]">
-          {children}
-        </div>
+      <CardBody
+        className={twJoin([
+          'grid gap-2 items-center',
+          edgeValues ? 'grid-cols-[1fr_50px]' : 'grid-cols-2',
+        ])}
+      >
+        {children}
       </CardBody>
     </Card>
   );

@@ -1,4 +1,4 @@
-import { Avatar, Button, Switch } from '@nextui-org/react';
+import { Avatar, Button, Divider, Switch } from '@nextui-org/react';
 import { UserRound } from 'lucide-react';
 import { useLogout } from 'src/cache/auth/useLogout';
 import { useGetUser } from 'src/cache/user/useGetUser';
@@ -25,15 +25,17 @@ export const ProfileScreen = () => {
         <span>Provider:</span>
         <span>{user?.app_metadata.provider}</span>
       </ProfileCard>
-      <ProfileCard title="Settings">
+      <ProfileCard title="Settings" edgeValues>
         <span>Show daily word:</span>
         <Switch />
+        <Divider className="col-span-2" />
         <span>Show transcription: </span>
         <Switch />
+        <Divider className="col-span-2" />
         <span>Show pictures in game mode:</span>
         <Switch />
       </ProfileCard>
-      <ProfileCard title="Statistics">
+      <ProfileCard title="Statistics" edgeValues>
         <span>Total words: </span>
         <span>{102}</span>
         <span>Learned words: </span>
