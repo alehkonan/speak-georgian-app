@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION get_words(user_id_param uuid DEFAULT NULL)
+CREATE OR REPLACE FUNCTION get_all_words(user_id_param uuid DEFAULT NULL)
   RETURNS SETOF word
   AS $$
 BEGIN

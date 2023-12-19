@@ -6,7 +6,7 @@ type Params = {
   isRightAnswer: boolean;
 };
 
-export const updateStatistic = async ({
+export const updateWordStatistic = async ({
   userId,
   wordId,
   isRightAnswer,

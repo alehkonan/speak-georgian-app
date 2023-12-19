@@ -1,8 +1,9 @@
 import { Tab, Tabs } from '@nextui-org/react';
 import { Gamepad2, Home, Star, UserRound } from 'lucide-react';
-import { type ReactNode, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { type ReactNode } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { twJoin } from 'tailwind-merge';
+import { useGetUser } from 'src/cache/user/useGetUser';
 import { paths } from './paths';
 
 type NavTab = {
@@ -11,11 +12,7 @@ type NavTab = {
   icon?: ReactNode;
 };
 
-type Props = {
-  isPrivate?: boolean;
-};
-
-export const publicTabs: NavTab[] = [
+const publicTabs: NavTab[] = [
   {
     path: paths.root,
     title: 'Home',
@@ -26,7 +23,7 @@ export const publicTabs: NavTab[] = [
   },
 ];
 
-export const privateTabs: NavTab[] = [
+const privateTabs: NavTab[] = [
   {
     path: paths.root,
     title: 'Home',
@@ -49,34 +46,30 @@ export const privateTabs: NavTab[] = [
   },
 ];
 
-export const Navigation = ({ isPrivate }: Props) => {
-  const tabs = isPrivate ? privateTabs : publicTabs;
-  const [selectedKey, setSelectedKey] = useState(window.location.pathname);
+export const Navigation = () => {
+  const { data: user, isLoading } = useGetUser();
+  const tabs = user ? privateTabs : publicTabs;
   const { pathname } = useLocation();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (tabs.find(({ path }) => path === pathname)) {
-      setSelectedKey(pathname);
-    }
-  }, [pathname, tabs]);
+  if (isLoading) return null;
 
   return (
-    <Tabs
-      selectedKey={selectedKey}
-      onSelectionChange={(key) => navigate(String(key))}
-    >
+    <Tabs selectedKey={pathname}>
       {tabs.map(({ path, title, icon }) => (
         <Tab
           key={path}
           title={
             <div className="flex items-center gap-2">
               {icon}
-              <span className={twJoin(['sm:block', isPrivate && 'hidden'])}>
+              <span className={twJoin(['sm:block', user && 'hidden'])}>
                 {title}
               </span>
             </div>
           }
+          as={Link}
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          to={path}
         />
       ))}
     </Tabs>

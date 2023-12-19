@@ -12,7 +12,7 @@ import { GripHorizontal } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { useGetGameWord } from 'src/cache/game/useGetGameWord';
 import { useSetWordLearned } from 'src/cache/statistic/useSetWordLearned';
-import { useUpdateStatistic } from 'src/cache/statistic/useUpdateStatistic';
+import { useUpdateWordStatistic } from 'src/cache/statistic/useUpdateStatistic';
 import { useUser } from 'src/cache/user/useUser';
 import { ErrorCard } from './ErrorCard';
 import { Swiper } from './Swiper';
@@ -22,7 +22,7 @@ export const GameCard = () => {
   const user = useUser();
   const [answer, setAnswer] = useState<string>();
   const { data: gameWord, refetch, error, isFetching } = useGetGameWord();
-  const { mutate: updateStatistic } = useUpdateStatistic();
+  const { mutate: updateStatistic } = useUpdateWordStatistic();
   const { mutate: setWordAsLearned } = useSetWordLearned();
 
   const options = useMemo(() => {

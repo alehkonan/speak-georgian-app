@@ -4,7 +4,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import toast, { Toaster } from 'react-hot-toast';
-import { App } from './app/App';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './app/router';
 import './index.css';
 
 const root = ReactDOM.createRoot(
@@ -28,7 +29,7 @@ root.render(
   <React.StrictMode>
     <NextUIProvider>
       <QueryClientProvider client={queryClient}>
-        <App />
+        <RouterProvider router={router} />
         <Toaster />
         <ReactQueryDevtools />
       </QueryClientProvider>

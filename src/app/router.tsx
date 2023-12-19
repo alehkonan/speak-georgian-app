@@ -1,4 +1,4 @@
-import { type RouteObject } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import { NotFoundScreen } from 'src/screens/NotFound';
 import { CategoriesScreen } from '../screens/Categories';
 import { FavoritesScreen } from '../screens/Favorites';
@@ -8,21 +8,14 @@ import { ProfileScreen } from '../screens/Profile';
 import { WelcomeScreen } from '../screens/Welcome';
 import { WordsScreen } from '../screens/Words';
 import { Layout } from './Layout';
-import { checkIfVisited } from './loaders';
+import {
+  layoutLoader,
+  protectedRouteLoader,
+  publicRouteLoader,
+} from './loaders';
 import { paths } from './paths';
 
-const commonRoutes: RouteObject[] = [
-  {
-    index: true,
-    element: <CategoriesScreen />,
-  },
-  {
-    path: paths.category,
-    element: <WordsScreen />,
-  },
-];
-
-export const publicRoutes: RouteObject[] = [
+export const router = createBrowserRouter([
   {
     id: 'Welcome',
     path: paths.welcome,
@@ -31,37 +24,35 @@ export const publicRoutes: RouteObject[] = [
   {
     path: paths.root,
     element: <Layout />,
-    loader: checkIfVisited,
+    loader: layoutLoader,
     children: [
-      ...commonRoutes,
       {
         path: paths.login,
+        loader: publicRouteLoader,
         element: <LoginScreen />,
       },
-    ],
-  },
-  {
-    path: '*',
-    element: <NotFoundScreen />,
-  },
-];
-
-export const privateRoutes: RouteObject[] = [
-  {
-    path: paths.root,
-    element: <Layout isPrivate />,
-    children: [
-      ...commonRoutes,
       {
-        path: paths.favorites,
-        element: <FavoritesScreen />,
+        index: true,
+        element: <CategoriesScreen />,
       },
       {
+        path: paths.category,
+        element: <WordsScreen />,
+      },
+
+      {
         path: paths.game,
+        loader: protectedRouteLoader,
         element: <GameScreen />,
       },
       {
+        path: paths.favorites,
+        loader: protectedRouteLoader,
+        element: <FavoritesScreen />,
+      },
+      {
         path: paths.profile,
+        loader: protectedRouteLoader,
         element: <ProfileScreen />,
       },
     ],
@@ -70,4 +61,4 @@ export const privateRoutes: RouteObject[] = [
     path: '*',
     element: <NotFoundScreen />,
   },
-];
+]);
