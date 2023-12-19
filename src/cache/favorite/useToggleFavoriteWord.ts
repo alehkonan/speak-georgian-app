@@ -8,14 +8,19 @@ export const useToggleFavoriteWord = () => {
 
   return useMutation({
     mutationFn: toggleFavoriteWord,
-    onSuccess: ({ id, category_id, is_favorite }) => {
+    onSuccess: ({ id, category_id, is_favorite }, { userId }) => {
       queryClient.setQueryData<Word[]>(
         queryKeys.category.words(category_id).queryKey,
         (words) => words?.map((w) => (w.id === id ? { ...w, is_favorite } : w)),
       );
-      queryClient.invalidateQueries({
-        queryKey: queryKeys.favorite.words.queryKey,
-      });
+      Promise.all([
+        queryClient.invalidateQueries({
+          queryKey: queryKeys.favorite.words.queryKey,
+        }),
+        queryClient.invalidateQueries({
+          queryKey: queryKeys.statistic.user(userId || null).queryKey,
+        }),
+      ]);
     },
   });
 };
