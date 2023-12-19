@@ -1,6 +1,7 @@
 import { Avatar, Button, Divider, Switch } from '@nextui-org/react';
 import { UserRound } from 'lucide-react';
 import { useLogout } from 'src/cache/auth/useLogout';
+import { useGetUserStatistic } from 'src/cache/statistic/useGetUserStatistic';
 import { useGetUser } from 'src/cache/user/useGetUser';
 import { ProfileCard } from 'src/shared/components/ProfileCard';
 import { Screen } from 'src/shared/components/Screen';
@@ -9,9 +10,10 @@ import { formatDate } from 'src/shared/utils/dates';
 export const ProfileScreen = () => {
   const { data: user } = useGetUser();
   const { mutate: logout, isPending } = useLogout();
+  const { data: statistic, isLoading } = useGetUserStatistic(user?.id);
 
   return (
-    <Screen>
+    <Screen isLoading={isLoading}>
       <ProfileCard
         avatar={
           <Avatar icon={<UserRound />} src={user?.user_metadata.picture} />
@@ -37,11 +39,11 @@ export const ProfileScreen = () => {
       </ProfileCard>
       <ProfileCard title="Statistics" edgeValues>
         <span>Total words: </span>
-        <span>{102}</span>
+        <span>{statistic?.total_words}</span>
         <span>Learned words: </span>
-        <span>{12}</span>
+        <span>{statistic?.learned_words}</span>
         <span>Favorite words: </span>
-        <span>{10}</span>
+        <span>{statistic?.favorite_words}</span>
       </ProfileCard>
       <Button color="primary" isLoading={isPending} onClick={() => logout()}>
         Logout

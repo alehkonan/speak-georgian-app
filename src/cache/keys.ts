@@ -16,5 +16,6 @@ export const queryKeys = createQueryKeyStore({
   },
   statistic: {
     word: (id: number) => [{ id }] as const,
+    user: (id: string | null) => [{ id }] as const,
   },
 });
