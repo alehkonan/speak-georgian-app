@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
-import { updateStatistic } from 'src/api/statistic/updateStatistic';
+import { updateWordStatistic } from 'src/api/statistic/updateWordStatistic';
 
-export const useUpdateStatistic = () => {
+export const useUpdateWordStatistic = () => {
   return useMutation({
-    mutationFn: updateStatistic,
+    mutationFn: updateWordStatistic,
   });
 };
