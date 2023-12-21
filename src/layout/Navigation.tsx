@@ -4,7 +4,7 @@ import { type ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { twJoin } from 'tailwind-merge';
 import { useGetUser } from 'src/cache/user/useGetUser';
-import { paths } from './paths';
+import { paths } from '../app/paths';
 
 type NavTab = {
   path: `/${string}`;
@@ -67,8 +67,7 @@ export const Navigation = () => {
             </div>
           }
           as={Link}
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
+          // @ts-expect-error as Link has to prop
           to={path}
         />
       ))}
