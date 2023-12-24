@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { paths } from 'src/app/paths';
 import { useGetCategories } from 'src/cache/category/useGetCategories';
@@ -9,6 +10,7 @@ import { type Breadcrumb, Screen } from 'src/shared/components/Screen';
 import { WordCard } from 'src/shared/components/WordCard';
 
 export const WordsScreen = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const categoryId = Number(id);
 
@@ -19,10 +21,13 @@ export const WordsScreen = () => {
     const category = categoryQuery.data?.find(({ id }) => id === categoryId);
 
     return [
-      { path: paths.root, label: 'Categories' },
-      { path: paths.category, label: category?.name_en ?? 'No category' },
+      { path: paths.root, label: t('categories.title') },
+      {
+        path: paths.category,
+        label: category?.name_en ?? t('categories.withoutCategory'),
+      },
     ];
-  }, [categoryQuery, categoryId]);
+  }, [categoryQuery.data, t, categoryId]);
 
   return (
     <Screen breadcrumbs={breadcrumbs} isLoading={wordsQuery.isLoading}>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { generatePath } from 'react-router-dom';
 import { paths } from 'src/app/paths';
 import { useGetCategories } from 'src/cache/category/useGetCategories';
@@ -6,10 +7,13 @@ import { CategoryCard } from 'src/shared/components/CategoryCard';
 import { ErrorCard } from 'src/shared/components/ErrorCard';
 import { type Breadcrumb, Screen } from 'src/shared/components/Screen';
 
-const breadcrumbs: Breadcrumb[] = [{ label: 'Categories', path: '/' }];
-
 export const CategoriesScreen = () => {
+  const { t } = useTranslation();
   const { data: categories, isLoading, error, refetch } = useGetCategories();
+
+  const breadcrumbs: Breadcrumb[] = [
+    { label: t('categories.title'), path: '/' },
+  ];
 
   return (
     <Screen breadcrumbs={breadcrumbs} isLoading={isLoading} saveScrollPosition>
@@ -31,7 +35,7 @@ export const CategoriesScreen = () => {
             path={generatePath(paths.category, {
               id: 'undefined',
             })}
-            title="Without category"
+            title={t('categories.withoutCategory')}
           />
         </CardContainer>
       )}

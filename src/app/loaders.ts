@@ -2,7 +2,7 @@ import { type LoaderFunction, redirect } from 'react-router-dom';
 import { supabaseApi } from 'src/api/api';
 import { paths } from './paths';
 
-export const layoutLoader: LoaderFunction = () => {
+export const hasVisitedLoader: LoaderFunction = () => {
   const isVisited = localStorage.getItem('visited');
   if (!isVisited) return redirect(paths.welcome);
   return null;

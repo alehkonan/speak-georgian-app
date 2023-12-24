@@ -9,6 +9,7 @@ extends:
   - plugin:jest-dom/recommended
   - plugin:tailwindcss/recommended
   - plugin:lodash/recommended
+  - plugin:i18next/recommended
   - eslint-config-prettier
 settings:
   react:
@@ -51,3 +52,4 @@ rules:
     - warn
     - prefer: type-imports
       fixStyle: inline-type-imports
+  i18next/no-literal-string: warn

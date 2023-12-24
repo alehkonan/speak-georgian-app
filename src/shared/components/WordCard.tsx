@@ -9,6 +9,7 @@ import {
 } from '@nextui-org/react';
 import { Check, Languages, Star } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { twJoin } from 'tailwind-merge';
 import { useToggleFavoriteWord } from 'src/cache/favorite/useToggleFavoriteWord';
 import { useUser } from 'src/cache/user/useUser';
@@ -32,15 +33,17 @@ export const WordCard = ({
   isFavorite,
   isLearned,
 }: Props) => {
-  const [isTranslated, setTranslated] = useState(false);
+  const { t } = useTranslation();
   const user = useUser();
   const { mutate: toggleFavorite, isPending } = useToggleFavoriteWord();
+
+  const [isTranslated, setTranslated] = useState(false);
 
   return (
     <Card>
       <CardBody className="justify-end p-0">
         {isLearned && (
-          <Tooltip content="This word is learned">
+          <Tooltip content={t('word.isLearned')}>
             <Check
               className={twJoin([
                 'absolute right-0 top-0 z-20',
@@ -72,18 +75,15 @@ export const WordCard = ({
         </div>
       </CardBody>
       <CardFooter className="justify-end gap-2">
-        {/* <Button
-          color={isLearned ? 'primary' : 'default'}
-          title={isLearned ? 'Is learned' : 'Is not learned'}
-          isIconOnly
-        >
-          <CheckCircle />
-        </Button> */}
         {user && (
           <Button
+            title={
+              isFavorite
+                ? t('word.removeFromFavorites')
+                : t('word.addToFavorites')
+            }
             color={isFavorite ? 'danger' : 'default'}
             isLoading={isPending}
-            title={isFavorite ? 'Remove from favorite' : 'Add to favorite'}
             isIconOnly
             onClick={() => toggleFavorite({ userId: user.id, wordId })}
           >
@@ -91,8 +91,10 @@ export const WordCard = ({
           </Button>
         )}
         <Button
+          title={
+            isTranslated ? t('word.hideTranslation') : t('word.showTranslation')
+          }
           color={isTranslated ? 'primary' : 'default'}
-          title={isTranslated ? 'Hide translation' : 'Show translation'}
           isIconOnly
           onClick={() => setTranslated(!isTranslated)}
         >

@@ -24,7 +24,7 @@ export const ProfileCard = ({
       <CardBody
         className={twJoin([
           'grid gap-2 items-center',
-          edgeValues ? 'grid-cols-[1fr_50px]' : 'grid-cols-2',
+          edgeValues ? 'grid-cols-[1fr_70px]' : 'grid-cols-2',
         ])}
       >
         {children}

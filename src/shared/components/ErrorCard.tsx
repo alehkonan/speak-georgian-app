@@ -5,6 +5,7 @@ import {
   CardFooter,
   CardHeader,
 } from '@nextui-org/react';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   error: Error;
@@ -13,11 +14,13 @@ type Props = {
 };
 
 export const ErrorCard = ({ error, onRetry, isRetrying }: Props) => {
+  const { t } = useTranslation();
+
   return (
     <div>
       <Card className="border border-red-300" shadow="sm">
         <CardHeader className="pb-0">
-          <p className="text-xl font-semibold text-red-500">Error</p>
+          <p className="text-xl font-semibold text-red-500">{t('error')}</p>
         </CardHeader>
         <CardBody>
           <p className="font-mono text-sm">{error.message}</p>
@@ -30,7 +33,7 @@ export const ErrorCard = ({ error, onRetry, isRetrying }: Props) => {
               variant="bordered"
               onClick={onRetry}
             >
-              Retry
+              {t('action.retry')}
             </Button>
           </CardFooter>
         )}

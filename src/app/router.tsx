@@ -1,59 +1,79 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { type RouteObject, createBrowserRouter } from 'react-router-dom';
 import { NotFoundScreen } from 'src/screens/NotFound';
-import { CategoriesScreen } from '../screens/Categories';
-import { FavoritesScreen } from '../screens/Favorites';
-import { GameScreen } from '../screens/Game';
+import { Layout } from '../layout/Layout';
 import { LoginScreen } from '../screens/Login';
-import { ProfileScreen } from '../screens/Profile';
-import { WelcomeScreen } from '../screens/Welcome';
-import { WordsScreen } from '../screens/Words';
-import { Layout } from './Layout';
 import {
-  layoutLoader,
+  hasVisitedLoader,
   protectedRouteLoader,
   publicRouteLoader,
 } from './loaders';
 import { paths } from './paths';
 
+const publicRoutes: RouteObject[] = [
+  {
+    path: paths.login,
+    element: <LoginScreen />,
+  },
+];
+
+const protectedRoutes: RouteObject[] = [
+  {
+    path: paths.game,
+    lazy: async () => {
+      const { GameScreen } = await import('../screens/Game');
+      return { Component: GameScreen };
+    },
+  },
+  {
+    path: paths.favorites,
+    lazy: async () => {
+      const { FavoritesScreen } = await import('../screens/Favorites');
+      return { Component: FavoritesScreen };
+    },
+  },
+  {
+    path: paths.profile,
+    lazy: async () => {
+      const { ProfileScreen } = await import('../screens/Profile');
+      return { Component: ProfileScreen };
+    },
+  },
+];
+
 export const router = createBrowserRouter([
   {
-    id: 'Welcome',
     path: paths.welcome,
-    element: <WelcomeScreen />,
+    lazy: async () => {
+      const { WelcomeScreen } = await import('../screens/Welcome');
+      return { Component: WelcomeScreen };
+    },
   },
   {
     path: paths.root,
     element: <Layout />,
-    loader: layoutLoader,
+    loader: hasVisitedLoader,
     children: [
       {
-        path: paths.login,
-        loader: publicRouteLoader,
-        element: <LoginScreen />,
-      },
-      {
         index: true,
-        element: <CategoriesScreen />,
+        lazy: async () => {
+          const { CategoriesScreen } = await import('../screens/Categories');
+          return { Component: CategoriesScreen };
+        },
       },
       {
         path: paths.category,
-        element: <WordsScreen />,
-      },
-
-      {
-        path: paths.game,
-        loader: protectedRouteLoader,
-        element: <GameScreen />,
+        lazy: async () => {
+          const { WordsScreen } = await import('../screens/Words');
+          return { Component: WordsScreen };
+        },
       },
       {
-        path: paths.favorites,
-        loader: protectedRouteLoader,
-        element: <FavoritesScreen />,
+        loader: publicRouteLoader,
+        children: publicRoutes,
       },
       {
-        path: paths.profile,
         loader: protectedRouteLoader,
-        element: <ProfileScreen />,
+        children: protectedRoutes,
       },
     ],
   },

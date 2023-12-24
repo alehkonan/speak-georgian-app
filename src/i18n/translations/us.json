@@ -1,0 +1,55 @@
+{
+  "error": "Error",
+  "empty": "Empty",
+  "pageNotFound": "Page not found",
+  "navigation": {
+    "home": "Home",
+    "login": "Login",
+    "game": "Game",
+    "favorites": "Favorites",
+    "profile": "Profile",
+    "goToWords": "Go to words",
+    "goToHome": "Go to the home screen"
+  },
+  "action": {
+    "retry": "Retry"
+  },
+  "account": {
+    "info": "Account info",
+    "name": "Name",
+    "created": "Created",
+    "provider": "Provider"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "selectLanguage": "Select language"
+  },
+  "statistic": {
+    "title": "Statistic",
+    "totalWords": "Total words",
+    "learnedWords": "Learned words",
+    "favoriteWords": "Favorite words"
+  },
+  "auth": {
+    "logout": "Logout",
+    "loginWithGoogle": "Login with Google"
+  },
+  "game": {
+    "start": "Start the game",
+    "stop": "Stop the game",
+    "skip": "Skip",
+    "alreadyKnow": "Already know"
+  },
+  "categories": {
+    "title": "Categories",
+    "withoutCategory": "Without category"
+  },
+  "word": {
+    "isLearned": "This word is learned",
+    "addToFavorites": "Add to favorites",
+    "removeFromFavorites": "Remove from favorites",
+    "showTranslation": "Show translation",
+    "hideTranslation": "Hide translation"
+  }
+}
