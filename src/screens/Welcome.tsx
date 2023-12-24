@@ -1,10 +1,14 @@
 import { Button, Divider } from '@nextui-org/react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { loginWithGoogle } from 'src/api/auth/loginWithGoogle';
 import { paths } from 'src/app/paths';
 import { FieldWithMountains, Hill, Logo } from 'src/assets/images';
 
+const APP_NAME = 'Speak Georgian';
+
 export const WelcomeScreen = () => {
+  const { t } = useTranslation();
   localStorage.setItem('visited', 'true');
 
   return (
@@ -17,7 +21,7 @@ export const WelcomeScreen = () => {
         <Hill className="absolute -z-10 h-[115%] w-full text-white" />
         <div className="flex w-4/5 max-w-xl flex-col gap-2 pb-10">
           <h1 className="text-center text-xl font-bold text-ripe-mango">
-            Speak Georgian
+            {APP_NAME}
           </h1>
           <Button
             as={Link}
@@ -26,7 +30,7 @@ export const WelcomeScreen = () => {
             to={paths.root}
             variant="flat"
           >
-            Go to words
+            {t('navigation.goToWords')}
           </Button>
           <Divider />
           <Button
@@ -35,7 +39,7 @@ export const WelcomeScreen = () => {
             variant="flat"
             onClick={loginWithGoogle}
           >
-            Login with Google
+            {t('auth.loginWithGoogle')}
           </Button>
         </div>
       </div>

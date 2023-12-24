@@ -1,5 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import { Card, CardBody } from '@nextui-org/react';
+import { useTranslation } from 'react-i18next';
 import { twJoin } from 'tailwind-merge';
 
 type Props = {
@@ -10,6 +11,8 @@ export const CardContainer = ({
   children,
   isEmpty,
 }: PropsWithChildren<Props>) => {
+  const { t } = useTranslation();
+
   return (
     <div
       className={twJoin([
@@ -20,7 +23,7 @@ export const CardContainer = ({
       {isEmpty ? (
         <Card className="border bg-slate-100 sm:w-96" shadow="none">
           <CardBody>
-            <p className="text-center font-semibold">Empty</p>
+            <p className="text-center font-semibold">{t('empty')}</p>
           </CardBody>
         </Card>
       ) : (

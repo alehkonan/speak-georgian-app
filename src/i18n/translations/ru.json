@@ -1,0 +1,55 @@
+{
+  "error": "Ошибка",
+  "empty": "Пусто",
+  "pageNotFound": "Страница не найдена",
+  "navigation": {
+    "home": "Домашняя",
+    "login": "Войти",
+    "game": "Игра",
+    "favorites": "Избранное",
+    "profile": "Профиль",
+    "goToWords": "Перейти к словам",
+    "goToHome": "Перейти на домашний экран"
+  },
+  "action": {
+    "retry": "Повторить"
+  },
+  "account": {
+    "info": "Информация об аккаунте",
+    "name": "Имя",
+    "created": "Дата создания профиля",
+    "provider": "Провайдер аккаунта"
+  },
+  "settings": {
+    "title": "Настройки",
+    "language": "Язык",
+    "selectLanguage": "Выбрать язык"
+  },
+  "statistic": {
+    "title": "Статистика",
+    "totalWords": "Всего слов",
+    "learnedWords": "Выучено слов",
+    "favoriteWords": "Слов в избранном"
+  },
+  "auth": {
+    "logout": "Выйти",
+    "loginWithGoogle": "Войти с Google"
+  },
+  "game": {
+    "start": "Начать игру",
+    "stop": "Закончить игру",
+    "skip": "Пропустить",
+    "alreadyKnow": "Уже знаю"
+  },
+  "categories": {
+    "title": "Категории",
+    "withoutCategory": "Без категории"
+  },
+  "word": {
+    "isLearned": "Это слово выучено",
+    "addToFavorites": "Добавить в избранное",
+    "removeFromFavorites": "Убрать из избранного",
+    "showTranslation": "Показать перевод",
+    "hideTranslation": "Показать оригинал"
+  }
+}
