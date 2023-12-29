@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getWordStatistic } from 'src/api/statistic/getWordStatistic';
+import { useUser } from 'src/auth/useUser';
 import { queryKeys } from '../keys';
-import { useUser } from '../user/useUser';
 
 export const useGetWordStatistic = (wordId: number) => {
   const user = useUser();

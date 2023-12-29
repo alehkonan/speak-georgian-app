@@ -33,7 +33,8 @@
     "react-hot-toast": "^2.4.1",
     "react-i18next": "^14.0.0",
     "react-router-dom": "^6.21.1",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.6",

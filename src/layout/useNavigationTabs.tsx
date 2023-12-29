@@ -1,15 +1,17 @@
-import { Gamepad2, Home, Star, UserRound } from 'lucide-react';
+import { Gamepad2, Home, LogIn, Star, UserRound } from 'lucide-react';
 import { useMemo, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { paths } from 'src/app/paths';
+import { useUser } from 'src/auth/useUser';
 
 type NavTab = {
   path: `/${string}`;
   title: string;
-  icon?: ReactNode;
+  icon: ReactNode;
 };
 
-export const useNavigationTabs = (hasUser: boolean) => {
+export const useNavigationTabs = () => {
+  const user = useUser();
   const { t } = useTranslation();
 
   const publicTabs = useMemo<NavTab[]>(
@@ -17,10 +19,12 @@ export const useNavigationTabs = (hasUser: boolean) => {
       {
         path: paths.root,
         title: t('navigation.home'),
+        icon: <Home />,
       },
       {
         path: paths.login,
         title: t('navigation.login'),
+        icon: <LogIn />,
       },
     ],
     [t],
@@ -52,5 +56,5 @@ export const useNavigationTabs = (hasUser: boolean) => {
     [t],
   );
 
-  return hasUser ? privateTabs : publicTabs;
+  return user ? privateTabs : publicTabs;
 };

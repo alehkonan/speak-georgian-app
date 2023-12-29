@@ -2,11 +2,7 @@ import { type RouteObject, createBrowserRouter } from 'react-router-dom';
 import { NotFoundScreen } from 'src/screens/NotFound';
 import { Layout } from '../layout/Layout';
 import { LoginScreen } from '../screens/Login';
-import {
-  hasVisitedLoader,
-  protectedRouteLoader,
-  publicRouteLoader,
-} from './loaders';
+import { protectedRouteLoader, publicRouteLoader, rootLoader } from './loaders';
 import { paths } from './paths';
 
 const publicRoutes: RouteObject[] = [
@@ -51,7 +47,7 @@ export const router = createBrowserRouter([
   {
     path: paths.root,
     element: <Layout />,
-    loader: hasVisitedLoader,
+    loader: rootLoader,
     children: [
       {
         index: true,

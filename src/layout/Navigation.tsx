@@ -1,16 +1,10 @@
 import { Tab, Tabs } from '@nextui-org/react';
 import { Link, useLocation } from 'react-router-dom';
-import { twJoin } from 'tailwind-merge';
-import { useGetUser } from 'src/cache/user/useGetUser';
 import { useNavigationTabs } from './useNavigationTabs';
 
-
 export const Navigation = () => {
-  const { data: user, isLoading } = useGetUser();
-  const tabs = useNavigationTabs(Boolean(user));
+  const tabs = useNavigationTabs();
   const { pathname } = useLocation();
-
-  if (isLoading) return null;
 
   return (
     <Tabs selectedKey={pathname}>
@@ -20,9 +14,7 @@ export const Navigation = () => {
           title={
             <div className="flex items-center gap-2">
               {icon}
-              <span className={twJoin(['sm:block', user && 'hidden'])}>
-                {title}
-              </span>
+              <span className="hidden sm:block">{title}</span>
             </div>
           }
           as={Link}

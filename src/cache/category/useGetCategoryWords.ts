@@ -1,17 +1,14 @@
-import { type User } from '@supabase/supabase-js';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { getCategoryWords } from 'src/api/category/getWords';
+import { useUser } from 'src/auth/useUser';
 import { queryKeys } from '../keys';
 
 export const useGetCategoryWords = (categoryId?: number) => {
-  const queryClient = useQueryClient();
-
-  const user = queryClient.getQueryData<User>(queryKeys.user.details.queryKey);
+  const user = useUser();
 
   return useQuery({
     queryKey: queryKeys.category.words(categoryId || null).queryKey,
-    queryFn: ({ queryKey: [, , { id }] }) =>
-      getCategoryWords(user?.id, id || undefined),
+    queryFn: () => getCategoryWords(user?.id, categoryId),
     staleTime: Infinity,
   });
 };

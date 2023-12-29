@@ -11,8 +11,8 @@ import { Check, Languages, Star } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { twJoin } from 'tailwind-merge';
+import { useUser } from 'src/auth/useUser';
 import { useToggleFavoriteWord } from 'src/cache/favorite/useToggleFavoriteWord';
-import { useUser } from 'src/cache/user/useUser';
 
 type Props = {
   wordId: number;
