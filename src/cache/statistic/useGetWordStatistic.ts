@@ -10,5 +10,7 @@ export const useGetWordStatistic = (wordId: number) => {
     queryKey: queryKeys.statistic.word(wordId).queryKey,
     queryFn: () => getWordStatistic({ userId: user?.id, wordId }),
     enabled: Boolean(user),
+    // do not store game word statistic in cache, update it every time
+    gcTime: 0,
   });
 };
