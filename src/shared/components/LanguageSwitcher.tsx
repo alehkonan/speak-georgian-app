@@ -1,16 +1,13 @@
 import { Select, SelectItem, type Selection } from '@nextui-org/react';
 import isNumber from 'lodash/isNumber';
 import { useTranslation } from 'react-i18next';
-import { language } from 'src/i18n';
+import { fallbackLng, langMap } from 'src/i18n';
 import { FlagAvatar } from './FlagAvatar';
-
-const languages = Object.values(language);
 
 export const LanguageSwitcher = () => {
   const { i18n, t } = useTranslation();
 
-  const selectedLanguage =
-    languages.find(({ code }) => code === i18n.language) || language.us;
+  const currLang = langMap.get(i18n.language)?.code || fallbackLng;
 
   const onSelectionChange = (keys: Selection) => {
     if (keys === 'all') return undefined;
@@ -22,9 +19,9 @@ export const LanguageSwitcher = () => {
   return (
     <Select
       aria-label={t('settings.selectLanguage')}
-      items={languages}
+      items={[...langMap.values()]}
       renderValue={([item]) => <FlagAvatar language={item?.data} />}
-      selectedKeys={[selectedLanguage.code]}
+      selectedKeys={[currLang]}
       size="sm"
       variant="flat"
       onSelectionChange={onSelectionChange}
