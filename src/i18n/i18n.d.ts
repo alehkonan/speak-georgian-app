@@ -1,10 +1,10 @@
-import type us from './translations/us.json';
+import type en from './translations/en.json';
 import 'i18next';
 
 declare module 'i18next' {
   interface CustomTypeOptions {
     resources: {
-      translation: typeof us;
+      translation: typeof en;
     };
   }
 }

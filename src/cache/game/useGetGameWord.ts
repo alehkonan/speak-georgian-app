@@ -6,5 +6,6 @@ export const useGetGameWord = () => {
   return useQuery({
     queryKey: queryKeys.game.word.queryKey,
     queryFn: () => getGameWord(),
+    staleTime: Infinity,
   });
 };

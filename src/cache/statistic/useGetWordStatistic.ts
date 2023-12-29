@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getWordStatistic } from 'src/api/statistic/getWordStatistic';
+import { useUser } from 'src/auth/useUser';
 import { queryKeys } from '../keys';
-import { useUser } from '../user/useUser';
 
 export const useGetWordStatistic = (wordId: number) => {
   const user = useUser();
@@ -10,5 +10,7 @@ export const useGetWordStatistic = (wordId: number) => {
     queryKey: queryKeys.statistic.word(wordId).queryKey,
     queryFn: () => getWordStatistic({ userId: user?.id, wordId }),
     enabled: Boolean(user),
+    // do not store game word statistic in cache, update it every time
+    gcTime: 0,
   });
 };
