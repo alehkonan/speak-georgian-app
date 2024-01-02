@@ -6,4 +6,5 @@ export const paths = {
   login: '/login',
   profile: '/profile',
   welcome: '/welcome',
+  newWord: '/new-word',
 } as const;

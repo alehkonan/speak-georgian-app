@@ -20,8 +20,8 @@ type Props = {
   translation: string;
   transcription?: string;
   pictureUrl?: string;
-  isFavorite: boolean | null;
-  isLearned: boolean | null;
+  isFavorite?: boolean | null;
+  isLearned?: boolean | null;
 };
 
 export const WordCard = ({

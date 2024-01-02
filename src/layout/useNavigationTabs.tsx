@@ -1,4 +1,4 @@
-import { Gamepad2, Home, LogIn, Star, UserRound } from 'lucide-react';
+import { Gamepad2, Home, LogIn, Star, UserRound, Plus } from 'lucide-react';
 import { useMemo, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { paths } from 'src/app/paths';
@@ -51,6 +51,11 @@ export const useNavigationTabs = () => {
         path: paths.profile,
         title: t('navigation.profile'),
         icon: <UserRound />,
+      },
+      {
+        path: paths.newWord,
+        title: t('navigation.addWord'),
+        icon: <Plus />,
       },
     ],
     [t],

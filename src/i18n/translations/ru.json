@@ -1,55 +1,63 @@
 {
-  "error": "Ошибка",
-  "empty": "Пусто",
-  "pageNotFound": "Страница не найдена",
-  "navigation": {
-    "home": "Домашняя",
-    "login": "Войти",
-    "game": "Игра",
-    "favorites": "Избранное",
-    "profile": "Профиль",
-    "goToWords": "Перейти к словам",
-    "goToHome": "Перейти на домашний экран"
+  "account": {
+    "created": "Дата создания профиля",
+    "info": "Информация об аккаунте",
+    "name": "Имя",
+    "provider": "Провайдер аккаунта"
   },
   "action": {
     "retry": "Повторить"
   },
-  "account": {
-    "info": "Информация об аккаунте",
-    "name": "Имя",
-    "created": "Дата создания профиля",
-    "provider": "Провайдер аккаунта"
-  },
-  "settings": {
-    "title": "Настройки",
-    "language": "Язык",
-    "selectLanguage": "Выбрать язык"
-  },
-  "statistic": {
-    "title": "Статистика",
-    "totalWords": "Всего слов",
-    "learnedWords": "Выучено слов",
-    "favoriteWords": "Слов в избранном"
-  },
   "auth": {
-    "logout": "Выйти",
-    "loginWithGoogle": "Войти с Google"
-  },
-  "game": {
-    "start": "Начать игру",
-    "stop": "Закончить игру",
-    "skip": "Пропустить",
-    "alreadyKnow": "Уже знаю"
+    "loginWithGoogle": "Войти с Google",
+    "logout": "Выйти"
   },
   "categories": {
     "title": "Категории",
     "withoutCategory": "Без категории"
   },
+  "empty": "Пусто",
+  "error": "Ошибка",
+  "game": {
+    "alreadyKnow": "Уже знаю",
+    "skip": "Пропустить",
+    "start": "Начать игру",
+    "stop": "Закончить игру"
+  },
+  "navigation": {
+    "addWord": "Добавить слово",
+    "favorites": "Избранное",
+    "game": "Игра",
+    "goToHome": "Перейти на домашний экран",
+    "goToWords": "Перейти к словам",
+    "home": "Домашняя",
+    "login": "Войти",
+    "profile": "Профиль"
+  },
+  "pageNotFound": "Страница не найдена",
+  "settings": {
+    "language": "Язык",
+    "selectLanguage": "Выбрать язык",
+    "title": "Настройки"
+  },
+  "statistic": {
+    "favoriteWords": "Слов в избранном",
+    "learnedWords": "Выучено слов",
+    "title": "Статистика",
+    "totalWords": "Всего слов"
+  },
   "word": {
-    "isLearned": "Это слово выучено",
+    "add": "Добавить слово",
     "addToFavorites": "Добавить в избранное",
+    "category": "Категория",
+    "englishTranscription": "Английская транскрипция",
+    "englishTranslation": "Слово на английском",
+    "georgianWord": "Слово на грузинском",
+    "hideTranslation": "Показать оригинал",
+    "isLearned": "Это слово выучено",
     "removeFromFavorites": "Убрать из избранного",
+    "russianTranslation": "Слово на русском",
     "showTranslation": "Показать перевод",
-    "hideTranslation": "Показать оригинал"
+    "selectImage": "Выбрать картинку"
   }
 }
