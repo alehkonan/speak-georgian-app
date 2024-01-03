@@ -34,6 +34,13 @@ const protectedRoutes: RouteObject[] = [
       return { Component: ProfileScreen };
     },
   },
+  {
+    path: paths.newWord,
+    lazy: async () => {
+      const { NewWordScreen } = await import('../screens/NewWord');
+      return { Component: NewWordScreen };
+    },
+  },
 ];
 
 export const router = createBrowserRouter([

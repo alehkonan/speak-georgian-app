@@ -1,55 +1,63 @@
 {
-  "error": "Error",
-  "empty": "Empty",
-  "pageNotFound": "Page not found",
-  "navigation": {
-    "home": "Home",
-    "login": "Login",
-    "game": "Game",
-    "favorites": "Favorites",
-    "profile": "Profile",
-    "goToWords": "Go to words",
-    "goToHome": "Go to the home screen"
+  "account": {
+    "created": "Created",
+    "info": "Account info",
+    "name": "Name",
+    "provider": "Provider"
   },
   "action": {
     "retry": "Retry"
   },
-  "account": {
-    "info": "Account info",
-    "name": "Name",
-    "created": "Created",
-    "provider": "Provider"
-  },
-  "settings": {
-    "title": "Settings",
-    "language": "Language",
-    "selectLanguage": "Select language"
-  },
-  "statistic": {
-    "title": "Statistic",
-    "totalWords": "Total words",
-    "learnedWords": "Learned words",
-    "favoriteWords": "Favorite words"
-  },
   "auth": {
-    "logout": "Logout",
-    "loginWithGoogle": "Login with Google"
-  },
-  "game": {
-    "start": "Start the game",
-    "stop": "Stop the game",
-    "skip": "Skip",
-    "alreadyKnow": "Already know"
+    "loginWithGoogle": "Login with Google",
+    "logout": "Logout"
   },
   "categories": {
     "title": "Categories",
     "withoutCategory": "Without category"
   },
+  "empty": "Empty",
+  "error": "Error",
+  "game": {
+    "alreadyKnow": "Already know",
+    "skip": "Skip",
+    "start": "Start the game",
+    "stop": "Stop the game"
+  },
+  "navigation": {
+    "addWord": "Add Word",
+    "favorites": "Favorites",
+    "game": "Game",
+    "goToHome": "Go to the home screen",
+    "goToWords": "Go to words",
+    "home": "Home",
+    "login": "Login",
+    "profile": "Profile"
+  },
+  "pageNotFound": "Page not found",
+  "settings": {
+    "language": "Language",
+    "selectLanguage": "Select language",
+    "title": "Settings"
+  },
+  "statistic": {
+    "favoriteWords": "Favorite words",
+    "learnedWords": "Learned words",
+    "title": "Statistic",
+    "totalWords": "Total words"
+  },
   "word": {
-    "isLearned": "This word is learned",
+    "add": "Add new word",
     "addToFavorites": "Add to favorites",
+    "category": "Category",
+    "englishTranscription": "English transcription",
+    "englishTranslation": "English translation",
+    "georgianWord": "Georgian word",
+    "hideTranslation": "Hide translation",
+    "isLearned": "This word is learned",
     "removeFromFavorites": "Remove from favorites",
+    "russianTranslation": "Russian translation",
     "showTranslation": "Show translation",
-    "hideTranslation": "Hide translation"
+    "selectImage": "Select image"
   }
 }
