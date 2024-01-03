@@ -72,13 +72,11 @@ export const NewWordScreen = () => {
           )}
         </Select>
         <FileInput
-          onChange={(e) => {
-            console.log(e.target.files);
-            setImage(e.target.files?.item(0) || undefined);
-          }}
-        >
-          {image ? image.name : t('word.selectImage')}
-        </FileInput>
+          accept="image/*"
+          label={t('word.selectImage')}
+          selectedFile={image}
+          onSelectFile={setImage}
+        />
       </form>
       <DevTool control={form.control} />
       <Button
