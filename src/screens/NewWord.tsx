@@ -43,22 +43,28 @@ export const NewWordScreen = () => {
         onSubmit={form.handleSubmit(onSubmit, console.warn)}
       >
         <Input
+          enterKeyHint="next"
           errorMessage={form.formState.errors.name_ka?.message}
           label={t('word.georgianWord')}
           lang="ka"
+          isRequired
           {...form.register('name_ka')}
         />
         <Input
+          enterKeyHint="next"
           errorMessage={form.formState.errors.name_en?.message}
           label={t('word.englishTranslation')}
+          isRequired
           {...form.register('name_en')}
         />
         <Input
+          enterKeyHint="next"
           errorMessage={form.formState.errors.transcription_en?.message}
           label={t('word.englishTranscription')}
           {...form.register('transcription_en')}
         />
         <Input
+          enterKeyHint="next"
           errorMessage={form.formState.errors.name_ru?.message}
           label={t('word.russianTranslation')}
           lang="ru"
@@ -75,6 +81,7 @@ export const NewWordScreen = () => {
         </Select>
         <FileInput
           accept="image/*"
+          enterKeyHint="next"
           label={t('word.selectImage')}
           selectedFile={image}
           onSelectFile={setImage}
