@@ -45,6 +45,7 @@ export const NewWordScreen = () => {
         <Input
           errorMessage={form.formState.errors.name_ka?.message}
           label={t('word.georgianWord')}
+          lang="ka"
           {...form.register('name_ka')}
         />
         <Input
@@ -60,6 +61,7 @@ export const NewWordScreen = () => {
         <Input
           errorMessage={form.formState.errors.name_ru?.message}
           label={t('word.russianTranslation')}
+          lang="ru"
           {...form.register('name_ru')}
         />
         <Select
@@ -78,7 +80,7 @@ export const NewWordScreen = () => {
           onSelectFile={setImage}
         />
       </form>
-      <DevTool control={form.control} />
+      {import.meta.env.DEV && <DevTool control={form.control} />}
       <Button
         className="self-end"
         color="primary"
