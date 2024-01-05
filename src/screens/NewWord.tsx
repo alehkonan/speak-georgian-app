@@ -71,7 +71,7 @@ export const NewWordScreen = () => {
           {...form.register('name_ru')}
         />
         <Select
-          items={categories}
+          items={categories || []}
           label={t('word.category')}
           {...form.register('category_id')}
         >
