@@ -2,7 +2,12 @@ import { type RouteObject, createBrowserRouter } from 'react-router-dom';
 import { NotFoundScreen } from 'src/screens/NotFound';
 import { Layout } from '../layout/Layout';
 import { LoginScreen } from '../screens/Login';
-import { protectedRouteLoader, publicRouteLoader, rootLoader } from './loaders';
+import {
+  adminLoader,
+  protectedRouteLoader,
+  publicRouteLoader,
+  rootLoader,
+} from './loaders';
 import { paths } from './paths';
 
 const publicRoutes: RouteObject[] = [
@@ -36,6 +41,7 @@ const protectedRoutes: RouteObject[] = [
   },
   {
     path: paths.newWord,
+    loader: adminLoader,
     lazy: async () => {
       const { NewWordScreen } = await import('../screens/NewWord');
       return { Component: NewWordScreen };
