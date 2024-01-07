@@ -78,7 +78,7 @@ export const NewWordScreen = () => {
           onSelectFile={setImage}
         />
       </form>
-      <DevTool control={form.control} />
+      {import.meta.env.DEV && <DevTool control={form.control} />}
       <Button
         className="self-end"
         color="primary"
