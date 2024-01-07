@@ -52,6 +52,12 @@ export const useNavigationTabs = () => {
         title: t('navigation.profile'),
         icon: <UserRound />,
       },
+    ],
+    [t],
+  );
+
+  const adminTabs = useMemo<NavTab[]>(
+    () => [
       {
         path: paths.newWord,
         title: t('navigation.addWord'),
@@ -61,5 +67,9 @@ export const useNavigationTabs = () => {
     [t],
   );
 
-  return user ? privateTabs : publicTabs;
+  return user
+    ? user.role === 'admin'
+      ? [...privateTabs, ...adminTabs]
+      : privateTabs
+    : publicTabs;
 };
