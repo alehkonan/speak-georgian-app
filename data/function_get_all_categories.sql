@@ -1,4 +1,3 @@
--- todo add language detection
 CREATE OR REPLACE FUNCTION get_categories()
   RETURNS SETOF categories
   AS $$
