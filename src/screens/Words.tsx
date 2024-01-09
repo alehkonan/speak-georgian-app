@@ -4,18 +4,20 @@ import { useParams } from 'react-router-dom';
 import { paths } from 'src/app/paths';
 import { useGetCategories } from 'src/cache/category/useGetCategories';
 import { useGetCategoryWords } from 'src/cache/category/useGetCategoryWords';
+import { langMap } from 'src/i18n';
 import { CardContainer } from 'src/shared/components/CardContainer';
 import { ErrorCard } from 'src/shared/components/ErrorCard';
 import { type Breadcrumb, Screen } from 'src/shared/components/Screen';
 import { WordCard } from 'src/shared/components/WordCard';
 
 export const WordsScreen = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { id } = useParams();
   const categoryId = Number(id);
 
   const categoryQuery = useGetCategories();
   const wordsQuery = useGetCategoryWords(categoryId);
+  const { code = 'en' } = langMap.get(i18n.language) || {};
 
   const breadcrumbs = useMemo<Breadcrumb[]>(() => {
     const category = categoryQuery.data?.find(({ id }) => id === categoryId);
@@ -42,7 +44,7 @@ export const WordsScreen = () => {
             isLearned={word.is_learned}
             pictureUrl={word.picture_url || undefined}
             transcription={word.transcription_en || undefined}
-            translation={word.name_en}
+            translation={word[`name_${code}`] || t('noTranslation')}
             word={word.name_ka}
             wordId={word.id}
           />

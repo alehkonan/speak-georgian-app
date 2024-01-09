@@ -4,6 +4,7 @@ export const WordSchema = zod.object({
   id: zod.number(),
   name_ka: zod.string(),
   name_en: zod.string(),
+  name_ru: zod.string().nullable(),
   transcription_en: zod.string().nullable(),
   category_id: zod.number().nullable(),
   picture_url: zod.string().nullable(),
