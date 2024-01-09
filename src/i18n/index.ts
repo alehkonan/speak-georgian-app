@@ -1,4 +1,4 @@
-import { use } from 'i18next';
+import i18next from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 import en from './translations/en.json';
@@ -17,14 +17,21 @@ export const langMap = new Map<string, Language>([
 const defaultNS = 'translation';
 export const fallbackLng = 'en';
 
-export const initI18 = () =>
-  use(initReactI18next)
-    .use(LanguageDetector)
-    .init({
-      fallbackLng,
-      defaultNS,
-      resources: {
-        en: { [defaultNS]: en },
-        ru: { [defaultNS]: ru },
-      },
-    });
+i18next.on('languageChanged', (lang) => {
+  document.documentElement.setAttribute('lang', lang);
+});
+
+// eslint-disable-next-line import/no-named-as-default-member
+i18next
+  .use(initReactI18next)
+  .use(LanguageDetector)
+  .init({
+    fallbackLng,
+    defaultNS,
+    resources: {
+      en: { [defaultNS]: en },
+      ru: { [defaultNS]: ru },
+    },
+  });
+
+export default i18next;

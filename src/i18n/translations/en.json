@@ -59,5 +59,6 @@
     "russianTranslation": "Russian translation",
     "showTranslation": "Show translation",
     "selectImage": "Select image"
-  }
+  },
+  "noTranslation": "No translation"
 }

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { loginWithGoogle } from 'src/api/auth/loginWithGoogle';
 import { paths } from 'src/app/paths';
 import { FieldWithMountains, Hill, Logo } from 'src/assets/images';
+import { LanguageSwitcher } from 'src/shared/components/LanguageSwitcher';
 
 const APP_NAME = 'Speak Georgian';
 
@@ -23,6 +24,9 @@ export const WelcomeScreen = () => {
           <h1 className="text-center text-xl font-bold text-ripe-mango">
             {APP_NAME}
           </h1>
+          <div className="fixed right-0 top-0 p-3">
+            <LanguageSwitcher />
+          </div>
           <Button
             as={Link}
             className="font-semibold"
