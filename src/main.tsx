@@ -8,7 +8,7 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from './app/router';
 import { queryClient } from './cache/client';
 import { idbPersister } from './cache/persister';
-import { initI18 } from './i18n';
+import './i18n';
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
@@ -27,4 +27,4 @@ const app = (
   </React.StrictMode>
 );
 
-initI18().then(() => root.render(app));
+root.render(app);
