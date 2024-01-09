@@ -19,6 +19,7 @@ export const LanguageSwitcher = () => {
   return (
     <Select
       aria-label={t('settings.selectLanguage')}
+      className="min-w-[70px]"
       items={[...langMap.values()]}
       renderValue={([item]) => <FlagAvatar language={item?.data} />}
       selectedKeys={[currLang]}
