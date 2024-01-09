@@ -70,7 +70,7 @@ export const GameCard = () => {
           <WordStatistic wordId={gameWord?.id} />
         </div>
         <CardHeader className="justify-center pb-0">
-          <p className="text-lg font-semibold">{gameWord?.name_ka}</p>
+          <p className="text-xl font-semibold">{gameWord?.name_ka}</p>
         </CardHeader>
         <CardBody className="gap-4">
           <Image
