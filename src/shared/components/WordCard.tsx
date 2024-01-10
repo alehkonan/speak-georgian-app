@@ -3,16 +3,24 @@ import {
   Card,
   CardBody,
   CardFooter,
-  Chip,
   Image,
-  Tooltip,
+  Modal,
+  ModalContent,
+  useDisclosure,
 } from '@nextui-org/react';
-import { Check, Languages, Star } from 'lucide-react';
+import {
+  BookOpen,
+  BookOpenCheck,
+  Ear,
+  GanttChartSquare,
+  Languages,
+  Star,
+} from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { twJoin } from 'tailwind-merge';
 import { useUser } from 'src/auth/useUser';
 import { useToggleFavoriteWord } from 'src/cache/favorite/useToggleFavoriteWord';
+import { WordChip } from './WordChip';
 
 type Props = {
   wordId: number;
@@ -38,69 +46,85 @@ export const WordCard = ({
   const { mutate: toggleFavorite, isPending } = useToggleFavoriteWord();
 
   const [isTranslated, setTranslated] = useState(false);
+  const [hasTranscription, setHasTranscription] = useState(false);
+  const { isOpen, onOpenChange, onOpen } = useDisclosure();
 
   return (
-    <Card>
-      <CardBody className="justify-end p-0">
-        {isLearned && (
-          <Tooltip content={t('word.isLearned')}>
-            <Check
-              className={twJoin([
-                'absolute right-0 top-0 z-20',
-                'm-1 rounded-full p-1 shadow',
-                'bg-green-400 text-white',
-              ])}
-              size="28"
+    <>
+      <Card>
+        <CardBody className="h-36 p-0">
+          {pictureUrl && (
+            <Image
+              alt={word}
+              className="h-full object-cover"
+              src={pictureUrl}
+              removeWrapper
             />
-          </Tooltip>
-        )}
-        {pictureUrl && (
-          <Image
-            alt={word}
-            className="aspect-square object-cover"
-            src={pictureUrl}
-            removeWrapper
-          />
-        )}
-        <div
-          className={twJoin([
-            'bottom-0 z-20 m-1 flex flex-wrap gap-1',
-            pictureUrl && 'absolute',
-          ])}
-        >
-          <Chip variant="faded">{isTranslated ? translation : word}</Chip>
-          {transcription && !isTranslated && (
-            <Chip variant="faded">{transcription}</Chip>
           )}
-        </div>
-      </CardBody>
-      <CardFooter className="justify-end gap-2">
-        {user && (
+          <div className="absolute top-0 z-20 m-2 grid gap-1">
+            <WordChip Icon={isLearned ? BookOpenCheck : BookOpen} text={word} />
+            <WordChip
+              Icon={Ear}
+              isVisible={hasTranscription}
+              text={transcription}
+            />
+            <WordChip
+              Icon={Languages}
+              isVisible={isTranslated}
+              text={translation}
+            />
+          </div>
+        </CardBody>
+        <CardFooter className="gap-2">
+          <Button isIconOnly onClick={onOpen}>
+            <GanttChartSquare />
+          </Button>
+          <Button
+            color={hasTranscription ? 'primary' : 'default'}
+            isIconOnly
+            onClick={() => setHasTranscription(!hasTranscription)}
+          >
+            <Ear />
+          </Button>
           <Button
             title={
-              isFavorite
-                ? t('word.removeFromFavorites')
-                : t('word.addToFavorites')
+              isTranslated
+                ? t('word.hideTranslation')
+                : t('word.showTranslation')
             }
-            color={isFavorite ? 'danger' : 'default'}
-            isLoading={isPending}
+            className="mr-auto"
+            color={isTranslated ? 'primary' : 'default'}
             isIconOnly
-            onClick={() => toggleFavorite({ userId: user.id, wordId })}
+            onClick={() => setTranslated(!isTranslated)}
           >
-            <Star className={isFavorite ? 'text-white' : 'text-black'} />
+            <Languages />
           </Button>
-        )}
-        <Button
-          title={
-            isTranslated ? t('word.hideTranslation') : t('word.showTranslation')
-          }
-          color={isTranslated ? 'primary' : 'default'}
-          isIconOnly
-          onClick={() => setTranslated(!isTranslated)}
-        >
-          <Languages />
-        </Button>
-      </CardFooter>
-    </Card>
+          {user && (
+            <Button
+              title={
+                isFavorite
+                  ? t('word.removeFromFavorites')
+                  : t('word.addToFavorites')
+              }
+              color={isFavorite ? 'danger' : 'default'}
+              isLoading={isPending}
+              isIconOnly
+              onClick={() => toggleFavorite({ userId: user.id, wordId })}
+            >
+              <Star className={isFavorite ? 'text-white' : 'text-black'} />
+            </Button>
+          )}
+        </CardFooter>
+      </Card>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+        <ModalContent className="p-4">
+          <p>მომღერალზე</p>
+          <p>Prefix: მო</p>
+          <p>Root: მღერ</p>
+          <p>Suffix: ალ</p>
+          <p>Postposition: ზე</p>
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
