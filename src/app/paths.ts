@@ -7,4 +7,5 @@ export const paths = {
   profile: '/profile',
   welcome: '/welcome',
   newWord: '/new-word',
+  rules: '/rules',
 } as const;

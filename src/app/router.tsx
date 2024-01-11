@@ -77,6 +77,13 @@ export const router = createBrowserRouter([
         },
       },
       {
+        path: paths.rules,
+        lazy: async () => {
+          const { RulesScreen } = await import('../screens/Rules');
+          return { Component: RulesScreen };
+        },
+      },
+      {
         loader: publicRouteLoader,
         children: publicRoutes,
       },
