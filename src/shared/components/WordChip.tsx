@@ -6,7 +6,7 @@ import { twJoin } from 'tailwind-merge';
 type Props = {
   isVisible?: boolean;
   Icon: FC<LucideProps>;
-  text?: string;
+  text: string | null;
 };
 
 export const WordChip = ({ isVisible = true, Icon, text }: Props) => {
