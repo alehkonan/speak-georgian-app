@@ -18,13 +18,15 @@ export const FavoritesScreen = () => {
         {data?.map((word) => (
           <WordCard
             key={word.id}
+            categoryId={word.category_id}
+            id={word.id}
             isFavorite={word.is_favorite}
             isLearned={word.is_learned}
-            pictureUrl={word.picture_url || undefined}
-            transcription={word.transcription_en || undefined}
+            pictureUrl={word.picture_url}
+            speechPart={word.speech_part}
+            transcription={word.transcription_en}
             translation={word[`name_${code}`] || t('noTranslation')}
             word={word.name_ka}
-            wordId={word.id}
           />
         ))}
       </CardContainer>

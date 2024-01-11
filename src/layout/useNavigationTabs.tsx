@@ -1,4 +1,12 @@
-import { Gamepad2, Home, LogIn, Star, UserRound, Plus } from 'lucide-react';
+import {
+  Gamepad2,
+  Home,
+  LogIn,
+  Star,
+  UserRound,
+  Plus,
+  GraduationCap,
+} from 'lucide-react';
 import { useMemo, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { paths } from 'src/app/paths';
@@ -22,6 +30,11 @@ export const useNavigationTabs = () => {
         icon: <Home />,
       },
       {
+        path: paths.rules,
+        title: t('navigation.rules'),
+        icon: <GraduationCap />,
+      },
+      {
         path: paths.login,
         title: t('navigation.login'),
         icon: <LogIn />,
@@ -36,6 +49,11 @@ export const useNavigationTabs = () => {
         path: paths.root,
         title: t('navigation.home'),
         icon: <Home />,
+      },
+      {
+        path: paths.rules,
+        title: t('navigation.rules'),
+        icon: <GraduationCap />,
       },
       {
         path: paths.game,

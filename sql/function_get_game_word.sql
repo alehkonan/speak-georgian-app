@@ -1,3 +1,11 @@
+CREATE TYPE game_word AS (
+  id int,
+  name_en text,
+  name_ka text,
+  picture_url text,
+  variants text[]
+);
+
 CREATE OR REPLACE FUNCTION get_game_word()
   RETURNS SETOF game_word
   AS $$

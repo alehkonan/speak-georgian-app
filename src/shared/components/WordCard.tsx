@@ -5,76 +5,100 @@ import {
   CardFooter,
   Chip,
   Image,
-  Tooltip,
 } from '@nextui-org/react';
-import { Check, Languages, Star } from 'lucide-react';
+import { BookOpen, BookOpenCheck, Ear, Languages, Star } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { twJoin } from 'tailwind-merge';
+import { type SpeechPart } from 'src/api/schemas/word';
 import { useUser } from 'src/auth/useUser';
 import { useToggleFavoriteWord } from 'src/cache/favorite/useToggleFavoriteWord';
+import { WordChip } from './WordChip';
 
 type Props = {
-  wordId: number;
-  word: string;
+  categoryId: number | null;
+  isFavorite: boolean;
+  isLearned: boolean;
+  pictureUrl: string | null;
+  speechPart: SpeechPart | null;
+  transcription: string | null;
   translation: string;
-  transcription?: string;
-  pictureUrl?: string;
-  isFavorite?: boolean | null;
-  isLearned?: boolean | null;
+  word: string;
+  id: number;
 };
 
 export const WordCard = ({
-  wordId,
-  word,
-  translation,
-  transcription,
-  pictureUrl,
+  categoryId,
   isFavorite,
   isLearned,
+  pictureUrl,
+  speechPart,
+  transcription,
+  translation,
+  word,
+  id,
 }: Props) => {
   const { t } = useTranslation();
   const user = useUser();
-  const { mutate: toggleFavorite, isPending } = useToggleFavoriteWord();
+  const { mutate: toggleFavorite, isPending } =
+    useToggleFavoriteWord(categoryId);
 
   const [isTranslated, setTranslated] = useState(false);
+  const [hasTranscription, setHasTranscription] = useState(false);
 
   return (
     <Card>
-      <CardBody className="justify-end p-0">
-        {isLearned && (
-          <Tooltip content={t('word.isLearned')}>
-            <Check
-              className={twJoin([
-                'absolute right-0 top-0 z-20',
-                'm-1 rounded-full p-1 shadow',
-                'bg-green-400 text-white',
-              ])}
-              size="28"
-            />
-          </Tooltip>
-        )}
+      <CardBody className="h-36 p-0">
         {pictureUrl && (
           <Image
             alt={word}
-            className="aspect-square object-cover"
+            className="h-full object-cover"
             src={pictureUrl}
             removeWrapper
           />
         )}
-        <div
-          className={twJoin([
-            'bottom-0 z-20 m-1 flex flex-wrap gap-1',
-            pictureUrl && 'absolute',
-          ])}
-        >
-          <Chip variant="faded">{isTranslated ? translation : word}</Chip>
-          {transcription && !isTranslated && (
-            <Chip variant="faded">{transcription}</Chip>
-          )}
+        {speechPart && (
+          <Chip
+            className="absolute bottom-0 right-0 z-10  m-1 p-0"
+            color="warning"
+            size="sm"
+          >
+            {speechPart}
+          </Chip>
+        )}
+        <div className="absolute top-0 z-20 m-2 grid gap-1">
+          <WordChip Icon={isLearned ? BookOpenCheck : BookOpen} text={word} />
+          <WordChip
+            Icon={Ear}
+            isVisible={hasTranscription}
+            text={transcription}
+          />
+          <WordChip
+            Icon={Languages}
+            isVisible={isTranslated}
+            text={translation}
+          />
         </div>
       </CardBody>
-      <CardFooter className="justify-end gap-2">
+      <CardFooter className="gap-2">
+        <Button
+          color={hasTranscription ? 'primary' : 'default'}
+          title="Show transcription"
+          isIconOnly
+          onClick={() => setHasTranscription(!hasTranscription)}
+        >
+          <Ear />
+        </Button>
+        <Button
+          title={
+            isTranslated ? t('word.hideTranslation') : t('word.showTranslation')
+          }
+          className="mr-auto"
+          color={isTranslated ? 'primary' : 'default'}
+          isIconOnly
+          onClick={() => setTranslated(!isTranslated)}
+        >
+          <Languages />
+        </Button>
         {user && (
           <Button
             title={
@@ -85,21 +109,11 @@ export const WordCard = ({
             color={isFavorite ? 'danger' : 'default'}
             isLoading={isPending}
             isIconOnly
-            onClick={() => toggleFavorite({ userId: user.id, wordId })}
+            onClick={() => toggleFavorite({ userId: user.id, wordId: id })}
           >
             <Star className={isFavorite ? 'text-white' : 'text-black'} />
           </Button>
         )}
-        <Button
-          title={
-            isTranslated ? t('word.hideTranslation') : t('word.showTranslation')
-          }
-          color={isTranslated ? 'primary' : 'default'}
-          isIconOnly
-          onClick={() => setTranslated(!isTranslated)}
-        >
-          <Languages />
-        </Button>
       </CardFooter>
     </Card>
   );

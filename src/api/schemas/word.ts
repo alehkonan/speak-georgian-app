@@ -1,5 +1,18 @@
 import zod from 'zod';
 
+export const SpeechPartSchema = zod.enum([
+  'noun',
+  'adjective',
+  'numeral',
+  'pronoun',
+  'verb',
+  'adverb',
+  'postposition',
+  'conjunction',
+  'particle',
+  'interjection',
+]);
+
 export const WordSchema = zod.object({
   id: zod.number(),
   name_ka: zod.string(),
@@ -8,8 +21,9 @@ export const WordSchema = zod.object({
   transcription_en: zod.string().nullable(),
   category_id: zod.number().nullable(),
   picture_url: zod.string().nullable(),
-  is_favorite: zod.boolean().nullish(),
-  is_learned: zod.boolean().nullish(),
+  speech_part: SpeechPartSchema.nullable(),
+  is_favorite: zod.boolean(),
+  is_learned: zod.boolean(),
   created_at: zod.coerce.date(),
 });
 
@@ -35,3 +49,4 @@ export const GameWordSchema = zod.object({
 export type Word = zod.infer<typeof WordSchema>;
 export type WordForm = zod.infer<typeof WordFormSchema>;
 export type GameWord = zod.infer<typeof GameWordSchema>;
+export type SpeechPart = zod.infer<typeof SpeechPartSchema>;
