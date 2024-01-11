@@ -7,14 +7,20 @@ type Params = {
 };
 
 export const setWordLearned = async ({ userId, wordId }: Params) => {
-  const { data, error } = await supabaseApi
-    .rpc('set_word_learned', {
-      user_id_param: userId,
-      word_id_param: wordId,
-    })
+  const { error } = await supabaseApi.rpc('set_word_learned', {
+    user_id_param: userId,
+    word_id_param: wordId,
+  });
+
+  if (error) throw error;
+
+  const { data: word, error: wordError } = await supabaseApi
+    .from('words')
+    .select()
+    .eq('id', wordId)
     .single();
 
-  if (error) throw new Error('Unable to update word statistic');
+  if (wordError) throw wordError;
 
-  return WordSchema.parse(data);
+  return WordSchema.parse(word);
 };

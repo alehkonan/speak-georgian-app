@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getCategoryWords } from 'src/api/category/getWords';
+import { getCategoryWords } from 'src/api/category/getCategoryWords';
 import { useUser } from 'src/auth/useUser';
 import { queryKeys } from '../keys';
 

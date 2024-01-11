@@ -3,22 +3,27 @@ import { toggleFavoriteWord } from 'src/api/favorite/toggleFavoriteWord';
 import { type Word } from 'src/api/schemas/word';
 import { queryKeys } from '../keys';
 
-export const useToggleFavoriteWord = () => {
+export const useToggleFavoriteWord = (categoryId: number | null) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: toggleFavoriteWord,
-    onSuccess: ({ id, category_id, is_favorite }, { userId }) => {
+    onSuccess: ({ word_id, is_favorite, user_id }) => {
+      console.log(word_id, is_favorite);
       queryClient.setQueryData<Word[]>(
-        queryKeys.category.words(category_id).queryKey,
-        (words) => words?.map((w) => (w.id === id ? { ...w, is_favorite } : w)),
+        queryKeys.category.words(categoryId).queryKey,
+        (words) => {
+          return words?.map((word) =>
+            word.id === word_id ? { ...word, is_favorite } : word,
+          );
+        },
       );
       Promise.all([
         queryClient.invalidateQueries({
           queryKey: queryKeys.favorite.words.queryKey,
         }),
         queryClient.invalidateQueries({
-          queryKey: queryKeys.statistic.user(userId || null).queryKey,
+          queryKey: queryKeys.statistic.user(user_id).queryKey,
         }),
       ]);
     },
