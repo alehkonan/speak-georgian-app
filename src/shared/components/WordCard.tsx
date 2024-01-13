@@ -16,8 +16,8 @@ import { WordChip } from './WordChip';
 
 type Props = {
   categoryId: number | null;
-  isFavorite: boolean;
-  isLearned: boolean;
+  isFavorite: boolean | null;
+  isLearned: boolean | null;
   pictureUrl: string | null;
   speechPart: SpeechPart | null;
   transcription: string | null;
