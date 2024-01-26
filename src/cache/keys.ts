@@ -15,4 +15,7 @@ export const queryKeys = createQueryKeyStore({
     word: (id: number) => [{ id }] as const,
     user: (id: string | null) => [{ id }] as const,
   },
+  rule: {
+    list: null,
+  },
 });

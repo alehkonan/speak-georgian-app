@@ -1,0 +1,134 @@
+[
+  {
+    "title": "Person markers in verbs",
+    "statements": [
+      {
+        "description": "ვ is usually added at the beginning of the word to indicate the first person.",
+        "example": "ვხატავ [I paint], ვჭამ [I eat]"
+      },
+      {
+        "description": "Usually there is no indicator for the second person.",
+        "example": "ხატავ [you paint], შენ ჭამ [you eat]"
+      },
+      {
+        "description": "ს is added in the end of the word to indicate the third person.",
+        "example": "ხატავს [s/he paints]"
+      }
+    ]
+  },
+  {
+    "title": "Plural markers in verbs",
+    "statements": [
+      {
+        "description": "Plural verbs are ended with თ letter",
+        "example": "ჩვენ ვცხოვრობთ [We live]"
+      },
+      {
+        "description": "But in 3rd person ending is ენ",
+        "example": "ისინი ცხოვრობენ [They live]"
+      }
+    ]
+  },
+  {
+    "title": "Words order in the sentence",
+    "statements": [
+      {
+        "description": "The most common and neutral word order is Subject-Object-Verb",
+        "example": "დავითი თამარს ხედავს [Davit sees Tamara]"
+      }
+    ]
+  },
+  {
+    "title": "Emphatic -a",
+    "statements": [
+      {
+        "description": "The word before a monosyllabic word can take a so-called emphatic vowel 'a'",
+        "example": "როგორა ხარ? [How are you?]"
+      }
+    ]
+  },
+  {
+    "title": "The verb 'to have'",
+    "statements": [
+      {
+        "description": "ქონა is used for inanimate objects",
+        "example": "მე მაქვს ჩანთა [I have a bag]"
+      },
+      {
+        "description": "ყოლა is used for animate objects",
+        "example": "მე მყავს მეგობარი [I have a friend]"
+      }
+    ]
+  },
+  {
+    "title": "Noun cases",
+    "statements": [
+      {
+        "description": "Nominative case is used to express a subject or an object.",
+        "example": "კაცი [a man]"
+      },
+      {
+        "description": "Ergative case is used to express subject actions that were in the past.",
+        "example": "კაცმა - a man"
+      },
+      {
+        "description": "Dative case.",
+        "example": "კაცს - a man"
+      },
+      {
+        "description": "Genitive - the case of a possessor.",
+        "example": "კაცის - of a man"
+      },
+      {
+        "description": "Instrumental case.",
+        "example": "კაცით - with a man"
+      },
+      {
+        "description": "Adverbial case is used for forming adverbs or when something is being transformed into something else.",
+        "example": "კაცად"
+      },
+      {
+        "description": "Vocative case is used as a form of address to a person (or thing).",
+        "example": "კაცო"
+      }
+    ]
+  },
+  {
+    "title": "Diminutive suffix",
+    "statements": [
+      {
+        "description": "კო suffix is used to express that something is small or cute",
+        "example": "მამა [father] -> მამიკო [daddy]"
+      }
+    ]
+  },
+  {
+    "title": "Word formations",
+    "statements": [
+      {
+        "description": "Construction სა{noun}ე|ო|ურ|- is used to form a word that denotes the purpose, function, appointment.",
+        "example": "ყური [ear] -> საყურე [earring]\nქვეყანა [country] -> საქვეყნო [public]\nფეხი [foot] -> საფეხური [step]"
+      },
+      {
+        "description": "Construction სა{verb}ელ|არ|ულ|ო|ალ|- forms a noun for what this verb is used",
+        "example": "წერა [write] -> საწერი [something that shall be written]\nკეთება [do] -> საკეთებელი [something that shall be done]\nხვეწნა [beg] -> სახვეწარი [something to beg for]\nწყვა [measure] -> საწყაული [something to measure with]\nრჩენა [save, support] -> სარჩო [means of subsistence]\nმკა [reap] -> სამკალი [harvest]"
+      },
+      {
+        "description": "Construction {noun}ელ is used to create adjective from nouns denoting the place.",
+        "example": "თბილისი [Tbilisi] -> თბილისელი [who is from Tbilisi]"
+      },
+      {
+        "description": "Construction {noun}იან is used to create adjective that indicates possession from noun.",
+        "example": "ცოლი [wife] -> ცოლიანი [married]"
+      },
+      {
+        "description": "Construction უ{noun}ო is used to denote the lack of something.",
+        "example": "გული [Heart] -> უგულო [heartless]"
+      },
+      {
+        "description": "Construction სი{adjective}ე is used to create abstract noun from the adjective.",
+        "example": "ცოცხალი [alive] -> სიცოცხლე [life]"
+      }
+    ]
+  }
+]
