@@ -1,75 +1,35 @@
-import {
-  Card,
-  CardBody,
-  CardHeader,
-  Code,
-  Divider,
-  Input,
-} from '@nextui-org/react';
-import { Search } from 'lucide-react';
+import { Accordion, AccordionItem } from '@nextui-org/react';
+import { ChevronsLeftRight } from 'lucide-react';
+import { useGetRules } from 'src/cache/rule/useGetRules';
 import { Screen } from 'src/shared/components/Screen';
 
-const warning = 'This screen is development process...';
-
-// TODO move data to database
-const rules = [
-  {
-    title: 'Person indicator in verb',
-    statements: [
-      {
-        description: 'ვ is the indicator of the first person.',
-        example: `ვხატავ`,
-      },
-      {
-        description: 'There is no indicator for 2 person.',
-        example: `ხატავ`,
-      },
-      {
-        description: 'For 3 person ს is added to the end of the word',
-        example: `ხატავს`,
-      },
-    ],
-  },
-  {
-    title: 'Word order and case markers',
-    statements: [
-      {
-        description:
-          'The most common and neutral word order is Subject-Object-Verb.',
-        example: `დავითი თამარს ხედავს`,
-      },
-    ],
-  },
-];
-
 export const RulesScreen = () => {
+  const { data: rules } = useGetRules();
+
+  if (!rules?.length) return null;
+
   return (
     <Screen>
-      <div className="grid auto-rows-min gap-2">
-        {rules.map(({ title, statements }) => (
-          <Card key={title}>
-            <CardHeader className="font-bold">{title}</CardHeader>
-            <Divider />
-            <CardBody>
+      <Accordion selectionMode="multiple" variant="splitted">
+        {rules?.map(({ title, statements }) => (
+          <AccordionItem
+            key={title}
+            indicator={<ChevronsLeftRight size={16} />}
+            title={title}
+          >
+            <div className="grid gap-2">
               {statements.map(({ description, example }) => (
                 <div key={description}>
                   <p>{description}</p>
-                  <Code>{example}</Code>
+                  <p className="whitespace-pre-wrap italic text-gray-600">
+                    {example}
+                  </p>
                 </div>
               ))}
-            </CardBody>
-          </Card>
+            </div>
+          </AccordionItem>
         ))}
-        <p className="text-sm italic text-gray-400">{warning}</p>
-      </div>
-      <Input
-        className="self-end"
-        placeholder="Search the rule"
-        size="sm"
-        startContent={<Search />}
-        variant="flat"
-        isClearable
-      />
+      </Accordion>
     </Screen>
   );
 };
