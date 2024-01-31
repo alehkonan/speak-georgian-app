@@ -1,7 +1,10 @@
-import { type RouteObject, createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import { NotFoundScreen } from 'src/screens/NotFound';
+import { RulesScreen } from 'src/screens/Rules';
 import { Layout } from '../layout/Layout';
+import { CategoriesScreen } from '../screens/Categories';
 import { LoginScreen } from '../screens/Login';
+import { WordsScreen } from '../screens/Words';
 import {
   adminLoader,
   protectedRouteLoader,
@@ -10,53 +13,7 @@ import {
 } from './loaders';
 import { paths } from './paths';
 
-const publicRoutes: RouteObject[] = [
-  {
-    path: paths.login,
-    element: <LoginScreen />,
-  },
-];
-
-const protectedRoutes: RouteObject[] = [
-  {
-    path: paths.game,
-    lazy: async () => {
-      const { GameScreen } = await import('../screens/Game');
-      return { Component: GameScreen };
-    },
-  },
-  {
-    path: paths.favorites,
-    lazy: async () => {
-      const { FavoritesScreen } = await import('../screens/Favorites');
-      return { Component: FavoritesScreen };
-    },
-  },
-  {
-    path: paths.profile,
-    lazy: async () => {
-      const { ProfileScreen } = await import('../screens/Profile');
-      return { Component: ProfileScreen };
-    },
-  },
-  {
-    path: paths.newWord,
-    loader: adminLoader,
-    lazy: async () => {
-      const { NewWordScreen } = await import('../screens/NewWord');
-      return { Component: NewWordScreen };
-    },
-  },
-];
-
 export const router = createBrowserRouter([
-  {
-    path: paths.welcome,
-    lazy: async () => {
-      const { WelcomeScreen } = await import('../screens/Welcome');
-      return { Component: WelcomeScreen };
-    },
-  },
   {
     path: paths.root,
     element: <Layout />,
@@ -64,34 +21,67 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        lazy: async () => {
-          const { CategoriesScreen } = await import('../screens/Categories');
-          return { Component: CategoriesScreen };
-        },
+        element: <CategoriesScreen />,
       },
       {
         path: paths.category,
-        lazy: async () => {
-          const { WordsScreen } = await import('../screens/Words');
-          return { Component: WordsScreen };
-        },
+        element: <WordsScreen />,
       },
       {
         path: paths.rules,
-        lazy: async () => {
-          const { RulesScreen } = await import('../screens/Rules');
-          return { Component: RulesScreen };
-        },
+        element: <RulesScreen />,
       },
       {
         loader: publicRouteLoader,
-        children: publicRoutes,
+        children: [
+          {
+            path: paths.login,
+            element: <LoginScreen />,
+          },
+        ],
       },
       {
         loader: protectedRouteLoader,
-        children: protectedRoutes,
+        children: [
+          {
+            path: paths.game,
+            lazy: async () => {
+              const { GameScreen } = await import('../screens/Game');
+              return { Component: GameScreen };
+            },
+          },
+          {
+            path: paths.favorites,
+            lazy: async () => {
+              const { FavoritesScreen } = await import('../screens/Favorites');
+              return { Component: FavoritesScreen };
+            },
+          },
+          {
+            path: paths.profile,
+            lazy: async () => {
+              const { ProfileScreen } = await import('../screens/Profile');
+              return { Component: ProfileScreen };
+            },
+          },
+          {
+            path: paths.newWord,
+            loader: adminLoader,
+            lazy: async () => {
+              const { NewWordScreen } = await import('../screens/NewWord');
+              return { Component: NewWordScreen };
+            },
+          },
+        ],
       },
     ],
+  },
+  {
+    path: paths.welcome,
+    lazy: async () => {
+      const { WelcomeScreen } = await import('../screens/Welcome');
+      return { Component: WelcomeScreen };
+    },
   },
   {
     path: '*',
