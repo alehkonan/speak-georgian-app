@@ -7,7 +7,7 @@ type User = {
   created: string;
   pictureUrl?: string;
   provider?: string;
-  role?: 'admin';
+  role?: string;
 };
 
 type UserState = {

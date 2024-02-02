@@ -7,6 +7,8 @@ type Params = {
 };
 
 export const toggleFavoriteWord = async ({ userId, wordId }: Params) => {
+  if (!userId) throw new Error('User is not defined');
+
   const { error } = await supabaseApi.rpc('toggle_favorite_word', {
     user_id_param: userId,
     word_id_param: wordId,

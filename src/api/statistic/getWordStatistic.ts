@@ -7,6 +7,8 @@ type Params = {
 };
 
 export const getWordStatistic = async ({ userId, wordId }: Params) => {
+  if (!userId) throw new Error('User is not defined');
+
   const { data, error } = await supabaseApi
     .from('statistic')
     .select()
