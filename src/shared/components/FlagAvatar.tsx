@@ -19,7 +19,7 @@ export const FlagAvatar = ({ language }: Props) => {
   return (
     <Avatar
       aria-label={language?.label}
-      className="h-4 w-4"
+      className="size-4"
       src={getSrc(language.code)}
     />
   );

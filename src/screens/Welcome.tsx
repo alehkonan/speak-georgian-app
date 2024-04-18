@@ -14,8 +14,8 @@ export const WelcomeScreen = () => {
 
   return (
     <div className="flex h-screen flex-col justify-end">
-      <div className="fixed -z-10 grid h-full w-full place-items-center">
-        <FieldWithMountains className="absolute h-full w-full" />
+      <div className="fixed -z-10 grid size-full place-items-center">
+        <FieldWithMountains className="absolute size-full" />
         <Logo className="z-0 w-2/5" />
       </div>
       <div className="relative flex flex-col items-center justify-end">
