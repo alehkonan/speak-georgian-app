@@ -1,2 +1,2 @@
 npm run check:types
-npm run lint:fix && git add .
+npm run lint

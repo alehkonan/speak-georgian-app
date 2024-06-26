@@ -10,46 +10,46 @@ import { Screen } from 'src/shared/components/Screen';
 import { formatDate } from 'src/shared/utils/dates';
 
 export const ProfileScreen = () => {
-  const { t } = useTranslation();
-  const user = useUser();
-  const { mutate: logout, isPending } = useLogout();
-  const { data: statistic, isLoading } = useGetUserStatistic(user?.id);
+	const { t } = useTranslation();
+	const user = useUser();
+	const { mutate: logout, isPending } = useLogout();
+	const { data: statistic, isLoading } = useGetUserStatistic(user?.id);
 
-  return (
-    <Screen isLoading={isLoading}>
-      <div className="grid auto-rows-min gap-4">
-        <ProfileCard
-          avatar={<Avatar icon={<UserRound />} src={user?.pictureUrl} />}
-          title={t('account.info')}
-        >
-          <span>{t('account.name')}: </span>
-          <span>{user?.name}</span>
-          <span>{t('account.created')}:</span>
-          <span>{formatDate(user?.created)}</span>
-          <span>{t('account.provider')}:</span>
-          <span>{user?.provider}</span>
-        </ProfileCard>
-        <ProfileCard title={t('settings.title')} edgeValues>
-          <span>{t('settings.language')}:</span>
-          <LanguageSwitcher />
-        </ProfileCard>
-        <ProfileCard title={t('statistic.title')} edgeValues>
-          <span>{t('statistic.totalWords')}: </span>
-          <span>{statistic?.total_words}</span>
-          <span>{t('statistic.learnedWords')}: </span>
-          <span>{statistic?.learned_words}</span>
-          <span>{t('statistic.favoriteWords')}: </span>
-          <span>{statistic?.favorite_words}</span>
-        </ProfileCard>
-      </div>
-      <Button
-        className="self-end"
-        color="primary"
-        isLoading={isPending}
-        onClick={() => logout()}
-      >
-        {t('auth.logout')}
-      </Button>
-    </Screen>
-  );
+	return (
+		<Screen isLoading={isLoading}>
+			<div className="grid auto-rows-min gap-4">
+				<ProfileCard
+					avatar={<Avatar icon={<UserRound />} src={user?.pictureUrl} />}
+					title={t('account.info')}
+				>
+					<span>{t('account.name')}: </span>
+					<span>{user?.name}</span>
+					<span>{t('account.created')}:</span>
+					<span>{formatDate(user?.created)}</span>
+					<span>{t('account.provider')}:</span>
+					<span>{user?.provider}</span>
+				</ProfileCard>
+				<ProfileCard title={t('settings.title')} edgeValues>
+					<span>{t('settings.language')}:</span>
+					<LanguageSwitcher />
+				</ProfileCard>
+				<ProfileCard title={t('statistic.title')} edgeValues>
+					<span>{t('statistic.totalWords')}: </span>
+					<span>{statistic?.total_words}</span>
+					<span>{t('statistic.learnedWords')}: </span>
+					<span>{statistic?.learned_words}</span>
+					<span>{t('statistic.favoriteWords')}: </span>
+					<span>{statistic?.favorite_words}</span>
+				</ProfileCard>
+			</div>
+			<Button
+				className="self-end"
+				color="primary"
+				isLoading={isPending}
+				onClick={() => logout()}
+			>
+				{t('auth.logout')}
+			</Button>
+		</Screen>
+	);
 };

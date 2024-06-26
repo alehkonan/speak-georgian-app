@@ -5,27 +5,27 @@ import { GameCard } from 'src/shared/components/GameCard';
 import { Screen } from 'src/shared/components/Screen';
 
 export const GameScreen = () => {
-  const { t } = useTranslation();
-  const [isStarted, setStarted] = useState(false);
+	const { t } = useTranslation();
+	const [isStarted, setStarted] = useState(false);
 
-  return (
-    <Screen>
-      {isStarted ? (
-        <div className="grid h-full grid-rows-[1fr_auto] items-center self-center">
-          <GameCard />
-          <Button color="primary" onClick={() => setStarted(false)}>
-            {t('game.stop')}
-          </Button>
-        </div>
-      ) : (
-        <Button
-          className="self-end"
-          color="primary"
-          onClick={() => setStarted(true)}
-        >
-          {t('game.start')}
-        </Button>
-      )}
-    </Screen>
-  );
+	return (
+		<Screen>
+			{isStarted ? (
+				<div className="grid h-full grid-rows-[1fr_auto] items-center self-center">
+					<GameCard />
+					<Button color="primary" onClick={() => setStarted(false)}>
+						{t('game.stop')}
+					</Button>
+				</div>
+			) : (
+				<Button
+					className="self-end"
+					color="primary"
+					onClick={() => setStarted(true)}
+				>
+					{t('game.start')}
+				</Button>
+			)}
+		</Screen>
+	);
 };

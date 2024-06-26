@@ -4,11 +4,11 @@ import { useUser } from 'src/auth/useUser';
 import { queryKeys } from '../keys';
 
 export const useGetCategoryWords = (categoryId?: number) => {
-  const user = useUser();
+	const user = useUser();
 
-  return useQuery({
-    queryKey: queryKeys.category.words(categoryId || null).queryKey,
-    queryFn: () => getCategoryWords(user?.id, categoryId),
-    staleTime: Infinity,
-  });
+	return useQuery({
+		queryKey: queryKeys.category.words(categoryId || null).queryKey,
+		queryFn: () => getCategoryWords(user?.id, categoryId),
+		staleTime: Number.POSITIVE_INFINITY,
+	});
 };

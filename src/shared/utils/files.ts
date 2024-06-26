@@ -1,12 +1,12 @@
 type MimeType = {
-  type: string;
-  subtype?: string;
+	type: string;
+	subtype?: string;
 };
 
 const parseMimeType = (mimeType: string): MimeType => {
-  const [type, subtype] = mimeType.split('/');
+	const [type, subtype] = mimeType.split('/');
 
-  return { type, subtype };
+	return { type, subtype };
 };
 
 /**
@@ -16,14 +16,14 @@ const parseMimeType = (mimeType: string): MimeType => {
  * @example getCanAcceptFile('image/*', 'image/png') => true getCanAcceptFile('image/*', 'text/html') => false
  */
 export const getCanAcceptFile = (accept?: string, fileType?: string) => {
-  if (!accept) return true;
-  if (!fileType) return false;
+	if (!accept) return true;
+	if (!fileType) return false;
 
-  const { type, subtype } = parseMimeType(accept);
-  const file = parseMimeType(fileType);
+	const { type, subtype } = parseMimeType(accept);
+	const file = parseMimeType(fileType);
 
-  const hasAcceptableSubtype =
-    !subtype || subtype === '*' || subtype === file.subtype;
+	const hasAcceptableSubtype =
+		!subtype || subtype === '*' || subtype === file.subtype;
 
-  return type === file.type && hasAcceptableSubtype;
+	return type === file.type && hasAcceptableSubtype;
 };

@@ -11,20 +11,23 @@ import { idbPersister } from './cache/persister';
 import './i18n';
 import './index.css';
 
-const root = ReactDOM.createRoot(document.getElementById('root')!);
-const app = (
-  <React.StrictMode>
-    <NextUIProvider>
-      <PersistQueryClientProvider
-        client={queryClient}
-        persistOptions={{ persister: idbPersister }}
-      >
-        <RouterProvider router={router} />
-        <Toaster />
-        <ReactQueryDevtools />
-      </PersistQueryClientProvider>
-    </NextUIProvider>
-  </React.StrictMode>
+const rootElement = document.getElementById('root');
+if (!rootElement) throw new Error('Root element not found!');
+
+const root = ReactDOM.createRoot(rootElement);
+const App = (
+	<React.StrictMode>
+		<NextUIProvider>
+			<PersistQueryClientProvider
+				client={queryClient}
+				persistOptions={{ persister: idbPersister }}
+			>
+				<RouterProvider router={router} />
+				<Toaster />
+				<ReactQueryDevtools />
+			</PersistQueryClientProvider>
+		</NextUIProvider>
+	</React.StrictMode>
 );
 
-root.render(app);
+root.render(App);

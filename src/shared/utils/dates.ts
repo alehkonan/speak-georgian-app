@@ -4,11 +4,11 @@
  * @returns formatted date as a string
  */
 export const formatDate = (date?: string | null) => {
-  if (!date) return '';
-  try {
-    const dateFormatter = Intl.DateTimeFormat('cs', { dateStyle: 'short' });
-    return dateFormatter.format(new Date(date));
-  } catch (error) {
-    return '';
-  }
+	if (!date) return '';
+	try {
+		const dateFormatter = Intl.DateTimeFormat('cs', { dateStyle: 'short' });
+		return dateFormatter.format(new Date(date));
+	} catch (error) {
+		return '';
+	}
 };

@@ -4,11 +4,11 @@ import { useUser } from 'src/auth/useUser';
 import { queryKeys } from '../keys';
 
 export const useGetFavoriteWords = () => {
-  const user = useUser();
+	const user = useUser();
 
-  return useQuery({
-    queryKey: queryKeys.favorite.words.queryKey,
-    queryFn: () => getFavoriteWords(user?.id),
-    staleTime: Infinity,
-  });
+	return useQuery({
+		queryKey: queryKeys.favorite.words.queryKey,
+		queryFn: () => getFavoriteWords(user?.id),
+		staleTime: Number.POSITIVE_INFINITY,
+	});
 };
