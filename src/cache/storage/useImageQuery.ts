@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { uploadImage } from 'src/api/storage/uploadImage';
+import { uploadImage } from 'src/supabase/storage/uploadImage';
 
 export const useUploadImage = () => {
 	return useMutation({

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getWordStatistic } from 'src/api/statistic/getWordStatistic';
+import { getWordStatistic } from 'src/supabase/statistic/getWordStatistic';
 import { useUser } from 'src/auth/useUser';
 import { queryKeys } from '../keys';
 

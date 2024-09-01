@@ -1,33 +1,23 @@
-import { NextUIProvider } from '@nextui-org/react';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
-import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Toaster } from 'react-hot-toast';
-import { RouterProvider } from 'react-router-dom';
-import { router } from './app/router';
-import { queryClient } from './cache/client';
-import { idbPersister } from './cache/persister';
 import './i18n';
 import './index.css';
+import { routeTree } from './routeTree.gen';
+import { createRouter, RouterProvider } from '@tanstack/react-router';
+
+const router = createRouter({
+	routeTree,
+	defaultPreloadStaleTime: 0, // turn off internal cache in order to use tanstack query
+});
+
+declare module '@tanstack/react-router' {
+	interface Register {
+		router: typeof router;
+	}
+}
 
 const rootElement = document.getElementById('root');
-if (!rootElement) throw new Error('Root element not found!');
+if (!rootElement) {
+	throw new Error(`Element with id 'root' does not exist in index.html`);
+}
 
-const root = ReactDOM.createRoot(rootElement);
-const App = (
-	<React.StrictMode>
-		<NextUIProvider>
-			<PersistQueryClientProvider
-				client={queryClient}
-				persistOptions={{ persister: idbPersister }}
-			>
-				<RouterProvider router={router} />
-				<Toaster />
-				<ReactQueryDevtools />
-			</PersistQueryClientProvider>
-		</NextUIProvider>
-	</React.StrictMode>
-);
-
-root.render(App);
+ReactDOM.createRoot(rootElement).render(<RouterProvider router={router} />);

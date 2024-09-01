@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getFavoriteWords } from 'src/api/favorite/getFavoriteWords';
+import { getFavoriteWords } from 'src/supabase/favorite/getFavoriteWords';
 import { useUser } from 'src/auth/useUser';
 import { queryKeys } from '../keys';
 

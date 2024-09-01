@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getRules } from 'src/api/rules/getRules';
+import { getRules } from 'src/supabase/rules/getRules';
 import { queryKeys } from '../keys';
 
 export const useGetRules = () => {

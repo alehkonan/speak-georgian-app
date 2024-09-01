@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getCategories } from 'src/api/category/getCategories';
+import { getCategories } from 'src/supabase/category/getCategories';
 import { queryKeys } from '../keys';
 
 export const useGetCategories = () => {

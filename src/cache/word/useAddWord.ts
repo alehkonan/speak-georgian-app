@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addWord } from 'src/api/word/addWord';
+import { addWord } from 'src/supabase/word/addWord';
 import { useUser } from 'src/auth/useUser';
 import { queryKeys } from '../keys';
 

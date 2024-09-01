@@ -30,11 +30,12 @@
 		"game": "Game",
 		"goToHome": "Go to the home screen",
 		"goToWords": "Go to words",
-		"home": "Home",
 		"login": "Login",
 		"profile": "Profile",
-		"rules": "Rules"
+		"rules": "Rules",
+		"words": "Words"
 	},
+	"noTranslation": "No translation",
 	"pageNotFound": "Page not found",
 	"settings": {
 		"language": "Language",
@@ -58,8 +59,7 @@
 		"isLearned": "This word is learned",
 		"removeFromFavorites": "Remove from favorites",
 		"russianTranslation": "Russian translation",
-		"showTranslation": "Show translation",
-		"selectImage": "Select image"
-	},
-	"noTranslation": "No translation"
+		"selectImage": "Select image",
+		"showTranslation": "Show translation"
+	}
 }

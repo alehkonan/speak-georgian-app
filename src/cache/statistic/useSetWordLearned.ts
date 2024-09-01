@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { setWordLearned } from 'src/api/statistic/setWordLearned';
+import { setWordLearned } from 'src/supabase/statistic/setWordLearned';
 import { queryKeys } from '../keys';
 
 export const useSetWordLearned = () => {

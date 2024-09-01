@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getUserStatistic } from 'src/api/statistic/getUserStatistic';
+import { getUserStatistic } from 'src/supabase/statistic/getUserStatistic';
 import { queryKeys } from '../keys';
 
 export const useGetUserStatistic = (userId: string | undefined) => {

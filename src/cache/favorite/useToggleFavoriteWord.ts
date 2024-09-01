@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toggleFavoriteWord } from 'src/api/favorite/toggleFavoriteWord';
-import type { Word } from 'src/api/schemas/word';
+import { toggleFavoriteWord } from 'src/supabase/favorite/toggleFavoriteWord';
+import type { Word } from 'src/supabase/schemas/word';
 import { queryKeys } from '../keys';
 
 export const useToggleFavoriteWord = (categoryId: number | null) => {
