@@ -35,11 +35,6 @@ export const useNavigationTabs = () => {
 				icon: <GraduationCap />,
 			},
 			{
-				path: '/favorites',
-				title: t('navigation.favorites'),
-				icon: <Star />,
-			},
-			{
 				path: '/login',
 				title: t('navigation.login'),
 				icon: <LogIn />,
