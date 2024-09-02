@@ -1,6 +1,6 @@
 import { Button } from '@nextui-org/react';
-import { useTranslation } from 'react-i18next';
 import { Link } from '@tanstack/react-router';
+import { useTranslation } from 'react-i18next';
 import { Screen } from 'src/components/Screen';
 
 export const NotFoundScreen = () => {

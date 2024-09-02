@@ -5,12 +5,12 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useId, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { type WordForm, WordFormSchema } from 'src/supabase/schemas/word';
 import { useGetCategories } from 'src/cache/category/useGetCategories';
 import { useUploadImage } from 'src/cache/storage/useImageQuery';
 import { useAddWord } from 'src/cache/word/useAddWord';
 import { FileInput } from 'src/components/FileInput';
 import { Screen } from 'src/components/Screen';
+import { type WordForm, WordFormSchema } from 'src/supabase/schemas/word';
 
 export const Route = createFileRoute('/_layout/(private)/new-word')({
 	component: NewWordScreen,

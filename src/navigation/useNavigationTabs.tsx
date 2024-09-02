@@ -1,3 +1,4 @@
+import type { LinkOptions, RegisteredRouter } from '@tanstack/react-router';
 import {
 	Gamepad2,
 	GraduationCap,
@@ -10,7 +11,6 @@ import {
 import { type ReactNode, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useUser } from 'src/auth/useUser';
-import type { LinkOptions, RegisteredRouter } from '@tanstack/react-router';
 
 type NavTab = {
 	path: LinkOptions<RegisteredRouter>['to'];

@@ -1,11 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import { useGetFavoriteWords } from 'src/cache/favorite/useGetFavoriteWords';
-import { langMap } from 'src/i18n';
 import { CardContainer } from 'src/components/CardContainer';
 import { ErrorCard } from 'src/components/ErrorCard';
 import { Screen } from 'src/components/Screen';
 import { WordCard } from 'src/components/WordCard';
+import { langMap } from 'src/i18n';
 
 export const Route = createFileRoute('/_layout/(private)/favorites')({
 	component: () => {

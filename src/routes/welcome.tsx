@@ -1,9 +1,9 @@
 import { Button, Divider } from '@nextui-org/react';
-import { createFileRoute, Link } from '@tanstack/react-router';
+import { Link, createFileRoute } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
-import { loginWithGoogle } from 'src/supabase/auth/loginWithGoogle';
 import { FieldWithMountains, Hill, Logo } from 'src/assets/images';
 import { LanguageSwitcher } from 'src/components/LanguageSwitcher';
+import { loginWithGoogle } from 'src/supabase/auth/loginWithGoogle';
 
 export const Route = createFileRoute('/welcome')({
 	component: WelcomeScreen,

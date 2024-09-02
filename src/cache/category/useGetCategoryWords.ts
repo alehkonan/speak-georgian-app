@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { getCategoryWords } from 'src/supabase/category/getCategoryWords';
 import { useUser } from 'src/auth/useUser';
+import { getCategoryWords } from 'src/supabase/category/getCategoryWords';
 import { queryKeys } from '../keys';
 
 export const useGetCategoryWords = (categoryId?: number) => {

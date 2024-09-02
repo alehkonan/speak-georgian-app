@@ -1,11 +1,11 @@
 import { BreadcrumbItem, Breadcrumbs, Spinner } from '@nextui-org/react';
-import type { PropsWithChildren } from 'react';
-import { useRestoreScrollPosition } from '../hooks/useRestoreScrollPosition';
 import {
 	type NavigateOptions,
 	type RegisteredRouter,
 	useNavigate,
 } from '@tanstack/react-router';
+import type { PropsWithChildren } from 'react';
+import { useRestoreScrollPosition } from '../hooks/useRestoreScrollPosition';
 
 export type Breadcrumb = {
 	path: NavigateOptions<RegisteredRouter>;

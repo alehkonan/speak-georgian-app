@@ -1,8 +1,8 @@
 import { Accordion, AccordionItem } from '@nextui-org/react';
 import { createFileRoute } from '@tanstack/react-router';
 import { ChevronsLeftRight } from 'lucide-react';
-import { getRules } from 'src/supabase/rules/getRules';
 import { Screen } from 'src/components/Screen';
+import { getRules } from 'src/supabase/rules/getRules';
 
 export const Route = createFileRoute('/_layout/rules')({
 	loader: () => getRules(),

@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet } from '@tanstack/react-router';
+import { Outlet, createFileRoute } from '@tanstack/react-router';
 import { Wave } from 'src/assets/images';
 import { NavigationTabs } from 'src/navigation/NavigationTabs';
 

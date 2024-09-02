@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
-import { langMap } from 'src/i18n';
 import { CardContainer } from 'src/components/CardContainer';
 import { CategoryCard } from 'src/components/CategoryCard';
 import { type Breadcrumb, Screen } from 'src/components/Screen';
+import { langMap } from 'src/i18n';
 import { getCategories } from 'src/supabase/category/getCategories';
 
 export const Route = createFileRoute('/_layout/category/')({

@@ -1,14 +1,14 @@
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { NextUIProvider } from '@nextui-org/react';
-import { createRootRoute, Outlet, useRouter } from '@tanstack/react-router';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
+import { Outlet, createRootRoute, useRouter } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import { Toaster } from 'react-hot-toast';
+import { useUserStore } from 'src/auth/useUser';
 import { queryClient } from 'src/cache/client';
 import { idbPersister } from 'src/cache/persister';
-import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
-import { useUserStore } from 'src/auth/useUser';
-import { supabaseClient } from 'src/supabase/client';
 import { getUserRole } from 'src/supabase/auth/getUserRole';
+import { supabaseClient } from 'src/supabase/client';
 
 export const Route = createRootRoute({
 	beforeLoad: async () => {

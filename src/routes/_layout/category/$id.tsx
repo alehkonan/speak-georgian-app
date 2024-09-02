@@ -3,11 +3,11 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGetCategories } from 'src/cache/category/useGetCategories';
 import { useGetCategoryWords } from 'src/cache/category/useGetCategoryWords';
-import { langMap } from 'src/i18n';
 import { CardContainer } from 'src/components/CardContainer';
 import { ErrorCard } from 'src/components/ErrorCard';
 import { type Breadcrumb, Screen } from 'src/components/Screen';
 import { WordCard } from 'src/components/WordCard';
+import { langMap } from 'src/i18n';
 
 export const Route = createFileRoute('/_layout/category/$id')({
 	component: CategoryWords,
