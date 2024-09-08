@@ -10,8 +10,6 @@ export const Route = createFileRoute('/_layout/(private)/game')({
 });
 
 function GameScreen() {
-	console.log('game screen');
-
 	const { t } = useTranslation();
 	const [isStarted, setStarted] = useState(false);
 

@@ -9,7 +9,6 @@ export const useToggleFavoriteWord = (categoryId: number | null) => {
 	return useMutation({
 		mutationFn: toggleFavoriteWord,
 		onSuccess: ({ word_id, is_favorite, user_id }) => {
-			console.log(word_id, is_favorite);
 			queryClient.setQueryData<Word[]>(
 				queryKeys.category.words(categoryId).queryKey,
 				(words) => {
