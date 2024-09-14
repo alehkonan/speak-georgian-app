@@ -179,22 +179,144 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({
-  IndexRoute,
-  LayoutRouteRoute: LayoutRouteRoute.addChildren({
-    LayoutprivateRouteRoute: LayoutprivateRouteRoute.addChildren({
-      LayoutprivateFavoritesRoute,
-      LayoutprivateGameRoute,
-      LayoutprivateNewWordRoute,
-      LayoutprivateProfileRoute,
-    }),
-    LayoutLoginRoute,
-    LayoutRulesRoute,
-    LayoutCategoryIdRoute,
-    LayoutCategoryIndexRoute,
-  }),
-  WelcomeRoute,
-})
+interface LayoutprivateRouteRouteChildren {
+  LayoutprivateFavoritesRoute: typeof LayoutprivateFavoritesRoute
+  LayoutprivateGameRoute: typeof LayoutprivateGameRoute
+  LayoutprivateNewWordRoute: typeof LayoutprivateNewWordRoute
+  LayoutprivateProfileRoute: typeof LayoutprivateProfileRoute
+}
+
+const LayoutprivateRouteRouteChildren: LayoutprivateRouteRouteChildren = {
+  LayoutprivateFavoritesRoute: LayoutprivateFavoritesRoute,
+  LayoutprivateGameRoute: LayoutprivateGameRoute,
+  LayoutprivateNewWordRoute: LayoutprivateNewWordRoute,
+  LayoutprivateProfileRoute: LayoutprivateProfileRoute,
+}
+
+const LayoutprivateRouteRouteWithChildren =
+  LayoutprivateRouteRoute._addFileChildren(LayoutprivateRouteRouteChildren)
+
+interface LayoutRouteRouteChildren {
+  LayoutprivateRouteRoute: typeof LayoutprivateRouteRouteWithChildren
+  LayoutLoginRoute: typeof LayoutLoginRoute
+  LayoutRulesRoute: typeof LayoutRulesRoute
+  LayoutCategoryIdRoute: typeof LayoutCategoryIdRoute
+  LayoutCategoryIndexRoute: typeof LayoutCategoryIndexRoute
+}
+
+const LayoutRouteRouteChildren: LayoutRouteRouteChildren = {
+  LayoutprivateRouteRoute: LayoutprivateRouteRouteWithChildren,
+  LayoutLoginRoute: LayoutLoginRoute,
+  LayoutRulesRoute: LayoutRulesRoute,
+  LayoutCategoryIdRoute: LayoutCategoryIdRoute,
+  LayoutCategoryIndexRoute: LayoutCategoryIndexRoute,
+}
+
+const LayoutRouteRouteWithChildren = LayoutRouteRoute._addFileChildren(
+  LayoutRouteRouteChildren,
+)
+
+export interface FileRoutesByFullPath {
+  '/': typeof LayoutprivateRouteRouteWithChildren
+  '': typeof LayoutRouteRouteWithChildren
+  '/welcome': typeof WelcomeRoute
+  '/login': typeof LayoutLoginRoute
+  '/rules': typeof LayoutRulesRoute
+  '/favorites': typeof LayoutprivateFavoritesRoute
+  '/game': typeof LayoutprivateGameRoute
+  '/new-word': typeof LayoutprivateNewWordRoute
+  '/profile': typeof LayoutprivateProfileRoute
+  '/category/$id': typeof LayoutCategoryIdRoute
+  '/category': typeof LayoutCategoryIndexRoute
+}
+
+export interface FileRoutesByTo {
+  '/': typeof LayoutprivateRouteRouteWithChildren
+  '/welcome': typeof WelcomeRoute
+  '/login': typeof LayoutLoginRoute
+  '/rules': typeof LayoutRulesRoute
+  '/favorites': typeof LayoutprivateFavoritesRoute
+  '/game': typeof LayoutprivateGameRoute
+  '/new-word': typeof LayoutprivateNewWordRoute
+  '/profile': typeof LayoutprivateProfileRoute
+  '/category/$id': typeof LayoutCategoryIdRoute
+  '/category': typeof LayoutCategoryIndexRoute
+}
+
+export interface FileRoutesById {
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/_layout': typeof LayoutRouteRouteWithChildren
+  '/welcome': typeof WelcomeRoute
+  '/_layout/': typeof LayoutprivateRouteRouteWithChildren
+  '/_layout/login': typeof LayoutLoginRoute
+  '/_layout/rules': typeof LayoutRulesRoute
+  '/_layout/favorites': typeof LayoutprivateFavoritesRoute
+  '/_layout/game': typeof LayoutprivateGameRoute
+  '/_layout/new-word': typeof LayoutprivateNewWordRoute
+  '/_layout/profile': typeof LayoutprivateProfileRoute
+  '/_layout/category/$id': typeof LayoutCategoryIdRoute
+  '/_layout/category/': typeof LayoutCategoryIndexRoute
+}
+
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | ''
+    | '/welcome'
+    | '/login'
+    | '/rules'
+    | '/favorites'
+    | '/game'
+    | '/new-word'
+    | '/profile'
+    | '/category/$id'
+    | '/category'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/welcome'
+    | '/login'
+    | '/rules'
+    | '/favorites'
+    | '/game'
+    | '/new-word'
+    | '/profile'
+    | '/category/$id'
+    | '/category'
+  id:
+    | '__root__'
+    | '/'
+    | '/_layout'
+    | '/welcome'
+    | '/_layout/'
+    | '/_layout/login'
+    | '/_layout/rules'
+    | '/_layout/favorites'
+    | '/_layout/game'
+    | '/_layout/new-word'
+    | '/_layout/profile'
+    | '/_layout/category/$id'
+    | '/_layout/category/'
+  fileRoutesById: FileRoutesById
+}
+
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
+  LayoutRouteRoute: typeof LayoutRouteRouteWithChildren
+  WelcomeRoute: typeof WelcomeRoute
+}
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  LayoutRouteRoute: LayoutRouteRouteWithChildren,
+  WelcomeRoute: WelcomeRoute,
+}
+
+export const routeTree = rootRoute
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
 
 /* prettier-ignore-end */
 

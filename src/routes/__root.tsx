@@ -1,8 +1,8 @@
 import { NextUIProvider } from '@nextui-org/react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
-import { Outlet, createRootRoute, useRouter } from '@tanstack/react-router';
-import { StrictMode } from 'react';
+import { createRootRoute, Outlet, useRouter } from '@tanstack/react-router';
+import { lazy, StrictMode, Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { useUserStore } from 'src/auth/useUser';
 import { queryClient } from 'src/cache/client';
@@ -26,22 +26,36 @@ export const Route = createRootRoute({
 			role,
 		});
 	},
-	component: () => {
-		const router = useRouter();
-
-		return (
-			<StrictMode>
-				<NextUIProvider navigate={(path) => router.navigate({ to: path })}>
-					<PersistQueryClientProvider
-						client={queryClient}
-						persistOptions={{ persister: idbPersister }}
-					>
-						<Outlet />
-						<Toaster />
-						<ReactQueryDevtools />
-					</PersistQueryClientProvider>
-				</NextUIProvider>
-			</StrictMode>
-		);
-	},
+	component: App,
 });
+
+const TanStackRouterDevtools =
+	process.env.NODE_ENV === 'production'
+		? () => null
+		: lazy(() =>
+				import('@tanstack/router-devtools').then((res) => ({
+					default: res.TanStackRouterDevtools,
+				})),
+			);
+
+function App() {
+	const router = useRouter();
+
+	return (
+		<StrictMode>
+			<NextUIProvider navigate={(path) => router.navigate({ to: path })}>
+				<PersistQueryClientProvider
+					client={queryClient}
+					persistOptions={{ persister: idbPersister }}
+				>
+					<Outlet />
+					<Toaster />
+					<ReactQueryDevtools />
+					<Suspense fallback="Loading...">
+						<TanStackRouterDevtools />
+					</Suspense>
+				</PersistQueryClientProvider>
+			</NextUIProvider>
+		</StrictMode>
+	);
+}
