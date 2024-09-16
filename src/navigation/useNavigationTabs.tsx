@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import { type ReactNode, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useUser } from 'src/auth/useUser';
+import { useUserStore } from 'src/store/user';
 
 type NavTab = {
 	path: LinkOptions<RegisteredRouter>['to'];
@@ -19,7 +19,7 @@ type NavTab = {
 };
 
 export const useNavigationTabs = () => {
-	const user = useUser();
+	const { user } = useUserStore();
 	const { t } = useTranslation();
 
 	const publicTabs = useMemo<NavTab[]>(

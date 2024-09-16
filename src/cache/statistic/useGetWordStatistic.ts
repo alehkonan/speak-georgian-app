@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { useUser } from 'src/auth/useUser';
+import { useUserStore } from 'src/store/user';
 import { getWordStatistic } from 'src/supabase/statistic/getWordStatistic';
 import { queryKeys } from '../keys';
 
 export const useGetWordStatistic = (wordId: number) => {
-	const user = useUser();
+	const { user } = useUserStore();
 
 	return useQuery({
 		queryKey: queryKeys.statistic.word(wordId).queryKey,

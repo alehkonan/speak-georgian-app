@@ -1,7 +1,7 @@
 import { Button } from '@nextui-org/react';
 import { createFileRoute } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
-import { useLogin } from 'src/auth/useLogin';
+import { useLogin } from 'src/cache/auth/useLogin';
 import { Screen } from 'src/components/Screen';
 
 export const Route = createFileRoute('/_layout/login')({

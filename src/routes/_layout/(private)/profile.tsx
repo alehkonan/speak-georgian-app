@@ -2,12 +2,12 @@ import { Avatar, Button } from '@nextui-org/react';
 import { createFileRoute } from '@tanstack/react-router';
 import { UserRound } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { useLogout } from 'src/auth/useLogout';
-import { useUser } from 'src/auth/useUser';
+import { useLogout } from 'src/cache/auth/useLogout';
 import { useGetUserStatistic } from 'src/cache/statistic/useGetUserStatistic';
 import { LanguageSwitcher } from 'src/components/LanguageSwitcher';
 import { ProfileCard } from 'src/components/ProfileCard';
 import { Screen } from 'src/components/Screen';
+import { useUserStore } from 'src/store/user';
 import { formatDate } from 'src/utils/dates';
 
 export const Route = createFileRoute('/_layout/(private)/profile')({
@@ -16,7 +16,7 @@ export const Route = createFileRoute('/_layout/(private)/profile')({
 
 function ProfileScreen() {
 	const { t } = useTranslation();
-	const user = useUser();
+	const { user } = useUserStore();
 	const { mutate: logout, isPending } = useLogout();
 	const { data: statistic, isLoading } = useGetUserStatistic(user?.id);
 

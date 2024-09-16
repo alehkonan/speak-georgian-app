@@ -11,17 +11,17 @@ import shuffle from 'lodash/shuffle';
 import { GripHorizontal } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useUser } from 'src/auth/useUser';
 import { useGetGameWord } from 'src/cache/game/useGetGameWord';
 import { useSetWordLearned } from 'src/cache/statistic/useSetWordLearned';
 import { useUpdateWordStatistic } from 'src/cache/statistic/useUpdateStatistic';
+import { useUserStore } from 'src/store/user';
 import { ErrorCard } from './ErrorCard';
 import { Swiper } from './Swiper';
 import { WordStatistic } from './WordStatistic';
 
 export const GameCard = () => {
 	const { t } = useTranslation();
-	const user = useUser();
+	const { user } = useUserStore();
 	const [answer, setAnswer] = useState<string>();
 	const { data: gameWord, refetch, error, isFetching } = useGetGameWord();
 	const { mutate: updateStatistic } = useUpdateWordStatistic();

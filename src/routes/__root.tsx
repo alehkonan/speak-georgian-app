@@ -4,27 +4,20 @@ import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client
 import { createRootRoute, Outlet, useRouter } from '@tanstack/react-router';
 import { lazy, StrictMode, Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
-import { useUserStore } from 'src/auth/useUser';
 import { queryClient } from 'src/cache/client';
 import { idbPersister } from 'src/cache/persister';
+import { setUser, useUserStore } from 'src/store/user';
 import { getUserRole } from 'src/supabase/auth/getUserRole';
 import { supabaseClient } from 'src/supabase/client';
 
 export const Route = createRootRoute({
 	beforeLoad: async () => {
-		const { user, setUser } = useUserStore.getState();
+		const { user } = useUserStore.getState();
 		if (user) return;
 		const { data } = await supabaseClient.auth.getUser();
 		if (!data.user) return;
 		const role = await getUserRole(data.user.id);
-		setUser({
-			id: data.user.id,
-			name: data.user.user_metadata.full_name,
-			pictureUrl: data.user.user_metadata.picture,
-			created: data.user.created_at,
-			provider: data.user.app_metadata.provider,
-			role,
-		});
+		setUser({ ...data.user, role });
 	},
 	component: App,
 });

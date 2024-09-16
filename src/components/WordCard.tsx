@@ -9,8 +9,8 @@ import {
 import { BookOpen, BookOpenCheck, Ear, Languages, Star } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useUser } from 'src/auth/useUser';
 import { useToggleFavoriteWord } from 'src/cache/favorite/useToggleFavoriteWord';
+import { useUserStore } from 'src/store/user';
 import type { SpeechPart } from 'src/supabase/schemas/word';
 import { WordChip } from './WordChip';
 
@@ -38,7 +38,7 @@ export const WordCard = ({
 	id,
 }: Props) => {
 	const { t } = useTranslation();
-	const user = useUser();
+	const { user } = useUserStore();
 	const { mutate: toggleFavorite, isPending } =
 		useToggleFavoriteWord(categoryId);
 

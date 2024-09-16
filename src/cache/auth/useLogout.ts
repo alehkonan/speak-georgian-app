@@ -1,17 +1,17 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';
+import { useUserStore } from 'src/store/user';
 import { logout } from 'src/supabase/auth/logout';
-import { useUserStore } from './useUser';
 
 export const useLogout = () => {
-	const setUser = useUserStore((state) => state.setUser);
+	const { clear } = useUserStore();
 	const navigate = useNavigate();
 
 	return useMutation({
 		mutationFn: logout,
 		onSuccess: () => {
 			navigate({ to: '/' });
-			setUser(null);
+			clear();
 		},
 	});
 };
