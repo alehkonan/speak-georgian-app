@@ -2,6 +2,13 @@
 
 export $(cat .env.local | xargs)
 
-yes $SUPABASE_ACCESS_TOKEN | npx supabase login
+if expect -c "spawn npx supabase login; expect \"*\" { exit 1 }"; then
+  echo Logging to the supabase with token...
+  yes $SUPABASE_ACCESS_TOKEN | npx supabase login
+else
+  echo Logging to the supabase...
+  npx supabase login
+fi
 
-npx supabase gen types typescript --project-id $PROJECT_ID --schema public > src/services/supabase/types.ts
+echo Generating types...
+npx supabase gen types typescript --project-id $PROJECT_ID > src/api/types.ts

@@ -5,33 +5,32 @@ import en from './translations/en.json';
 import ru from './translations/ru.json';
 
 export type Language = {
-  readonly code: 'en' | 'ru';
-  readonly label: string;
+	readonly code: 'en' | 'ru';
+	readonly label: string;
 };
 
 export const langMap = new Map<string, Language>([
-  ['en', { code: 'en', label: 'English' }],
-  ['ru', { code: 'ru', label: 'Русский' }],
+	['en', { code: 'en', label: 'English' }],
+	['ru', { code: 'ru', label: 'Русский' }],
 ]);
 
 const defaultNS = 'translation';
 export const fallbackLng = 'en';
 
 i18next.on('languageChanged', (lang) => {
-  document.documentElement.setAttribute('lang', lang);
+	document.documentElement.setAttribute('lang', lang);
 });
 
-// eslint-disable-next-line import/no-named-as-default-member
 i18next
-  .use(initReactI18next)
-  .use(LanguageDetector)
-  .init({
-    fallbackLng,
-    defaultNS,
-    resources: {
-      en: { [defaultNS]: en },
-      ru: { [defaultNS]: ru },
-    },
-  });
+	.use(initReactI18next)
+	.use(LanguageDetector)
+	.init({
+		fallbackLng,
+		defaultNS,
+		resources: {
+			en: { [defaultNS]: en },
+			ru: { [defaultNS]: ru },
+		},
+	});
 
 export default i18next;

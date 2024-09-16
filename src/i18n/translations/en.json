@@ -1,65 +1,65 @@
 {
-  "account": {
-    "created": "Created",
-    "info": "Account info",
-    "name": "Name",
-    "provider": "Provider"
-  },
-  "action": {
-    "retry": "Retry"
-  },
-  "auth": {
-    "loginWithGoogle": "Login with Google",
-    "logout": "Logout"
-  },
-  "categories": {
-    "title": "Categories",
-    "withoutCategory": "Without category"
-  },
-  "empty": "Empty",
-  "error": "Error",
-  "game": {
-    "alreadyKnow": "Already know",
-    "skip": "Skip",
-    "start": "Start the game",
-    "stop": "Stop the game"
-  },
-  "navigation": {
-    "addWord": "Add Word",
-    "favorites": "Favorites",
-    "game": "Game",
-    "goToHome": "Go to the home screen",
-    "goToWords": "Go to words",
-    "home": "Home",
-    "login": "Login",
-    "profile": "Profile",
-    "rules": "Rules"
-  },
-  "pageNotFound": "Page not found",
-  "settings": {
-    "language": "Language",
-    "selectLanguage": "Select language",
-    "title": "Settings"
-  },
-  "statistic": {
-    "favoriteWords": "Favorite words",
-    "learnedWords": "Learned words",
-    "title": "Statistic",
-    "totalWords": "Total words"
-  },
-  "word": {
-    "add": "Add new word",
-    "addToFavorites": "Add to favorites",
-    "category": "Category",
-    "englishTranscription": "English transcription",
-    "englishTranslation": "English translation",
-    "georgianWord": "Georgian word",
-    "hideTranslation": "Hide translation",
-    "isLearned": "This word is learned",
-    "removeFromFavorites": "Remove from favorites",
-    "russianTranslation": "Russian translation",
-    "showTranslation": "Show translation",
-    "selectImage": "Select image"
-  },
-  "noTranslation": "No translation"
+	"account": {
+		"created": "Created",
+		"info": "Account info",
+		"name": "Name",
+		"provider": "Provider"
+	},
+	"action": {
+		"retry": "Retry"
+	},
+	"auth": {
+		"loginWithGoogle": "Login with Google",
+		"logout": "Logout"
+	},
+	"categories": {
+		"title": "Categories",
+		"withoutCategory": "Without category"
+	},
+	"empty": "Empty",
+	"error": "Error",
+	"game": {
+		"alreadyKnow": "Already know",
+		"skip": "Skip",
+		"start": "Start the game",
+		"stop": "Stop the game"
+	},
+	"navigation": {
+		"addWord": "Add Word",
+		"favorites": "Favorites",
+		"game": "Game",
+		"goToHome": "Go to the home screen",
+		"goToWords": "Go to words",
+		"login": "Login",
+		"profile": "Profile",
+		"rules": "Rules",
+		"words": "Words"
+	},
+	"noTranslation": "No translation",
+	"pageNotFound": "Page not found",
+	"settings": {
+		"language": "Language",
+		"selectLanguage": "Select language",
+		"title": "Settings"
+	},
+	"statistic": {
+		"favoriteWords": "Favorite words",
+		"learnedWords": "Learned words",
+		"title": "Statistic",
+		"totalWords": "Total words"
+	},
+	"word": {
+		"add": "Add new word",
+		"addToFavorites": "Add to favorites",
+		"category": "Category",
+		"englishTranscription": "English transcription",
+		"englishTranslation": "English translation",
+		"georgianWord": "Georgian word",
+		"hideTranslation": "Hide translation",
+		"isLearned": "This word is learned",
+		"removeFromFavorites": "Remove from favorites",
+		"russianTranslation": "Russian translation",
+		"selectImage": "Select image",
+		"showTranslation": "Show translation"
+	}
 }

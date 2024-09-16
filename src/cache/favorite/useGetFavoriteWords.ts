@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import { getFavoriteWords } from 'src/api/favorite/getFavoriteWords';
-import { useUser } from 'src/auth/useUser';
+import { useUserStore } from 'src/store/user';
+import { getFavoriteWords } from 'src/supabase/favorite/getFavoriteWords';
 import { queryKeys } from '../keys';
 
 export const useGetFavoriteWords = () => {
-  const user = useUser();
+	const { user } = useUserStore();
 
-  return useQuery({
-    queryKey: queryKeys.favorite.words.queryKey,
-    queryFn: () => getFavoriteWords(user?.id),
-    staleTime: Infinity,
-  });
+	return useQuery({
+		queryKey: queryKeys.favorite.words.queryKey,
+		queryFn: () => getFavoriteWords(user?.id),
+		staleTime: Number.POSITIVE_INFINITY,
+	});
 };

@@ -4,6 +4,8 @@ on: [pull_request]
 jobs:
   lint_and_test:
     runs-on: ubuntu-22.04
+    env:
+      HUSKY: 0
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -15,7 +17,9 @@ jobs:
           key: node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install deps
         run: npm ci
-      - name: Run lint
-        run: npm run lint
+      - name: Check types
+        run: npm run check:types
+      - name: Check eslint rules
+        run: npm run check:lint
       - name: Run tests
         run: npm run test
