@@ -20,6 +20,6 @@ jobs:
       - name: Check types
         run: npm run check:types
       - name: Check eslint rules
-        run: npm run lint
+        run: npm run check:lint
       - name: Run tests
         run: npm run test
