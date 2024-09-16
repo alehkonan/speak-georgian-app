@@ -1,8 +1,8 @@
 import { NextUIProvider } from '@nextui-org/react';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
-import { createRootRoute, Outlet, useRouter } from '@tanstack/react-router';
-import { lazy, StrictMode, Suspense } from 'react';
+import { Outlet, createRootRoute, useRouter } from '@tanstack/react-router';
+import { StrictMode, Suspense, lazy } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { queryClient } from 'src/cache/client';
 import { idbPersister } from 'src/cache/persister';
