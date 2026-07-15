@@ -1,11 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
-import { getGameWord } from 'src/supabase/game/getGameWord';
-import { queryKeys } from '../keys';
+import { useQuery } from "@tanstack/react-query";
+import { getGameWord } from "src/supabase/game/getGameWord";
 
 export const useGetGameWord = () => {
-	return useQuery({
-		queryKey: queryKeys.game.word.queryKey,
-		queryFn: () => getGameWord(),
-		staleTime: Number.POSITIVE_INFINITY,
-	});
+  return useQuery({
+    queryKey: ["game", "word"],
+    queryFn: () => getGameWord(),
+    staleTime: Number.POSITIVE_INFINITY,
+  });
 };
